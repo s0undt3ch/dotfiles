@@ -1,0 +1,45 @@
+[submodule "vim/bundle/ultisnips"]
+	path = vim/bundle/ultisnips
+	url = git@github.com:s0undt3ch/ultisnips.git
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "vim/bundle/vim-powerline"]
+	path = vim/bundle/vim-powerline
+	url = git@github.com:s0undt3ch/vim-powerline.git
+[submodule "vim/bundle/bash-support.vim"]
+	path = vim/bundle/bash-support.vim
+	url = git@github.com:s0undt3ch/bash-support.vim.git
+[submodule "vim/bundle/salt-vim"]
+	path = vim/bundle/salt-vim
+	url = git://github.com/saltstack/salt-vim.git
+[submodule "vim/bundle/python-mode"]
+	path = vim/bundle/python-mode
+	url = git@github.com:s0undt3ch/python-mode.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
+[submodule "vim/bundle/DfrankUtil"]
+	path = vim/bundle/DfrankUtil
+	url = git://github.com/vim-scripts/DfrankUtil.git
+[submodule "vim/bundle/gundo.vim"]
+	path = vim/bundle/gundo.vim
+	url = git://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/tabman.vim"]
+	path = vim/bundle/tabman.vim
+	url = git://github.com/kien/tabman.vim.git
+[submodule "vim/bundle/vim-session"]
+	path = vim/bundle/vim-session
+	url = git@github.com:s0undt3ch/vim-session.git
+[submodule "vim/bundle/csapprox"]
+	path = vim/bundle/csapprox
+	url = git://github.com/godlygeek/csapprox.git
+[submodule "vim/bundle/gitv"]
+	path = vim/bundle/gitv
+	url = git://github.com/gregsexton/gitv.git
+[submodule "fonts/ubuntu-mono-powerline-ttf"]
+	path = fonts/ubuntu-mono-powerline-ttf
+	url = git://github.com/pdf/ubuntu-mono-powerline-ttf.git
+[submodule "vim/bundle/wordlist.vim"]
+	path = vim/bundle/wordlist.vim
+	url = git://github.com/vim-scripts/wordlist.vim.git
