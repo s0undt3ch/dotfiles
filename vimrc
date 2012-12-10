@@ -68,6 +68,7 @@ set showmatch                           " Show matching brackets
 :autocmd BufNewFile,BufRead hg-editor-*.txt set wrap linebreak textwidth=0 spell spelllang=en
 :autocmd BufNewFile,BufRead .git/COMMIT_EDITMSG set wrap linebreak textwidth=0 spell spelllang=en
 :autocmd BufNewFile,BufRead *.po set spell spelllang=pt
+:autocmd FileType sh set sw=4 ts=4 fenc=utf-8
 " ==========================================================================
 
 " ========== python-mode settings =================
