@@ -5,8 +5,10 @@
     ~~~~~~~~~~~~~~~~~~~
 
     Run this code to create all the symlinks to your home directory.
-    NOTE: Remember to run this script as the users you desire to setup.
-    WARNING: This is not a dotfiles maintainer, it's just a litle helping hack.
+    NOTE: Remember to run this script as the user who's home directory
+    you're trying to set up.
+    WARNING: This is not a dotfiles maintainer script, it's just a litle
+    helping hack.
 
 
     :codeauthor: :email:`Pedro Algarvio (pedro@algarvio.me)`
@@ -19,8 +21,8 @@ import shutil
 import optparse
 import subprocess
 
-DOTFILES_DIR = os.path.abspath(os.path.dirname(__file__))
 HOME_DIR = os.path.expanduser('~')
+DOTFILES_DIR = os.path.abspath(os.path.dirname(__file__))
 GLOBAL_SKIPS = (
     'README.rst',
     'symlink-dotfiles.py',
@@ -29,8 +31,22 @@ GLOBAL_SKIPS = (
 )
 
 
+def __skip_path(path):
+    relative_path = os.path.relpath(path, DOTFILES_DIR).rstrip(os.sep)
+    # Let's check for an exact or a `.startswith()` match
+    for rule in GLOBAL_SKIPS:
+        if relative_path == rule.rstrip(os.sep):
+            # This is an exact match. Skip it!
+            return True
+        elif relative_path.startswith(rule.rstrip(os.sep)):
+            # This is a `.startswith()` partial match. Skip it!
+            return True
+    return False
+
+
 def symlink(source, dest, force=False):
-    if os.path.relpath(source, DOTFILES_DIR) in GLOBAL_SKIPS:
+    if __skip_path(source):
+        # Return now if this meant to be skipped
         return
 
     print 'Linking {0} -> {1} ...'.format(source, dest),
@@ -60,7 +76,7 @@ def symlink(source, dest, force=False):
     print 'OK!'
 
 
-def symlink_fonts(force=False, skip_fonts_cache=False):
+def symlink_fonts(opts):
     fontsdir = os.path.join(HOME_DIR, '.fonts')
     if not os.path.isdir(fontsdir):
         os.makedirs(fontsdir)
@@ -68,43 +84,48 @@ def symlink_fonts(force=False, skip_fonts_cache=False):
     for font in os.listdir(os.path.join(DOTFILES_DIR, 'fonts')):
         sfontpath = os.path.join(DOTFILES_DIR, 'fonts', font)
         dfontpath = os.path.join(fontsdir, font)
-        symlink(sfontpath, dfontpath, force)
+        symlink(sfontpath, dfontpath, opts.force)
 
-    if skip_fonts_cache:
+    if opts.skip_fonts_cache:
         return
 
     print 'Regenerating fonts cache'
     subprocess.call(['fc-cache', '-vf'])
 
 
-def symlink_vim(force=False):
+def symlink_vim(opts):
     # Symlink .vimrc
     symlink(
         os.path.join(DOTFILES_DIR, 'vimrc'),
         os.path.join(HOME_DIR, '.vimrc'),
-        force
+        opts.force
     )
     HOME_DIR_VIM = os.path.join(HOME_DIR, '.vim')
     DOTFILES_DIR_VIM = os.path.join(DOTFILES_DIR, 'vim')
-    # Symlink the .vim direectory
+    # Symlink the .vim directory
     for fname in os.listdir(DOTFILES_DIR_VIM):
-        spath = os.path.join(DOTFILES_DIR, 'vim', fname)
+        spath = os.path.join(DOTFILES_DIR_VIM, fname)
         if os.path.isfile(spath):
-            symlink(spath, os.path.join(HOME_DIR_VIM, fname))
+            symlink(
+                spath,
+                os.path.join(HOME_DIR_VIM, fname),
+                opts.force
+            )
             continue
+        # It's a directory, descent into it
         ddir = os.path.join(HOME_DIR_VIM, fname)
         sdir = os.path.join(DOTFILES_DIR_VIM, fname)
-        if not os.path.exists(ddir):
+        if not __skip_path(sdir) and not os.path.exists(ddir):
             os.makedirs(ddir)
         for sname in os.listdir(sdir):
             symlink(
                 os.path.join(sdir, sname),
                 os.path.join(ddir, sname),
-                force
+                opts.force
             )
 
 
-def symlink_ssh(force):
+def symlink_ssh(opts):
     dssh = os.path.join(HOME_DIR, '.ssh')
     if not os.path.exists(dssh):
         os.makedirs(dssh, 0700)
@@ -112,11 +133,11 @@ def symlink_ssh(force):
         symlink(
             os.path.join(DOTFILES_DIR, 'ssh', fname),
             os.path.join(dssh, fname),
-            force
+            opts.force
         )
 
 
-def symlink_single_files(force=False):
+def symlink_single_files(opts):
     dont_sync_fnames = ('vimrc',)
     for fname in os.listdir(DOTFILES_DIR):
         spath = os.path.join(DOTFILES_DIR, fname)
@@ -127,7 +148,7 @@ def symlink_single_files(force=False):
         elif fname.startswith('.'):
             continue
         dpath = os.path.join(HOME_DIR, '.{0}'.format(fname))
-        symlink(spath, dpath, force)
+        symlink(spath, dpath, opts.force)
 
 
 if __name__ == '__main__':
@@ -151,9 +172,10 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     if args:
         parser.error('No arguments are supported')
-    symlink_fonts(
-        force=options.force, skip_fonts_cache=options.skip_fonts_cache
-    )
-    symlink_vim(force=options.force)
-    symlink_ssh(force=options.force)
-    symlink_single_files(force=options.force)
+    symlink_fonts(options)
+    symlink_vim(options)
+    symlink_ssh(options)
+    symlink_single_files(options)
+
+
+# vim: sw=4 ts=4 fenc=utf-8 et spell spelllang=en
