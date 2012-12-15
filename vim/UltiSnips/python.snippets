@@ -19,7 +19,26 @@ snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
     :license: ${5:`!p snip.rv = snip.opt("g:ultisnips_python_project_license", "LICENSE NAME")`}, see LICENSE for more details.
 `!p snip.rv = tripple_quotes(snip)`
 
-${6}
+$0
+endsnippet
+
+snippet sec "Code Section" b
+# ----- ${1:SECTION NAME} `!p
+snip.rv = '{0}>'.format(
+    (int(snip.opt('g:ultisnips_python_colorcolumn', 80))
+    - len(snip._initial_indent or 0)
+    - 12
+    - len(t[1] or 'SECTION NAME')) * '-')
+`
+${VISUAL}$0
+# <---- `!p snip.rv = t[1] or 'SECTION NAME'` `!p
+snip.rv = '{0}'.format(
+    (int(snip.opt('g:ultisnips_python_colorcolumn', 80))
+    - len(snip._initial_indent or 0)
+    - 11
+    - len(t[1] or 'SECTION NAME')) * '-'
+    )
+`
 endsnippet
 
 # vim:ft=snippets:
