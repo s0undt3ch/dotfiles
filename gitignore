@@ -1,0 +1,12 @@
+.config*/
+.project
+.pydevproject
+.settings/
+.ropeproject/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Vim Swap Files
+.*.swp
+.*.swo

@@ -1,0 +1,9 @@
+[user]
+	name = Pedro Algarvio
+	email = pedro@algarvio.me
+[color]
+	ui = true
+[core]
+	excludesfile = /home/vampas/.gitignore
+[alias]
+	graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
