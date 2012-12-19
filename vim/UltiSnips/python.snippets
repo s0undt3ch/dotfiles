@@ -22,26 +22,8 @@ snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
 $0
 endsnippet
 
-snippet sec "Code Section" b
-# ----- ${1:SECTION NAME} `!p
-snip.rv = '{0}>'.format(
-    (int(snip.opt('g:ultisnips_python_colorcolumn', 80))
-    - (len(snip._initial_indent) or 0)
-    - 12
-    - len(t[1] or 'SECTION NAME')) * '-')
-`
-${VISUAL}$0
-# <---- `!p snip.rv = t[1] or 'SECTION NAME'` `!p
-snip.rv = '{0}'.format(
-    (int(snip.opt('g:ultisnips_python_colorcolumn', 80))
-    - (len(snip._initial_indent) or 0)
-    - 11
-    - len(t[1] or 'SECTION NAME')) * '-'
-    )
-`
-endsnippet
-
 snippet log "Instantiate a logging instance" !b
 log = logging.getLogger(__name__)
 endsnippet
+
 # vim:ft=snippets:

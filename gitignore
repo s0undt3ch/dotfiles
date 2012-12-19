@@ -8,5 +8,4 @@
 *.egg-info/
 
 # Vim Swap Files
-.*.swp
-.*.swo
+.*.sw*
