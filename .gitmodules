@@ -43,3 +43,6 @@
 [submodule "vim/bundle/wordlist.vim"]
 	path = vim/bundle/wordlist.vim
 	url = git://github.com/vim-scripts/wordlist.vim.git
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
