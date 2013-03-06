@@ -7,7 +7,7 @@ append to your bashrc file the following:
 
     # Source any files found under ~/.bashrc.d
     if [ -d ~/.bashrc.d ]; then
-        for f in $(ls ~/.bashrc.d); do
-            source ~/.bashrc.d/${f}
+        for f in $(ls ~/.bashrc.d/*.sh ); do
+            . ${f}
         done
     fi
