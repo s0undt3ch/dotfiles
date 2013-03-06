@@ -138,7 +138,7 @@ def symlink_ssh(opts):
 
 
 def symlink_single_files(opts):
-    dont_sync_fnames = ('vimrc',)
+    dont_sync_fnames = ('vimrc', 'bashrc')
     for fname in os.listdir(DOTFILES_DIR):
         spath = os.path.join(DOTFILES_DIR, fname)
         if fname in dont_sync_fnames:
@@ -148,6 +148,25 @@ def symlink_single_files(opts):
         elif fname.startswith('.'):
             continue
         dpath = os.path.join(HOME_DIR, '.{0}'.format(fname))
+        symlink(spath, dpath, opts.force)
+
+
+def symlink_bashrcd(opts):
+    bashrcd_source = os.path.join(DOTFILES_DIR, 'bashrc.d')
+    bashrcd_dest = os.path.join(HOME_DIR, '.bashrc.d')
+    if not os.path.isdir(bashrcd_dest):
+        os.makedirs(bashrcd_dest)
+
+    dont_sync_fnames = ()
+    for fname in os.listdir(bashrcd_source):
+        spath = os.path.join(bashrcd_source, fname)
+        if fname in dont_sync_fnames or fname in GLOBAL_SKIPS:
+            continue
+        elif fname.startswith('.'):
+            continue
+        elif not os.path.isfile(spath):
+            continue
+        dpath = os.path.join(bashrcd_dest, fname)
         symlink(spath, dpath, opts.force)
 
 
@@ -176,6 +195,7 @@ if __name__ == '__main__':
     symlink_vim(options)
     symlink_ssh(options)
     symlink_single_files(options)
+    symlink_bashrcd(options)
 
 
 # vim: sw=4 ts=4 fenc=utf-8 et spell spelllang=en
