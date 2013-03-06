@@ -77,6 +77,12 @@ def symlink(source, dest, force=False):
 
 
 def symlink_fonts(opts):
+    try:
+        subprocess.call(['fc-cache', '-V'])
+    except OSError:
+        print 'The \'fc-cache\' binary is not found. Skipping...'
+        return
+
     fontsdir = os.path.join(HOME_DIR, '.fonts')
     if not os.path.isdir(fontsdir):
         os.makedirs(fontsdir)
