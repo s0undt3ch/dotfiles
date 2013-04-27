@@ -15,3 +15,5 @@
 	# Store your github password in ~/.gitconfig-github-secret
 	user = s0undt3ch
 	password = !/usr/bin/test -f ~/.gitconfig-github-secret && cat ~/.gitconfig-github-secret | tr -d '\n'
+[grep]
+	linenumber = true
