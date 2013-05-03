@@ -2,6 +2,10 @@
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 #export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
+unset HISTSIZE
+unset HISTCONTROL
+unset HISTFILESIZE
+
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=100000000
 export HISTSIZE=100000000
