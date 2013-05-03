@@ -1,5 +1,5 @@
 if [ `id -u` == '0' ]; then
-    USERCOLOR='01;34m'
+    USERCOLOR='01;31m'
 else
     USERCOLOR='01;32m'
 fi
