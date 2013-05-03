@@ -17,3 +17,5 @@
 	password = !/usr/bin/test -f ~/.gitconfig-github-secret && cat ~/.gitconfig-github-secret | tr -d '\n'
 [grep]
 	linenumber = true
+[push]
+	default = simple
