@@ -28,9 +28,6 @@
 [submodule "vim/bundle/tabman.vim"]
 	path = vim/bundle/tabman.vim
 	url = git://github.com/kien/tabman.vim.git
-[submodule "vim/bundle/vim-session"]
-	path = vim/bundle/vim-session
-	url = git://github.com/xolox/vim-session.git
 [submodule "vim/bundle/csapprox"]
 	path = vim/bundle/csapprox
 	url = git://github.com/godlygeek/csapprox.git
