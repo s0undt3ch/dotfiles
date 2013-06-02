@@ -19,3 +19,5 @@
 	linenumber = true
 [push]
 	default = simple
+[log]
+	decorate = full
