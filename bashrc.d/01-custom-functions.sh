@@ -1,6 +1,6 @@
 new-git-branch() {
     branch="$1"
-    git branch "${branch}" && git push origin "${branch}" && git checkout "${branch}"
+    git branch "${branch}" && (git push --set-upstream origin "${branch}" || git push origin "${branch}") && git checkout "${branch}"
 }
 
 develop() {
