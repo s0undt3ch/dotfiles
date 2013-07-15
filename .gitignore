@@ -39,3 +39,6 @@ nosetests.xml
 
 # vim temp files
 *.swp
+
+# Don't track file which include *skipgit* in their name
+*/*skipgit*
