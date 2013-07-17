@@ -30,3 +30,16 @@ killpymatch-term() {
 function duf {
     du -sk "$@" | sort -n | while read size fname; do for unit in k M G T P E Z Y; do if [ $size -lt 1024 ]; then echo -e "${size}${unit}\t${fname}"; break; fi; size=$((size/1024)); done; done
 }
+
+clean-vim-tempfiles() {
+    local SEARCH_PATH="$1"
+    if [ "x${SEARCH_PATH}" = "x" ]; then
+        echo "The path to search for vim swap files was not passed"
+        return 1
+    fi
+    for fname in $(find $1 -type f -name "*.*.sw*" 2>/dev/null); do
+        if [ "x$(file $fname | grep -i 'Vim swap file')" != "x" ]; then
+            rm $fname
+        fi
+    done
+}
