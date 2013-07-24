@@ -83,6 +83,23 @@ def symlink_fonts(opts):
         print 'The \'fc-cache\' binary is not found. Skip handling fonts...'
         return
 
+    FONTS_CONF_DIR = os.path.join(
+        HOME_DIR, '.config', 'fontconfig', 'conf.d'
+    )
+
+    if not os.path.isdir(FONTS_CONF_DIR):
+        os.makedirs(FONTS_CONF_DIR)
+
+    symlink(
+        os.path.join(
+            DOTFILES_DIR, 'config', 'fontconfig', 'conf.d', 'fonts.conf'
+        ),
+        os.path.join(
+            FONTS_CONF_DIR, 'fonts.conf'
+        ),
+        opts.force
+    )
+
     fontsdir = os.path.join(HOME_DIR, '.fonts')
     if not os.path.isdir(fontsdir):
         os.makedirs(fontsdir)
