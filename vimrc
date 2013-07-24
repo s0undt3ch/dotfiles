@@ -62,8 +62,6 @@ set showmatch                           " Show matching brackets
 
 
 " =============== Some defaults for certain file types =====================
-":autocmd BufNewFile  *.py   0r ~/.vim/skeleton.py
-":autocmd BufNewFile  *.html   0r ~/.vim/skeleton.html
 :autocmd BufNewFile,BufRead *.html set sw=2 ts=2 fenc=utf-8 et
 :autocmd BufNewFile,BufRead *.xml set sw=2 ts=2 fenc=utf-8 et
 :autocmd BufNewFile,BufRead *.json set sw=2 ts=2 fenc=utf-8 et
@@ -88,7 +86,7 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '*.egg-info']
 colorscheme fruity
 
 " ----- Powerline settings -------------------------------------------------->
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ for\ Powerline\ 10
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
 let g:Powerline_symbols = 'fancy'
 " <---- Powerline settings ---------------------------------------------------
 
