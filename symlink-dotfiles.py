@@ -147,6 +147,25 @@ def symlink_vim(opts):
                 opts.force
             )
 
+    # Setup the Powerline Configuration
+    POWERLINE_SRC = os.path.join(
+        DOTFILES_DIR, 'config', 'powerline'
+    )
+    POWERLINE_DEST = os.path.join(
+        HOME_DIR, '.config', 'powerline'
+    )
+    if not os.path.isdir(POWERLINE_DEST):
+        os.makedirs(POWERLINE_DEST)
+
+    for fname in os.listdir(POWERLINE_SRC):
+        spath = os.path.join(POWERLINE_SRC, fname)
+        if os.path.isfile(spath):
+            symlink(
+                spath,
+                os.path.join(POWERLINE_DEST, fname),
+                opts.force
+            )
+
 
 def symlink_ssh(opts):
     dssh = os.path.join(HOME_DIR, '.ssh')

@@ -66,6 +66,7 @@ set showmatch                           " Show matching brackets
 ":autocmd BufNewFile  *.html   0r ~/.vim/skeleton.html
 :autocmd BufNewFile,BufRead *.html set sw=2 ts=2 fenc=utf-8 et
 :autocmd BufNewFile,BufRead *.xml set sw=2 ts=2 fenc=utf-8 et
+:autocmd BufNewFile,BufRead *.json set sw=2 ts=2 fenc=utf-8 et
 ":autocmd BufNewFile,BufRead *.txt set sw=4 ts=4 fenc=utf-8 et linebreak wrap
 :autocmd BufNewFile,BufRead svn-commit*.tmp set wrap linebreak textwidth=0 spell spelllang=en
 :autocmd BufNewFile,BufRead hg-editor-*.txt set wrap linebreak textwidth=0 spell spelllang=en
@@ -86,13 +87,10 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '*.egg-info']
 
 colorscheme fruity
 
-" ========= Powerline settings ===================
-"set guifont=Ubuntu\ Mono\ for\ Powerline\ 11
-set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ 10
+" ----- Powerline settings -------------------------------------------------->
+set guifont=Droid\ Sans\ Mono\ Slashed\ for\ Powerline\ for\ Powerline\ 10
 let g:Powerline_symbols = 'fancy'
-"call Pl#Theme#InsertSegment('spell:lang', 'before', 'fileencoding')
-"call Pl#Theme#InsertSegment('spell:lang', 'after', 'fileinfo')
-" ================================================
+" <---- Powerline settings ---------------------------------------------------
 
 " Auto Commands
 "---------------
