@@ -105,6 +105,8 @@ def symlink_fonts(opts):
         os.makedirs(fontsdir)
 
     for font in os.listdir(os.path.join(DOTFILES_DIR, 'fonts')):
+        if font in ('original', 'private'):
+            continue
         sfontpath = os.path.join(DOTFILES_DIR, 'fonts', font)
         dfontpath = os.path.join(fontsdir, font)
         symlink(sfontpath, dfontpath, opts.force)
