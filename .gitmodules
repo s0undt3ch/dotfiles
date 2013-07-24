@@ -31,9 +31,6 @@
 [submodule "vim/bundle/gitv"]
 	path = vim/bundle/gitv
 	url = git://github.com/gregsexton/gitv.git
-[submodule "fonts/ubuntu-mono-powerline-ttf"]
-	path = fonts/ubuntu-mono-powerline-ttf
-	url = git://github.com/pdf/ubuntu-mono-powerline-ttf.git
 [submodule "vim/bundle/wordlist.vim"]
 	path = vim/bundle/wordlist.vim
 	url = git://github.com/vim-scripts/wordlist.vim.git
