@@ -2,6 +2,9 @@
 " "----------------
 set nocompatible
 
+" Inject the powerline vim plugin into the pathogen search
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
 " Initialize Plugin Manager
 call pathogen#infect()
 call pathogen#helptags()
