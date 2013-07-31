@@ -21,3 +21,9 @@
 	default = simple
 [log]
 	decorate = full
+[alias]
+	l = log --oneline --decorate
+	ll = log --stat --decorate --abbrev-commit --date=relative
+	lll = log -p --stat --decorate --abbrev-commit --date=relative
+	llll = "!sh -c 'git lll $@ \
+		| gvim - -R -v -c \"set ft=git\" -c \"set fdm=syntax\"' -"
