@@ -40,3 +40,9 @@
 [submodule "vim/bundle/powerline"]
 	path = vim/bundle/powerline
 	url = git://github.com/Lokaltog/powerline
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git
