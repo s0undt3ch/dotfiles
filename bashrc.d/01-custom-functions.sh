@@ -43,3 +43,16 @@ clean-vim-tempfiles() {
         fi
     done
 }
+
+clean-pyc-files() {
+    local SEARCH_PATH="$1"
+    if [ "x${SEARCH_PATH}" = "x" ]; then
+        echo "The path to search for vim swap files was not passed"
+        return 1
+    fi
+    for fname in $(find $1 -type f -name "*.pyc" 2>/dev/null); do
+        if [ "x$(file $fname | grep -i 'byte-compiled')" != "x" ]; then
+            rm $fname
+        fi
+    done
+}
