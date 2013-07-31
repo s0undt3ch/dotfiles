@@ -156,6 +156,9 @@ def symlink_vim(opts):
     POWERLINE_DEST = os.path.join(
         HOME_DIR, '.config', 'powerline'
     )
+    if not os.path.isdir(POWERLINE_SRC):
+        return
+
     if not os.path.isdir(POWERLINE_DEST):
         os.makedirs(POWERLINE_DEST)
 
