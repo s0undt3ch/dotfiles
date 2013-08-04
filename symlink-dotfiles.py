@@ -149,6 +149,22 @@ def symlink_vim(opts):
                 opts.force
             )
 
+   # Symlink the .vimrc.d directory
+    HOME_DIR_VIMRC = os.path.join(HOME_DIR, '.vimrc.d')
+    DOTFILES_DIR_VIMRC = os.path.join(DOTFILES_DIR, 'vimrc.d')
+    if not os.path.isdir(HOME_DIR_VIMRC):
+        os.makedirs(HOME_DIR_VIMRC)
+
+    for fname in os.listdir(DOTFILES_DIR_VIMRC):
+        spath = os.path.join(DOTFILES_DIR_VIMRC, fname)
+        if os.path.isfile(spath):
+            symlink(
+                spath,
+                os.path.join(HOME_DIR_VIMRC, fname),
+                opts.force
+            )
+            continue
+
     # Setup the Powerline Configuration
     POWERLINE_SRC = os.path.join(
         DOTFILES_DIR, 'config', 'powerline'
