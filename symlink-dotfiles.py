@@ -200,6 +200,20 @@ def symlink_ssh(opts):
         )
 
 
+def symlink_thunderbird(opts):
+    source = os.path.join(DOTFILES_DIR, 'thunderbird')
+    dest = os.path.join(HOME_DIR, '.thunderbird')
+    for fname in os.listdir(source):
+        if not fname.endswith('.html'):
+            # We only want the signatures for now
+            continue
+        symlink(
+            os.path.join(source, fname),
+            os.path.join(dest, fname),
+            opts.force
+        )
+
+
 def symlink_single_files(opts):
     dont_sync_fnames = ('vimrc', 'bashrc')
     for fname in os.listdir(DOTFILES_DIR):
@@ -259,6 +273,7 @@ if __name__ == '__main__':
     symlink_ssh(options)
     symlink_single_files(options)
     symlink_bashrcd(options)
+    symlink_thunderbird(options)
 
 
 # vim: sw=4 ts=4 fenc=utf-8 et spell spelllang=en
