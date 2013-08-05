@@ -1,0 +1,57 @@
+{
+  "email-signature@algarvio.me.html": {
+    "name": "Pedro Algarvio",
+    "avatar": "images/avatar.png",
+    "gittip": {
+      "href": "https://www.gittip.com/s0undt3ch",
+      "src": "images/gittip.png",
+      "title": "Tip me on GitTip"
+    },
+    "contacts": [
+      ["mailto:pedro@algarvio.me", "images/mail.png", "Email me @algarvio.me"],
+      ["http://www.linkedin.com/in/pedroalgarvio", "images/linkedin.png", "Find me on LinkedIn"],
+      ["https://twitter.com/s0undt3ch", "images/twitter.png", "Find me on Twitter"],
+      ["https://github.com/s0undt3ch", "images/github.png", "Find me on GitHub"],
+      ["https://bitbucket.org/s0undt3ch", "images/bitbucket.png", "Find me on BitBucket"],
+      ["https://www.ohloh.net/accounts/s0undt3ch", "images/ohloh.png", "Find me on Ohloh"]
+    ]
+  },
+
+  "email-signature@saltstack.com.html": {
+    "name": "Pedro Algarvio",
+    "avatar": "images/pro-avatar.png",
+    "gittip": {
+      "href": "https://www.gittip.com/s0undt3ch",
+      "src": "images/gittip.png",
+      "title": "Tip me on GitTip"
+    },
+    "contacts": [
+      ["mailto:pedro@saltstack.com", "images/mail.png", "Email me @saltstack.com"],
+      ["mailto:pedro@algarvio.me", "images/mail.png", "Email me @algarvio.me"],
+      ["http://www.linkedin.com/in/pedroalgarvio", "images/linkedin.png", "Find me on LinkedIn"],
+      ["https://twitter.com/s0undt3ch", "images/twitter.png", "Find me on Twitter"],
+      ["https://github.com/s0undt3ch", "images/github.png", "Find me on GitHub"],
+      ["https://bitbucket.org/s0undt3ch", "images/bitbucket.png", "Find me on BitBucket"],
+      ["https://www.ohloh.net/accounts/s0undt3ch", "images/ohloh.png", "Find me on Ohloh"]
+    ]
+  },
+
+  "email-signature@tawasys.com.html": {
+    "name": "Pedro Algarvio",
+    "avatar": "images/pro-avatar.png",
+    "gittip": {
+      "href": "https://www.gittip.com/s0undt3ch",
+      "src": "images/gittip.png",
+      "title": "Tip me on GitTip"
+    },
+    "contacts": [
+      ["mailto:pedro@tawasys.com", "images/mail.png", "Email me @tawasys.com"],
+      ["mailto:pedro@algarvio.me", "images/mail.png", "Email me @algarvio.me"],
+      ["http://www.linkedin.com/in/pedroalgarvio", "images/linkedin.png", "Find me on LinkedIn"],
+      ["https://twitter.com/s0undt3ch", "images/twitter.png", "Find me on Twitter"],
+      ["https://github.com/s0undt3ch", "images/github.png", "Find me on GitHub"],
+      ["https://bitbucket.org/s0undt3ch", "images/bitbucket.png", "Find me on BitBucket"],
+      ["https://www.ohloh.net/accounts/s0undt3ch", "images/ohloh.png", "Find me on Ohloh"]
+    ]
+  }
+}

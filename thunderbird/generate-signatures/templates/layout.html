@@ -1,0 +1,37 @@
+<style type="text/css" media="screen">
+  div#email-sig {
+    font-family: 'lucida sans unicode', 'lucida grande', sans-serif;
+    border: 1px dotted #aaa;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -moz-box-shadow: 4px 4px 5px #888;
+    -webkit-box-shadow: 4px 4px 5px #888;
+    box-shadow: 4px 4px 5px #888;
+    font-size: 10px;
+    margin: 0;
+    padding: 4px 4px;
+    float: left;
+    vertical-align: middle;
+  }
+  div#email-sig img.avatar { padding-left: -38px; }
+  div#email-sig a, div#email-sig a:visited { color: #006699; }
+  div#email-sig img { vertical-align: bottom; }
+  div#email-sig div.right { float: right; margin-left: 4px; }
+  div#email-sig div.left { float: left; }
+</style>
+<br/>
+<div id="email-sig">
+  <div class="right">
+    <b>{{ name }}</b><br/>
+    {% for href, src, title in contacts -%}
+    <a href="{{ href }}" title="{{ title }}"><img src="{{ src|b64data }}" alt="{{ title }}"/></a>&nbsp;//&nbsp;
+    {%- endfor %}
+    {% if gittip %}
+    Like my work? <a href="{{ gittip.href }}" title="{{ gittip.title }}"><img src="{{ gittip.src|b64data }}" alt="{{ gittip.title }}"/></a>
+    {% endif %}
+  </div>
+  <div class="left">
+    <img class="avatar" src="{{ avatar|b64data }}" alt="{{ name }}"/>
+  </div>
+</div>
+<br/>
