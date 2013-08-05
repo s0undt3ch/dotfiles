@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
     generate-email-signatures.py
@@ -19,6 +20,11 @@ from jinja2 import Environment, FileSystemLoader
 
 def url_to_image_data(fname):
     data_template = 'data:image/{0};base64,{1}'
+    if not os.path.isfile(fname):
+        fname = os.path.join(
+            os.path.abspath(os.path.dirname(__file__)),
+            fname
+        )
     return data_template.format(
         fname.rsplit('.', 1)[-1],
         open(os.path.abspath(fname), 'rb').read().encode('base64').replace('\n', '')
