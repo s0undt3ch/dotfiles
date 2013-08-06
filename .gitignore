@@ -42,4 +42,9 @@ nosetests.xml
 
 # Don't track file which include *skipgit* in their name
 */*skipgit*
+
+# Don't track private fonts
 fonts/private*/*
+
+# Don't track generated email signatures
+thunderbird/*.html
