@@ -1,4 +1,4 @@
-setl textwidth=79
+setl colorcolumn=80 spell spelllang=en textwidth=79 formatoptions=want
 
 " FIXME: how to differentiate between rst2beamer and Sphinx?
 " if !filereadable(expand(“%:p:h”).“/Makefile”)
