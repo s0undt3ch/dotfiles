@@ -203,6 +203,10 @@ def symlink_ssh(opts):
 def symlink_thunderbird(opts):
     source = os.path.join(DOTFILES_DIR, 'thunderbird')
     dest = os.path.join(HOME_DIR, '.thunderbird')
+
+    if not os.path.isdir(dest):
+        os.makedirs(dest)
+
     print 'Generating the HTML email signatures'
     subprocess.call([os.path.join(source, 'generate-signatures', 'generate-email-signatures.py')])
     for fname in os.listdir(source):
