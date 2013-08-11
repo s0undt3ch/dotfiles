@@ -223,6 +223,10 @@ def symlink_thunderbird(opts):
 def symlink_bin(opts):
     source = os.path.join(DOTFILES_DIR, 'bin')
     dest = os.path.join(HOME_DIR, 'bin')
+
+    if not os.path.isdir(dest):
+        os.makedirs(dest)
+
     for fname in os.listdir(source):
         symlink(
             os.path.join(source, fname),
