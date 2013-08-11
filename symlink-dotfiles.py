@@ -236,7 +236,7 @@ def symlink_bin(opts):
 
 
 def symlink_single_files(opts):
-    dont_sync_fnames = ('vimrc', 'bashrc')
+    dont_sync_fnames = ('vimrc',)
     for fname in os.listdir(DOTFILES_DIR):
         spath = os.path.join(DOTFILES_DIR, fname)
         if fname in dont_sync_fnames:
