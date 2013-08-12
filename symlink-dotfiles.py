@@ -198,6 +198,8 @@ def symlink_ssh(opts):
             os.path.join(dssh, fname),
             opts.force
         )
+        os.chmod(os.path.join(dssh, fname), 0600)
+    os.chmod(os.path.join(dssh), 0700)
 
 
 def symlink_thunderbird(opts):
