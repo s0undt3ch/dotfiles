@@ -1,5 +1,7 @@
 #!/bin/bash -
 # added by travis gem
-source ~/.travis/travis.sh
+if [ -f ~/.travis/travis.sh ]; then
+    source ~/.travis/travis.sh
+fi
 
 
