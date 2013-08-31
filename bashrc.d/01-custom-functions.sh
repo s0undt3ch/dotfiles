@@ -39,7 +39,7 @@ clean-vim-tempfiles() {
     fi
     for fname in $(find $1 -type f -name "*.*.sw*" 2>/dev/null); do
         if [ "x$(file $fname | grep -i 'Vim swap file')" != "x" ]; then
-            rm $fname
+            rm -f $fname
         fi
     done
 }
@@ -52,7 +52,7 @@ clean-pyc-files() {
     fi
     for fname in $(find $1 -type f -name "*.pyc" 2>/dev/null); do
         if [ "x$(file $fname | grep -i 'byte-compiled')" != "x" ]; then
-            rm $fname
+            rm -f $fname
         fi
     done
 }
