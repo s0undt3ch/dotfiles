@@ -1,0 +1,2 @@
+[extensions]
+prompt = ~/bin/hg-prompt
