@@ -1,2 +1,23 @@
+[defaults]
+cdiff = -q
+
 [extensions]
+hgext.extdiff =
 prompt = ~/bin/hg-prompt
+hgk =
+color =
+
+[extdiff]
+cmd.cdiff = /usr/bin/colordiff
+opts.cdiff = -uprN
+
+[web]
+push_ssl = False
+
+[ui]
+username = Pedro Algarvio, aka, s0undt3ch <pedro@algarivo.me>
+interactive = True
+ignore = /home/vampas/.hgignore
+
+[diff]
+git=1
