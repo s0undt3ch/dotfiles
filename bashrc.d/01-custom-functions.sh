@@ -56,3 +56,7 @@ clean-pyc-files() {
         fi
     done
 }
+
+ssh-null() {
+    ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none $@
+}
