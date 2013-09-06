@@ -6,6 +6,7 @@ hgext.extdiff =
 prompt = ~/bin/hg-prompt
 hgk =
 color =
+transplant =
 
 [extdiff]
 cmd.cdiff = /usr/bin/colordiff
