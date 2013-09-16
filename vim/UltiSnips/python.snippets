@@ -1,6 +1,31 @@
 snippet mod "Basic Python Module Header" b
 # -*- coding: utf-8 -*-
 `!p snip.rv = tripple_quotes(snip)`
+    `!p
+codeauthor = snip.opt('g:ultisnips_python_code_author', None)
+if codeauthor is not None:
+    snip.rv = ':codeauthor: {1}\n    '.format(snip.mkline(''), codeauthor)
+`:copyright: © ${3:`!p
+import datetime;
+snip.rv = datetime.datetime.utcnow().strftime('%Y')
+    `} by the ${4:`!p
+snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
+    `} Team, see AUTHORS for more details.
+    :license: ${5:`!p snip.rv = snip.opt("g:ultisnips_python_project_license", "LICENSE NAME")`}, see LICENSE for more details.
+
+
+    ${1:`!p snip.rv = snip.module or snip.fn`}
+    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+
+    ${2:@todo: add description}
+`!p snip.rv = tripple_quotes(snip)`
+
+$0
+endsnippet
+
+snippet omod "Basic Python Module Header" b
+# -*- coding: utf-8 -*-
+`!p snip.rv = tripple_quotes(snip)`
     ${1:`!p snip.rv = snip.module or snip.fn`}
     `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
 
