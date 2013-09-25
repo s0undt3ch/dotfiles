@@ -1,6 +1,7 @@
 [user]
 	name = Pedro Algarvio
 	email = pedro@algarvio.me
+	signingkey = 9C558009
 [color]
 	ui = true
 [core]
