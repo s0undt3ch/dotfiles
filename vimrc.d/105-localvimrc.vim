@@ -8,7 +8,7 @@ let g:localvimrc_name = '.lvimrc'
 " 1	Load vimrc file in a sandbox.
 "
 " Default: 1
-let g:localvimrc_sandbox = 1
+let g:localvimrc_sandbox = 0
 
 
 " Ask before sourcing any local vimrc file.

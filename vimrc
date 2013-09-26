@@ -21,7 +21,7 @@ syntax on
 " Buffer (File) Options
 set hidden                              " Edit multiple unsaved files at the same time
 set confirm                             " Prompt to save unsaved changes when exiting
-set viminfo='1000,f1,<500,:100,/100,h   " Keep various histories between edits
+set viminfo='1000,f1,<500,:100,/100,h,! " Keep various histories between edits
 
 " Search Options
 set hlsearch                            " Highlight searches. See below for more
