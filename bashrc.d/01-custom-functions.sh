@@ -1,3 +1,6 @@
+# Disable posix mode which disallows -(dashes) in function names.
+set +o posix
+
 new-git-branch() {
     branch="$1"
     git branch "${branch}" && (git push --set-upstream origin "${branch}" || git push origin "${branch}") && git checkout "${branch}"
@@ -60,3 +63,6 @@ clean-pyc-files() {
 ssh-null() {
     ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none $@
 }
+
+# Enable posix mode which disallows -(dashes) in function names.
+set -o posix
