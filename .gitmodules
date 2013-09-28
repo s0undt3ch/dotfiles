@@ -1,6 +1,6 @@
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
-	url = git@github.com:s0undt3ch/ultisnips.git
+	url = git://github.com/s0undt3ch/ultisnips.git
 [submodule "vim/bundle/vim-fugitive"]
 	path = vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
