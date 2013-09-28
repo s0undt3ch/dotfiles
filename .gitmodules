@@ -6,7 +6,7 @@
 	url = git://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/bash-support.vim"]
 	path = vim/bundle/bash-support.vim
-	url = git@github.com:s0undt3ch/bash-support.vim.git
+	url = git://github.com/s0undt3ch/bash-support.vim.git
 [submodule "vim/bundle/salt-vim"]
 	path = vim/bundle/salt-vim
 	url = git://github.com/saltstack/salt-vim.git
