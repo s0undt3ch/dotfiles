@@ -21,6 +21,12 @@ import shutil
 import optparse
 import subprocess
 
+try:
+    import jinja2
+    HAS_JINJA = True
+except ImportError:
+    HAS_JINJA = False
+
 HOME_DIR = os.path.expanduser('~')
 DOTFILES_DIR = os.path.abspath(os.path.dirname(__file__))
 GLOBAL_SKIPS = (
@@ -296,7 +302,8 @@ if __name__ == '__main__':
     symlink_ssh(options)
     symlink_single_files(options)
     symlink_bashrcd(options)
-    symlink_thunderbird(options)
+    if HAS_JINJA:
+        symlink_thunderbird(options)
     symlink_bin(options)
 
 
