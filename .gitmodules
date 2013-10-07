@@ -36,7 +36,7 @@
 	url = git://github.com/vim-scripts/wordlist.vim.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
-	url = git://github.com/scrooloose/syntastic.git
+	url = git@github.com:s0undt3ch/syntastic.git
 [submodule "vim/bundle/powerline"]
 	path = vim/bundle/powerline
 	url = git://github.com/Lokaltog/powerline
