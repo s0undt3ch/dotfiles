@@ -59,7 +59,12 @@ set shortmess=atI                       " Limit Vim's "hit-enter" messages
 set encoding=utf-8                      " Necessary to show Unicode glyphs
 set t_Co=256                            " Explicitly tell Vim that the terminal supports 256 colors
 set showmatch                           " Show matching brackets
-colorscheme fruity
+
+if has("gui_running")
+  colorscheme fruity
+else
+  colorscheme fruity-term
+endif
 
 " ----- Include and Source any *.vim files in ~/.vimrc.d/ ------------------->
 for fpath in split(globpath('~/.vimrc.d/', '*.vim'), '\n')
