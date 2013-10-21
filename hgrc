@@ -18,7 +18,7 @@ push_ssl = False
 [ui]
 username = Pedro Algarvio, aka, s0undt3ch <pedro@algarivo.me>
 interactive = True
-ignore = /home/vampas/.hgignore
+ignore = ~/.hgignore
 
 [diff]
 git=1
