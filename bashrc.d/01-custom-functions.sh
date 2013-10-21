@@ -7,7 +7,9 @@ new-git-branch() {
 }
 
 develop() {
-    . /home/vampas/projects/.vp_installs/PY-2.7/bin/activate
+	echo "1"
+    . ~/projects/.virtualenvs/Py27/bin/activate
+	echo "2"
 }
 
 killpymatch() {
