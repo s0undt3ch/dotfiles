@@ -1,3 +1,5 @@
+# vim: ts=4 sts=4 et
+
 # ----- Define colors ------------------------------------------------------->
 # Reset
 Color_Off="[0m"       # Text Reset
@@ -81,6 +83,7 @@ fi
 # <---- Define colors --------------------------------------------------------
 
 
+export VIRTUAL_ENV_DISABLE_PROMPT=1  # We handle our own PS1
 export USER_VC_PROMPT=$'\033[1;30m on \033[0;36m%n\033[00m:\033[00m%b\033[32m'
 
 
@@ -89,39 +92,31 @@ set +o posix
 
 # ----- Some required functions definitions --------------------------------->
 user-last-command-failed() {
-  code=$?
-  if [ $code != 0 ]; then
-    echo -n $'\033[37m exited \033[31m'
-    echo -n $code
-    echo -n $'\033[37m'
-  fi
+    code=$?
+    if [ $code != 0 ]; then
+        echo -n $'\033[37m exited \033[31m'
+        echo -n $code
+        echo -n $'\033[37m'
+    fi
 }
 
 user-background-jobs() {
-  jobs|python -c 'if 1:
-    import sys
-    items = ["\033[36m%s\033[37m" % x.split()[2]
-             for x in sys.stdin.read().splitlines()]
-    if items:
-      if len(items) > 2:
-        string = "%s, and %s" % (", ".join(items[:-1]), items[-1])
-      else:
-        string = ", ".join(items)
-      print("\033[37m running %s" % string)
-  '
+    if [ -x ~/bin/background-running-jobs ]; then
+        jobs | ~/bin/background-running-jobs --text-color='[1;30m' --job-color='[0;36m' --pre-space
+    fi
 }
 
 current-virtualenv() {
   if [ x$VIRTUAL_ENV != x ]; then
-    if [[ $VIRTUAL_ENV == *.virtualenvs/* ]]; then
-       ENV_NAME=`basename "${VIRTUAL_ENV}"`
-    else
-      folder=`dirname "${VIRTUAL_ENV}"`
-      ENV_NAME=`basename "$folder"`
-    fi
-    echo -n $' \033[37mworkon \033[31m'
-    echo -n $ENV_NAME
-    echo -n $'\033[00m'
+      if [[ $VIRTUAL_ENV == *.virtualenvs/* ]]; then
+          ENV_NAME=`basename "${VIRTUAL_ENV}"`
+      else
+          folder=`dirname "${VIRTUAL_ENV}"`
+          ENV_NAME=`basename "$folder"`
+      fi
+      echo -n $'\033[1;30m workon \033[0;31m'
+      echo -n $ENV_NAME
+      echo -n $'\033[00m'
   fi
 }
 
