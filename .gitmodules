@@ -46,3 +46,6 @@
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
+[submodule "libs/vcprompt"]
+	path = libs/vcprompt
+	url = git://github.com/djl/vcprompt.git
