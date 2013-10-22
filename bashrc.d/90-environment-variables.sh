@@ -8,3 +8,10 @@ export LANGUAGE=en_GB:en
 # if you want remote xterms connecting to this system, to be sent 256 colors.
 # This must be set before reading global initialization such as /etc/bashrc.
 export SEND_256_COLORS_TO_REMOTE=1
+
+
+# ----- Set the EDITOR to vim if available ---------------------------------->
+if [ "x$(which vim)" != "x" ]; then
+    export EDITOR=vim
+fi
+# <---- Set the EDITOR to vim if available -----------------------------------
