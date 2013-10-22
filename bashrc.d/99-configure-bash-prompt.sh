@@ -84,7 +84,7 @@ fi
 
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1  # We handle our own PS1
-export USER_VC_PROMPT=$'\033[1;30m on \033[38;5;27m%n\033[00m:\033[38;5;214m%b\033[32m'
+export USER_VC_PROMPT=$'\033[1;30m on \033[38;5;27m%n\033[00m:\033[38;5;214m%b\033[0;32m'
 
 
 # Disable posix mode which disallows dashes in function names
@@ -94,9 +94,9 @@ set +o posix
 user-last-command-failed() {
     code=$?
     if [ $code != 0 ]; then
-        echo -n $'\033[37m exited \033[31m'
+        echo -n $'\033[1;37m exited \033[0;31m'
         echo -n $code
-        echo -n $'\033[37m'
+        echo -n $'\033[0;37m'
     fi
 }
 
