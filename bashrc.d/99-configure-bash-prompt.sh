@@ -75,16 +75,16 @@ On_ICyan="[0;106m"    # Cyan
 On_IWhite="[0;107m"   # White
 
 
-if [ `id -u` == '0' ]; then
-    USERCOLOR=$Red
+if [ `id -u` = '0' ]; then
+    USERCOLOR="[38;5;196m"
 else
-    USERCOLOR=$BIBlue
+    USERCOLOR="[38;5;33m"
 fi
 # <---- Define colors --------------------------------------------------------
 
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1  # We handle our own PS1
-export USER_VC_PROMPT=$'\033[1;30m on \033[0;36m%n\033[00m:\033[00m%b\033[32m'
+export USER_VC_PROMPT=$'\033[1;30m on \033[38;5;27m%n\033[00m:\033[38;5;214m%b\033[32m'
 
 
 # Disable posix mode which disallows dashes in function names
@@ -131,8 +131,8 @@ set -o posix
 
 
 export USER_BASEPROMPT='\n\e${USERCOLOR}\u \
-\e${BBlack}@ \e${BIRed}\h \
-\e${Color_Off}\e${BBlack}in \e${Green}\w\
+\e${BBlack}@ \e[38;5;202m\h \
+\e${Color_Off}\e${BBlack}in \e[38;5;35m\w\
 `user-last-command-failed`\
 \e${Color_Off}`user-vcprompt`\
 `user-background-jobs`\
