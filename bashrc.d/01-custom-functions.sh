@@ -66,5 +66,27 @@ ssh-null() {
     ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none $@
 }
 
+ssh-hop() {
+    ssh_binary="ssh"
+    ssh_command="ssh -A -t $1"
+    shift
+    for item in ${@:1}; do
+        ssh_command="${ssh_command} ssh -A -t ${item}"
+    done
+    echo $ssh_command
+    $($ssh_command)
+}
+
+ssh-null-hop() {
+    ssh_binary="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none"
+    ssh_command="${ssh_binary} -A -t $1"
+    shift
+    for item in ${@:1}; do
+        ssh_command="${ssh_command} ${ssh_binary} -A -t ${item}"
+    done
+    echo $ssh_command
+    $($ssh_command)
+}
+
 # Enable posix mode which disallows -(dashes) in function names.
 set -o posix
