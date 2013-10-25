@@ -1,3 +1,4 @@
+# vim: ts=4 sts=4 et
 # Disable posix mode which disallows -(dashes) in function names.
 set +o posix
 
@@ -66,26 +67,59 @@ ssh-null() {
     ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none $@
 }
 
+HOP_PARSING_CODE="import sys
+import socket
+
+output = []
+ssh_command = sys.argv[1]
+
+for hop in sys.argv[2:-1]:
+    port = '22'
+    if ':' in hop:
+        hop, port = hop.split(':')
+
+    user = None
+    if '@' in hop:
+        user, hop = hop.split('@')
+    try:
+        hop = socket.gethostbyname(hop.strip())
+    except socket.gaierror as exc:
+        pass
+    output.extend([
+        ssh_command, '-A', '-t', '-p', port,
+        user and '{0}@{1}'.format(user, hop) or hop
+    ])
+
+port = '22'
+last_hop = sys.argv[-1]
+if ':' in last_hop:
+    last_hop, port = last_hop.split(':')
+user = None
+if '@' in last_hop:
+    user, last_hop = last_hop.split('@')
+try:
+    last_hop = socket.gethostbyname(last_hop.strip())
+except socket.gaierror:
+    pass
+output.extend([
+    ssh_command, '-A', '-p', port,
+    user and '{0}@{1}'.format(user, last_hop) or last_hop
+])
+print ' '.join(output)
+"
+
 ssh-hop() {
-    ssh_binary="ssh"
-    ssh_command="ssh -A -t $1"
-    shift
-    for item in ${@:1}; do
-        ssh_command="${ssh_command} ssh -A -t ${item}"
-    done
+    ssh_binary="/usr/bin/ssh"
+    ssh_command=$(python -c "$HOP_PARSING_CODE" "$ssh_binary" $@)
     echo $ssh_command
-    $($ssh_command)
+    eval $ssh_command
 }
 
 ssh-null-hop() {
-    ssh_binary="ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none"
-    ssh_command="${ssh_binary} -A -t $1"
-    shift
-    for item in ${@:1}; do
-        ssh_command="${ssh_command} ${ssh_binary} -A -t ${item}"
-    done
+    ssh_binary="/usr/bin/ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oControlPath=none"
+    ssh_command=$(python -c "$HOP_PARSING_CODE" "$ssh_binary" $@)
     echo $ssh_command
-    $($ssh_command)
+    eval $ssh_command
 }
 
 # Enable posix mode which disallows -(dashes) in function names.
