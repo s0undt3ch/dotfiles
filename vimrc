@@ -40,11 +40,10 @@ set pastetoggle=<f11>                   " Use <F11> to toggle between 'paste' an
 
 " Status / Command Line Options
 set wildmenu                            " Better commandline completion
-set wildmode=list:full                  " Expand match on first Tab complete
+set wildmode=longest:list:full          " Expand match on first Tab complete
 set showcmd                             " Show (partial) command in status line
 set laststatus=2                        " Always show a status line
 set cmdheight=2                         " Prevent "Press Enter" message after most commands
-"set statusline=%f%m%r%h%w\ [%n:%{&ff}/%Y]%=[0x\%04.4B][%03v][%p%%\ line\ %l\ of\ %L]
 
 " Interface Options
 "set number                              " Display line numbers at left of screen
