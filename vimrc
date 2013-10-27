@@ -36,11 +36,12 @@ set nostartofline                       " Emulate typical editor navigation beha
 set nopaste                             " Start in normal (non-paste) mode
 set showmode                            " Necessary to show paste state in insert mode
 set pastetoggle=<f11>                   " Use <F11> to toggle between 'paste' and 'nopaste'
+set clipboard=unnamedplus               " Use X11 clipboard
 
 
 " Status / Command Line Options
 set wildmenu                            " Better commandline completion
-set wildmode=longest:list:full          " Expand match on first Tab complete
+set wildmode=list:longest:full          " Expand match on first Tab complete
 set showcmd                             " Show (partial) command in status line
 set laststatus=2                        " Always show a status line
 set cmdheight=2                         " Prevent "Press Enter" message after most commands
@@ -63,6 +64,7 @@ if has("gui_running")
   colorscheme fruity
 else
   colorscheme fruity-term
+  highlight ColorColumn ctermbg=233       " Visible color column in terminals
 endif
 
 " ----- Include and Source any *.vim files in ~/.vimrc.d/ ------------------->
