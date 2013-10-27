@@ -8,9 +8,7 @@ new-git-branch() {
 }
 
 develop() {
-	echo "1"
     . ~/projects/.virtualenvs/Py27/bin/activate
-	echo "2"
 }
 
 killpymatch() {
