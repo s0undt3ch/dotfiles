@@ -8,8 +8,22 @@ new-git-branch() {
 }
 
 develop() {
-    . ~/projects/.virtualenvs/Py27/bin/activate
+    venv_name=${1:-Py27}
+    venv_activate_bin=~/projects/.virtualenvs/${venv_name}/bin/activate
+    if [ ! -f $venv_activate_bin ]; then
+        echo "No virtualenv by the name \"${venv_name}\" was found!"
+        return 1
+    fi
+    . ${venv_activate_bin}
 }
+
+__existing_virtualenvs() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    VENVS_DIR=~/projects/.virtualenvs
+    VENVS=$(ls $VENVS_DIR)
+    COMPREPLY=( $(compgen -W "${VENVS}" -- $cur) )
+}
+complete -F __existing_virtualenvs develop
 
 killpymatch() {
     pid=$(ps aux | grep python | grep "$1" | awk '{print $2}')
