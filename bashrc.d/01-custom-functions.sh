@@ -7,6 +7,12 @@ new-git-branch() {
     git branch "${branch}" && (git push --set-upstream origin "${branch}" || git push origin "${branch}") && git checkout "${branch}"
 }
 
+__branch_completion() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    __gitcomp_nl "$(__git_heads)"
+}
+complete -F __branch_completion new-git-branch
+
 develop() {
     venv_name=${1:-Py27}
     venv_activate_bin=~/projects/.virtualenvs/${venv_name}/bin/activate
