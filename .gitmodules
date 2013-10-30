@@ -1,9 +1,11 @@
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
 	url = git://github.com/s0undt3ch/ultisnips.git
+	branch = features/shared-globals
 [submodule "vim/bundle/vim-fugitive"]
 	path = vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
+	branch = master
 [submodule "vim/bundle/bash-support.vim"]
 	path = vim/bundle/bash-support.vim
 	url = git://github.com/s0undt3ch/bash-support.vim.git
@@ -11,6 +13,7 @@
 [submodule "vim/bundle/salt-vim"]
 	path = vim/bundle/salt-vim
 	url = git://github.com/saltstack/salt-vim.git
+	branch = master
 [submodule "vim/bundle/python-mode"]
 	path = vim/bundle/python-mode
 	url = git://github.com/klen/python-mode.git
@@ -18,15 +21,19 @@
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+	branch = master
 [submodule "vim/bundle/DfrankUtil"]
 	path = vim/bundle/DfrankUtil
 	url = git://github.com/vim-scripts/DfrankUtil.git
+	branch = master
 [submodule "vim/bundle/gundo.vim"]
 	path = vim/bundle/gundo.vim
 	url = git://github.com/sjl/gundo.vim.git
+	branch = master
 [submodule "vim/bundle/tabman.vim"]
 	path = vim/bundle/tabman.vim
 	url = git://github.com/kien/tabman.vim.git
+	branch = master
 [submodule "vim/bundle/csapprox"]
 	path = vim/bundle/csapprox
 	url = git://github.com/godlygeek/csapprox.git
@@ -34,27 +41,34 @@
 [submodule "vim/bundle/gitv"]
 	path = vim/bundle/gitv
 	url = git://github.com/gregsexton/gitv.git
+	branch = master
 [submodule "vim/bundle/wordlist.vim"]
 	path = vim/bundle/wordlist.vim
 	url = git://github.com/vim-scripts/wordlist.vim.git
+	branch = master
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+	branch = master
 [submodule "vim/bundle/powerline"]
 	path = vim/bundle/powerline
 	url = git://github.com/Lokaltog/powerline
+	branch = develop
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar
+	branch = master
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
+	branch = master
 [submodule "libs/vcprompt"]
 	path = libs/vcprompt
 	url = git://github.com/djl/vcprompt.git
 [submodule "vim/bundle/jedi-vim"]
 	path = vim/bundle/jedi-vim
 	url = git://github.com/davidhalter/jedi-vim.git
+	branch = master
 [submodule "vim/bundle/delimitMate"]
 	path = vim/bundle/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
