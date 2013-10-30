@@ -28,6 +28,7 @@
 [submodule "vim/bundle/csapprox"]
 	path = vim/bundle/csapprox
 	url = git://github.com/godlygeek/csapprox.git
+	branch = master
 [submodule "vim/bundle/gitv"]
 	path = vim/bundle/gitv
 	url = git://github.com/gregsexton/gitv.git
