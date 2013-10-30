@@ -7,6 +7,7 @@
 [submodule "vim/bundle/bash-support.vim"]
 	path = vim/bundle/bash-support.vim
 	url = git://github.com/s0undt3ch/bash-support.vim.git
+	branch = with-my-details
 [submodule "vim/bundle/salt-vim"]
 	path = vim/bundle/salt-vim
 	url = git://github.com/saltstack/salt-vim.git
