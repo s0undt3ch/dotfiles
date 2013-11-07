@@ -294,6 +294,13 @@ if __name__ == '__main__':
         default=False,
         help='Skip regenerating fonts cache'
     )
+    if HAS_JINJA:
+        parser.add_option(
+            '-E', '--email-signatures',
+            action='store_true',
+            default=False,
+            help='Generate the email signatures'
+        )
     (options, args) = parser.parse_args()
     if args:
         parser.error('No arguments are supported')
@@ -302,7 +309,7 @@ if __name__ == '__main__':
     symlink_ssh(options)
     symlink_single_files(options)
     symlink_bashrcd(options)
-    if HAS_JINJA:
+    if HAS_JINJA and options.email_signatures:
         symlink_thunderbird(options)
     symlink_bin(options)
 
