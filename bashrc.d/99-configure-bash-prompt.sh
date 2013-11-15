@@ -75,6 +75,12 @@ On_ICyan="[0;106m"    # Cyan
 On_IWhite="[0;107m"   # White
 
 
+if [ `hostname` = 'fedup' ]; then
+    HOSTCOLOR="[38;5;202m"
+else
+    HOSTCOLOR="[38;5;198m"
+fi
+
 if [ `id -u` = '0' ]; then
     USERCOLOR="[38;5;196m"
 else
@@ -131,7 +137,7 @@ set -o posix
 
 
 export USER_BASEPROMPT='\n\e${USERCOLOR}\u \
-\e${BBlack}@\e${Color_Off} \e[38;5;202m\h \
+\e${BBlack}@\e${Color_Off} \e${HOSTCOLOR}\h \
 \e${Color_Off}\e${BBlack}in \e[38;5;35m\w\
 `user-last-command-failed`\
 \e${Color_Off}`user-vcprompt`\
