@@ -1,0 +1,30 @@
+" Enable Code Lint
+let g:pymode_lint = 0
+" Add virtualenv paths
+let g:pymode_virtualenv = 1
+" Check code on the fly
+let g:pymode_lint_onfly = 0
+" Always show the errors ruller, even if there's no errors.
+let g:pymode_lint_signs_always_visible = 1
+
+let g:pymode_lint_checker = "pylint,mccabe"
+let g:pymode_lint_config = fnamemodify(expand(":h"), ":p:h")  . '/.pylintrc'
+
+" Maximum allowed mccabe complexity
+let g:pymode_lint_mccabe_complexity = 40
+
+autocmd FileType python set colorcolumn=80 spell spelllang=en
+autocmd FileType rst set colorcolumn=80 spell spelllang=en textwidth=79 formatoptions=want
+
+let g:ultisnips_python_quoting_style = 'single'
+let g:ultisnips_python_project_team = 'UfSoft.org'
+let g:ultisnips_python_project_license = 'BSD'
+let g:ultisnips_python_code_author = ':email:`Pedro Algarvio (pedro@algarvio.me)`'
+
+let g:syntastic_enable_signs=1
+let g:syntastic_check_on_open=1
+let g:syntastic_python_checkers = ["pylint", "python"]
+let g:syntastic_python_pylint_args = '--rcfile ' . fnamemodify(expand(":h"), ":p:h") . 
+	\ '/.pylintrc' . ' -f parseable -r n -i y ' .
+	\ '--disable=E8501,E8121,E8122,E8123,E8124,E8125,E8126,E8127,E8128'
+
