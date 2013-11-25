@@ -73,3 +73,7 @@
 	path = vim/bundle/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
 	branch = master
+[submodule "vim/bundle/vim-localvimrc"]
+	path = vim/bundle/vim-localvimrc
+	url = https://github.com/embear/vim-localvimrc.git
+	branch = master
