@@ -77,3 +77,7 @@
 	path = vim/bundle/vim-localvimrc
 	url = https://github.com/embear/vim-localvimrc.git
 	branch = master
+[submodule "vim/bundle/Dockerfile.vim"]
+	path = vim/bundle/Dockerfile.vim
+	url = git://github.com/ekalinin/Dockerfile.vim.git
+	branch = master
