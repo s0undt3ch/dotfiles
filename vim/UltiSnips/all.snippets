@@ -1,28 +1,83 @@
 global !p
-def start_comment(ft):
-    FT_COMMENT_MAP = {
-        'vim':      '"',
-        'python':   '#',
-        'css':      '//',
-    }
-    return FT_COMMENT_MAP.get(ft, '#')
+
+'''
+Maps a filetype to comment format used for boxes. Automatically filled during usage
+'''
+
+_commentDict = {}
+
+def _parse_comments(s):
+    """ Parses vim's comments option to extract comment format """
+    i = iter(s.split(","))
+
+    rv = []
+    try:
+        while True:
+            # get the flags and text of a comment part
+            flags,text = i.next().split(':', 1)
+
+            if len(flags) == 0:
+                if len(text) == 1:
+                    rv.append((text,text,text, ""))
+            # parse 3-part comment, but ignore those with O flag
+            elif flags[0] == 's' and 'O' not in flags:
+                ctriple = []
+                indent = ""
+
+                if flags[-1] in string.digits:
+                    indent = " " * int(flags[-1])
+                ctriple.append(text)
+
+                flags,text = i.next().split(':', 1)
+                assert(flags[0] == 'm')
+                ctriple.append(text)
+
+                flags,text = i.next().split(':', 1)
+                assert(flags[0] == 'e')
+                ctriple.append(text)
+                ctriple.append(indent)
+
+                rv.append(ctriple)
+
+            elif flags[0] == 'b':
+                if len(text) == 1:
+                    rv.insert(0, (text,text,text, ""))
+
+    except StopIteration:
+       return rv
+
+def _get_comment_format():
+    """ Returns a 4-element tuple representing the comment format for
+    the current file. """
+
+    ft = vim.eval("&filetype")
+    # check if the comment dict has the format for the current file
+    if _commentDict.has_key(ft):
+        return _commentDict[ft]
+
+    # otherwise parse vim's comments and add it for later use
+    commentformat = _parse_comments(vim.eval("&comments"))[0]
+    _commentDict[ft] = commentformat
+
+    return commentformat
 endglobal
 
 
 snippet sec "Code Section" b
-`!p snip.rv = start_comment(snip.ft)` ----- ${1:SECTION NAME} `!p
+`!p snip.rv = _get_comment_format()[0]` ----- ${1:SECTION NAME} `!p
 snip.rv = '{0}>'.format(
-    (int(snip.opt('g:ultisnips_python_colorcolumn', 80))
+    ((int(vim.eval("&colorcolumn")) or int(vim.eval("&textwidth")) or 80)
     - (len(snip._initial_indent) or 0)
-    - (11 + len(start_comment(snip.ft)))
-    - len(t[1] or 'SECTION NAME')) * '-')
+    - (11 + len(_get_comment_format()[0]))
+    - len(t[1] or 'SECTION NAME')) * '-'
+    )
 `
 ${VISUAL}$0
-`!p snip.rv = start_comment(snip.ft)` <---- `!p snip.rv = t[1] or 'SECTION NAME'` `!p
+`!p snip.rv = _get_comment_format()[0]` <---- `!p snip.rv = t[1] or 'SECTION NAME'` `!p
 snip.rv = '{0}'.format(
-    (int(snip.opt('g:ultisnips_python_colorcolumn', 80))
+    ((int(vim.eval("&colorcolumn")) or int(vim.eval("&textwidth")) or 80)
     - (len(snip._initial_indent) or 0)
-    - (10 + len(start_comment(snip.ft)))
+    - (10 + len(_get_comment_format()[0]))
     - len(t[1] or 'SECTION NAME')) * '-'
     )
 `
