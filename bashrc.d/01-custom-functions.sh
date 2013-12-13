@@ -140,5 +140,8 @@ ssh-null-hop() {
     eval $ssh_command
 }
 
+rdesktop-shortcut() {
+    rdesktop -g 1820x1000 -k pt -z -r sound:local $@
+}
 # Enable posix mode which disallows -(dashes) in function names.
 set -o posix
