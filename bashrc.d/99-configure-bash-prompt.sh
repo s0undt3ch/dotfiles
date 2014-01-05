@@ -75,7 +75,7 @@ On_ICyan="[0;106m"    # Cyan
 On_IWhite="[0;107m"   # White
 
 
-if [ `hostname` = 'sloth' ]; then
+if [ `hostname` = 'arched' ]; then
     HOSTCOLOR="[38;5;202m"
 else
     HOSTCOLOR="[38;5;198m"
