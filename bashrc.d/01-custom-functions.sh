@@ -123,7 +123,7 @@ output.extend([
     ssh_command, '-A', '-p', port,
     user and '{0}@{1}'.format(user, last_hop) or last_hop
 ])
-print ' '.join(output)
+print(' '.join(output))
 "
 
 ssh-hop() {
