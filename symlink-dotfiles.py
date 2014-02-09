@@ -66,7 +66,7 @@ def symlink(source, dest, force=False):
         print 'Skipped. Real file not overwritten'
         return
     elif os.path.exists(dest) and not os.path.islink(dest) and force:
-        print 'Overwriting existint file...',
+        print 'Overwriting existing file...',
         if os.path.isdir(dest):
             shutil.rmtree(dest)
         else:
