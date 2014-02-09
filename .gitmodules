@@ -81,3 +81,7 @@
 	path = vim/bundle/Dockerfile.vim
 	url = git://github.com/ekalinin/Dockerfile.vim.git
 	branch = master
+[submodule "libs/powerline"]
+	path = libs/powerline
+	url = https://github.com/Lokaltog/powerline.git
+	branch = develop
