@@ -9,6 +9,14 @@ export LANGUAGE=en_GB:en
 # This must be set before reading global initialization such as /etc/bashrc.
 export SEND_256_COLORS_TO_REMOTE=1
 
+# Tell that we run a 256 colors terminal
+export TERM=xterm-256color
+
+# ----- Define the powerline command required by tmux's powerline ----------->
+if [ -f ~/.Dotfiles/libs/powerline/scripts/powerline ]; then
+    export POWERLINE_COMMAND=~/.Dotfiles/libs/powerline/scripts/powerline
+fi
+# <---- Define the powerline command required by tmux's powerline ------------
 
 # ----- Set the EDITOR to vim if available ---------------------------------->
 if [ "x$(which vim)" != "x" ]; then
