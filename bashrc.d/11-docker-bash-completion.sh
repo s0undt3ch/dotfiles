@@ -21,7 +21,7 @@
 # If the docker daemon is using a unix socket for communication your user
 # must have access to the socket for the completions to function correctly
 
-if [ -x $(which docker) ] && [ "$(command -v _docker)x" = "x" ]; then
+if [ -x $(which docker 2>/dev/null) ] && [ "$(command -v _docker)x" = "x" ]; then
 	# We have docker installed and docker completion is not already loaded
 
 	__docker_containers_all()
