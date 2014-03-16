@@ -50,7 +50,7 @@ set cmdheight=2                         " Prevent "Press Enter" message after mo
 "set number                              " Display line numbers at left of screen
 set visualbell                          " Flash the screen instead of beeping on errors
 set t_vb=                               " And then disable even the flashing
-set mouse=a                             " Enable mouse usage (all modes) in terminals
+"set mouse=a                             " Enable mouse usage (all modes) in terminals
 set ttimeout ttimeoutlen=200            " Quickly time out on keycodes
 set notimeout                           "   but never time out on mappings
 set list                                " Show tabs and trailing whitespace
