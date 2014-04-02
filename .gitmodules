@@ -85,3 +85,7 @@
 	path = libs/powerline
 	url = https://github.com/Lokaltog/powerline.git
 	branch = develop
+[submodule "vim/bundle/nginx-vim-syntax"]
+	path = vim/bundle/nginx-vim-syntax
+	url = https://github.com/evanmiller/nginx-vim-syntax.git
+	branch = master
