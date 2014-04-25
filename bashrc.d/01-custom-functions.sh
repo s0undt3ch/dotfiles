@@ -25,7 +25,7 @@ develop() {
 
 __existing_virtualenvs() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
-    VENVS_DIR=~/projects/.virtualenvs
+    VENVS_DIR=${VIRTUALENV_PARENT_DIRS:-~/projects/.virtualenvs}
     VENVS=$(ls $VENVS_DIR)
     COMPREPLY=( $(compgen -W "${VENVS}" -- $cur) )
 }
