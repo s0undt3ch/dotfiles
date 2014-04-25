@@ -15,7 +15,7 @@ complete -F __branch_completion new-git-branch
 
 develop() {
     venv_name=${1:-Py27}
-    venv_activate_bin=~/projects/.virtualenvs/${venv_name}/bin/activate
+    venv_activate_bin=${VIRTUALENV_PARENT_DIRS:-~/projects/.virtualenvs}/${venv_name}/bin/activate
     if [ ! -f $venv_activate_bin ]; then
         echo "No virtualenv by the name \"${venv_name}\" was found!"
         return 1
