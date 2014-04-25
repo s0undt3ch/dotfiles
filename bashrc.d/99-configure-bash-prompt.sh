@@ -136,7 +136,7 @@ user-vcprompt() {
 set -o posix
 
 
-export USER_BASEPROMPT='\n\e${USERCOLOR}\u \
+export USER_BASEPROMPT='\e${USERCOLOR}\u \
 \e${BBlack}@\e${Color_Off} \e${HOSTCOLOR}\h \
 \e${Color_Off}\e${BBlack}in \e[38;5;35m\w\
 `user-last-command-failed`\
