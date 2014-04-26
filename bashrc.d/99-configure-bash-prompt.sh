@@ -114,14 +114,8 @@ user-background-jobs() {
 
 current-virtualenv() {
   if [ x$VIRTUAL_ENV != x ]; then
-      if [[ $VIRTUAL_ENV == *.virtualenvs/* ]]; then
-          ENV_NAME=`basename "${VIRTUAL_ENV}"`
-      else
-          folder=`dirname "${VIRTUAL_ENV}"`
-          ENV_NAME=`basename "$folder"`
-      fi
       echo -n $'\033[1;30m workon \033[0;31m'
-      echo -n $ENV_NAME
+      echo -n `basename "${VIRTUAL_ENV}"`
       echo -n $'\033[00m'
   fi
 }
