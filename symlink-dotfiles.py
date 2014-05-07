@@ -276,6 +276,25 @@ def symlink_bashrcd(opts):
         symlink(spath, dpath, opts.force)
 
 
+def symlink_config(opts):
+    source = os.path.join(DOTFILES_DIR, 'config')
+    dest = os.path.join(HOME_DIR, '.config')
+    if not os.path.isdir(dest):
+        os.makedirs(dest)
+
+    dont_sync_fnames = ()
+    for fname in os.listdir(source):
+        spath = os.path.join(source, fname)
+        if fname in dont_sync_fnames or fname in GLOBAL_SKIPS:
+            continue
+        elif fname.startswith('.'):
+            continue
+        elif not os.path.isfile(spath):
+            continue
+        dpath = os.path.join(dest, fname)
+        symlink(spath, dpath, opts.force)
+
+
 if __name__ == '__main__':
     parser = optparse.OptionParser(
         description=' '.join([
@@ -312,6 +331,7 @@ if __name__ == '__main__':
     if HAS_JINJA and options.email_signatures:
         symlink_thunderbird(options)
     symlink_bin(options)
+    symlink_config(options)
 
 
 # vim: sw=4 ts=4 fenc=utf-8 et spell spelllang=en
