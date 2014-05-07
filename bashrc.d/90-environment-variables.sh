@@ -10,7 +10,7 @@ export LANGUAGE=en_GB:en
 export SEND_256_COLORS_TO_REMOTE=1
 
 # Tell that we run a 256 colors terminal
-#export TERM=xterm-256color
+export TERM=xterm-256color
 
 # ----- Define the powerline command required by tmux's powerline ----------->
 if [ -f ~/.Dotfiles/libs/powerline/scripts/powerline ]; then
