@@ -141,6 +141,7 @@ ssh-null-hop() {
 }
 
 rdesktop-shortcut() {
+    echo "Running: rdesktop -g 1820x1000 -k pt -z -r sound:local $@"
     rdesktop -g 1820x1000 -k pt -z -r sound:local $@
 }
 # Enable posix mode which disallows -(dashes) in function names.
