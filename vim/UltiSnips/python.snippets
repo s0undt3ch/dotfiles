@@ -23,6 +23,26 @@ snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
 $0
 endsnippet
 
+snippet smod "Basic Python Module Header" b
+# -*- coding: utf-8 -*-
+`!p snip.rv = tripple_quotes(snip)`
+    `!p
+codeauthor = snip.opt('g:ultisnips_python_code_author', None)
+if codeauthor is not None:
+    snip.rv = ':codeauthor: {1}'.format(snip.mkline(''), codeauthor)
+`
+
+
+    ${1:`!p snip.rv = snip.module or snip.fn`}
+    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+
+    ${2:@todo: add description}
+`!p snip.rv = tripple_quotes(snip)`
+
+$0
+endsnippet
+
+
 snippet cod "UTF-8 Coding header" b
 # -*- coding: utf-8 -*-
 $0
