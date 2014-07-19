@@ -89,3 +89,7 @@
 	path = vim/bundle/nginx-vim-syntax
 	url = https://github.com/evanmiller/nginx-vim-syntax.git
 	branch = master
+[submodule "libs/git-cascade"]
+	path = libs/git-cascade
+	url = https://github.com/cool-RR/git-cascade.git
+	branch = master
