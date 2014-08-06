@@ -25,7 +25,7 @@ endif
 ":autocmd BufNewFile,BufRead *.txt set sw=4 ts=4 fenc=utf-8 et linebreak wrap
 :autocmd BufNewFile,BufRead svn-commit*.tmp set wrap linebreak textwidth=0 spell spelllang=en
 :autocmd BufNewFile,BufRead hg-editor-*.txt set wrap linebreak textwidth=0 spell spelllang=en
-:autocmd BufNewFile,BufRead .git/COMMIT_EDITMSG set wrap linebreak textwidth=0 spell spelllang=en
+:autocmd BufNewFile,BufRead .git/*_EDITMSG set wrap linebreak textwidth=0 spell spelllang=en ft=gitcommit
 :autocmd Filetype gitcommit setlocal spell spelllang=en
 :autocmd BufNewFile,BufRead *.po set spell spelllang=pt
 :autocmd FileType sh set sw=4 ts=4 fenc=utf-8 number
