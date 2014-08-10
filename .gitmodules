@@ -93,3 +93,7 @@
 	path = libs/git-cascade
 	url = https://github.com/cool-RR/git-cascade.git
 	branch = master
+[submodule "libs/pyenv"]
+	path = libs/pyenv
+	url = https://github.com/yyuu/pyenv.git
+	branch = master
