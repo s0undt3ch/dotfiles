@@ -20,4 +20,10 @@ for lib in $LIBS; do
     git commit -am "Updated to latest libs/$bundle"
     cd $SCRIPT_DIR
 done
+
+if [ ! -L ${SCRIPT_DIR}/pyenv/plugins/pyenv-virtualenvwrapper ]; then
+    cd ${SCRIPT_DIR}/pyenv/plugins
+    ln -sf ../../pyenv-virtualenvwrapper/ .
+fi
+
 exit

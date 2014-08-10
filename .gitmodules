@@ -97,3 +97,7 @@
 	path = libs/pyenv
 	url = https://github.com/yyuu/pyenv.git
 	branch = master
+[submodule "libs/pyenv-virtualenvwrapper"]
+	path = libs/pyenv-virtualenvwrapper
+	url = https://github.com/yyuu/pyenv-virtualenvwrapper.git
+	branch = master
