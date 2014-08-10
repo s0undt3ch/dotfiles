@@ -4,7 +4,7 @@ UNTRACKED_FILES=$(git status --porcelain 2>/dev/null| grep "^ M" | wc -l)
 
 if [ $UNTRACKED_FILES -eq 1 ]; then
     echo "The are files with uncommited changes. Please commit those first before updating the libs submodules."
-    exit 1
+    #exit 1
 fi
 
 SCRIPT_DIR=`cd $(dirname $0) && pwd`
