@@ -21,6 +21,11 @@ for lib in $LIBS; do
     cd $SCRIPT_DIR
 done
 
+if [ ! -L ${SCRIPT_DIR}/pyenv/plugins/pyenv-virtualenv ]; then
+    cd ${SCRIPT_DIR}/pyenv/plugins
+    ln -sf ../../pyenv-virtualenv/ .
+fi
+
 if [ ! -L ${SCRIPT_DIR}/pyenv/plugins/pyenv-virtualenvwrapper ]; then
     cd ${SCRIPT_DIR}/pyenv/plugins
     ln -sf ../../pyenv-virtualenvwrapper/ .
