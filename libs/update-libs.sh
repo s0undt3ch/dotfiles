@@ -16,6 +16,11 @@ for lib in $LIBS; do
     echo "Processing $lib"
     cd $lib
     git pull -u
+    if [ "$(git remote | grep upstream)" != "" ]; then
+        branch=$(git branch | grep '*' | awk '{ print $2 }')
+        git pull upstream $branch
+        git push
+    fi
     cd ../../
     git commit -am "Updated to latest libs/$bundle"
     cd $SCRIPT_DIR
