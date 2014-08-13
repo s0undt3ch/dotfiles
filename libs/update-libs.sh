@@ -31,4 +31,9 @@ if [ ! -L ${SCRIPT_DIR}/pyenv/plugins/pyenv-virtualenvwrapper ]; then
     ln -sf ../../pyenv-virtualenvwrapper/ .
 fi
 
+if [ ! -L ${SCRIPT_DIR}/pyenv/plugins/pyenv-autoenv ]; then
+    cd ${SCRIPT_DIR}/pyenv/plugins
+    ln -sf ../../pyenv-autoenv/ .
+fi
+
 exit

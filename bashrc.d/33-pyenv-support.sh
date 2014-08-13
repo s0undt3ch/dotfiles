@@ -12,3 +12,6 @@ eval "$(pyenv virtualenv-init -)"
 
 # Completion
 . "${PYENV_ROOT}/completions/pyenv.bash"
+
+# Virtualenv auto-activation
+. "${PYENV_ROOT}/plugins/pyenv-autoenv/bin/pyenv-autoenv"
