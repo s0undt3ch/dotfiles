@@ -22,7 +22,7 @@ for lib in $LIBS; do
         git push
     fi
     cd ../../
-    git commit -am "Updated to latest libs/$bundle"
+    git commit -am "Updated to latest libs/$lib"
     cd $SCRIPT_DIR
 done
 
