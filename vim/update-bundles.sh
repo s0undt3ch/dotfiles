@@ -17,6 +17,11 @@ for bundle in $BUNDLES; do
     echo "Processing $bundle"
     cd $bundle
     git pull -u
+    if [ "$(git remote | grep upstream)" != "" ]; then
+        branch=$(git branch | grep '*' | awk '{ print $2 }')
+        git pull upstream $branch
+        git push
+    fi
     cd ../../
     git commit -am "Updated to latest vim/bundle/$bundle"
     cd $BUNDLE_DIR
