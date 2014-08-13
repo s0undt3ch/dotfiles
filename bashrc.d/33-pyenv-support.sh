@@ -7,6 +7,9 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 # Init pyenv
 eval "$(pyenv init -)"
 
+# Start pyenv-virtualwrapper
+pyenv virtualenvwrapper
+
 # Init pyenv virtualenv
 eval "$(pyenv virtualenv-init -)"
 
