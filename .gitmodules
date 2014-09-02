@@ -109,3 +109,7 @@
 	path = libs/pyenv-autoenv
 	url = git@github.com:s0undt3ch/pyenv-autoenv.git
 	branch = master
+[submodule "vim/bundle/riv.vim"]
+	path = vim/bundle/riv.vim
+	url = https://github.com/Rykka/riv.vim.git
+	branch = master
