@@ -72,6 +72,9 @@ def symlink(source, dest, force=False):
         else:
             os.unlink(dest)
 
+    if not os.path.isdir(os.path.dirname(dest)):
+        os.makedirs(os.path.dirname(dest))
+
     os.symlink(
         os.path.relpath(
             source,
