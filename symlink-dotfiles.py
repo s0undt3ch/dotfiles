@@ -33,7 +33,8 @@ GLOBAL_SKIPS = (
     'README.rst',
     'symlink-dotfiles.py',
     'vim/colortest.vim',
-    'vim/.syntax'
+    'vim/.syntax',
+    'update-dotfiles-submodules.sh'
 )
 
 
