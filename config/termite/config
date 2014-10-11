@@ -1,0 +1,72 @@
+[options]
+resize_grip = false
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+visible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = Source Code Pro Light for Powerline 11
+scrollback_lines = 10000
+search_wrap = true
+#icon_name = terminal
+#geometry = 640x480
+ 
+# 0.0: opaque, 1.0: transparent
+transparency = 0.0
+pseudo_transparency = false
+ 
+# "system", "on" or "off"
+cursor_blink = system
+ 
+# "block", "underline" or "ibeam"
+cursor_shape = block
+ 
+# $BROWSER is used by default
+browser = firefox
+ 
+# word characters used for word selection
+# (default if unset: all graphic non-punctuation/space characters)
+#word_chars = -A-Za-z0-9,./?%&#:_=+@~
+ 
+[colors]
+foreground = #cccccc
+foreground_bold = #ffffff
+#foreground_dim = #888888
+background = #222222
+cursor = #999999
+ 
+# if unset, will reverse foreground and background
+#highlight = #2f2f2f
+ 
+# colors from color0 to color254 can be set
+color0 = #666666
+color1 = #CC6699
+color2 = #99CC66
+color3 = #CC9966
+color4 = #6699CC
+color5 = #9966CC
+color6 = #66CC99
+color7 = #CCCCCC
+color8 = #999999
+color9 = #FF99CC
+color10 = #CCFF99
+color11 = #FFCC99
+color12 = #99CCFF
+color13 = #CC99FF
+color14 = #99FFCC
+color15 = #FFFFFF
+ 
+[hints]
+#font = Monospace 12
+#foreground = #dcdccc
+#background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 0.5
+#roundness = 2.0
+ 
+# vim: ft=dosini
