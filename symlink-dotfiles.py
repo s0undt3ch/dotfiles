@@ -293,7 +293,13 @@ def symlink_config(opts):
             continue
         elif fname.startswith('.'):
             continue
-        elif not os.path.isfile(spath):
+        elif os.path.isdir(spath):
+            dest_dir_path = os.path.join(dest, fname)
+            if not os.path.isdir(dest_dir_path):
+                os.makedirs(dest_dir_path)
+            for fname in os.listdir(spath):
+                dpath = os.path.join(dest_dir_path, fname)
+                symlink(spath, dpath, opts.force)
             continue
         dpath = os.path.join(dest, fname)
         symlink(spath, dpath, opts.force)
