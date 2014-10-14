@@ -3,6 +3,7 @@
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+awful.util = require("awful.util")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
@@ -75,7 +76,6 @@ if hostname == 'arched' then
             'xcompmgr',
             'xrdb -merge ~/.Xresources',
             'nm-applet',
-            'feh --bg-max ~/Downloads/KDE/linux-arch.png'
         }
 
         for _,i in pairs(cmds) do
@@ -115,8 +115,16 @@ vicious.register(pulsewidget, vicious.contrib.pulse, "Vol: $1%", 2)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-theme_name = os.getenv("AWESOME_THEME") or 'arch'
-beautiful.init("/usr/share/awesome/themes/" .. theme_name .. "/theme.lua")
+wallpaper_cmd = 'feh --bg-max ~/Downloads/KDE/linux-arch.png'
+theme_name = os.getenv("AWESOME_THEME") or 'holo'
+theme_file = "/usr/share/awesome/themes/" .. theme_name .. "/theme.lua"
+if awful.util.file_readable(theme_file) then
+    beautiful.init(theme_file)
+else
+    beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+end
+-- We want the app icons!
+theme.tasklist_disable_icon = false
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -158,11 +166,11 @@ local layouts =
 -- }}}
 
 -- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
-end
+-- if beautiful.wallpaper then
+--    for s = 1, screen.count() do
+--        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+--    end
+-- end
 -- }}}
 
 -- {{{ Tags
