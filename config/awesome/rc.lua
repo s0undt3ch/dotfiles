@@ -368,9 +368,14 @@ globalkeys = awful.util.table.join(
               end),
 
     -- PulseAudio Volume
-    awful.key({         }, "XF86AudioMute", function () awful.util.spawn('amixer -c 0 -q set Master toggle') end),
-    awful.key({         }, "XF86AudioLowerVolume", function () awful.util.spawn('amixer -c 0 -q set Master 2dB-') end),
-    awful.key({         }, "XF86AudioRaiseVolume", function () awful.util.spawn('amixer -c 0 -q set Master 2dB+') end),
+    -- awful.key({         }, "XF86AudioMute", function () awful.util.spawn('amixer -c 0 -q set Master toggle') end),
+    -- awful.key({         }, "XF86AudioLowerVolume", function () awful.util.spawn('amixer -c 0 -q set Master 2dB-') end),
+    -- awful.key({         }, "XF86AudioRaiseVolume", function () awful.util.spawn('amixer -c 0 -q set Master 2dB+') end),
+
+   -- PulseAudio Volume
+   awful.key({         }, "XF86AudioMute", function () awful.util.spawn('pulseaudio-ctl mute') end),
+   awful.key({         }, "XF86AudioLowerVolume", function () awful.util.spawn('pulseaudio-ctl down') end),
+   awful.key({         }, "XF86AudioRaiseVolume", function () awful.util.spawn('pulseaudio-ctl up') end),
 
     -- Keyboard Backlight
     awful.key({         }, "XF86KbdBrightnessUp",   function () awful.util.spawn("sudo asus-kbd-backlight up") end),
