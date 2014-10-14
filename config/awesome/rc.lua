@@ -415,7 +415,7 @@ clientkeys = awful.util.table.join(
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
-        awful.key({ SUPER_KEY }, "#" .. i + 9,
+        awful.key({ SUPER_KEY }, "F" .. i,
                   function ()
                         local screen = mouse.screen
                         local tag = awful.tag.gettags(screen)[i]
@@ -424,7 +424,7 @@ for i = 1, 9 do
                         end
                   end),
         -- Toggle tag.
-        awful.key({ SUPER_KEY, CONTROL_KEY }, "#" .. i + 9,
+        awful.key({ SUPER_KEY, CONTROL_KEY }, "F" .. i,
                   function ()
                       local screen = mouse.screen
                       local tag = awful.tag.gettags(screen)[i]
@@ -433,7 +433,7 @@ for i = 1, 9 do
                       end
                   end),
         -- Move client to tag.
-        awful.key({ SUPER_KEY, SHFIT_KEY }, "#" .. i + 9,
+        awful.key({ SUPER_KEY, SHFIT_KEY }, "F" .. i,
                   function ()
                       if client.focus then
                           local tag = awful.tag.gettags(client.focus.screen)[i]
@@ -443,7 +443,7 @@ for i = 1, 9 do
                      end
                   end),
         -- Toggle tag.
-        awful.key({ SUPER_KEY, CONTROL_KEY, SHFIT_KEY }, "#" .. i + 9,
+        awful.key({ SUPER_KEY, CONTROL_KEY, SHFIT_KEY }, "F" .. i,
                   function ()
                       if client.focus then
                           local tag = awful.tag.gettags(client.focus.screen)[i]
