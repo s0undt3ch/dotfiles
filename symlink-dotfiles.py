@@ -286,22 +286,28 @@ def symlink_config(opts):
     if not os.path.isdir(dest):
         os.makedirs(dest)
 
+    def link_directory(source, dest):
+        if not os.path.isdir(dest):
+            os.makedirs(dest)
+        for fname in os.listdir(source):
+            spath = os.path.join(source, fname)
+            dpath = os.path.join(dest, fname)
+            if os.path.isdir(spath):
+                link_directory(spath, dpath)
+                continue
+            symlink(spath, dpath, opts.force)
+
     dont_sync_fnames = ()
     for fname in os.listdir(source):
         spath = os.path.join(source, fname)
+        dpath = os.path.join(dest, fname)
         if fname in dont_sync_fnames or fname in GLOBAL_SKIPS:
             continue
         elif fname.startswith('.'):
             continue
         elif os.path.isdir(spath):
-            dest_dir_path = os.path.join(dest, fname)
-            if not os.path.isdir(dest_dir_path):
-                os.makedirs(dest_dir_path)
-            for fname in os.listdir(spath):
-                dpath = os.path.join(dest_dir_path, fname)
-                symlink(spath, dpath, opts.force)
+            link_directory(spath, dpath)
             continue
-        dpath = os.path.join(dest, fname)
         symlink(spath, dpath, opts.force)
 
 
