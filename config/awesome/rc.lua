@@ -341,23 +341,23 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ SUPER_KEY,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "r", awesome.restart),
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "q", awesome.quit),
+    awful.key({ SUPER_KEY,              }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ SUPER_KEY, CONTROL_KEY  }, "r", awesome.restart),
+    awful.key({ SUPER_KEY, SHFIT_KEY    }, "q", awesome.quit),
 
-    awful.key({ SUPER_KEY,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ SUPER_KEY,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ SUPER_KEY,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "space", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ SUPER_KEY,              }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ SUPER_KEY,              }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ SUPER_KEY, SHFIT_KEY    }, "h",     function () awful.tag.incnmaster( 1)      end),
+    awful.key({ SUPER_KEY, SHFIT_KEY    }, "l",     function () awful.tag.incnmaster(-1)      end),
+    awful.key({ SUPER_KEY, CONTROL_KEY  }, "h",     function () awful.tag.incncol( 1)         end),
+    awful.key({ SUPER_KEY, CONTROL_KEY  }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ SUPER_KEY,              }, "space", function () awful.layout.inc(layouts,  1) end),
+    awful.key({ SUPER_KEY, SHFIT_KEY    }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "n", awful.client.restore),
+    awful.key({ SUPER_KEY, CONTROL_KEY  }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ SUPER_KEY },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ ALT_KEY },            "F2",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ SUPER_KEY }, "x",
               function ()
