@@ -42,6 +42,8 @@ end
 
 
 -- Define special keys as variables
+MOD_SUPER = 'Mod4'
+MOD_ALT = 'Mod1'
 SUPER_KEY = 'Mod4'
 SHIFT_KEY = 'Shift'
 CONTROL_KEY = 'Control'
@@ -208,9 +210,9 @@ mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
-                    awful.button({ SUPER_KEY }, 1, awful.client.movetotag),
+                    awful.button({ MOD_SUPER }, 1, awful.client.movetotag),
                     awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ SUPER_KEY }, 3, awful.client.toggletag),
+                    awful.button({ MOD_SUPER }, 3, awful.client.toggletag),
                     awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
                     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
@@ -311,29 +313,29 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ SUPER_KEY,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ SUPER_KEY,           }, "Right",  awful.tag.viewnext       ),
-    awful.key({ SUPER_KEY,           }, "Escape", awful.tag.history.restore),
+    awful.key({ MOD_SUPER,           }, "Left",   awful.tag.viewprev       ),
+    awful.key({ MOD_SUPER,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ MOD_SUPER,           }, "Escape", awful.tag.history.restore),
 
-    awful.key({ SUPER_KEY,           }, "j",
+    awful.key({ MOD_SUPER,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ SUPER_KEY,           }, "k",
+    awful.key({ MOD_SUPER,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ SUPER_KEY,           }, "w", function () mymainmenu:show() end),
+    awful.key({ MOD_SUPER,           }, "w", function () mymainmenu:show() end),
 
     -- Layout manipulation
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ SUPER_KEY,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ SUPER_KEY,           }, "Tab",
+    awful.key({ MOD_SUPER, SHFIT_KEY   }, "j", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ MOD_SUPER, SHFIT_KEY   }, "k", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ MOD_SUPER, CONTROL_KEY }, "j", function () awful.screen.focus_relative( 1) end),
+    awful.key({ MOD_SUPER, CONTROL_KEY }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ MOD_SUPER,           }, "u", awful.client.urgent.jumpto),
+    awful.key({ MOD_SUPER,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
@@ -341,25 +343,25 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ SUPER_KEY,              }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ SUPER_KEY, CONTROL_KEY  }, "r", awesome.restart),
-    awful.key({ SUPER_KEY, SHFIT_KEY    }, "q", awesome.quit),
+    awful.key({ MOD_SUPER,              }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ MOD_SUPER, CONTROL_KEY  }, "r", awesome.restart),
+    awful.key({ MOD_SUPER, SHFIT_KEY    }, "q", awesome.quit),
 
-    awful.key({ SUPER_KEY,              }, "l",     function () awful.tag.incmwfact( 0.05)    end),
-    awful.key({ SUPER_KEY,              }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ SUPER_KEY, SHFIT_KEY    }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ SUPER_KEY, SHFIT_KEY    }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ SUPER_KEY, CONTROL_KEY  }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ SUPER_KEY, CONTROL_KEY  }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ SUPER_KEY,              }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ SUPER_KEY, SHFIT_KEY    }, "space", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ MOD_SUPER,              }, "l",     function () awful.tag.incmwfact( 0.05)    end),
+    awful.key({ MOD_SUPER,              }, "h",     function () awful.tag.incmwfact(-0.05)    end),
+    awful.key({ MOD_SUPER, SHFIT_KEY    }, "h",     function () awful.tag.incnmaster( 1)      end),
+    awful.key({ MOD_SUPER, SHFIT_KEY    }, "l",     function () awful.tag.incnmaster(-1)      end),
+    awful.key({ MOD_SUPER, CONTROL_KEY  }, "h",     function () awful.tag.incncol( 1)         end),
+    awful.key({ MOD_SUPER, CONTROL_KEY  }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ MOD_SUPER,              }, "space", function () awful.layout.inc(layouts,  1) end),
+    awful.key({ MOD_SUPER, SHFIT_KEY    }, "space", function () awful.layout.inc(layouts, -1) end),
 
-    awful.key({ SUPER_KEY, CONTROL_KEY  }, "n", awful.client.restore),
+    awful.key({ MOD_SUPER, CONTROL_KEY  }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ ALT_KEY },            "F2",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ MOD_ALT                 }, "F2",    function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ SUPER_KEY }, "x",
+    awful.key({ MOD_SUPER }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
@@ -390,19 +392,19 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ SUPER_KEY,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ SUPER_KEY, SHFIT_KEY   }, "c",      function (c) c:kill()                         end),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "space",  awful.client.floating.toggle                     ),
-    awful.key({ SUPER_KEY, CONTROL_KEY }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ SUPER_KEY,           }, "o",      awful.client.movetoscreen                        ),
-    awful.key({ SUPER_KEY,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ SUPER_KEY,           }, "n",
+    awful.key({ MOD_SUPER,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ MOD_SUPER, SHFIT_KEY   }, "c",      function (c) c:kill()                         end),
+    awful.key({ MOD_SUPER, CONTROL_KEY }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ MOD_SUPER, CONTROL_KEY }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ MOD_SUPER,           }, "o",      awful.client.movetoscreen                        ),
+    awful.key({ MOD_SUPER,           }, "t",      function (c) c.ontop = not c.ontop            end),
+    awful.key({ MOD_SUPER,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
         end),
-    awful.key({ SUPER_KEY,           }, "m",
+    awful.key({ MOD_SUPER,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical   = not c.maximized_vertical
@@ -415,7 +417,7 @@ clientkeys = awful.util.table.join(
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
-        awful.key({ SUPER_KEY }, "F" .. i,
+        awful.key({ MOD_SUPER }, "F" .. i,
                   function ()
                         local screen = mouse.screen
                         local tag = awful.tag.gettags(screen)[i]
@@ -424,7 +426,7 @@ for i = 1, 9 do
                         end
                   end),
         -- Toggle tag.
-        awful.key({ SUPER_KEY, CONTROL_KEY }, "F" .. i,
+        awful.key({ MOD_SUPER, CONTROL_KEY }, "F" .. i,
                   function ()
                       local screen = mouse.screen
                       local tag = awful.tag.gettags(screen)[i]
@@ -433,7 +435,7 @@ for i = 1, 9 do
                       end
                   end),
         -- Move client to tag.
-        awful.key({ SUPER_KEY, SHFIT_KEY }, "F" .. i,
+        awful.key({ MOD_SUPER, SHFIT_KEY }, "F" .. i,
                   function ()
                       if client.focus then
                           local tag = awful.tag.gettags(client.focus.screen)[i]
@@ -443,7 +445,7 @@ for i = 1, 9 do
                      end
                   end),
         -- Toggle tag.
-        awful.key({ SUPER_KEY, CONTROL_KEY, SHFIT_KEY }, "F" .. i,
+        awful.key({ MOD_SUPER, CONTROL_KEY, SHFIT_KEY }, "F" .. i,
                   function ()
                       if client.focus then
                           local tag = awful.tag.gettags(client.focus.screen)[i]
@@ -456,8 +458,8 @@ end
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ SUPER_KEY }, 1, awful.mouse.client.move),
-    awful.button({ SUPER_KEY }, 3, awful.mouse.client.resize))
+    awful.button({ MOD_SUPER }, 1, awful.mouse.client.move),
+    awful.button({ MOD_SUPER }, 3, awful.mouse.client.resize))
 
 -- Set keys
 root.keys(globalkeys)
