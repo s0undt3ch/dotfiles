@@ -113,7 +113,8 @@ vicious.register(pulsewidget, vicious.contrib.pulse, "Vol: $1%", 2)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+theme_name = os.getenv("AWESOME_THEME") or 'arch'
+beautiful.init("/usr/share/awesome/themes/" .. theme_name .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
