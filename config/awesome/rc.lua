@@ -69,7 +69,7 @@ if hostname == 'arched' then
     do
         local cmds = {
             'setxkbmap -model pc101 -layout pt,us',
-            'xscreensaver --no-splash',
+            'xscreensaver -no-splash',
             'xcompmgr',
             'xrdb -merge ~/.Xresources',
             'nm-applet',
