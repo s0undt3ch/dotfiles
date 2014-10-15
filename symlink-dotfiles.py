@@ -287,9 +287,13 @@ def symlink_config(opts):
         os.makedirs(dest)
 
     def link_directory(source, dest):
+        if source.endswith('.git'):
+            return
         if not os.path.isdir(dest):
             os.makedirs(dest)
         for fname in os.listdir(source):
+            if fname == '.git':
+                continue
             spath = os.path.join(source, fname)
             dpath = os.path.join(dest, fname)
             if os.path.isdir(spath):
@@ -299,6 +303,8 @@ def symlink_config(opts):
 
     dont_sync_fnames = ()
     for fname in os.listdir(source):
+        if fname == '.git':
+            continue
         spath = os.path.join(source, fname)
         dpath = os.path.join(dest, fname)
         if fname in dont_sync_fnames or fname in GLOBAL_SKIPS:
