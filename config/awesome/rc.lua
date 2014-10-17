@@ -572,12 +572,12 @@ for s = 1, screen.count() do
     left_layout:add(spr5px)
     left_layout:add(mytaglist[s])
     left_layout:add(spr5px)
+    left_layout:add(mypromptbox[s])
+    left_layout:add(spr5px)
 
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then
         right_layout:add(spr)
-        right_layout:add(spr5px)
-        right_layout:add(mypromptbox[s])
         right_layout:add(wibox.widget.systray())
         right_layout:add(spr5px)
     end
