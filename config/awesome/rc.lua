@@ -319,6 +319,7 @@ fswidget:connect_signal('mouse::enter', function () fs_widget:show(0) end)
 fswidget:connect_signal('mouse::leave', function () fs_widget:hide() end)
 ]] --
 
+--[[
 -- /
 diskbar_root = awful.widget.progressbar()
 diskbar_root:set_color(beautiful.fg_normal)
@@ -350,7 +351,9 @@ fswidget_root = wibox.widget.background(diskmargin_root)
 fswidget_root:set_bgimage(beautiful.widget_display)
 fswidget_root:connect_signal('mouse::enter', function () fs_widget_root:show(0) end)
 fswidget_root:connect_signal('mouse::leave', function () fs_widget_root:hide() end)
+]]
 
+--[[
 -- | NET | --
 
 net_widgetdl = wibox.widget.textbox()
@@ -373,6 +376,7 @@ widget_netul:set_image(beautiful.widget_netul)
 netwidgetul = wibox.widget.background()
 netwidgetul:set_widget(net_widgetul)
 netwidgetul:set_bgimage(beautiful.widget_display)
+]]--
 
 -- | Clock / Calendar | --
 local luatz = require("luatz")
@@ -633,6 +637,7 @@ for s = 1, screen.count() do
     right_layout:add(spr5px)
     ]]
 
+    --[[
     right_layout:add(spr)
 
     right_layout:add(widget_fs_root)
@@ -640,8 +645,10 @@ for s = 1, screen.count() do
     right_layout:add(fswidget_root)
     right_layout:add(widget_display_r)
     right_layout:add(spr5px)
+    ]]
 
 
+    --[[
     right_layout:add(spr)
 
     right_layout:add(widget_netdl)
@@ -651,6 +658,7 @@ for s = 1, screen.count() do
     right_layout:add(netwidgetul)
     right_layout:add(widget_display_r)
     right_layout:add(widget_netul)
+    ]]
 
     right_layout:add(spr)
 
