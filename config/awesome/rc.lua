@@ -391,8 +391,8 @@ function mytextclock.Update()
         markup(clockgf, space3 .. 
             os.date("!"..format, luatz.time_in()) ..
             markup.font("Tamsyn 3", "  ") .. "/" .. markup.font("Tamsyn 3", "  ") ..
-            os.date("!%H:%M", luatz.time_in("America/Denver")) .. "") ..
-            markup.font("Tamsyn 3", " "
+            os.date("!%H:%M", luatz.time_in("America/Denver")) ..
+            markup.font("Tamsyn 3", " ")
         )
     )
 end
