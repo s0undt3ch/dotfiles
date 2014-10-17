@@ -113,3 +113,19 @@
 	path = vim/bundle/riv.vim
 	url = https://github.com/Rykka/riv.vim.git
 	branch = master
+[submodule "config/awesome/lib/apw"]
+	path = config/awesome/lib/apw
+	url = https://github.com/mokasin/apw.git
+	branch = master
+[submodule "config/awesome/lib/cyclefocus"]
+	path = config/awesome/lib/cyclefocus
+	url = https://github.com/blueyed/awesome-cyclefocus
+[submodule "config/awesome/lib/pro"]
+	path = config/awesome/lib/pro
+	url = https://github.com/gyrfalco/pro
+[submodule "config/awesome/lib/luatz"]
+	path = config/awesome/lib/luatz
+	url = https://github.com/daurnimator/luatz.git
+[submodule "config/awesome/lib/lain"]
+	path = config/awesome/lib/lain
+	url = https://github.com/s0undt3ch/lain.git
