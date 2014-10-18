@@ -385,10 +385,11 @@ local clocktimer    = require("lain.helpers").newtimer
 
 mytextclock    = wibox.widget.textbox()
 function mytextclock.Update()
-    local format = "%a %d %b, %H:%M"
+    local format = "%a %d %b, " .. markup(clockgf, "%H:%M")
     tzcache.clear_tz_cache()
     mytextclock:set_markup(
-        markup(clockgf, space3 .. 
+        markup(beautiful.fg_normal,
+            space3 ..
             os.date("!"..format, luatz.time_in()) ..
             markup.font("Tamsyn 3", "  ") .. "/" .. markup.font("Tamsyn 3", "  ") ..
             os.date("!%H:%M", luatz.time_in("America/Denver")) ..
@@ -928,6 +929,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Pidgin" },
       properties = { floating = true } },
+    { rule = { class = "KeePass2" },
+      properties = { floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -1014,7 +1017,7 @@ end
 -- run_once("kbdd")
 -- run_once("compton")
 local cmds = {
-    'setxkbmap -model pc101 -layout pt,us',
+    'setxkbmap -model pc101 -layout pt',
     'xscreensaver -no-splash',
     'xcompmgr',
     'xrdb -merge ~/.Xresources',
