@@ -773,7 +773,7 @@ globalkeys = awful.util.table.join(
     awful.key({         }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 5") end),
 
     -- Lock workstation
-    awful.key({ CONTROL_KEY, "Mod1" }, "l",     function () awful.util.spawn("xscreensaver-command -lock") end )
+    awful.key({ "Control", "Mod1" }, "l",     function () awful.util.spawn("xscreensaver-command -lock") end )
 
     -- awful.key({ modkey            }, "Print",  function () exec("screengrab") end),
     -- awful.key({ modkey, "Control" }, "Print",  function () exec("screengrab --region") end),
