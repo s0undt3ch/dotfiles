@@ -1,1 +1,0 @@
-export INPUTRC=$HOME/.inputrc
