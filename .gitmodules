@@ -1,0 +1,84 @@
+[submodule "tag-wm/config/awesome/lib/lain"]
+	path = tag-wm/config/awesome/lib/lain
+	url = https://github.com/copycat-killer/lain.git
+	branch = master
+[submodule "tag-wm/config/awesome/lib/luatz"]
+	path = tag-wm/config/awesome/lib/luatz
+	url = https://github.com/daurnimator/luatz.git
+	branch = master
+[submodule "tag-wm/config/awesome/lib/pro"]
+	path = tag-wm/config/awesome/lib/pro
+	url = https://github.com/gyrfalco/pro.git
+	branch = master
+[submodule "tag-wm/config/awesome/lib/cyclefocus"]
+	path = tag-wm/config/awesome/lib/cyclefocus
+	url = https://github.com/blueyed/awesome-cyclefocus.git
+	branch = master
+[submodule "tag-wm/config/awesome/lib/apw"]
+	path = tag-wm/config/awesome/lib/apw
+	url = https://github.com/mokasin/apw.git
+	branch = master
+[submodule "ext/oh-my-zsh"]
+	path = ext/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
+	branch = master
+[submodule "ext/pyenv"]
+	path = ext/pyenv
+	url = https://github.com/yyuu/pyenv.git
+	branch = master
+[submodule "tag-vim/vim/bundle/ultisnips"]
+	path = tag-vim/vim/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+	branch = master
+[submodule "tag-vim/vim/bundle/vim-fugitive"]
+	path = tag-vim/vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+	branch = master
+[submodule "tag-vim/vim/bundle/salt-vim"]
+	path = tag-vim/vim/bundle/salt-vim
+	url = https://github.com/saltstack/salt-vim.git
+	branch = master
+[submodule "tag-vim/vim/bundle/DfrankUtil"]
+	path = tag-vim/vim/bundle/DfrankUtil
+	url = https://github.com/vim-scripts/DfrankUtil.git
+	branch = master
+[submodule "tag-vim/vim/bundle/syntastic"]
+	path = tag-vim/vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+	branch = master
+[submodule "tag-vim/vim/bundle/gitv"]
+	path = tag-vim/vim/bundle/gitv
+	url = https://github.com/gregsexton/gitv.git
+	branch = master
+[submodule "tag-vim/vim/bundle/vim-gitgutter"]
+	path = tag-vim/vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+	branch = master
+[submodule "tag-vim/vim/bundle/Dockerfile"]
+	path = tag-vim/vim/bundle/Dockerfile
+	url = https://github.com/ekalinin/Dockerfile.vim.git
+	branch = master
+[submodule "tag-vim/vim/bundle/nginx-vim-syntax"]
+	path = tag-vim/vim/bundle/nginx-vim-syntax
+	url = https://github.com/evanmiller/nginx-vim-syntax.git
+	branch = master
+[submodule "tag-vim/vim/bundle/localvimrc"]
+	path = tag-vim/vim/bundle/localvimrc
+	url = https://github.com/embear/vim-localvimrc.git
+	branch = master
+[submodule "tag-vim/vim/bundle/riv"]
+	path = tag-vim/vim/bundle/riv
+	url = https://github.com/Rykka/riv.vim.git
+	branch = master
+[submodule "ext/jedi"]
+	path = ext/jedi
+	url = https://github.com/davidhalter/jedi.git
+	branch = master
+[submodule "tag-vim/vim/bundle/jedi-vim"]
+	path = tag-vim/vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
+	branch = master
+[submodule "ext/pyenv-virtualenv"]
+	path = ext/pyenv-virtualenv
+	url = https://github.com/yyuu/pyenv-virtualenv.git
+	branch = master
