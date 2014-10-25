@@ -15,9 +15,6 @@ fi
 SCRIPT_DIR=$(cd $(dirname $0) && pwd)
 DOTFILES_DIR=$(cd "${SCRIPT_DIR}" && cd ../../ && pwd)
 
-echo "AAA"
-exit
-
 cd "${DOTFILES_DIR}"
 
 for submodule in $(LC_ALL=C git submodule | awk '{ print $2})'); do
