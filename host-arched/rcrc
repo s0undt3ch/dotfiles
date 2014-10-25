@@ -1,0 +1,4 @@
+HOSTNAME="arched"
+SYNLINK_DIRS="*:tag-vim/vim/bundles/* config/*"
+EXCLUDES="*:.ext/* *:zshrc.old"
+TAGS="bin fonts locale vim wm zsh"
