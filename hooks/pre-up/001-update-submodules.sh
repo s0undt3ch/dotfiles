@@ -17,7 +17,7 @@ DOTFILES_DIR=$(cd "${SCRIPT_DIR}" && cd ../../ && pwd)
 
 cd "${DOTFILES_DIR}"
 
-for submodule in $(LC_ALL=C git submodule | awk '{ print $2})'); do
+for submodule in $(LC_ALL=C git submodule | awk '{ print $2}'); do
     echo "Processing ${submodule}"
     cd "${submodule}"
     git pull -u
