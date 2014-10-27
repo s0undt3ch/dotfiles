@@ -86,3 +86,7 @@
 	path = .ext/powerline
 	url = https://github.com/Lokaltog/powerline.git
 	branch = develop
+[submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/clickable"]
+	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/clickable
+	url = https://github.com/Rykka/clickable.vim.git
+	branch = master
