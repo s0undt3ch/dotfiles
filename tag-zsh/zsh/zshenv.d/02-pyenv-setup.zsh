@@ -18,6 +18,7 @@ if [ "$(whence pyenv)" != "" ]; then
     eval "$(pyenv init -)"
 
     if [ -h "$PYENV_ROOT/plugins/pyenv-virtualenv" ]; then
+        export VIRTUAL_ENV_DISABLE_PROMPT=1
         eval "$(pyenv virtualenv-init -)"
     fi
 fi
