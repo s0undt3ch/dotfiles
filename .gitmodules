@@ -70,10 +70,6 @@
 	path = tag-vim/vim/bundle/riv
 	url = https://github.com/Rykka/riv.vim.git
 	branch = master
-[submodule ".ext/jedi"]
-	path = .ext/jedi
-	url = https://github.com/davidhalter/jedi.git
-	branch = master
 [submodule "tag-vim/vim/bundle/jedi-vim"]
 	path = tag-vim/vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
