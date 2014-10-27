@@ -1,2 +1,3 @@
-typeset -U path
-path=(~/bin $path)
+ZDOTDIR="${HOME}/.zsh"
+
+[ -f $ZDOTDIR/.zshenv ] && . $ZDOTDIR/.zshenv
