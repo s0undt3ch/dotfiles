@@ -82,3 +82,7 @@
 	path = .ext/pyenv-virtualenv
 	url = https://github.com/yyuu/pyenv-virtualenv.git
 	branch = master
+[submodule "tag-vim/vim/bundle/vim-virtualenv"]
+	path = tag-vim/vim/bundle/vim-virtualenv
+	url = https://github.com/jmcantrell/vim-virtualenv.git
+	branch = master
