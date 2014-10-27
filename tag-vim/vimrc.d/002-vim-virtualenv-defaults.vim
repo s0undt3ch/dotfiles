@@ -1,2 +1,2 @@
 " auto activate any virtualenv set
-let g:virtualenv_auto_activate = true
+let g:virtualenv_auto_activate = 1
