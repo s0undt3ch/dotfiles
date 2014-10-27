@@ -1,5 +1,7 @@
 # vim: ts=4 sts=4 et
 
+HOME=${HOME:-$(cd ~ && pwd)}
+
 if [ -d "$HOME/.dotfiles/.ext/pyenv" ]; then
     # If the pyenv checkout exists, update environment
     export PYENV_ROOT="$HOME/.dotfiles/.ext/pyenv"
