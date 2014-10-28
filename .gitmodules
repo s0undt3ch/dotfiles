@@ -78,10 +78,6 @@
 	path = .ext/pyenv-virtualenv
 	url = https://github.com/yyuu/pyenv-virtualenv.git
 	branch = master
-[submodule "tag-vim/vim/bundle/vim-virtualenv"]
-	path = tag-vim/vim/bundle/vim-virtualenv
-	url = https://github.com/jmcantrell/vim-virtualenv.git
-	branch = master
 [submodule ".ext/powerline"]
 	path = .ext/powerline
 	url = https://github.com/Lokaltog/powerline.git
@@ -89,4 +85,12 @@
 [submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/clickable"]
 	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/clickable
 	url = https://github.com/Rykka/clickable.vim.git
+	branch = master
+[submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/neocomplete"]
+	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim.git
+	branch = master
+[submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/vim-pyenv"]
+	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/vim-pyenv
+	url = https://github.com/lambdalisue/vim-pyenv.git
 	branch = master
