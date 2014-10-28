@@ -1,3 +1,4 @@
+#!/bin/sh -x
 # vim: ts=4 sts=4 et
 
 if [ "${UPDATE_SUBMODULES:-0}" != "1" ]; then
@@ -6,11 +7,11 @@ fi
 
 UNTRACKED_FILES=$(git status --porcelain 2>/dev/null| grep "^ M" | wc -l)
 
-if [ "$UNTRACKED_FILES" -eq 1 ]; then
-    echo "The are files with uncommited changes."
-    echo "Please commit those first before updating the Vim bundles."
-    exit 1
-fi
+#if [ "$UNTRACKED_FILES" -eq 1 ]; then
+#    echo "The are files with uncommited changes."
+#    echo "Please commit those first before updating the Vim bundles."
+#    exit 1
+#fi
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 DOTFILES_DIR=$(cd "${SCRIPT_DIR}" && cd ../../ && pwd)
