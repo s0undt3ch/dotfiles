@@ -6,19 +6,22 @@ fi
 
 UNTRACKED_FILES=$(git status --porcelain 2>/dev/null| grep "^ M" | wc -l)
 
-if [ $UNTRACKED_FILES -eq 1 ]; then
+if [ "$UNTRACKED_FILES" -eq 1 ]; then
     echo "The are files with uncommited changes."
     echo "Please commit those first before updating the Vim bundles."
     exit 1
 fi
 
-SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 DOTFILES_DIR=$(cd "${SCRIPT_DIR}" && cd ../../ && pwd)
 
 cd "${DOTFILES_DIR}"
 
-for submodule in $(LC_ALL=C git submodule | awk '{ print $2}'); do
+for submodule in $(LC_ALL=C git submodule | awk '{ print $2 }'); do
+
+    echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
     echo "Processing ${submodule}"
+    echo "--------------------------------------------------------"
     cd "${submodule}"
 
     git pull -u
@@ -29,9 +32,10 @@ for submodule in $(LC_ALL=C git submodule | awk '{ print $2}'); do
 
     if [ "$(git remote | grep upstream)" != "" ]; then
         branch=$(git branch | grep '*' | awk '{ print $2 }')
-        git pull upstream $branch
+        git pull upstream "$branch"
         git push
     fi
     cd "${DOTFILES_DIR}"
     git commit -am "Updated to latest ${submodule}"
+    echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 done
