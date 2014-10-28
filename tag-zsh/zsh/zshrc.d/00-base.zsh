@@ -84,3 +84,5 @@ export SSH_KEY_PATH="$HOME/.ssh/id_dsa"
 # alias ohmyzsh="mate ~/.oh-my-zsh
 
 alias vi=vim
+
+zstyle ':completion:*' special-dirs true
