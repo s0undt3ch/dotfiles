@@ -20,7 +20,15 @@ cd "${DOTFILES_DIR}"
 for submodule in $(LC_ALL=C git submodule | awk '{ print $2}'); do
     echo "Processing ${submodule}"
     cd "${submodule}"
+    if [ "$(git submodule)" != "" ]; then
+        git submodule update --init --recursive
+    fi
     git pull -u
+
+    if [ "$(git submodule)" != "" ]; then
+        git submodule update --init --recursive
+    fi
+
     if [ "$(git remote | grep upstream)" != "" ]; then
         branch=$(git branch | grep '*' | awk '{ print $2 }')
         git pull upstream $branch
