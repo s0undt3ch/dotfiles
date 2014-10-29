@@ -82,15 +82,15 @@
 	path = .ext/powerline
 	url = https://github.com/Lokaltog/powerline.git
 	branch = develop
-[submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/clickable"]
-	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/clickable
+[submodule "tag-vim/vim/bundle/clickable"]
+	path = tag-vim/vim/bundle/clickable
 	url = https://github.com/Rykka/clickable.vim.git
 	branch = master
-[submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/neocomplete"]
-	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/neocomplete
+[submodule "tag-vim/vim/bundle/neocomplete"]
+	path = tag-vim/vim/bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.vim.git
 	branch = master
-[submodule "/home/vampas/.dotfiles/tag-vim/vim/bundle/vim-pyenv"]
-	path = /home/vampas/.dotfiles/tag-vim/vim/bundle/vim-pyenv
+[submodule "tag-vim/vim/bundle/vim-pyenv"]
+	path = tag-vim/vim/bundle/vim-pyenv
 	url = https://github.com/lambdalisue/vim-pyenv.git
 	branch = master
