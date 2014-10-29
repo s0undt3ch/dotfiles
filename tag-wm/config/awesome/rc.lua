@@ -23,6 +23,12 @@ theme.taglist_bg_occupied       = "png:" .. theme_icons .. "/panel/taglist_2/occ
 theme.taglist_bg_urgent         = "png:" .. theme_icons .. "/panel/taglist_2/urgent.png"
 theme.taglist_bg_focus          = "png:" .. theme_icons .. "/panel/taglist_2/focus.png"
 theme.tasklist_disable_icon     = false
+
+theme.border_width  = 1
+theme.border_normal = "#404040"
+theme.border_focus  = "#c00000"
+theme.border_marked = "#000000"
+
 beautiful.widget_cpu            = my_icons .. "cpu.png"
 beautiful.widget_mem            = my_icons .. "mem.png"
 beautiful.widget_fs             = my_icons .. "hdd.png"
@@ -1006,5 +1012,17 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+client.connect_signal(
+    "focus",
+    function(c)
+        if c.maximized_horizontal == true and c.maximized_vertical == true then
+            c.border_width = "0"
+            c.border_color = beautiful.border_focus
+        else
+            c.border_width = beautiful.border_width
+            c.border_color = beautiful.border_focus
+        end
+    end
+)
