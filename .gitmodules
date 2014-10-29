@@ -94,3 +94,7 @@
 	path = tag-zsh/zsh/.zprezto
 	url = https://github.com/s0undt3ch/prezto.git
 	branch = master
+[submodule "tag-fonts/.powerline-fonts"]
+	path = tag-fonts/.powerline-fonts
+	url = https://github.com/Lokaltog/powerline-fonts.git
+	branch = master
