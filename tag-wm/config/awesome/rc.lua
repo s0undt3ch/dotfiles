@@ -426,10 +426,10 @@ bat_widget = lain.widgets.bat({
         else
             widget_bat:set_image(beautiful.widget_battery)
         end
-        if tonumber(bat_now.perc) <= 50 then
-            widget:set_markup(space3 .. markup("#ff9900", bat_now.perc .. " %") .. markup.font("Tamsyn 4", " "))
-        elseif tonumber(bat_now.perc) <= 25 then
+        if tonumber(bat_now.perc) <= 25 then
             widget:set_markup(space3 .. markup("#ff0000", bat_now.perc .. " %") .. markup.font("Tamsyn 4", " "))
+        elseif tonumber(bat_now.perc) <= 50 then
+            widget:set_markup(space3 .. markup("#ff9900", bat_now.perc .. " %") .. markup.font("Tamsyn 4", " "))
         else
             widget:set_markup(space3 .. bat_now.perc .. " %" .. markup.font("Tamsyn 4", " "))
         end
