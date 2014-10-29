@@ -18,10 +18,6 @@
 	path = tag-wm/config/awesome/lib/apw
 	url = https://github.com/mokasin/apw.git
 	branch = master
-[submodule ".ext/oh-my-zsh"]
-	path = .ext/oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
-	branch = master
 [submodule ".ext/pyenv"]
 	path = .ext/pyenv
 	url = https://github.com/yyuu/pyenv.git
@@ -93,4 +89,8 @@
 [submodule "tag-vim/vim/bundle/vim-pyenv"]
 	path = tag-vim/vim/bundle/vim-pyenv
 	url = https://github.com/lambdalisue/vim-pyenv.git
+	branch = master
+[submodule "tag-zsh/zsh/.zprezto"]
+	path = tag-zsh/zsh/.zprezto
+	url = https://github.com/s0undt3ch/prezto.git
 	branch = master
