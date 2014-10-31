@@ -1,0 +1,2 @@
+#!/bin/sh
+tmux has-session -t prezto && tmux new-session -t prezto || tmux
