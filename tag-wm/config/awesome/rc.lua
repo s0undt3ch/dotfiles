@@ -85,14 +85,15 @@ local home   = os.getenv("HOME")
 local exec   = function (s) oldspawn(s, false) end
 local shexec = awful.util.spawn_with_shell
 
-modkey        = "Mod4"
-altkey        = "Mod1"
-terminal      = "termite"
-tmux          = "termite -e tmux"
-ncmpcpp       = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
-newsbeuter    = "urxvt -g 210x50+50+50 -e newsbeuter"
-browser       = "firefox"
-filemanager   = "nautilus --no-desktop"
+modkey              = "Mod4"
+altkey              = "Mod1"
+terminal            = "termite"
+tmux                = "termite -e tmux"
+tmux_shared_windows = "termite -e tmux-shared-windows"
+ncmpcpp             = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
+newsbeuter          = "urxvt -g 210x50+50+50 -e newsbeuter"
+browser             = "firefox"
+filemanager         = "nautilus --no-desktop"
 
 -- | Table of layouts | --
 
@@ -760,6 +761,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
     awful.key({ modkey,           }, "Return", function () exec(terminal) end),
     awful.key({ modkey,           }, "t",      function () exec(tmux) end),
+    awful.key({ modkey, "Shift"   }, "t",      function () exec(tmux_shared_windows) end),
+    awful.key({ modkey, "Shift"   }, "Return", function () exec(tmux_shared_windows) end),
     awful.key({ modkey,           }, "space",  function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end),
     awful.key({ modkey,           }, "u",      function () exec("urxvt -geometry 254x60+80+60") end),
