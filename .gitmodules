@@ -22,10 +22,6 @@
 	path = .ext/pyenv
 	url = https://github.com/yyuu/pyenv.git
 	branch = master
-[submodule "tag-vim/vim/bundle/ultisnips"]
-	path = tag-vim/vim/bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
-	branch = master
 [submodule "tag-vim/vim/bundle/vim-fugitive"]
 	path = tag-vim/vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
@@ -97,4 +93,8 @@
 [submodule "tag-fonts/.powerline-fonts"]
 	path = tag-fonts/.powerline-fonts
 	url = https://github.com/Lokaltog/powerline-fonts.git
+	branch = master
+[submodule "tag-vim/vim/bundle/ultisnips"]
+	path = tag-vim/vim/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
 	branch = master
