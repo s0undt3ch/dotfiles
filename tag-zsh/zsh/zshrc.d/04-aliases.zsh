@@ -1,1 +1,1 @@
-alias vi=vim
+../zshenv.d/04-aliases.zsh

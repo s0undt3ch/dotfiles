@@ -1,2 +1,1 @@
-typeset -U path
-path=(~/.bin $path)
+../zshenv.d/01-set-path.zsh
