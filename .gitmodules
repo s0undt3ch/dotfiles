@@ -62,10 +62,6 @@
 	path = tag-vim/vim/bundle/riv
 	url = https://github.com/Rykka/riv.vim.git
 	branch = master
-[submodule "tag-vim/vim/bundle/jedi-vim"]
-	path = tag-vim/vim/bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
-	branch = master
 [submodule ".ext/pyenv-virtualenv"]
 	path = .ext/pyenv-virtualenv
 	url = https://github.com/yyuu/pyenv-virtualenv.git
@@ -97,4 +93,36 @@
 [submodule "tag-vim/vim/bundle/ultisnips"]
 	path = tag-vim/vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+	branch = master
+[submodule "tag-vim/vim/bundle/python-mode"]
+	path = tag-vim/vim/bundle/python-mode
+	url = https://github.com/klen/python-mode.git
+	branch = master
+[submodule "tag-vim/vim/bundle/ScrollColors"]
+	path = tag-vim/vim/bundle/ScrollColors
+	url = https://github.com/vim-scripts/ScrollColors.git
+	branch = master
+[submodule "tag-vim/vim/bundle/colorschemes"]
+	path = tag-vim/vim/bundle/colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git
+	branch = master
+[submodule "tag-vim/vim/bundle/gruvbox"]
+	path = tag-vim/vim/bundle/gruvbox
+	url = https://github.com/morhetz/gruvbox.git
+	branch = master
+[submodule "tag-vim/vim/bundle/colorsupport"]
+	path = tag-vim/vim/bundle/colorsupport
+	url = https://github.com/vim-scripts/colorsupport.vim
+	branch = master
+[submodule "tag-vim/vim/bundle/YouCompleteMe"]
+	path = tag-vim/vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
+	branch = master
+[submodule "tag-vim/vim/bundle/fruity-vim-colorscheme"]
+	path = tag-vim/vim/bundle/fruity-vim-colorscheme
+	url = https://github.com/mitsuhiko/fruity-vim-colorscheme.git
+	branch = master
+[submodule "tag-vim/vim/bundle/rainbow-parenteses"]
+	path = tag-vim/vim/bundle/rainbow-parenteses
+	url = https://github.com/kien/rainbow_parentheses.vim.git
 	branch = master
