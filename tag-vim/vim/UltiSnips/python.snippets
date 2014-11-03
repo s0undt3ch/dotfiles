@@ -1,0 +1,96 @@
+snippet mod "Basic Python Module Header" b
+# -*- coding: utf-8 -*-
+`!p snip.rv = tripple_quotes(snip)`
+    `!p
+codeauthor = snip.opt('g:ultisnips_python_code_author', None)
+if codeauthor is not None:
+    snip.rv = ':codeauthor: {1}\n    '.format(snip.mkline(''), codeauthor)
+`:copyright: © ${3:`!p
+import datetime;
+snip.rv = datetime.datetime.utcnow().strftime('%Y')
+    `} by the ${4:`!p
+snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
+    `} Team, see AUTHORS for more details.
+    :license: ${5:`!p snip.rv = snip.opt("g:ultisnips_python_project_license", "LICENSE NAME")`}, see LICENSE for more details.
+
+
+    ${1:`!p snip.rv = snip.module or snip.fn`}
+    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+
+    ${2:@todo: add description}
+`!p snip.rv = tripple_quotes(snip)`
+
+$0
+endsnippet
+
+snippet smod "Basic Python Module Header" b
+# -*- coding: utf-8 -*-
+`!p snip.rv = tripple_quotes(snip)`
+    `!p
+codeauthor = snip.opt('g:ultisnips_python_code_author', None)
+if codeauthor is not None:
+    snip.rv = ':codeauthor: {1}'.format(snip.mkline(''), codeauthor)
+`
+
+
+    ${1:`!p snip.rv = snip.module or snip.fn`}
+    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+
+    ${2:@todo: add description}
+`!p snip.rv = tripple_quotes(snip)`
+
+$0
+endsnippet
+
+
+snippet cod "UTF-8 Coding header" b
+# -*- coding: utf-8 -*-
+$0
+endsnippet
+
+snippet omod "Basic Python Module Header" b
+# -*- coding: utf-8 -*-
+`!p snip.rv = tripple_quotes(snip)`
+    ${1:`!p snip.rv = snip.module or snip.fn`}
+    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+
+    ${2:@todo: add description}
+
+    `!p
+codeauthor = snip.opt('g:ultisnips_python_code_author', None)
+if codeauthor is not None:
+    snip.rv = ':codeauthor: {1}\n    '.format(snip.mkline(''), codeauthor)
+`:copyright: © ${3:`!p
+import datetime;
+snip.rv = datetime.datetime.utcnow().strftime('%Y')
+    `} by the ${4:`!p
+snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
+    `} Team, see AUTHORS for more details.
+    :license: ${5:`!p snip.rv = snip.opt("g:ultisnips_python_project_license", "LICENSE NAME")`}, see LICENSE for more details.
+`!p snip.rv = tripple_quotes(snip)`
+
+$0
+endsnippet
+
+snippet log "Instantiate a logging instance" !b
+log = logging.getLogger(__name__)
+endsnippet
+
+snippet pudb "Import and setup pudb set trace" !b
+from pudb import set_trace; set_trace()
+endsnippet
+
+snippet pylint "Add a PyLint disable comment"
+# pylint: disable=
+endsnippet
+
+snippet pp "pprint.pprint()"
+pprint.pprint(${1})
+endsnippet
+
+snippet ppp "import pprint; pprint.pprint()"
+import pprint
+pprint.pprint(${1})
+endsnippet
+
+# vim:ft=snippets:
