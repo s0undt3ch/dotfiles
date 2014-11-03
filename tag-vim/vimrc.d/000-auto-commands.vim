@@ -10,12 +10,12 @@ if has("autocmd")
           \ endif
 
     " Default omni completion based on syntax
-    if exists("+omnifunc")
-      autocmd Filetype *
-            \ if &omnifunc == "" |
-            \   setlocal omnifunc=syntaxcomplete#Complete |
-            \ endif
-    endif
+    "if exists("+omnifunc")
+    "  autocmd Filetype *
+    "        \ if &omnifunc == "" |
+    "        \   setlocal omnifunc=syntaxcomplete#Complete |
+    "        \ endif
+    "endif
   augroup END
 endif
 
