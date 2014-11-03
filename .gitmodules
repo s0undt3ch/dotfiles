@@ -126,3 +126,7 @@
 	path = tag-vim/vim/bundle/rainbow-parenteses
 	url = https://github.com/kien/rainbow_parentheses.vim.git
 	branch = master
+[submodule "tag-vim/vim/bundle/vim-snippets"]
+	path = tag-vim/vim/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
+	branch = master
