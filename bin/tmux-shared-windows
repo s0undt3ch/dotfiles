@@ -1,2 +1,4 @@
 #!/bin/sh
-tmux has-session -t prezto && tmux new-session -t prezto || tmux
+tmux start-server 2> /dev/null
+tmux has-session -t $(whoami) && tmux new-session -t $(whoami) -s "$(whoami)-$(tmux list-sessions | wc -l)" || tmux new-session -s $(whoami) -d 2> /dev/null
+tmux attach-session -t $(whoami)
