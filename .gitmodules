@@ -130,3 +130,7 @@
 	path = tag-vim/vim/bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
 	branch = master
+[submodule "tag-vim/vim/bundle/python-syntax"]
+	path = tag-vim/vim/bundle/python-syntax
+	url = https://github.com/s0undt3ch/python-syntax.git
+	branch = master
