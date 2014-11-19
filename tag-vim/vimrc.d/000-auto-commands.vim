@@ -29,4 +29,5 @@ endif
 :autocmd Filetype gitcommit setlocal spell spelllang=en
 :autocmd BufNewFile,BufRead *.po set spell spelllang=pt
 :autocmd FileType sh set sw=4 ts=4 fenc=utf-8 number
+:autocmd Filetype rst set sw=2 ts=2 et fenc=utf-8 spell spelllang=en nofoldenable
 " <---- Auto-commands --------------------------------------------------------
