@@ -87,6 +87,7 @@ local shexec = awful.util.spawn_with_shell
 
 modkey              = "Mod4"
 altkey              = "Mod1"
+altkey_r            = "Mod5"
 terminal            = "termite"
 tmux                = "termite -e tmux-shared-windows"
 ncmpcpp             = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
@@ -777,6 +778,11 @@ globalkeys = awful.util.table.join(
     -- Screen Brightness
     awful.key({         }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 5") end),
     awful.key({         }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 5") end),
+
+    -- Application Shortcuts
+    awful.key({ altkey_r }, "f", function() awful.util.spawn(browser) end),
+    awful.key({ altkey_r }, "p", function() awful.util.spawn('/usr/bin/pidgin') end),
+    awful.key({ altkey_r }, "m", function() awful.util.spawn('/usr/bin/thunderbird') end),
 
     -- Lock workstation
     awful.key({ "Control", "Mod1" }, "l",     function () awful.util.spawn("xscreensaver-command -lock") end )
