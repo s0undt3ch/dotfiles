@@ -26,7 +26,8 @@ local cmds = {
     'xcompmgr',
     'xrdb -merge ~/.Xresources',
     'nm-applet',
-    'numlockx on'
+    'numlockx on',
+    'redshift -l 38.9079180:-9.0514060'
 }
 
 function initapps.init()
