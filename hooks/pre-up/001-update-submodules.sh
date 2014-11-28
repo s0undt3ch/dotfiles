@@ -40,7 +40,7 @@ for submodule in $(LC_ALL=C git submodule | awk '{ print $2 }'); do
     if [ "$(git remote | grep upstream)" != "" ]; then
         branch=$(git branch | grep '*' | awk '{ print $2 }')
         git pull upstream "$branch"
-        git push
+        git push rw-origin || git push
     fi
     cd "${DOTFILES_DIR}"
     git commit -am "Updated to latest ${submodule}"
