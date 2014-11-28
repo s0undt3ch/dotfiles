@@ -67,6 +67,7 @@ else
   highlight ColorColumn ctermbg=233       " Visible color column in terminals
 endif
 
+let python_highlight_all = 1
 " ----- Include and Source any *.vim files in ~/.vimrc.d/ ------------------->
 for fpath in split(globpath('~/.vimrc.d/', '*.vim'), '\n')
   exe 'source' fpath
