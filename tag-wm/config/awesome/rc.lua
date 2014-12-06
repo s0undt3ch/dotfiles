@@ -783,6 +783,7 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey_r }, "f", function() awful.util.spawn(browser) end),
     awful.key({ altkey_r }, "p", function() awful.util.spawn('/usr/bin/pidgin') end),
     awful.key({ altkey_r }, "m", function() awful.util.spawn('/usr/bin/thunderbird') end),
+    awful.key({ altkey_r }, "c", function() awful.util.spawn('/usr/bin/chromium') end),
 
     -- Lock workstation
     awful.key({ "Control", "Mod1" }, "l",     function () awful.util.spawn("xscreensaver-command -lock") end )
