@@ -766,6 +766,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "u",      function () exec("urxvt -geometry 254x60+80+60") end),
     awful.key({ modkey,           }, "s",      function () exec(filemanager) end),
     awful.key({ modkey            }, "g",      function () exec("gvim") end),
+    awful.key({ },                   "Print",  function () awful.util.spawn("scrot -e 'mv $f ~/screenshots/ 2>/dev/null'") end),
 
     awful.key({         }, "XF86AudioMute", vol_widget.ToggleMute),
     awful.key({         }, "XF86AudioLowerVolume", vol_widget.Down),
