@@ -114,10 +114,6 @@
 	path = tag-vim/vim/bundle/colorsupport
 	url = https://github.com/vim-scripts/colorsupport.vim
 	branch = master
-[submodule "tag-vim/vim/bundle/YouCompleteMe"]
-	path = tag-vim/vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
-	branch = master
 [submodule "tag-vim/vim/bundle/fruity-vim-colorscheme"]
 	path = tag-vim/vim/bundle/fruity-vim-colorscheme
 	url = https://github.com/mitsuhiko/fruity-vim-colorscheme.git
