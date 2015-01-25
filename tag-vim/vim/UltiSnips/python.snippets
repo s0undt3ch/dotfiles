@@ -31,14 +31,14 @@ snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
     `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
 
     ${2:@todo: add description}
-`!p snip.rv = tripple_quotes(snip)`
+`!p snip.rv = triple_quotes(snip)`
 
 $0
 endsnippet
 
 snippet smod "Basic Python Module Header" b
 # -*- coding: utf-8 -*-
-`!p snip.rv = tripple_quotes(snip)`
+`!p snip.rv = triple_quotes(snip)`
     `!p
 codeauthor = snip.opt('g:ultisnips_python_code_author', None)
 if codeauthor is not None:
@@ -50,7 +50,7 @@ if codeauthor is not None:
     `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
 
     ${2:@todo: add description}
-`!p snip.rv = tripple_quotes(snip)`
+`!p snip.rv = triple_quotes(snip)`
 
 $0
 endsnippet
@@ -63,7 +63,7 @@ endsnippet
 
 snippet omod "Basic Python Module Header" b
 # -*- coding: utf-8 -*-
-`!p snip.rv = tripple_quotes(snip)`
+`!p snip.rv = triple_quotes(snip)`
     ${1:`!p snip.rv = snip.module or snip.fn`}
     `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
 
@@ -80,7 +80,7 @@ snip.rv = datetime.datetime.utcnow().strftime('%Y')
 snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
     `} Team, see AUTHORS for more details.
     :license: ${5:`!p snip.rv = snip.opt("g:ultisnips_python_project_license", "LICENSE NAME")`}, see LICENSE for more details.
-`!p snip.rv = tripple_quotes(snip)`
+`!p snip.rv = triple_quotes(snip)`
 
 $0
 endsnippet
