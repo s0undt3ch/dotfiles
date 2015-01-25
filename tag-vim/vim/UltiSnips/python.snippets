@@ -1,6 +1,19 @@
+global !p
+
+def get_quoting_style(snip):
+    style = snip.opt("g:ultisnips_python_quoting_style", "double")
+    if style == 'single':
+        return "'"
+    return '"'
+
+def triple_quotes(snip):
+    return get_quoting_style(snip) * 3
+
+endglobal
+
 snippet mod "Basic Python Module Header" b
 # -*- coding: utf-8 -*-
-`!p snip.rv = tripple_quotes(snip)`
+`!p snip.rv = triple_quotes(snip)`
     `!p
 codeauthor = snip.opt('g:ultisnips_python_code_author', None)
 if codeauthor is not None:
