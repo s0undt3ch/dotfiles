@@ -130,3 +130,6 @@
 	path = tag-vim/vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 	branch = master
+[submodule "tag-vim/vim/bundle/vim-gradle"]
+	path = tag-vim/vim/bundle/vim-gradle
+	url = https://github.com/tfnico/vim-gradle.git
