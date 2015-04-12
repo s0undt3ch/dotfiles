@@ -37,6 +37,7 @@ set nopaste                             " Start in normal (non-paste) mode
 set showmode                            " Necessary to show paste state in insert mode
 set pastetoggle=<f11>                   " Use <F11> to toggle between 'paste' and 'nopaste'
 set clipboard=unnamedplus               " Use X11 clipboard
+set nofoldenable
 
 
 " Status / Command Line Options
