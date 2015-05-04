@@ -113,3 +113,6 @@
 [submodule "tag-vim/vim/bundle/vim-gradle"]
 	path = tag-vim/vim/bundle/vim-gradle
 	url = https://github.com/tfnico/vim-gradle.git
+[submodule "tag-vim/vim/bundle/cql-vim"]
+	path = tag-vim/vim/bundle/cql-vim
+	url = https://github.com/elubow/cql-vim.git
