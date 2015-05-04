@@ -31,4 +31,5 @@ endif
 :autocmd FileType sh set sw=4 ts=4 fenc=utf-8 number
 :autocmd FileType groovy set sw=4 ts=4 fenc=utf-8 number et
 :autocmd Filetype rst set sw=2 ts=2 et fenc=utf-8 spell spelllang=en nofoldenable
+:autocmd BufRead *.cql set syntax=cql
 " <---- Auto-commands --------------------------------------------------------
