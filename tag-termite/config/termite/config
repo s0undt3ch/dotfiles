@@ -23,7 +23,7 @@ cursor_blink = system
 cursor_shape = block
 
 # $BROWSER is used by default
-browser = firefox
+browser = chromium
 
 # set size hints for the window
 #size_hints = false
@@ -31,39 +31,6 @@ browser = firefox
 # emit escape sequences for other keys modified by Control
 #modify_other_keys = false
 
-[colors1]
-foreground = #eaeaea
-foreground_bold = #ffffff
-#foreground_dim = #888888
-background = #000000
-#cursor = #aeafad
-# if unset, will reverse foreground and background
-highlight = #d6d6d6
-# colors from color0 to color254 can be set
-# Black + Grey
-color0 = #1d1f21
-color8 = #969896
-# Red + Bright Red
-color1 = #912226
-color9 = #d54e53
-# Green + Bright Green
-color2 = #778900
-color10 = #b9ca4a
-# Yellow (Orange) + Bright Yellow (Yellow)
-color3 = #ae7b00
-color11 = #e7c547
-# Blue + Bright Blue
-color4 = #1d2594
-color12 = #7aa6da
-# Magenta (Purple) + Bright Magenta
-color5 = #682a9b
-color13 = #c397d8
-# Cyan (Aqua) + Bright Cyan
-color6 = #2b6651
-color14 = #70c0b1
-# Light Grey (Selection) + White (Current Line)
-color7 = #929593
-color15 = #ecebec
 
 [hints]
 #font = Monospace 12
@@ -71,9 +38,40 @@ color15 = #ecebec
 #background = #3f3f3f
 #active_foreground = #e68080
 #active_background = #3f3f3f
-#padding = 2
+padding = 0
 #border = #3f3f3f
-#border_width = 0.5
+border_width = 0
 #roundness = 2.0
+
+
+# Solarized dark color scheme
+
+[colors]
+foreground = #839496
+foreground_bold = #eee8d5
+#foreground_dim = #888888
+background = #002b36
+cursor = #93a1a1
+
+# if unset, will reverse foreground and background
+#highlight = #839496
+
+# colors from color0 to color254 can be set
+color0 = #073642
+color1 = #dc322f
+color2 = #859900
+color3 = #b58900
+color4 = #268bd2
+color5 = #d33682
+color6 = #2aa198
+color7 = #eee8d5
+color8 = #002b36
+color9 = #cb4b16
+color10 = #586e75
+color11 = #657b83
+color12 = #839496
+color13 = #6c71c4
+color14 = #93a1a1
+color15 = #fdf6e3
 
 # vim: ft=dosini cms=#%s
