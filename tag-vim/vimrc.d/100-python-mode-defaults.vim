@@ -1,7 +1,7 @@
 " ----- python-mode settings ------------------------------------------------>
 let g:pymode_rope = 0                       " Disable Rope, we'll be using Jedi
 let g:pymode_folding = 0                    " Enable python folding
-let g:pymode_virtualenv = 1                 " Add virtualenv paths
+let g:pymode_virtualenv = 0                 " Add virtualenv paths
 let g:pymode_lint = 1                       " Enable code lint
 let g:pymode_lint_onfly = 0                 " Run linter on the fly
 let g:pymode_lint_checker = "pylint,mccabe"
