@@ -2,9 +2,12 @@
 #
 HOME=${HOME:-$(cd ~ && pwd)}
 
+if [ -z "$POWERLINE_COMMAND" ]; then
+    export POWERLINE_COMMAND="$HOME/.dotfiles/.ext/powerline/scripts/powerline"
+fi
+
 if [ -n "$(whence powerline-daemon)" ]; then
     if [ -z "$(ps aux | grep 'bin/powerline-daemon' | grep -v grep)" ]; then
-        export POWERLINE_COMMAND="$HOME/.dotfiles/.ext/powerline/scripts/powerline"
         powerline-daemon
     fi
 fi
