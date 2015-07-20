@@ -3,6 +3,12 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
 let g:syntastic_python_checkers = []
 
+if has('clientserver')
+  let g:syntastic_enable_async = 1
+  let g:syntastic_async_tmux_if_possible = 1
+  let g:syntastic_async_tmux_new_window = 1
+endif
+
 "  All packages installation lines(apt-get install) are for debian/ubuntu
     " ----- CSS Tidy -------------------------------------------------------->
     " In order to have csstidy, remember to link:
