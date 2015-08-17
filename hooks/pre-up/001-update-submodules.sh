@@ -30,7 +30,7 @@ for submodule in $(LC_ALL=C git submodule | awk '{ print $2 }'); do
     echo "--------------------------------------------------------"
     cd "${submodule}"
 
-    git pull -u
+    git pull
 
     if [ -f ./.gitmodules ]; then
         echo "Git submodules detected, updating..."
