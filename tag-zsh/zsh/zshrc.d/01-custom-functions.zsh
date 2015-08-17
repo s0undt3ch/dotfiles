@@ -15,20 +15,24 @@ function new-git-branch() {
 
 
 function killpymatch() {
-    pid=$(ps aux | grep python | grep "$1" | awk '{print $2}')
-    if [ "x$pid" != "x" ]; then
-        echo "Killing match of $1 with pid $pid"
-        kill -KILL $pid
+    pids=$(ps aux | grep python | grep "$1" | awk '{print $2}')
+    if [ "x$pids" != "x" ]; then
+        echo "Killing -TERM match of $1 with pid(s) ${pids//[[:space:]]/ }"
+        for pid in $(echo $pids); do
+            kill -KILL $pid
+        done
     else
         echo "No process matching '$1' found"
     fi
 }
 
 function killpymatch-term() {
-    pid=$(ps aux | grep python | grep "$1" | awk '{print $2}')
-    if [ "x$pid" != "x" ]; then
-        echo "Killing -TERM match of $1 with pid $pid"
-        kill -TERM $pid
+    pids=$(ps aux | grep python | grep "$1" | awk '{print $2}')
+    if [ "x$pids" != "x" ]; then
+        echo "Killing -TERM match of $1 with pid(s) ${pids//[[:space:]]/ }"
+        for pid in $(echo $pids); do
+            kill -TERM $pid
+        done
     else
         echo "No process matching '$1' found"
     fi
