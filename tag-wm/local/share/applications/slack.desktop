@@ -4,5 +4,5 @@ Version=1.0
 Terminal=false
 Type=Application
 Name=Slack
-Exec=firefox --class=Slack -P slack -no-remote https://saltstack.slack.com
+Exec=firefox --class=Slack -P Slack -no-remote https://saltstack.slack.com
 Icon=slack.png
