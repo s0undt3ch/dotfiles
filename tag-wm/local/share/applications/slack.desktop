@@ -1,8 +1,10 @@
-#!/usr/bin/env xdg-open
 [Desktop Entry]
-Version=1.0
-Terminal=false
-Type=Application
-Name=Slack
+Comment=Slack Firefox Application
 Exec=firefox --class=Slack -P Slack -no-remote https://saltstack.slack.com
+Name=Slack
+GenericName=Slack
+Terminal=0
+Type=Application
 Icon=slack.png
+MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
