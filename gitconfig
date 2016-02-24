@@ -2,6 +2,8 @@
 	name = Pedro Algarvio
 	email = pedro@algarvio.me
 	signingkey = 84A298FF
+[commit]
+	gpgsign = true
 [color]
 	ui = true
 [core]
