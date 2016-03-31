@@ -1,4 +1,3 @@
-
 " Setup NeoBundle  ----------------------------------------------------------{{{
 " If neobundle is not installed, do it first
   let bundleExists = 1
@@ -41,26 +40,29 @@
   NeoBundle 'ekalinin/Dockerfile.vim'
   NeoBundle 'evanmiller/nginx-vim-syntax'
   NeoBundle 'mitsuhiko/fruity-vim-colorscheme'
-  NeoBundle 'kien/rainbow_parentheses.vim'
+  NeoBundle 'luochen1990/rainbow'
  " Git helpers
   NeoBundle 'gregsexton/gitv'
   NeoBundle 'tpope/vim-fugitive'
   NeoBundle 'jreybert/vimagit'
   NeoBundle 'airblade/vim-gitgutter'
   NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-  "NeoBundle 'https://github.com/jaxbot/github-issues.vim'
+  "NeoBundle 'jaxbot/github-issues.vim'
 " untils
-  NeoBundle 'benekastah/neomake'
+  NeoBundle 'benekastah/neomake', 'e06f85e1651f5fe8841df3c85df1c51a891ccac4'
   NeoBundle 'editorconfig/editorconfig-vim'
   NeoBundle 'scrooloose/nerdtree'
-  NeoBundle 'bling/vim-airline'
+  NeoBundle 'bling/vim-airline', {'depends': 'vim-airline/vim-airline-themes'}
   NeoBundle 'tpope/vim-surround'
   NeoBundle 'tomtom/tcomment_vim'
-  "NeoBundle 'embear/vim-localvimrc'
+  NeoBundle 'embear/vim-localvimrc'
   "NeoBundle 'Rykka/clickable.vim'
   NeoBundle 'lambdalisue/vim-pyenv'
   NeoBundle 'janko-m/vim-test'
   NeoBundle 'kassio/neoterm'
+  NeoBundle 'tmux-plugins/vim-tmux'
+  NeoBundle 'edkolev/tmuxline.vim'
+  NeoBundle 'milkypostman/vim-togglelist'
 " Shougo
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'Shougo/unite-outline'
@@ -76,12 +78,14 @@
         \    },
         \ }
   NeoBundle 'Shougo/deoplete.nvim'
+  NeoBundle 'zchee/deoplete-jedi'
   NeoBundle 'Shougo/neco-vim'
   NeoBundle 'Shougo/neoinclude.vim'
+  NeoBundle 'Shougo/context_filetype.vim'
   NeoBundleLazy 'ujihisa/neco-look',{'autoload':{'filetypes':['markdown']}}
   NeoBundle 'Shougo/neosnippet.vim'
   NeoBundle 'Shougo/neosnippet-snippets'
-  NeoBundle 'honza/vim-snippets'
+  NeoBundle 'honza/vim-snippets', {'depends': 'SirVer/ultisnips'}
 
   NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
   NeoBundle 'rhysd/github-complete.vim'
@@ -134,6 +138,7 @@ if pluginsExist
 
 " Interface Options
   set number                              " Display line numbers at left of screen
+  set cursorline                          " Highlight the current line
   set visualbell                          " Flash the screen instead of beeping on errors
   set t_vb=                               " And then disable even the flashing
   "set mouse=a                             " Enable mouse usage (all modes) in terminals
@@ -145,6 +150,7 @@ if pluginsExist
   set encoding=utf-8                      " Necessary to show Unicode glyphs
   set t_Co=256                            " Explicitly tell Vim that the terminal supports 256 colors
   set showmatch                           " Show matching brackets
+  set noautoread                          " Warn me if the file is modified outside
 " Let airline tell me my status
   set noshowmode
   set noswapfile
@@ -300,37 +306,59 @@ if pluginsExist
 
 " Snipppets -----------------------------------------------------------------{{{
 
-" Enable snipMate compatibility feature.
-  let g:neosnippet#enable_snipmate_compatibility = 1
-  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>     <Plug>(neosnippet_expand_target)
-" Tell Neosnippet about the other snippets
-  let g:neosnippet#snippets_directory='~/.nvim/bundle/neosnippet-snippets/neosnippets, ~/Github/ionic-snippets'
+  "let g:deoplete#disable_auto_complete = 1
 
-" SuperTab like snippets behavior.
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: "\<TAB>"
+  let g:UltiSnipsSnippetsDir        = '~/.nvim/UltiSnips/'
 
+  " better key bindings for UltiSnipsExpandTrigger
+  "let g:UltiSnipsExpandTrigger = "<tab>"
+  "let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  "let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+  "let g:UltiSnipsDontReverseSearchPath="1"
+  "let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+  "let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+  let g:ultisnips_python_style = 'sphinx'
+  let g:ultisnips_python_quoting_style = 'double'
+  let g:ultisnips_python_project_team = 'UfSoft.org'
+  let g:ultisnips_python_project_license = 'BSD'
+  let g:ultisnips_python_code_author = ':email:`Pedro Algarvio (pedro@algarvio.me)`'
+
+  inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
+  "inoremap <silent><expr> <c-space>
+  "  \ pumvisible() ? "\<C-n>" :
+  "  \ deoplete#mappings#manual_complete()
+
+  "au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+  "au BufEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+  " this mapping Enter key to <C-y> to chose the current highlight item 
+  " and close the selection list, same as other IDEs.
+  " CONFLICT with some plugins like tpope/Endwise
+  "inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  "inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
+  ""                    \<c-r>=CleverTab#Complete('tab')<cr>
+  ""                    \<c-r>=CleverTab#Complete('ultisnips')<cr>
+  ""                    \<c-r>=CleverTab#Complete('keyword')<cr>
+  ""                    \<c-r>=CleverTab#Complete('neocomplete')<cr>
+  ""                    \<c-r>=CleverTab#Complete('omni')<cr>
+  ""                    \<c-r>=CleverTab#Complete('stop')<cr>
+  "inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 "}}}
 
 " vim-airline ---------------------------------------------------------------{{{
-  let g:airline_theme = 'solarized'
-  let g:airline_powerline_fonts = 1
   let g:airline#extensions#bufferline#enabled = 1
-  "let g:airline#extensions#syntastic#enabled = 1
   let g:airline#extensions#hunks#enabled = 1
-  let g:airline#extensions#virtualenv#enabled = 1
-  let g:airline#extensions#whitespace#enabled = 1
+  let g:airline#extensions#spellcheck#enabled = 1
+  let g:airline#extensions#syntastic#enabled = 0
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#fnamemod = ':t'
   let g:airline#extensions#tabline#show_tab_nr = 1
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
-  let g:airline#extensions#spellcheck#enabled = 1
+  let g:airline#extensions#tmuxline#enabled = 0
+  let g:airline#extensions#virtualenv#enabled = 1
+  let g:airline#extensions#whitespace#enabled = 1
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme = 'solarized'
 "}}}
 
 " Linting -------------------------------------------------------------------{{{
@@ -402,7 +430,9 @@ if 'VIRTUAL_ENV' in os.environ:
     sys.path.insert(0, project_base_dir)
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     if os.path.exists(activate_this):
-        execfile(activate_this, dict(__file__=activate_this))
+        with open(activate_this) as rfh:
+          code = compile(rfh.read(), activate_this, 'exec')
+          exec(code, dict(__file__=activate_this))
     else:
        old_os_path = os.environ['PATH']
        os.environ['PATH'] = project_base_dir + os.pathsep + old_os_path
@@ -464,13 +494,7 @@ EOF
 "}}}
 
 " Rainbow Parentheses Settings ----------------------------------------------{{{
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
-  au Syntax * RainbowParenthesesLoadChevrons
+  let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 "}}}
 
-
 endif
-
