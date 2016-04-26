@@ -308,12 +308,12 @@ if pluginsExist
 
   "let g:deoplete#disable_auto_complete = 1
 
-  let g:UltiSnipsSnippetsDir        = '~/.nvim/UltiSnips/'
+  let g:UltiSnipsSnippetsDir        = '/home/vampas/.nvim/UltiSnips/'
 
   " better key bindings for UltiSnipsExpandTrigger
-  "let g:UltiSnipsExpandTrigger = "<tab>"
-  "let g:UltiSnipsJumpForwardTrigger = "<tab>"
-  "let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+  let g:UltiSnipsExpandTrigger = "<tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
   "let g:UltiSnipsDontReverseSearchPath="1"
   "let g:UltiSnipsJumpForwardTrigger = '<Tab>'
@@ -324,8 +324,11 @@ if pluginsExist
   let g:ultisnips_python_project_license = 'BSD'
   let g:ultisnips_python_code_author = ':email:`Pedro Algarvio (pedro@algarvio.me)`'
 
-  inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
-  "inoremap <silent><expr> <c-space>
+  " Make sure scratch is automaticaly closed
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+  "inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
+  "inoremap <silent><expr> <c-@>
   "  \ pumvisible() ? "\<C-n>" :
   "  \ deoplete#mappings#manual_complete()
 
@@ -495,6 +498,18 @@ EOF
 
 " Rainbow Parentheses Settings ----------------------------------------------{{{
   let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+"}}}
+
+" GitHub Complete Settings --------------------------------------------------{{{
+  let g:github_complete_api_token = join(readfile(expand('~/.github_token'), ''))
+  let g:github_complete_enable_neocomplete = 1
+  let g:github_complete_enable_emoji_completion = 1
+  let g:github_complete_enable_issue_completion = 1
+  let g:github_complete_enable_user_completion = 1
+  augroup config-github-complete
+        autocmd!
+        autocmd FileType gitcommit setl omnifunc=github_complete#complete
+  augroup END
 "}}}
 
 endif
