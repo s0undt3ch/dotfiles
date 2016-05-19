@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
 repo = 'saltstack/salt-vim'
 
 [[plugins]]
@@ -57,13 +60,13 @@ repo = 'airblade/vim-gitgutter'
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
 
-[[plugins]]
-repo = 'jaxbot/github-issues.vim'
+#[[plugins]]
+#repo = 'jaxbot/github-issues.vim'
 
 # utils
-[[plugin]]
+[[plugins]]
 repo = 'benekastah/neomake'
-rev = 'e06f85e1651f5fe8841df3c85df1c51a891ccac4'
+#rev = 'e06f85e1651f5fe8841df3c85df1c51a891ccac4'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
@@ -71,7 +74,7 @@ repo = 'editorconfig/editorconfig-vim'
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 
-[[plugin]]
+[[plugins]]
 repo = 'bling/vim-airline'
 depends = ['vim-airline-themes']
 
