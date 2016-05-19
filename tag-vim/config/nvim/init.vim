@@ -501,15 +501,18 @@ EOF
 "}}}
 
 " GitHub Complete Settings --------------------------------------------------{{{
-  let g:github_complete_api_token = join(readfile(expand('~/.github_token'), ''))
-  let g:github_complete_enable_neocomplete = 1
-  let g:github_complete_enable_emoji_completion = 1
-  let g:github_complete_enable_issue_completion = 1
-  let g:github_complete_enable_user_completion = 1
-  augroup config-github-complete
+  let b:github_api_token_file_path = expand('~/.github_token')
+  if filereadable(b:github_api_token_file_path)
+    let g:github_complete_api_token = join(readfile(b:github_api_token_file_path, ''))
+    let g:github_complete_enable_neocomplete = 1
+    let g:github_complete_enable_emoji_completion = 1
+    let g:github_complete_enable_issue_completion = 1
+    let g:github_complete_enable_user_completion = 1
+    augroup config-github-complete
         autocmd!
         autocmd FileType gitcommit setl omnifunc=github_complete#complete
-  augroup END
+    augroup END
+  endif
 "}}}
 
 endif
