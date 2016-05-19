@@ -1,106 +1,47 @@
-" Setup NeoBundle  ----------------------------------------------------------{{{
-" If neobundle is not installed, do it first
-  let bundleExists = 1
-  if (!isdirectory(expand("$HOME/.nvim/bundle/neobundle.vim")))
-     call system(expand("mkdir -p $HOME/.nvim/bundle"))
-     call system(expand("git clone https://github.com/Shougo/neobundle.vim ~/.nvim/bundle/neobundle.vim"))
-     let bundleExists = 0
+" Setup dein ----------------------------------------------------------------{{{
+" If dein is not installed, do it first
+let s:pluginsExist=0
+let s:dein_dir = expand("$HOME/.cache/dein")
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+if &runtimepath !~# '/dein.vim'
+  if (!isdirectory(s:dein_repo_dir))
+     call system("mkdir -p " . s:dein_dir)
+     call system("git clone https://github.com/Shougo/dein.vim " . s:dein_repo_dir)
   endif
-  if 0 | endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
 
-  if has('vim_starting')
-    if &compatible
-      " Be iMproved
-      set nocompatible
-    endif
+if dein#load_state(s:dein_dir)
+  let s:toml      = expand('~/.config/nvim/plugins.toml')
+  let s:lazy_toml = expand('~/.config/nvim/lazy-plugins.toml')
 
-" Required:
-    set runtimepath+=~/.nvim/bundle/neobundle.vim/
+  call dein#begin(s:dein_dir,[$MYVIMRC,s:toml,s:lazy_toml])
+
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
+let s:pluginsExist=1
+
+if has('vim_starting')
+  if &compatible
+    " Be iMproved
+    set nocompatible
   endif
+endif
 
-" Required:
-  call neobundle#begin(expand('~/.nvim/bundle/'))
-  let pluginsExist = 1
-" Let NeoBundle manage NeoBundle
-" Required:
-  NeoBundleFetch 'Shougo/neobundle.vim'
-
-" syntax
-  NeoBundle 'saltstack/salt-vim'
-  NeoBundle 'Rykka/riv.vim'
-  NeoBundle 'tfnico/vim-gradle'
-  NeoBundle 'elubow/cql-vim'
-" colorscheme & syntax highlighting
-  NeoBundle 'mhartington/oceanic-next'
-  "NeoBundle 'altercation/vim-colors-solarized'
-  NeoBundle 'frankier/neovim-colors-solarized-truecolor-only'
-  NeoBundle 'Yggdroot/indentLine'
-  NeoBundle 'Raimondi/delimitMate'
-  NeoBundle 'valloric/MatchTagAlways'
-  NeoBundle 'ekalinin/Dockerfile.vim'
-  NeoBundle 'evanmiller/nginx-vim-syntax'
-  NeoBundle 'mitsuhiko/fruity-vim-colorscheme'
-  NeoBundle 'luochen1990/rainbow'
- " Git helpers
-  NeoBundle 'gregsexton/gitv'
-  NeoBundle 'tpope/vim-fugitive'
-  NeoBundle 'jreybert/vimagit'
-  NeoBundle 'airblade/vim-gitgutter'
-  NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-  "NeoBundle 'jaxbot/github-issues.vim'
-" untils
-  NeoBundle 'benekastah/neomake', 'e06f85e1651f5fe8841df3c85df1c51a891ccac4'
-  NeoBundle 'editorconfig/editorconfig-vim'
-  NeoBundle 'scrooloose/nerdtree'
-  NeoBundle 'bling/vim-airline', {'depends': 'vim-airline/vim-airline-themes'}
-  NeoBundle 'tpope/vim-surround'
-  NeoBundle 'tomtom/tcomment_vim'
-  NeoBundle 'embear/vim-localvimrc'
-  "NeoBundle 'Rykka/clickable.vim'
-  NeoBundle 'lambdalisue/vim-pyenv'
-  NeoBundle 'janko-m/vim-test'
-  NeoBundle 'kassio/neoterm'
-  NeoBundle 'tmux-plugins/vim-tmux'
-  NeoBundle 'edkolev/tmuxline.vim'
-  NeoBundle 'milkypostman/vim-togglelist'
-" Shougo
-  NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'Shougo/unite-outline'
-  NeoBundle 'ujihisa/unite-colorscheme'
-  NeoBundle 'Shougo/vimfiler.vim'
-  NeoBundle 'Shougo/vimproc.vim', {
-        \ 'build' : {
-        \     'windows' : 'tools\\update-dll-mingw',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make -f make_mac.mak',
-        \     'linux' : 'make',
-        \     'unix' : 'gmake',
-        \    },
-        \ }
-  NeoBundle 'Shougo/deoplete.nvim'
-  NeoBundle 'zchee/deoplete-jedi'
-  NeoBundle 'Shougo/neco-vim'
-  NeoBundle 'Shougo/neoinclude.vim'
-  NeoBundle 'Shougo/context_filetype.vim'
-  NeoBundleLazy 'ujihisa/neco-look',{'autoload':{'filetypes':['markdown']}}
-  NeoBundle 'Shougo/neosnippet.vim'
-  NeoBundle 'Shougo/neosnippet-snippets'
-  NeoBundle 'honza/vim-snippets', {'depends': 'SirVer/ultisnips'}
-
-  NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-  NeoBundle 'rhysd/github-complete.vim'
-  NeoBundle 'junegunn/goyo.vim'
-  NeoBundle 'junegunn/limelight.vim'
-  NeoBundle 'ryanoasis/vim-devicons'
-  call neobundle#end()
 
 " Required:
   filetype plugin indent on
-  let pluginsExist=1
-  NeoBundleCheck
 " }}}
 
-if pluginsExist
+if s:pluginsExist
 " System Settings  ----------------------------------------------------------{{{
 
 "  source ~/.local.vim
