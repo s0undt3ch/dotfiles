@@ -131,5 +131,10 @@ function rdesktop-shortcut() {
     echo "Running: rdesktop -g 1820x1000 -k pt -z -r sound:local -x l -P $@"
     rdesktop -g 1820x1000 -k pt -z -r sound:local -x l -P $@
 }
+
+function rdesktop-wide-shortcut() {
+    echo "Running: rdesktop -g 3820x1980 -k pt -z -r sound:local -x l -P $@"
+    rdesktop -g 3820x1980 -k pt -z -r sound:local -x l -P $@
+}
 # Enable posix mode which disallows -(dashes) in function names.
 #set -o posix
