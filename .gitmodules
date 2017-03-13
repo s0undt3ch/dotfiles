@@ -2,46 +2,6 @@
 	path = .ext/pyenv
 	url = https://github.com/yyuu/pyenv.git
 	branch = master
-[submodule "tag-vim/vim/bundle/vim-fugitive"]
-	path = tag-vim/vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-	branch = master
-[submodule "tag-vim/vim/bundle/salt-vim"]
-	path = tag-vim/vim/bundle/salt-vim
-	url = https://github.com/saltstack/salt-vim.git
-	branch = master
-[submodule "tag-vim/vim/bundle/DfrankUtil"]
-	path = tag-vim/vim/bundle/DfrankUtil
-	url = https://github.com/vim-scripts/DfrankUtil.git
-	branch = master
-[submodule "tag-vim/vim/bundle/syntastic"]
-	path = tag-vim/vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-	branch = master
-[submodule "tag-vim/vim/bundle/gitv"]
-	path = tag-vim/vim/bundle/gitv
-	url = https://github.com/gregsexton/gitv.git
-	branch = master
-[submodule "tag-vim/vim/bundle/vim-gitgutter"]
-	path = tag-vim/vim/bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-	branch = master
-[submodule "tag-vim/vim/bundle/Dockerfile"]
-	path = tag-vim/vim/bundle/Dockerfile
-	url = https://github.com/ekalinin/Dockerfile.vim.git
-	branch = master
-[submodule "tag-vim/vim/bundle/nginx-vim-syntax"]
-	path = tag-vim/vim/bundle/nginx-vim-syntax
-	url = https://github.com/evanmiller/nginx-vim-syntax.git
-	branch = master
-[submodule "tag-vim/vim/bundle/localvimrc"]
-	path = tag-vim/vim/bundle/localvimrc
-	url = https://github.com/embear/vim-localvimrc.git
-	branch = master
-[submodule "tag-vim/vim/bundle/riv"]
-	path = tag-vim/vim/bundle/riv
-	url = https://github.com/Rykka/riv.vim.git
-	branch = master
 [submodule ".ext/pyenv-virtualenv"]
 	path = .ext/pyenv-virtualenv
 	url = https://github.com/yyuu/pyenv-virtualenv.git
@@ -50,68 +10,7 @@
 	path = .ext/powerline
 	url = https://github.com/Lokaltog/powerline.git
 	branch = develop
-[submodule "tag-vim/vim/bundle/clickable"]
-	path = tag-vim/vim/bundle/clickable
-	url = https://github.com/Rykka/clickable.vim.git
-	branch = master
-[submodule "tag-vim/vim/bundle/neocomplete"]
-	path = tag-vim/vim/bundle/neocomplete
-	url = https://github.com/Shougo/neocomplete.vim.git
-	branch = master
-[submodule "tag-vim/vim/bundle/vim-pyenv"]
-	path = tag-vim/vim/bundle/vim-pyenv
-	url = https://github.com/lambdalisue/vim-pyenv.git
-	branch = master
 [submodule "tag-zsh/zsh/.zprezto"]
 	path = tag-zsh/zsh/.zprezto
 	url = https://github.com/s0undt3ch/prezto.git
 	branch = master
-[submodule "tag-vim/vim/bundle/ultisnips"]
-	path = tag-vim/vim/bundle/ultisnips
-	url = https://github.com/s0undt3ch/ultisnips.git
-	branch = master
-[submodule "tag-vim/vim/bundle/python-mode"]
-	path = tag-vim/vim/bundle/python-mode
-	url = https://github.com/klen/python-mode.git
-	branch = master
-[submodule "tag-vim/vim/bundle/ScrollColors"]
-	path = tag-vim/vim/bundle/ScrollColors
-	url = https://github.com/vim-scripts/ScrollColors.git
-	branch = master
-[submodule "tag-vim/vim/bundle/colorschemes"]
-	path = tag-vim/vim/bundle/colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
-	branch = master
-[submodule "tag-vim/vim/bundle/gruvbox"]
-	path = tag-vim/vim/bundle/gruvbox
-	url = https://github.com/morhetz/gruvbox.git
-	branch = master
-[submodule "tag-vim/vim/bundle/colorsupport"]
-	path = tag-vim/vim/bundle/colorsupport
-	url = https://github.com/vim-scripts/colorsupport.vim
-	branch = master
-[submodule "tag-vim/vim/bundle/fruity-vim-colorscheme"]
-	path = tag-vim/vim/bundle/fruity-vim-colorscheme
-	url = https://github.com/mitsuhiko/fruity-vim-colorscheme.git
-	branch = master
-[submodule "tag-vim/vim/bundle/rainbow-parenteses"]
-	path = tag-vim/vim/bundle/rainbow-parenteses
-	url = https://github.com/kien/rainbow_parentheses.vim.git
-	branch = master
-[submodule "tag-vim/vim/bundle/vim-snippets"]
-	path = tag-vim/vim/bundle/vim-snippets
-	url = https://github.com/honza/vim-snippets.git
-	branch = master
-[submodule "tag-vim/vim/bundle/jedi-vim"]
-	path = tag-vim/vim/bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
-	branch = master
-[submodule "tag-vim/vim/bundle/vim-gradle"]
-	path = tag-vim/vim/bundle/vim-gradle
-	url = https://github.com/tfnico/vim-gradle.git
-[submodule "tag-vim/vim/bundle/cql-vim"]
-	path = tag-vim/vim/bundle/cql-vim
-	url = https://github.com/elubow/cql-vim.git
-[submodule "tag-vim/vim/bundle/vim-colors-solarized"]
-	path = tag-vim/vim/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
