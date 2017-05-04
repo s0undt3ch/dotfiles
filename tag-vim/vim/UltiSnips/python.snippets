@@ -63,7 +63,7 @@ snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
 
 
     ${1:`!p snip.rv = find_module(snip) or snip.fn`}
-    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+    `!p snip.rv = len(t[1] or find_module(snip) or snip.fn)*'~'`
 
     ${2:@todo: add description}
 `!p snip.rv = triple_quotes(snip)`
@@ -81,8 +81,8 @@ if codeauthor is not None:
 `
 
 
-    ${1:`!p snip.rv = snip.module or snip.fn`}
-    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+    ${1:`!p snip.rv = find_module(snip) or snip.fn`}
+    `!p snip.rv = len(t[1] or find_module(snip) or snip.fn)*'~'`
 
     ${2:@todo: add description}
 `!p snip.rv = triple_quotes(snip)`
@@ -99,8 +99,8 @@ endsnippet
 snippet omod "Basic Python Module Header" b
 # -*- coding: utf-8 -*-
 `!p snip.rv = triple_quotes(snip)`
-    ${1:`!p snip.rv = snip.module or snip.fn`}
-    `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
+    ${1:`!p snip.rv = find_module(snip) or snip.fn`}
+    `!p snip.rv = len(t[1] or find_module(snip) or snip.fn)*'~'`
 
     ${2:@todo: add description}
 
