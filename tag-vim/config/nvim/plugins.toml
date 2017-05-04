@@ -1,8 +1,8 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]]
-repo = 'saltstack/salt-vim'
+#[[plugins]]
+#repo = 'saltstack/salt-vim'
 
 [[plugins]]
 repo = 'Rykka/riv.vim'

@@ -145,6 +145,7 @@ if s:pluginsExist
   let g:solarized_underline=1
   let g:solarized_italic=1
   let g:solarized_termcolors=256
+  let g:solarized_termtrans = 1
   " let g:solarized_diffmode="normal"
   " let g:solarized_menu=1<Paste>
   syntax enable
@@ -157,7 +158,7 @@ if s:pluginsExist
 " turn on spelling for markdown files
   autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell
 " highlight bad words in red
-  hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+  "hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
 " enable deoplete
   let g:deoplete#enable_at_startup = 1
 " disable markdown auto-preview. Gets annoying
