@@ -9,7 +9,42 @@ def get_quoting_style(snip):
 def triple_quotes(snip):
     return get_quoting_style(snip) * 3
 
+
+def find_package(snip):
+    import os
+    dirname = vim.eval('expand("%:p:h")') or ''
+    package = []
+    curdir = dirname
+    while True:
+        if os.path.isfile(os.path.join(curdir, '__init__.py')):
+            package.append(os.path.basename(curdir))
+            curdir = os.path.abspath(os.path.join(curdir, '..'))
+            continue
+        break
+
+    if package:
+        package.reverse()
+        return '.'.join(package)
+    return None
+
+def find_module(snip):
+    package = find_package(snip)
+    if package:
+        return '{0}.{1}'.format(package, snip.basename)
+    return snip.basename
 endglobal
+
+snippet mmod "Minimal Python Module Header" b
+# -*- coding: utf-8 -*-
+`!p snip.rv = triple_quotes(snip)`
+    ${1:`!p snip.rv = find_module(snip) or snip.fn`}
+    `!p snip.rv = len(t[1] or find_module(snip) or snip.fn)*'~'`
+
+    ${2:@todo: add description}
+`!p snip.rv = triple_quotes(snip)`
+
+$0
+endsnippet
 
 snippet mod "Basic Python Module Header" b
 # -*- coding: utf-8 -*-
@@ -27,7 +62,7 @@ snip.rv = snip.opt("g:ultisnips_python_project_team", "PROJECT NAME")
     :license: ${5:`!p snip.rv = snip.opt("g:ultisnips_python_project_license", "LICENSE NAME")`}, see LICENSE for more details.
 
 
-    ${1:`!p snip.rv = snip.module or snip.fn`}
+    ${1:`!p snip.rv = find_module(snip) or snip.fn`}
     `!p snip.rv = len(t[1] or snip.module or snip.fn)*'~'`
 
     ${2:@todo: add description}
