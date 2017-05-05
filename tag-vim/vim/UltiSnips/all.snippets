@@ -14,11 +14,11 @@ def _parse_comments(s):
     try:
         while True:
             # get the flags and text of a comment part
-            flags,text = i.next().split(':', 1)
+            flags, text = next(i).split(':', 1)
 
             if len(flags) == 0:
                 if len(text) == 1:
-                    rv.append((text,text,text, ""))
+                    rv.append((text, text, text, ""))
             # parse 3-part comment, but ignore those with O flag
             elif flags[0] == 's' and 'O' not in flags:
                 ctriple = []
@@ -28,11 +28,11 @@ def _parse_comments(s):
                     indent = " " * int(flags[-1])
                 ctriple.append(text)
 
-                flags,text = i.next().split(':', 1)
+                flags,text = next(i).split(':', 1)
                 assert(flags[0] == 'm')
                 ctriple.append(text)
 
-                flags,text = i.next().split(':', 1)
+                flags,text = next(i).split(':', 1)
                 assert(flags[0] == 'e')
                 ctriple.append(text)
                 ctriple.append(indent)
@@ -41,7 +41,7 @@ def _parse_comments(s):
 
             elif flags[0] == 'b':
                 if len(text) == 1:
-                    rv.insert(0, (text,text,text, ""))
+                    rv.insert(0, (text, text, text, ""))
 
     except StopIteration:
        return rv
@@ -52,7 +52,7 @@ def _get_comment_format():
 
     ft = vim.eval("&filetype")
     # check if the comment dict has the format for the current file
-    if _commentDict.has_key(ft):
+    if ft in _commentDict:
         return _commentDict[ft]
 
     # otherwise parse vim's comments and add it for later use
@@ -65,10 +65,12 @@ def _get_width():
     try:
         return int(vim.eval('&colorcolumn'))
     except:
+        width = 0
         try:
-            return int(vim.eval('&textwidth'))
+            width = int(vim.eval('&textwidth'))
         except:
-            return 80
+            width = 80
+        return width
 
 endglobal
 
