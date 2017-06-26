@@ -30,6 +30,8 @@ def find_package(snip):
 def find_module(snip):
     package = find_package(snip)
     if package:
+        if snip.basename == '__init__':
+            return package
         return '{0}.{1}'.format(package, snip.basename)
     return snip.basename
 endglobal
