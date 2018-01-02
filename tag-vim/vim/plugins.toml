@@ -36,7 +36,7 @@ repo = 'valloric/MatchTagAlways'
 repo = 'ekalinin/Dockerfile.vim'
 
 [[plugins]]
-repo = 'evanmiller/nginx-vim-syntax'
+repo = 'chr4/nginx.vim'
 
 [[plugins]]
 repo = 'mitsuhiko/fruity-vim-colorscheme'
