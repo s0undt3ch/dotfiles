@@ -6,15 +6,155 @@ dotfiles:
   d_bin:
     dst: ~/.bin
     src: bin
+  d_fonts:
+    dst: ~/.fonts
+    link: true
+    src: fonts
+  d_termite:
+    dst: ~/.config/termite
+    link: true
+    src: config/termite
   d_ultisnips:
     dst: ~/.vim/UltiSnips
     src: vim/UltiSnips
+  d_vim:
+    dst: ~/.vim
+    link: true
+    src: vim
+  d_vimrc.d:
+    dst: ~/.vimrc.d
+    link: true
+    src: vimrc.d
+  f_00-startx-on-login.fish:
+    dst: ~/.config/fish/conf.d/00-startx-on-login.fish
+    link: true
+    src: config/fish/conf.d/00-startx-on-login.fish
+  f_01-set-path.fish:
+    dst: ~/.config/fish/conf.d/01-set-path.fish
+    link: true
+    src: config/fish/conf.d/01-set-path.fish
+  f_02-pyenv-setup.fish:
+    dst: ~/.config/fish/conf.d/02-pyenv-setup.fish
+    link: true
+    src: config/fish/conf.d/02-pyenv-setup.fish
+  f_03-environment-variables.fish:
+    dst: ~/.config/fish/conf.d/03-environment-variables.fish
+    link: true
+    src: config/fish/conf.d/03-environment-variables.fish
+  f_04-pipenv-setup.fish:
+    dst: ~/.config/fish/conf.d/04-pipenv-setup.fish
+    link: true
+    src: config/fish/conf.d/04-pipenv-setup.fish
+  f_authorized_keys:
+    dst: ~/.ssh/authorized_keys
+    link: true
+    src: ssh/authorized_keys
+  f_authorized_keys2:
+    dst: ~/.ssh/authorized_keys2
+    link: true
+    src: ssh/authorized_keys2
+  f_checkbashisms:
+    dst: ~/.bin/checkbashisms
+    link: true
+    src: bin/checkbashisms
+  f_config.fish:
+    dst: ~/.config/fish/config.fish
+    link: true
+    src: config/fish/config.fish
+  f_face.icon:
+    dst: ~/.face.icon
+    link: true
+    src: face.icon
+  f_fish_prompt.fish:
+    dst: ~/.config/fish/functions/fish_prompt.fish
+    link: true
+    src: config/fish/functions/fish_prompt.fish
+  f_fishfile:
+    dst: ~/.config/fish/fishfile
+    link: true
+    src: config/fish/fishfile
   f_gitconfig:
     dst: ~/.gitconfig
     src: gitconfig
+  f_gitignore:
+    dst: ~/.gitignore
+    link: true
+    src: gitignore
+  f_locale.conf:
+    dst: ~/.config/locale.conf
+    src: config/locale.conf
+  f_pyenv.fish:
+    dst: ~/.config/fish/conf.d/pyenv.fish
+    link: true
+    src: config/fish/conf.d/pyenv.fish
+  f_pylintrc:
+    dst: ~/.pylintrc
+    link: true
+    src: pylintrc
+  f_ssh_config:
+    dst: ~/.ssh/config
+    link: true
+    src: ssh/config
+  f_tmux.conf:
+    dst: ~/.tmux.conf
+    link: true
+    src: tmux.conf
+  f_vcs.init.fish:
+    dst: ~/.config/fish/conf.d/vcs.init.fish
+    link: true
+    src: config/fish/conf.d/vcs.init.fish
+  f_vcs.name.fish:
+    dst: ~/.config/fish/functions/vcs.name.fish
+    link: true
+    src: config/fish/functions/vcs.name.fish
+  f_vimrc:
+    dst: ~/.vimrc
+    link: true
+    src: vimrc
+  f_virtualenv.fish:
+    dst: ~/.config/fish/functions/virtualenv.fish
+    link: true
+    src: config/fish/functions/virtualenv.fish
+  f_xinitrc:
+    dst: ~/.xinitrc
+    link: true
+    src: xinitrc
+  f_xscreensaver:
+    dst: ~/.xscreensaver
+    link: true
+    src: xscreensaver
 profiles:
   lenny:
     dotfiles:
     - d_ultisnips
     - d_bin
     - f_gitconfig
+    - f_locale.conf
+    - d_fonts
+    - d_termite
+    - f_checkbashisms
+    - f_pylintrc
+    - f_face.icon
+    - f_gitignore
+    - f_tmux.conf
+    - f_ssh_config
+    - f_authorized_keys
+    - f_authorized_keys2
+    - f_xinitrc
+    - f_xscreensaver
+    - d_vimrc.d
+    - f_vimrc
+    - d_vim
+    - f_config.fish
+    - f_00-startx-on-login.fish
+    - f_01-set-path.fish
+    - f_02-pyenv-setup.fish
+    - f_03-environment-variables.fish
+    - f_04-pipenv-setup.fish
+    - f_pyenv.fish
+    - f_vcs.init.fish
+    - f_fishfile
+    - f_fish_prompt.fish
+    - f_pyenv.fish
+    - f_vcs.name.fish
+    - f_virtualenv.fish
