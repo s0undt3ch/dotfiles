@@ -9,8 +9,12 @@ dotfiles:
   d_ultisnips:
     dst: ~/.vim/UltiSnips
     src: vim/UltiSnips
+  f_gitconfig:
+    dst: ~/.gitconfig
+    src: gitconfig
 profiles:
   lenny:
     dotfiles:
     - d_ultisnips
     - d_bin
+    - f_gitconfig
