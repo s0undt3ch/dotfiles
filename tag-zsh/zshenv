@@ -1,3 +1,0 @@
-ZDOTDIR="${HOME:-$(cd ~ && pwd)}/.zsh"
-
-[ -f $ZDOTDIR/.zshenv ] && . $ZDOTDIR/.zshenv

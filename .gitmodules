@@ -2,15 +2,7 @@
 	path = .ext/pyenv
 	url = https://github.com/yyuu/pyenv.git
 	branch = master
-[submodule ".ext/pyenv-virtualenv"]
-	path = .ext/pyenv-virtualenv
-	url = https://github.com/yyuu/pyenv-virtualenv.git
-	branch = master
-[submodule ".ext/powerline"]
-	path = .ext/powerline
-	url = https://github.com/Lokaltog/powerline.git
-	branch = develop
-[submodule "tag-zsh/zsh/.zprezto"]
-	path = tag-zsh/zsh/.zprezto
-	url = https://github.com/s0undt3ch/prezto.git
+[submodule ".ext/dotdrop"]
+	path = .ext/dotdrop
+	url = https://github.com/deadc0de6/dotdrop.git
 	branch = master

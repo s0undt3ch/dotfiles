@@ -1,1 +1,0 @@
-../zshenv.d/04-aliases.zsh

@@ -1,1 +1,0 @@
-../zshenv.d/01-set-path.zsh

@@ -1,1 +1,0 @@
-../zshenv.d/02-pyenv-setup.zsh
