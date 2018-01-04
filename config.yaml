@@ -1,0 +1,16 @@
+config:
+  backup: true
+  create: true
+  dotpath: ./
+dotfiles:
+  d_bin:
+    dst: ~/.bin
+    src: bin
+  d_ultisnips:
+    dst: ~/.vim/UltiSnips
+    src: vim/UltiSnips
+profiles:
+  lenny:
+    dotfiles:
+    - d_ultisnips
+    - d_bin
