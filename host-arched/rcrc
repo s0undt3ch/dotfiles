@@ -1,4 +1,0 @@
-HOSTNAME="arched"
-SYMLINK_DIRS="*:vim/bundle/clickable *:vim/bundle/colorsupport *:vim/bundle/DfrankUtil *:vim/bundle/Dockerfile *:vim/bundle/fruity-vim-colorscheme *:vim/bundle/gitv *:vim/bundle/localvimrc *:vim/bundle/nginx-vim-syntax *:vim/bundle/python-syntax *:vim/bundle/rainbow-parenteses *:vim/bundle/riv *:vim/bundle/salt-vim *:vim/bundle/ScrollColors *:vim/bundle/syntastic *:vim/bundle/ultisnips *:vim/bundle/vim-fugitive *:vim/bundle/vim-gitgutter *:vim/bundle/vim-snippets *:vim/bundle/YouCompleteMe *:config/awesome *:config/termite *:config/* *:zsh"
-EXCLUDES="*:.ext/* *:zshrc.old *:README *:README.rst *:LICENSE *:LICENCE"
-TAGS="bin fonts locale termite vim wm zsh"
