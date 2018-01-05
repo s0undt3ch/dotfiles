@@ -98,7 +98,7 @@ function fish_prompt --description 'Write out the prompt'
 
   if not test $last_status -eq 0
       set_color $fish_color_error
-      printf ' status: %s' (echo $last_status)
+      printf ' exitcode: %s' (echo $last_status)
   end
 
   set_color $fish_cwd_suffix_color
