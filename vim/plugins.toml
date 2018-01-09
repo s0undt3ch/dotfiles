@@ -10,12 +10,12 @@ repo = 'Rykka/riv.vim'
 [[plugins]]
 repo = 'tfnico/vim-gradle'
 
-[[plugins]]
-repo = 'elubow/cql-vim'
+#[[plugins]]
+#repo = 'elubow/cql-vim'
 
 # colorscheme & syntax highlighting
-[[plugins]]
-repo = 'mhartington/oceanic-next'
+#[[plugins]]
+#repo = 'mhartington/oceanic-next'
 
 [[plugins]]
 repo = 'altercation/vim-colors-solarized'
@@ -38,8 +38,8 @@ repo = 'ekalinin/Dockerfile.vim'
 [[plugins]]
 repo = 'chr4/nginx.vim'
 
-[[plugins]]
-repo = 'mitsuhiko/fruity-vim-colorscheme'
+#[[plugins]]
+#repo = 'mitsuhiko/fruity-vim-colorscheme'
 
 [[plugins]]
 repo = 'luochen1990/rainbow'
@@ -51,8 +51,8 @@ repo = 'gregsexton/gitv'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
-[[plugins]]
-repo = 'jreybert/vimagit'
+#[[plugins]]
+#repo = 'jreybert/vimagit'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -75,7 +75,7 @@ repo = 'editorconfig/editorconfig-vim'
 #repo = 'scrooloose/nerdtree'
 
 [[plugins]]
-repo = 'bling/vim-airline'
+repo = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes']
 
 [[plugins]]
@@ -90,17 +90,17 @@ repo = 'tomtom/tcomment_vim'
 [[plugins]]
 repo = 'embear/vim-localvimrc'
 
-[[plugins]]
-repo = 'Rykka/clickable.vim'
+#[[plugins]]
+#repo = 'Rykka/clickable.vim'
 
 [[plugins]]
 repo = 'lambdalisue/vim-pyenv'
 
-[[plugins]]
-repo = 'janko-m/vim-test'
+#[[plugins]]
+#repo = 'janko-m/vim-test'
 
-[[plugins]]
-repo = 'kassio/neoterm'
+#[[plugins]]
+#repo = 'kassio/neoterm'
 
 [[plugins]]
 repo = 'tmux-plugins/vim-tmux'
@@ -128,26 +128,30 @@ repo = 'Shougo/vimfiler.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
+[[plugins]]
+# Required system-wide python-jedi or jedi intalled on virtualenv
+repo = "maralla/completor.vim"
+
 #[[plugins]]
 #repo = 'Shougo/deoplete.nvim'
 
 #[[plugins]]
 #repo = 'zchee/deoplete-jedi'
 
-[[plugins]]
-repo = 'Shougo/neco-vim'
+#[[plugins]]
+#repo = 'Shougo/neco-vim'
 
-[[plugins]]
-repo = 'Shougo/neoinclude.vim'
+#[[plugins]]
+#repo = 'Shougo/neoinclude.vim'
 
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
+#[[plugins]]
+#repo = 'Shougo/neosnippet.vim'
 
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
+#[[plugins]]
+#repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'honza/vim-snippets'
@@ -163,14 +167,14 @@ depends = ['webapi-vim']
 [[plugins]]
 repo = 'mattn/webapi-vim'
 
-[[plugins]]
-repo = 'rhysd/github-complete.vim'
+#[[plugins]]
+#repo = 'rhysd/github-complete.vim'
 
-[[plugins]]
-repo = 'junegunn/goyo.vim'
+#[[plugins]]
+#repo = 'junegunn/goyo.vim'
 
-[[plugins]]
-repo = 'junegunn/limelight.vim'
+#[[plugins]]
+#repo = 'junegunn/limelight.vim'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
