@@ -21,10 +21,6 @@ dotfiles:
     dst: ~/.vim
     link: true
     src: vim
-  d_vimrc.d:
-    dst: ~/.vimrc.d
-    link: true
-    src: vimrc.d
   f_00-startx-on-login.fish:
     dst: ~/.config/fish/conf.d/00-startx-on-login.fish
     link: true
@@ -142,7 +138,6 @@ profiles:
     - f_authorized_keys2
     - f_xinitrc
     - f_xscreensaver
-    - d_vimrc.d
     - f_vimrc
     - d_vim
     - f_config.fish
