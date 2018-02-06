@@ -78,6 +78,7 @@ dotfiles:
     src: gitignore
   f_kitty.conf:
     dst: ~/.config/kitty/kitty.conf
+    link: true
     src: config/kitty/kitty.conf
   f_locale.conf:
     dst: ~/.config/locale.conf
