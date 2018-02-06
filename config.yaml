@@ -76,6 +76,9 @@ dotfiles:
     dst: ~/.gitignore
     link: true
     src: gitignore
+  f_kitty.conf:
+    dst: ~/.config/kitty/kitty.conf
+    src: config/kitty/kitty.conf
   f_locale.conf:
     dst: ~/.config/locale.conf
     src: config/locale.conf
@@ -153,3 +156,4 @@ profiles:
     - f_pyenv.fish
     - f_vcs.name.fish
     - f_virtualenv.fish
+    - f_kitty.conf
