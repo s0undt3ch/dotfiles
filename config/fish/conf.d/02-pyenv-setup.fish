@@ -1,7 +1,8 @@
 if test -d ~/.dotfiles/.ext/pyenv
     # If the pyenv checkout exists, update environment
     set --export PYENV_ROOT ~/.dotfiles/.ext/pyenv
-    set fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+    #set fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+    set -x PATH $PYENV_ROOT/bin $PATH
 
     #if test -d $PYENV_ROOT/plugins/pyenv-virtualenv
     #  if not set -q __pyenv_virtualenv_bin_path_set
