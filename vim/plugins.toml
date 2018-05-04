@@ -4,11 +4,8 @@ repo = 'Shougo/dein.vim'
 #[[plugins]]
 #repo = 'saltstack/salt-vim'
 
-[[plugins]]
-repo = 'Rykka/riv.vim'
-
-[[plugins]]
-repo = 'tfnico/vim-gradle'
+#[[plugins]]
+#repo = 'tfnico/vim-gradle'
 
 #[[plugins]]
 #repo = 'elubow/cql-vim'
@@ -32,11 +29,8 @@ repo = 'Raimondi/delimitMate'
 [[plugins]]
 repo = 'valloric/MatchTagAlways'
 
-[[plugins]]
-repo = 'ekalinin/Dockerfile.vim'
-
-[[plugins]]
-repo = 'chr4/nginx.vim'
+#[[plugins]]
+#repo = 'chr4/nginx.vim'
 
 #[[plugins]]
 #repo = 'mitsuhiko/fruity-vim-colorscheme'
@@ -45,17 +39,20 @@ repo = 'chr4/nginx.vim'
 repo = 'luochen1990/rainbow'
 
 # Git helpers
-[[plugins]]
-repo = 'gregsexton/gitv'
+#[[plugins]]
+#repo = 'gregsexton/gitv'
 
-[[plugins]]
-repo = 'tpope/vim-fugitive'
+#[[plugins]]
+#repo = 'tpope/vim-fugitive'
 
 #[[plugins]]
 #repo = 'jreybert/vimagit'
 
+#[[plugins]]
+#repo = 'airblade/vim-gitgutter'
+
 [[plugins]]
-repo = 'airblade/vim-gitgutter'
+repo = 'mhinz/vim-signify'
 
 #[[plugins]]
 #repo = 'Xuyuanp/nerdtree-git-plugin'
@@ -108,21 +105,24 @@ repo = 'tmux-plugins/vim-tmux'
 [[plugins]]
 repo = 'edkolev/tmuxline.vim'
 
-[[plugins]]
-repo = 'milkypostman/vim-togglelist'
+#[[plugins]]
+#repo = 'milkypostman/vim-togglelist'
 
 # Shougo
-[[plugins]]
-repo = 'Shougo/unite.vim'
+#[[plugins]]
+#repo = 'Shougo/unite.vim'
+
+#[[plugins]]
+#repo = 'Shougo/unite-outline'
+
+#[[plugins]]
+#repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
-repo = 'Shougo/unite-outline'
+repo = 'Shougo/denite.nvim'
 
-[[plugins]]
-repo = 'ujihisa/unite-colorscheme'
-
-[[plugins]]
-repo = 'Shougo/vimfiler.vim'
+#[[plugins]]
+#repo = 'Shougo/vimfiler.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
@@ -160,12 +160,12 @@ depends = ['ultisnips']
 [[plugins]]
 repo = 'sirver/ultisnips'
 
-[[plugins]]
-repo = 'mattn/gist-vim'
-depends = ['webapi-vim']
+#[[plugins]]
+#repo = 'mattn/gist-vim'
+#depends = ['webapi-vim']
 
-[[plugins]]
-repo = 'mattn/webapi-vim'
+#[[plugins]]
+#repo = 'mattn/webapi-vim'
 
 #[[plugins]]
 #repo = 'rhysd/github-complete.vim'

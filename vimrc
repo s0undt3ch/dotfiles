@@ -5,7 +5,7 @@ if g:pluginsExist
   source $HOME/.vim/config/basic-settings.vim
   source $HOME/.vim/config/smart-home.vim
   source $HOME/.vim/config/auto-commands.vim
-  source $HOME/.vim/config/virtualenv-support.vim
+  "source $HOME/.vim/config/virtualenv-support.vim
   source $HOME/.vim/config/completor-support.vim
   source $HOME/.vim/config/ultisnips-defaults.vim
   source $HOME/.vim/config/rainbow-parenteses-defaults.vim
@@ -15,6 +15,7 @@ if g:pluginsExist
   source $HOME/.vim/config/theme-settings.vim
   source $HOME/.vim/config/airline-settings.vim
   source $HOME/.vim/config/ale-settings.vim
+  source $HOME/.vim/config/easyclip-settings.vim
   if has("gui_running")
     source $HOME/.vim/config/gui-settings.vim
   endif

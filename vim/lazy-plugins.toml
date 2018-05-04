@@ -1,3 +1,12 @@
 [[plugins]]
 repo = 'ujihisa/neco-look'
 on_ft = ['markdown']
+
+
+[[plugins]]
+repo = 'gu-fan/riv.vim'
+on_ft = ['rst']
+
+[[plugins]]
+repo = 'ekalinin/Dockerfile.vim'
+on_ft = ['Dockerfile']
