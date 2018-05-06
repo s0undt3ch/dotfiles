@@ -15,5 +15,7 @@ end
 if status --is-login
     set -x PATH "$pyenv_root/shims" $PATH
     set -x PYENV_SHELL fish
+    set -x PYTHONIOENCODING "UTF-8"
+    set -x PYTHON_CONFIGURE_OPTS "--enable-shared"
 end
 command mkdir -p "$pyenv_root/"{shims,versions}
