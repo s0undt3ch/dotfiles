@@ -48,11 +48,8 @@ repo = 'luochen1990/rainbow'
 #[[plugins]]
 #repo = 'jreybert/vimagit'
 
-#[[plugins]]
-#repo = 'airblade/vim-gitgutter'
-
 [[plugins]]
-repo = 'mhinz/vim-signify'
+repo = 'airblade/vim-gitgutter'
 
 #[[plugins]]
 #repo = 'Xuyuanp/nerdtree-git-plugin'
