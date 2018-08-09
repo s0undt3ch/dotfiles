@@ -29,6 +29,8 @@ if has("autocmd")
     autocmd FileType groovy set sw=4 ts=4 fenc=utf-8 number et
     autocmd Filetype rst set sw=2 ts=2 et fenc=utf-8 spell spelllang=en nofoldenable
     autocmd BufRead *.cql set syntax=cql
+    " NO TRAILING WHITESPACE!
+    autocmd BufWritePre * :%s/\s\+$//e
 
     autocmd BufRead * normal zz  " Center buffer on line
   augroup END
