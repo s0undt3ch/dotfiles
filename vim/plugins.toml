@@ -42,8 +42,8 @@ repo = 'luochen1990/rainbow'
 #[[plugins]]
 #repo = 'gregsexton/gitv'
 
-#[[plugins]]
-#repo = 'tpope/vim-fugitive'
+[[plugins]]
+repo = 'tpope/vim-fugitive'
 
 #[[plugins]]
 #repo = 'jreybert/vimagit'
