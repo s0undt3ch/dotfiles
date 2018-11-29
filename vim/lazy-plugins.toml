@@ -10,3 +10,11 @@ on_ft = ['rst']
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
 on_ft = ['Dockerfile']
+
+[[plugins]]
+repo = 'Glench/Vim-Jinja2-Syntax'
+
+[[plugins]]
+repo = 'saltstack/salt-vim'
+on_ft = ['sls']
+depends = ['Vim-Jinja2-Syntax']
