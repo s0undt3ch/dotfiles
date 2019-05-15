@@ -87,8 +87,8 @@ repo = 'embear/vim-localvimrc'
 #[[plugins]]
 #repo = 'Rykka/clickable.vim'
 
-[[plugins]]
-repo = 'lambdalisue/vim-pyenv'
+#[[plugins]]
+#repo = 'lambdalisue/vim-pyenv'
 
 #[[plugins]]
 #repo = 'janko-m/vim-test'
