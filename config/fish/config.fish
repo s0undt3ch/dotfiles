@@ -1,3 +1,5 @@
+set -e fish_user_paths
+
 # solarized dark colors
 set fish_color_autosuggestion 586e75
 set fish_color_command 93a1a1
