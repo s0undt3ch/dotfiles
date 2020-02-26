@@ -16,6 +16,7 @@ if g:pluginsExist
   source $HOME/.vim/config/airline-settings.vim
   source $HOME/.vim/config/ale-settings.vim
   source $HOME/.vim/config/easyclip-settings.vim
+  source $HOME/.vim/config/vim-indent-guides.vim
   if has("gui_running")
     source $HOME/.vim/config/gui-settings.vim
   endif
