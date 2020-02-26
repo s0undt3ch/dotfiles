@@ -29,6 +29,9 @@ repo = 'Raimondi/delimitMate'
 [[plugins]]
 repo = 'valloric/MatchTagAlways'
 
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+
 #[[plugins]]
 #repo = 'chr4/nginx.vim'
 
@@ -86,9 +89,6 @@ repo = 'embear/vim-localvimrc'
 
 #[[plugins]]
 #repo = 'Rykka/clickable.vim'
-
-#[[plugins]]
-#repo = 'lambdalisue/vim-pyenv'
 
 #[[plugins]]
 #repo = 'janko-m/vim-test'
