@@ -9,6 +9,6 @@ if test -d ~/.dotfiles/.ext/pyenv
     set -x PYTHON_CONFIGURE_OPTS "--enable-shared"
 
     set --export VIRTUAL_ENV_DISABLE_PROMPT 1
-    status --is-interactive; and . (pyenv init -|psub)
-    status --is-interactive; and . (pyenv virtualenv-init -|psub)
+    status --is-interactive; and source (pyenv init -|psub)
+    status --is-interactive; and source (pyenv virtualenv-init -|psub)
 end
