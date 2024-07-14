@@ -1,8 +1,0 @@
-[submodule ".ext/pyenv"]
-	path = .ext/pyenv
-	url = https://github.com/yyuu/pyenv.git
-	branch = master
-[submodule ".ext/dotdrop"]
-	path = .ext/dotdrop
-	url = https://github.com/deadc0de6/dotdrop.git
-	branch = master
