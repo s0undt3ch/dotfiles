@@ -2,4 +2,8 @@
 	path = .git-submodules/dotbot
 	url = https://github.com/anishathalye/dotbot.git
 	branch = master
-	ignore=dirty
+	ignore = dirty
+[submodule "dotbot-includes"]
+	path = .git-submodules/dotbot-includes
+	url = https://github.com/vanduc2514/dotbot-includes.git
+	branch = master

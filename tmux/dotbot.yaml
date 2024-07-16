@@ -1,0 +1,3 @@
+- link:
+    ~/.tmux.conf: tmux.conf
+    ~/.local/bin/tmux-shared-windows: tmux-shared-windows

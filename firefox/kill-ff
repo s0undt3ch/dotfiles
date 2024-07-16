@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+kill -KILL $(ps aux | grep firefox | grep -v grep | grep FF | awk '{ print $2 }')

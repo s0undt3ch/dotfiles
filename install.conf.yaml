@@ -1,0 +1,15 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      glob: true
+
+- clean:
+  - '~'
+
+- includes:
+    tmux: dotbot.yaml
+    firefox: dotbot.yaml
+
+- includes:
+    pacdef: dotbot.yaml

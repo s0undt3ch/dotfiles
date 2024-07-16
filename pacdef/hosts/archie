@@ -1,0 +1,5 @@
+[arch]
+bolt
+nvidia
+nvidia-lts
+amd-ucode
