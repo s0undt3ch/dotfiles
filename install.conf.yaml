@@ -8,6 +8,9 @@
   - '~'
 
 - includes:
+    zsh: dotbot.yaml
+
+- includes:
     tmux: dotbot.yaml
     firefox: dotbot.yaml
 

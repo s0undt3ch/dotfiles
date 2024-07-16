@@ -1,0 +1,13 @@
+- link:
+    ~/.zshrc: zshrc
+    ~/.config/zsh/zimrc: zimrc
+
+- if:
+    cond: grep $(whoami) /etc/passwd | grep -q zsh
+    unmet:
+    - shell:
+      - command: chsh -s /usr/bin/zsh
+        description: Set user's shell to Zsh
+        stdin: true
+        stdout: true
+        stderr: true

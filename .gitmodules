@@ -7,3 +7,7 @@
 	path = .git-submodules/dotbot-includes
 	url = https://github.com/vanduc2514/dotbot-includes.git
 	branch = master
+[submodule "dotbot-if"]
+	path = .git-submodules/dotbot-if
+	url = https://github.com/wonderbeyond/dotbot-if.git
+	branch = main

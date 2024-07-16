@@ -17,4 +17,5 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 	-d "${BASEDIR}" \
 	-c "${CONFIG}" \
 	-p .git-submodules/dotbot-includes/includes.py \
+	-p .git-submodules/dotbot-if/if.py \
 	"${@}"
