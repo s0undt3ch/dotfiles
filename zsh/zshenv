@@ -4,3 +4,7 @@ path=(~/.local/bin $path)
 export PATH
 
 export EDITOR=$(which vim)
+
+HISTFILE=~/.zsh/history
+HISTSIZE=10000
+SAVEHIST=10000
