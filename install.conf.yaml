@@ -9,6 +9,7 @@
 
 - includes:
     zsh: dotbot.yaml
+    kitty: dotbot.yaml
 
 - includes:
     tmux: dotbot.yaml
