@@ -6,6 +6,7 @@ otf-firamono-nerd
 ttf-inconsolata-go-nerd
 ttf-sourcecodepro-nerd
 ttf-anonymouspro-nerd
+pre-commit
 
 # For PyEnv
 base-devel
