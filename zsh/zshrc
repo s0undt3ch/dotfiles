@@ -22,3 +22,8 @@ if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
   export MOZ_ENABLE_WAYLAND=1
   exec /usr/bin/startplasma-wayland
 fi
+
+# WTF?!
+bindkey '\e[H'  beginning-of-line
+bindkey '\e[F'  end-of-line
+bindkey '\e[3~' delete-char
