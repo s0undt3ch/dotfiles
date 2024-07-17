@@ -1,1 +1,3 @@
 pacdef/groups/**
+# Compiled zmodules
+**/*.zwc

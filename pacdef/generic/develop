@@ -7,3 +7,10 @@ otf-firamono-nerd
 ttf-inconsolata-go-nerd
 ttf-sourcecodepro-nerd
 ttf-anonymouspro-nerd
+
+# For PyEnv
+base-devel
+openssl
+zlib
+xz
+tk
