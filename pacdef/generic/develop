@@ -1,7 +1,6 @@
 [arch]
 enchant
 lazygit
-neovim
 ttf-hack-nerd
 otf-firamono-nerd
 ttf-inconsolata-go-nerd
@@ -14,3 +13,13 @@ openssl
 zlib
 xz
 tk
+
+# Neovim
+neovim
+python-pynvim
+fd
+ripgrep
+
+# Node & Typescript
+nodejs
+npm

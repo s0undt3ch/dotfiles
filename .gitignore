@@ -1,3 +1,5 @@
 pacdef/groups/**
 # Compiled zmodules
 **/*.zwc
+# LazyVim lockfile and non vcs config
+neovim/nvim/*.json

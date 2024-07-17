@@ -10,8 +10,7 @@
 - includes:
     zsh: dotbot.yaml
     kitty: dotbot.yaml
-
-- includes:
+    neovim: dotbot.yaml
     tmux: dotbot.yaml
     firefox: dotbot.yaml
 
