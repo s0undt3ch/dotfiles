@@ -16,3 +16,9 @@ fi
 
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
+
+
+if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
+  export MOZ_ENABLE_WAYLAND=1
+  exec /usr/bin/startplasma-wayland
+fi

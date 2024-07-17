@@ -2,6 +2,8 @@ zmodule git-info
 zmodule prompt-pwd
 zmodule duration-info
 zmodule sorin
+zmodule joke/zim-github-cli
+zmodule joke/zim-starship
 zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
 zmodule zsh-users/zsh-syntax-highlighting

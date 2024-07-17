@@ -1,5 +1,6 @@
 - link:
     ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
     ~/.config/zsh/zimrc: zimrc
 
 - if:

@@ -1,0 +1,4 @@
+# Add ~/.local/bin/ to the PATH
+typeset -U path PATH
+path=(~/.local/bin $path)
+export PATH
