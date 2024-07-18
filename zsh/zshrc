@@ -49,6 +49,11 @@ rehash_precmd() {
 add-zsh-hook -Uz precmd rehash_precmd
 
 
+# Some aliases
+alias -g vi=/usr/bin/nvim
+alias -g vim=/usr/bin/nvim
+
+
 # Start plasma on login on TTY 1
 if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
   export MOZ_ENABLE_WAYLAND=1
