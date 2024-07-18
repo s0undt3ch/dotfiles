@@ -1,5 +1,4 @@
 [arch]
-amd-ucode
 base
 base-devel
 bash
@@ -42,6 +41,7 @@ starship
 sudo
 tk # for GitK
 tmux
+tree
 unrar
 unzip
 vim
