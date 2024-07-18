@@ -19,6 +19,16 @@ source ${ZIM_HOME}/init.zsh
 
 source ~/.zsh/key-bindings.zsh
 
+# Fix terminal when output breaks it
+autoload -Uz add-zsh-hook
+
+function reset_broken_terminal () {
+	printf '%b' '\e[0m\e(B\e)0\017\e[?5l\e7\e[0;0r\e8'
+}
+
+add-zsh-hook -Uz precmd reset_broken_terminal
+
+# Start plasma on login on TTY 1
 if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
   export MOZ_ENABLE_WAYLAND=1
   exec /usr/bin/startplasma-wayland
