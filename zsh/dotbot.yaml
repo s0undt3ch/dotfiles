@@ -2,6 +2,7 @@
     ~/.zshrc: zshrc
     ~/.zshenv: zshenv
     ~/.zsh/zmodules: zmodules
+    ~/.zsh/key-bindings.zsh: key-bindings.zsh
     ~/.config/zsh/zimrc: zimrc
 
 - if:
