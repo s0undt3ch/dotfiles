@@ -7,6 +7,7 @@ ttf-inconsolata-go-nerd
 ttf-sourcecodepro-nerd
 ttf-anonymouspro-nerd
 pre-commit
+sqlitebrowser
 
 # For PyEnv
 base-devel
