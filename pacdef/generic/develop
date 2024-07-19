@@ -8,6 +8,7 @@ ttf-sourcecodepro-nerd
 ttf-anonymouspro-nerd
 pre-commit
 sqlitebrowser
+stylua
 
 # For PyEnv
 base-devel
