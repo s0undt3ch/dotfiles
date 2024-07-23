@@ -52,6 +52,7 @@ add-zsh-hook -Uz precmd rehash_precmd
 # Some aliases
 alias -g vi=/usr/bin/nvim
 alias -g vim=/usr/bin/nvim
+alias -g ls="ls --color=auto"
 
 
 # Start plasma on login on TTY 1
