@@ -9,6 +9,7 @@ ttf-anonymouspro-nerd
 pre-commit
 sqlitebrowser
 stylua
+httpie
 
 # For PyEnv
 base-devel
