@@ -1,4 +1,5 @@
 [arch]
+
 bluedevil
 breeze
 breeze-gtk
@@ -6,6 +7,8 @@ breeze-plymouth
 dolphin
 dolphin-plugins
 flatpak-kcm
+hunspell-en_US
+hunspell-pt_pt
 kactivitymanagerd
 kcalc
 kde-cli-tools
@@ -29,7 +32,9 @@ kwin
 libkscreen
 libksysguard
 libplasma
+libreoffice-still
 libva-utils
+mythes-pt_pt
 ocean-sound-theme
 okular
 oxygen
