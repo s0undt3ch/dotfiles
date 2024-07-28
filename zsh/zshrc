@@ -48,11 +48,20 @@ rehash_precmd() {
 
 add-zsh-hook -Uz precmd rehash_precmd
 
+# History
+HISTFILE=~/.zsh/history
+HISTSIZE=10000
+SAVEHIST=9999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
+
 
 # Some aliases
 alias -g vi=/usr/bin/nvim
 alias -g vim=/usr/bin/nvim
-alias -g ls="ls --color=auto"
+alias -g ls="eza --icons=always"
 
 
 # Start plasma on login on TTY 1

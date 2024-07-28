@@ -3,6 +3,7 @@ base
 base-devel
 bash
 bash-completion
+bat
 bluez
 bluez-utils
 coreutils
@@ -12,7 +13,9 @@ curl
 dmidecode
 dosfstools
 efivar
+eza
 findutils
+fzf
 git
 gnupg
 gzip
@@ -53,6 +56,7 @@ xclip
 xv
 xz
 yay-bin
+zoxide
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting

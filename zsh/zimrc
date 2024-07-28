@@ -7,5 +7,9 @@ zmodule joke/zim-starship
 zmodule ~/.zsh/zmodules/pyenv-setup
 zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
+zmodule utility
 zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
+zmodule kiesman99/zim-zoxide
+zmodule exa
+zmodule fzf
