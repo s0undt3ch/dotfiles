@@ -1,5 +1,4 @@
 [arch]
-
 bluedevil
 breeze
 breeze-gtk
@@ -60,10 +59,12 @@ polkit-kde-agent
 powerdevil
 print-manager
 qqc2-breeze-style
+skanpage
 spectacle
 spicetify-marketplace-bin
 spotify
 systemsettings
+tesseract-data-eus
 vdpauinfo
 xdg-desktop-portal
 xdg-desktop-portal-kde
