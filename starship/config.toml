@@ -25,6 +25,7 @@ $conda\
 [](fg:color_bg3 bg:color_bg1)\
 $time\
 [ ](fg:color_bg1)\
+($cmd_duration)\
 $line_break$character"""
 
 palette = 'gruvbox_dark'
@@ -168,3 +169,7 @@ vimcmd_symbol = '[](bold fg:color_green)'
 vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
 vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+
+[cmd_duration]
+show_notifications = true
+min_time_to_notify = 45_000   # 45 seconds before desktop notification
