@@ -13,6 +13,7 @@
     neovim: dotbot.yaml
     tmux: dotbot.yaml
     firefox: dotbot.yaml
+    wezterm: dotbot.yaml
 
 - includes:
     pacdef: dotbot.yaml
