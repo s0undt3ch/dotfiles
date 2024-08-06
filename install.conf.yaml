@@ -14,6 +14,7 @@
     tmux: dotbot.yaml
     firefox: dotbot.yaml
     wezterm: dotbot.yaml
+    starship: dotbot.yaml
 
 - includes:
     pacdef: dotbot.yaml
