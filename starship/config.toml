@@ -171,5 +171,5 @@ vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:color_yellow)'
 
 [cmd_duration]
-show_notifications = true
+show_notifications = false
 min_time_to_notify = 45_000   # 45 seconds before desktop notification
