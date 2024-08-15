@@ -10,6 +10,7 @@ pre-commit
 sqlitebrowser
 stylua
 httpie
+github-cli
 
 # For PyEnv
 base-devel
