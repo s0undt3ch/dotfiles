@@ -1,2 +1,38 @@
 - link:
     ~/.config/nvim: nvim
+
+- if:
+    cond: brew ls --versions stylua
+    unmet:
+      - shell:
+          - command: brew install stylua
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions fd
+    unmet:
+      - shell:
+          - command: brew install fd
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions ripgrep
+    unmet:
+      - shell:
+          - command: brew install ripgrep
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions neovim
+    unmet:
+      - shell:
+          - command: brew install neovim
+            stdin: true
+            stdout: true
+            stderr: true

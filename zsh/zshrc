@@ -36,18 +36,6 @@ zshcache_time="$(date +%s%N)"
 
 autoload -Uz add-zsh-hook
 
-rehash_precmd() {
-  if [[ -a /var/cache/zsh/pacman ]]; then
-    local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
-    if (( zshcache_time < paccache_time )); then
-      rehash
-      zshcache_time="$paccache_time"
-    fi
-  fi
-}
-
-add-zsh-hook -Uz precmd rehash_precmd
-
 # History
 HISTFILE=~/.zsh/history
 HISTSIZE=10000
@@ -62,10 +50,3 @@ setopt hist_verify
 alias -g vi=/usr/bin/nvim
 alias -g vim=/usr/bin/nvim
 alias -g ls="eza --icons=always"
-
-
-# Start plasma on login on TTY 1
-if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/tty1 ]]; then
-  export MOZ_ENABLE_WAYLAND=1
-  exec /usr/bin/startplasma-wayland
-fi

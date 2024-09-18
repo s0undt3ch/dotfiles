@@ -1,9 +1,0 @@
-- link:
-    ~/.config/pacdef: .
-
-- shell:
-  - command: pacdef package sync
-    description: Installing Packages
-    stdin: true
-    stdout: true
-    stderr: true

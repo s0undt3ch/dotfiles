@@ -1,0 +1,53 @@
+- if:
+    cond: brew ls --versions openssl
+    unmet:
+    - shell:
+      - command: brew install openssl
+        stdin: true
+        stdout: true
+        stderr: true
+
+- if:
+    cond: brew ls --versions readline
+    unmet:
+    - shell:
+      - command: brew install readline
+        stdin: true
+        stdout: true
+        stderr: true
+
+- if:
+    cond: brew ls --versions sqlite3
+    unmet:
+    - shell:
+      - command: brew install sqlite3
+        stdin: true
+        stdout: true
+        stderr: true
+
+- if:
+    cond: brew ls --versions xz
+    unmet:
+      - shell:
+          - command: brew install xz
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions zlib
+    unmet:
+      - shell:
+          - command: brew install zlib
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions tcl-tk
+    unmet:
+    - shell:
+      - command: brew install tcl-tk
+        stdin: true
+        stdout: true
+        stderr: true

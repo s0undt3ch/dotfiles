@@ -6,11 +6,29 @@
     ~/.config/zsh/zimrc: zimrc
 
 - if:
-    cond: grep $(whoami) /etc/passwd | grep -q zsh
+    cond: brew ls --versions eza
     unmet:
     - shell:
-      - command: chsh -s /usr/bin/zsh
-        description: Set user's shell to Zsh
+      - command: brew install eza
+        stdin: true
+        stdout: true
+        stderr: true
+
+
+- if:
+    cond: brew ls --versions zoxide
+    unmet:
+    - shell:
+      - command: brew install zoxide
+        stdin: true
+        stdout: true
+        stderr: true
+
+- if:
+    cond: brew ls --versions fzf
+    unmet:
+    - shell:
+      - command: brew install fzf
         stdin: true
         stdout: true
         stderr: true

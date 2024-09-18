@@ -1,2 +1,11 @@
 - link:
     ~/.config/starship.toml: config.toml
+
+- if:
+    cond: brew ls --versions starship
+    unmet:
+    - shell:
+      - command: brew install starship
+        stdin: true
+        stdout: true
+        stderr: true

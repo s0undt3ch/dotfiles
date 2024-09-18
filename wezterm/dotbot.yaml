@@ -1,2 +1,21 @@
 - link:
     ~/.config/wezterm/wezterm.lua: config.lua
+
+- if:
+    cond: brew ls --versions font-sauce-code-pro-nerd-font
+    unmet:
+    - shell:
+      - command: brew install --cask font-sauce-code-pro-nerd-font
+        stdin: true
+        stdout: true
+        stderr: true
+
+
+- if:
+    cond: brew ls --versions wezterm
+    unmet:
+    - shell:
+      - command: brew install wezterm
+        stdin: true
+        stdout: true
+        stderr: true
