@@ -47,6 +47,6 @@ setopt hist_verify
 
 
 # Some aliases
-alias -g vi=/usr/bin/nvim
-alias -g vim=/usr/bin/nvim
+alias -g vi=$(which nvim)
+alias -g vim=$(which nvim)
 alias -g ls="eza --icons=always"
