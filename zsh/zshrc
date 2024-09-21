@@ -1,4 +1,7 @@
 zstyle ':zim:zmodule' use 'degit'
+zstyle ':zim:input' double-dot-expand yes
+zstyle ':zim:ssh' ids 'id_ed25519'
+
 
 ZIM_CONFIG_FILE=~/.config/zsh/zimrc
 ZIM_HOME=~/.cache/zim

@@ -1,7 +1,10 @@
+zmodule input
 zmodule git-info
 zmodule prompt-pwd
 zmodule duration-info
 zmodule sorin
+zmodule environment
+zmodule homebrew
 zmodule joke/zim-github-cli
 zmodule joke/zim-starship
 zmodule ~/.zsh/zmodules/pyenv-setup
