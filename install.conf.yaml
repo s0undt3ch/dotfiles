@@ -11,7 +11,7 @@
     pyenv: dotbot.yaml
     zsh: dotbot.yaml
     neovim: dotbot.yaml
-#    tmux: dotbot.yaml
+    tmux: dotbot.yaml
 #    firefox: dotbot.yaml
     wezterm: dotbot.yaml
     starship: dotbot.yaml

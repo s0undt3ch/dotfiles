@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 tmux start-server 2> /dev/null
 sleep 0.5
-tmux has-session -t $(whoami) && tmux new-session -t $(whoami) -s "$(whoami)-$(tmux list-sessions | wc -l)" || tmux new-session -s $(whoami) -d 2> /dev/null
+tmux has-session -t $(whoami | sed 's/\./_/g') && tmux new-session -t $(whoami | sed 's/\./_/g') -s "$(whoami | sed 's/\./_/g')-$(tmux list-sessions | wc -l)" || tmux new-session -s $(whoami | sed 's/\./_/g') -d 2> /dev/null
 tmux selectp -t 1
 tmux split-window -v -d -l 25%
-tmux attach-session -t $(whoami)
+tmux attach-session -t $(whoami | sed 's/\./_/g')

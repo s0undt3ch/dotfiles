@@ -1,3 +1,12 @@
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.local/bin/tmux-shared-windows: tmux-shared-windows
+
+- if:
+    cond: brew ls --versions tmux
+    unmet:
+      - shell:
+          - command: brew install tmux
+            stdin: true
+            stdout: true
+            stderr: true
