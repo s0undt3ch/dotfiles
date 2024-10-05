@@ -15,6 +15,7 @@
 #    firefox: dotbot.yaml
     wezterm: dotbot.yaml
     starship: dotbot.yaml
+    keyboard: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
