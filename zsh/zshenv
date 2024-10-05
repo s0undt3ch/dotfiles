@@ -1,6 +1,6 @@
 # Add ~/.local/bin/ to the PATH
 typeset -U path PATH
-path=(~/.local/bin $path)
+path=(~/.local/bin /opt/homebrew/opt/mysql-client@8.4/bin $path)
 export PATH
 
 export EDITOR=$(which vim)
