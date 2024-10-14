@@ -3,6 +3,6 @@ typeset -U path PATH
 path=(~/.local/bin /opt/homebrew/opt/mysql-client@8.4/bin $path)
 export PATH
 
-export EDITOR=$(which vim)
+export EDITOR=$(which nvim)
 
 export CLICOLOR=1
