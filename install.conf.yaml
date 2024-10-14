@@ -16,6 +16,8 @@
     wezterm: dotbot.yaml
     starship: dotbot.yaml
     keyboard: dotbot.yaml
+    notunes: dotbot.yaml
+    scanner-app: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml

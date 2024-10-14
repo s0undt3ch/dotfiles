@@ -1,0 +1,10 @@
+- if:
+    cond: brew ls --versions notunes
+    unmet:
+      - shell:
+          - command: brew install --cask notunes
+            stdin: true
+            stdout: true
+            stderr: true
+      - shell:
+          - command: defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
