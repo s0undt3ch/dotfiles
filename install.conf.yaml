@@ -18,6 +18,7 @@
     keyboard: dotbot.yaml
     notunes: dotbot.yaml
     scanner-app: dotbot.yaml
+    git: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml

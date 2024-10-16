@@ -1,0 +1,13 @@
+- link:
+    ~/.gitconfig: config
+    ~/.gitconfig.work: config.work
+    ~/.gitconfig.personal: config.personal
+
+- if:
+    cond: brew ls --versions git &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install git
+            stdin: true
+            stdout: true
+            stderr: true
