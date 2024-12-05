@@ -19,6 +19,7 @@
     notunes: dotbot.yaml
     scanner-app: dotbot.yaml
     git: dotbot.yaml
+    aerospace: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml

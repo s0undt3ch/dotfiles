@@ -1,0 +1,11 @@
+- if:
+    cond: brew ls --versions aerospace
+    unmet:
+      - shell:
+          - command: brew install --cask nikitabobko/tap/aerospace
+            stdin: true
+            stdout: true
+            stderr: true
+
+- link:
+    ~/.config/aerospace/aerospace.toml : default-config.toml
