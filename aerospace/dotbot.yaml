@@ -7,5 +7,18 @@
             stdout: true
             stderr: true
 
+- if:
+    cond: brew ls --versions borders
+    unmet:
+      - shell:
+          - command: brew tap FelixKratz/formulae
+            stdin: true
+            stdout: true
+            stderr: true
+          - command: brew install borders
+            stdin: true
+            stdout: true
+            stderr: true
+
 - link:
     ~/.config/aerospace/aerospace.toml : default-config.toml
