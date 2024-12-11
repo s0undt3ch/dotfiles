@@ -1,0 +1,8 @@
+- if:
+    cond: brew ls --versions alt-tab &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install --cask alt-tab
+            stdin: true
+            stdout: true
+            stderr: true

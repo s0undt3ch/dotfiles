@@ -20,6 +20,7 @@
     scanner-app: dotbot.yaml
     git: dotbot.yaml
     aerospace: dotbot.yaml
+    alt-tab: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
