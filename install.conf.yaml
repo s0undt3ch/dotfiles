@@ -21,6 +21,7 @@
     git: dotbot.yaml
     aerospace: dotbot.yaml
     alt-tab: dotbot.yaml
+    kitty: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
