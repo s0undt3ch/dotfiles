@@ -2,8 +2,8 @@ return {
   -- Install catppuccin
   {
     "catppuccin/nvim",
-    -- lazy = false,
-    -- priority = 1000,
+    lazy = false,
+    priority = 1000,
   },
   -- Install dracula
   {
@@ -22,7 +22,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "onedark",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }
