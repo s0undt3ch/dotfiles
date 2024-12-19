@@ -1,5 +1,5 @@
 - if:
-    cond: brew ls --versions notunes &>/dev/null
+    cond: brew ls --versions --cask notunes &>/dev/null
     unmet:
       - shell:
           - command: brew install --cask notunes
