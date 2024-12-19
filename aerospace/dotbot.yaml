@@ -1,5 +1,5 @@
 - if:
-    cond: brew ls --versions aerospace
+    cond: brew ls --versions aerospace &>/dev/null
     unmet:
       - shell:
           - command: brew install --cask nikitabobko/tap/aerospace
@@ -8,7 +8,7 @@
             stderr: true
 
 - if:
-    cond: brew ls --versions borders
+    cond: brew ls --versions borders &>/dev/null
     unmet:
       - shell:
           - command: brew tap FelixKratz/formulae

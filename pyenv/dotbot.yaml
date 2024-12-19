@@ -1,5 +1,5 @@
 - if:
-    cond: brew ls --versions sqlite3
+    cond: brew ls --versions sqlite3 &>/dev/null
     unmet:
     - shell:
       - command: brew install sqlite3
@@ -8,7 +8,7 @@
         stderr: true
 
 - if:
-    cond: brew ls --versions tcl-tk
+    cond: brew ls --versions tcl-tk &>/dev/null
     unmet:
     - shell:
       - command: brew install tcl-tk
@@ -17,7 +17,7 @@
         stderr: true
 
 - if:
-    cond: brew ls --versions pyenv
+    cond: brew ls --versions pyenv &>/dev/null
     unmet:
       - shell:
           - command: brew install pyenv
@@ -26,7 +26,7 @@
             stderr: true
 
 - if:
-    cond: brew ls --versions pyenv-virtualenv
+    cond: brew ls --versions pyenv-virtualenv &>/dev/null
     unmet:
       - shell:
           - command: brew install pyenv-virtualenv

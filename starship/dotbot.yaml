@@ -2,7 +2,7 @@
     ~/.config/starship.toml: config.toml
 
 - if:
-    cond: brew ls --versions starship
+    cond: brew ls --versions starship &>/dev/null
     unmet:
     - shell:
       - command: brew install starship

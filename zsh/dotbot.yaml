@@ -6,7 +6,7 @@
     ~/.config/zsh/zimrc: zimrc
 
 - if:
-    cond: brew ls --versions eza
+    cond: brew ls --versions eza &>/dev/null
     unmet:
     - shell:
       - command: brew install eza
@@ -16,7 +16,7 @@
 
 
 - if:
-    cond: brew ls --versions zoxide
+    cond: brew ls --versions zoxide &>/dev/null
     unmet:
     - shell:
       - command: brew install zoxide
@@ -25,7 +25,7 @@
         stderr: true
 
 - if:
-    cond: brew ls --versions fzf
+    cond: brew ls --versions fzf &>/dev/null
     unmet:
     - shell:
       - command: brew install fzf

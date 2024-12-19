@@ -2,7 +2,7 @@
     ~/.config/nvim: nvim
 
 - if:
-    cond: brew ls --versions stylua
+    cond: brew ls --versions stylua &>/dev/null
     unmet:
       - shell:
           - command: brew install stylua
@@ -11,7 +11,7 @@
             stderr: true
 
 - if:
-    cond: brew ls --versions fd
+    cond: brew ls --versions fd &>/dev/null
     unmet:
       - shell:
           - command: brew install fd
@@ -20,7 +20,7 @@
             stderr: true
 
 - if:
-    cond: brew ls --versions ripgrep
+    cond: brew ls --versions ripgrep &>/dev/null
     unmet:
       - shell:
           - command: brew install ripgrep
@@ -29,7 +29,7 @@
             stderr: true
 
 - if:
-    cond: brew ls --versions neovim
+    cond: brew ls --versions neovim &>/dev/null
     unmet:
       - shell:
           - command: brew install neovim

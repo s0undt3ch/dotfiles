@@ -1,5 +1,5 @@
 - if:
-    cond: brew ls --versions kitty
+    cond: brew ls --versions kitty &>/dev/null
     unmet:
       - shell:
           - command: brew install --cask kitty

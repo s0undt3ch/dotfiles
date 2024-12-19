@@ -3,7 +3,7 @@
     ~/.local/bin/tmux-shared-windows: tmux-shared-windows
 
 - if:
-    cond: brew ls --versions tmux
+    cond: brew ls --versions tmux &>/dev/null
     unmet:
       - shell:
           - command: brew install tmux
