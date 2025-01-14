@@ -23,6 +23,7 @@
     alt-tab: dotbot.yaml
     kitty: dotbot.yaml
     fonts: dotbot.yaml
+    fish: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
