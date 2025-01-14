@@ -1,0 +1,8 @@
+- if:
+    cond: brew ls --versions --cask db-browser-for-sqlite &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install --cask db-browser-for-sqlite
+            stdin: true
+            stdout: true
+            stderr: true

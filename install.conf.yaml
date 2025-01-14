@@ -24,6 +24,7 @@
     kitty: dotbot.yaml
     fonts: dotbot.yaml
     fish: dotbot.yaml
+    sqlitebrowser: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml

@@ -16,6 +16,7 @@ end
 
 alias vi=$(which nvim)
 alias vim=$(which nvim)
+alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
 
 # `cat` → `bat` abbreviation
 # Requires `brew install bat`
