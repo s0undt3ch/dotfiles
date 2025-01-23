@@ -1,0 +1,8 @@
+- if:
+    cond: brew ls --versions --cask logitech-options &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install --cask logitech-options
+            stdin: true
+            stdout: true
+            stderr: true

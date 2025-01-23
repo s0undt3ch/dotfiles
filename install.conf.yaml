@@ -25,6 +25,7 @@
     fonts: dotbot.yaml
     fish: dotbot.yaml
     sqlitebrowser: dotbot.yaml
+    logitech: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
