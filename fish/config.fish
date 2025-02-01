@@ -24,8 +24,17 @@ if type -q bat
   abbr --add -g cat 'bat'
 end
 
+# PATH ordering
+set brew_bin (brew --prefix)/bin
+fish_add_path --prepend --path --move $brew_bin
+
 # Add ~/.local/bin to PATH
 set home_local_bin $HOME/.local/bin/
-if not contains -- $home_local_bin $fish_user_paths
-    fish_add_path --prepend --path $home_local_bin
-end
+fish_add_path --prepend --path --move $home_local_bin
+
+# Add pyenv shims to PATH
+set pyenv_shims $HOME/.pyenv/shims
+fish_add_path --prepend --path --move $pyenv_shims
+
+# The PATH order is now:
+# Pyenv shims > ~/.local/bin > Homebrew > system PATH
