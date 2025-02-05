@@ -25,6 +25,9 @@ if type -q bat
 end
 
 # PATH ordering
+set mysql_bin /opt/homebrew/opt/mysql-client@8.4/bin
+fish_add_path --prepend --path --move $mysql_bin
+
 set brew_bin (brew --prefix)/bin
 fish_add_path --prepend --path --move $brew_bin
 
@@ -37,4 +40,4 @@ set pyenv_shims $HOME/.pyenv/shims
 fish_add_path --prepend --path --move $pyenv_shims
 
 # The PATH order is now:
-# Pyenv shims > ~/.local/bin > Homebrew > system PATH
+# Pyenv shims > ~/.local/bin > Homebrew > MySQL Client bin > system PATH
