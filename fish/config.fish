@@ -41,3 +41,8 @@ fish_add_path --prepend --path --move $pyenv_shims
 
 # The PATH order is now:
 # Pyenv shims > ~/.local/bin > Homebrew > MySQL Client bin > system PATH
+
+
+# Set COMPOSE_PROJECT_NAME so that the dashtastic containers share the same name,
+# and not rely on the current directory for that.
+set -Ux COMPOSE_PROJECT_NAME dashtastic
