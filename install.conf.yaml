@@ -8,7 +8,7 @@
   - '~'
 
 - includes:
-    uv: dotbot.yaml
+    mise: dotbot.yaml
     zsh: dotbot.yaml
     neovim: dotbot.yaml
     tmux: dotbot.yaml

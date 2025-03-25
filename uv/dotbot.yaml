@@ -1,8 +1,0 @@
-- if:
-    cond: brew ls --versions uv &>/dev/null
-    unmet:
-    - shell:
-      - command: brew install uv
-        stdin: true
-        stdout: true
-        stderr: true
