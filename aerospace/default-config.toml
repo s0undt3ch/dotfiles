@@ -274,3 +274,12 @@ shift-down = ['volume set 0', 'mode main']
   # This is Cursor editor
   if.app-id = 'com.todesktop.230313mzl4w4u92'
   run = 'move-node-to-workspace Code'
+
+[[on-window-detected]]
+  # This is Cursor editor
+  if.app-id = 'com.todesktop.230313mzl4w4u92.dev'
+  run = 'move-node-to-workspace Code'
+
+[[on-window-detected]]
+  if.app-id = 'com.jetbrains.pycharm'
+  run = 'move-node-to-workspace Code'
