@@ -128,7 +128,7 @@ alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-a = 'workspace Audio' # In your config, you can drop workspace bindings that you don't need
-alt-b = 'workspace B'
+alt-b = 'workspace Browser'
 alt-c = 'workspace Code'
 alt-d = 'workspace D'
 alt-e = 'workspace E'
@@ -161,7 +161,7 @@ alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-a = 'move-node-to-workspace Audio'
-alt-shift-b = 'move-node-to-workspace B'
+alt-shift-b = 'move-node-to-workspace Browser'
 alt-shift-c = 'move-node-to-workspace Code'
 alt-shift-d = 'move-node-to-workspace D'
 alt-shift-e = 'move-node-to-workspace E'
@@ -249,3 +249,28 @@ shift-down = ['volume set 0', 'mode main']
 [[on-window-detected]]
   if.app-id = 'com.apple.iCal'
   run = 'move-node-to-workspace Calendar'
+
+[[on-window-detected]]
+  if.app-id = 'com.google.Chrome'
+  run = 'move-node-to-workspace Browser'
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.Safari'
+  run = 'move-node-to-workspace Browser'
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.Terminal'
+  run = 'move-node-to-workspace Terminal'
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.TextEdit'
+  run = 'move-node-to-workspace TextEdit'
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.Preview'
+  run = 'move-node-to-workspace Preview'
+
+[[on-window-detected]]
+  # This is Cursor editor
+  if.app-id = 'com.todesktop.230313mzl4w4u92'
+  run = 'move-node-to-workspace Code'
