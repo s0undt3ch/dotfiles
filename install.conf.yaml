@@ -27,6 +27,7 @@
     fish: dotbot.yaml
     sqlitebrowser: dotbot.yaml
     logitech: dotbot.yaml
+    k9s: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml

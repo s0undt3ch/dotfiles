@@ -1,0 +1,10 @@
+- link:
+    ~/Library/Application Support/k9s/plugins.yaml: plugins.yaml
+- if:
+    cond: brew ls --versions k9s &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install k9s
+            stdin: true
+            stdout: true
+            stderr: true
