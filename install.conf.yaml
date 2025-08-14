@@ -8,6 +8,7 @@
   - '~'
 
 - includes:
+    macos-config: dotbot.yaml
     uv: dotbot.yaml
     mise: dotbot.yaml
     zsh: dotbot.yaml

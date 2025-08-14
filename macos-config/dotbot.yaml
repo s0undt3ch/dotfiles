@@ -1,0 +1,8 @@
+- shell:
+    - description: macOS settings - show hidden files
+      command: |
+        echo "Enabling hidden files in Finder..."
+        defaults write com.apple.finder AppleShowAllFiles -bool true
+
+    - description: Restart Finder
+      command: killall Finder || true
