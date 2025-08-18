@@ -8,3 +8,11 @@
             stdin: true
             stdout: true
             stderr: true
+- if:
+    cond: brew ls --versions kubernetes-cli &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install kubernetes-cli
+            stdin: true
+            stdout: true
+            stderr: true
