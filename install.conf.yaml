@@ -29,6 +29,7 @@
     sqlitebrowser: dotbot.yaml
     logitech: dotbot.yaml
     k9s: dotbot.yaml
+    zed: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml

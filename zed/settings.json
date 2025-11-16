@@ -1,0 +1,77 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
+  "buffer_font_family": "SauceCodePro Nerd Font",
+  "buffer_font_size": 16,
+  "buffer_line_height": {"custom": 1.6},
+  "buffer_font_features": {"calt": false},
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": true,
+  },
+  "ui_font_size": 16,
+  "ui_font_family": ".SystemUIFont",
+  "theme": "One Dark Pro Extended",
+  "icon_theme": "Catppuccin Mocha",
+  "vim_mode": true,
+  "tabs": {
+    "file_icons": true,
+  },
+  "tab_size": 2,
+  "hard_tabs": false,
+  "format_on_save": "off",
+  "agent": {
+    "default_profile": "write",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4"
+    },
+    "model_parameters": []
+  },
+  "languages": {
+    "Python": {
+      "preferred_line_length": 120
+    }
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "relative_line_numbers": "enabled",
+  "auto_install_extensions": {
+    "git-firefly": true,
+    "ruff": true,
+    "toml": true,
+    "one-dark-pro-enhanced": true,
+    "python-requirements": true,
+    "python-snippets": true,
+    "material-icon-theme": true,
+  },
+  "notification_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "hide_hidden": true,
+    "dock": "left",
+    "hide_gitignore": true
+  },
+  "terminal": {
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default"
+      }
+    }
+  }
+}
