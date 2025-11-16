@@ -20,6 +20,14 @@ alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/D
 alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name production --region us-east-1; end; k9s'
 alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
 
+function git --wraps git
+    if test "$argv[1]" = "cliff" && test -f ~/.config/git-cliff/github-token
+        command git cliff --github-token (cat ~/.config/git-cliff/github-token) $argv[2..-1]
+    else
+        command git $argv
+    end
+end
+
 # `cat` → `bat` abbreviation
 # Requires `brew install bat`
 if type -q bat
