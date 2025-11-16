@@ -4,4 +4,9 @@ return {
     body = "[PWINT-$1] $2\n\nhttps://paddle.atlassian.net/browse/PWINT-$1",
     desc = "Profitwell commit with issue number",
   },
+  {
+    prefix = "met",
+    body = "[MET-$1] $2\n\nhttps://linear.app/paddle/issue/MET-$1",
+    desc = "Profitwell commit with issue number",
+  },
 }

@@ -1,6 +1,6 @@
 return {
   "linux-cultist/venv-selector.nvim",
-  branch = "regexp",
+  -- branch = "regexp",
   config = function()
     require("venv-selector").setup()
   end,
