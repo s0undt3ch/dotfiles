@@ -281,7 +281,15 @@ shift-down = ['volume set 0', 'mode main']
   run = 'move-node-to-workspace Code'
 
 [[on-window-detected]]
+  if.app-id = 'dev.zed.Zed'
+  run = 'move-node-to-workspace Code'
+
+[[on-window-detected]]
   if.app-id = 'com.jetbrains.pycharm'
+  run = 'move-node-to-workspace Code'
+
+[[on-window-detected]]
+  if.app-id = 'com.jetbrains.datagrip'
   run = 'move-node-to-workspace Code'
 
 [[on-window-detected]]
