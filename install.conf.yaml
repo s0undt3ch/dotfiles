@@ -21,7 +21,7 @@
     notunes: dotbot.yaml
     scanner-app: dotbot.yaml
     git: dotbot.yaml
-    aerospace: dotbot.yaml
+    amethyst: dotbot.yaml
     alt-tab: dotbot.yaml
     kitty: dotbot.yaml
     fonts: dotbot.yaml

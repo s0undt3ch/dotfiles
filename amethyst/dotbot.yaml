@@ -1,0 +1,29 @@
+- if:
+    cond: brew ls --versions --cask amethyst &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install --cask amethyst
+            stdin: true
+            stdout: true
+            stderr: true
+      - shell:
+          - command: defaults write com.apple.dock workspaces-auto-swoosh -bool NO
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions --cask borders &>/dev/null
+    unmet:
+      - shell:
+          - command: brew tap FelixKratz/formulae
+            stdin: true
+            stdout: true
+            stderr: true
+          - command: brew install borders
+            stdin: true
+            stdout: true
+            stderr: true
+
+- link:
+    ~/.config/amethyst/amethyst.yml : default-config.yml
