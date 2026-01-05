@@ -1,0 +1,36 @@
+- if:
+    cond: brew ls --versions --cask aerospace &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install --cask nikitabobko/tap/aerospace
+            stdin: true
+            stdout: true
+            stderr: true
+      - shell:
+          # https://nikitabobko.github.io/AeroSpace/guide.html#a-note-on-mission-control
+          - command: defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+            stdin: true
+            stdout: true
+            stderr: true
+      - shell:
+          # https://nikitabobko.github.io/AeroSpace/guide.html#a-note-on-displays-have-separate-spaces
+          - command: defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+            stdin: true
+            stdout: true
+            stderr: true
+
+- if:
+    cond: brew ls --versions --cask borders &>/dev/null
+    unmet:
+      - shell:
+          - command: brew tap FelixKratz/formulae
+            stdin: true
+            stdout: true
+            stderr: true
+          - command: brew install borders
+            stdin: true
+            stdout: true
+            stderr: true
+
+- link:
+    ~/.config/aerospace/aerospace.toml : default-config.toml
