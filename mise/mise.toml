@@ -1,4 +1,6 @@
 [tools]
+python = "3.11"
+toolr = "latest"
 uv = 'latest'
 
 [settings]
