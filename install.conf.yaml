@@ -30,6 +30,7 @@
     logitech: dotbot.yaml
     k9s: dotbot.yaml
     zed: dotbot.yaml
+    ghostty: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
