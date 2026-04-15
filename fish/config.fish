@@ -19,6 +19,8 @@ alias vim=$(which nvim)
 alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
 alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name production --region us-east-1; end; k9s'
 alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
+alias git-push-source-branch='git push --set-upstream origin (git branch --show-current)'
+alias gs=git-spice
 
 function git --wraps git
     if test "$argv[1]" = "cliff" && test -f ~/.config/git-cliff/github-token
