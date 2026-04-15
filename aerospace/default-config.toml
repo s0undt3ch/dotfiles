@@ -295,3 +295,7 @@ shift-down = ['volume set 0', 'mode main']
 [[on-window-detected]]
   if.app-id = 'com.linear'
   run = 'move-node-to-workspace Linear'
+
+[[on-window-detected]]
+  if.app-name-regex-substring = "Desk Control"
+  run = "layout floating"
