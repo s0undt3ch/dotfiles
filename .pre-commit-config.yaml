@@ -13,6 +13,12 @@ repos:
       - id: check-merge-conflict  # Check for files that contain merge conflict strings.
       - id: check-ast             # Simply check whether files parse as valid python.
 
+  - repo: https://github.com/ComPWA/mirrors-taplo
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+      - id: taplo-lint
+
 #  - repo: https://github.com/rwxcorp/pre-commit-lua.git
 #    rev: v1.0.0
 #    hooks:
