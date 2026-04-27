@@ -36,20 +36,9 @@ if type -q bat
   abbr --add -g cat 'bat'
 end
 
-# PATH ordering
-set mysql_bin /opt/homebrew/opt/mysql-client@8.4/bin
-fish_add_path --prepend --path --move $mysql_bin
-
-set brew_bin (brew --prefix)/bin
-fish_add_path --prepend --path --move $brew_bin
-
-# Add ~/.local/bin to PATH
-set home_local_bin $HOME/.local/bin/
-fish_add_path --prepend --path --move $home_local_bin
-
-# The PATH order is now:
-# ~/.local/bin > Homebrew > MySQL Client bin > system PATH
-
+# PATH ordering lives in conf.d/00_paths.fish so it runs before mise
+# activation, letting mise prepend its tool install dirs last (highest
+# priority).
 
 # Set COMPOSE_PROJECT_NAME so that the dashtastic containers share the same name,
 # and not rely on the current directory for that.

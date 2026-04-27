@@ -2,6 +2,7 @@
   python                = "3.11"
   toolr                 = "latest"
   uv                    = "latest"
+  aws                   = "latest"
   "github:PaddleHQ/pdl" = "latest"
 
 [settings]
