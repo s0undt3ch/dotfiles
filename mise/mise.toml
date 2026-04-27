@@ -1,7 +1,8 @@
 [tools]
-  python = "3.11"
-  toolr  = "latest"
-  uv     = 'latest'
+  python                = "3.11"
+  toolr                 = "latest"
+  uv                    = "latest"
+  "github:PaddleHQ/pdl" = "latest"
 
 [settings]
   python.uv_venv_auto                 = true
