@@ -130,7 +130,7 @@ automatically-unhide-macos-hidden-apps = true
   alt-a = 'workspace Audio'    # In your config, you can drop workspace bindings that you don't need
   alt-b = 'workspace Browser'
   alt-c = 'workspace Code'
-  alt-d = 'workspace D'
+  alt-d = 'workspace Docs'
   alt-e = 'workspace E'
   alt-f = 'workspace F'
   alt-g = 'workspace G'
@@ -163,7 +163,7 @@ automatically-unhide-macos-hidden-apps = true
   alt-shift-a = 'move-node-to-workspace Audio'
   alt-shift-b = 'move-node-to-workspace Browser'
   alt-shift-c = 'move-node-to-workspace Code'
-  alt-shift-d = 'move-node-to-workspace D'
+  alt-shift-d = 'move-node-to-workspace Docs'
   alt-shift-e = 'move-node-to-workspace E'
   alt-shift-f = 'move-node-to-workspace F'
   alt-shift-g = 'move-node-to-workspace G'
@@ -268,7 +268,11 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
   if.app-id = 'com.apple.Terminal'
-  run       = 'move-node-to-workspace Terminal'
+  run       = ['move-node-to-workspace Terminal', 'layout floating']
+
+[[on-window-detected]]
+  if.app-id = 'com.mitchellh.ghostty'
+  run       = ['move-node-to-workspace Terminal', 'layout floating']
 
 [[on-window-detected]]
   if.app-id = 'com.apple.TextEdit'
@@ -289,6 +293,10 @@ automatically-unhide-macos-hidden-apps = true
   run       = ['move-node-to-workspace Code', 'layout floating']
 
 [[on-window-detected]]
+  if.app-id = 'com.anthropic.claudefordesktop'
+  run       = ['move-node-to-workspace Code', 'layout floating']
+
+[[on-window-detected]]
   if.app-id = 'dev.zed.Zed'
   run       = ['move-node-to-workspace Code', 'layout floating']
 
@@ -302,7 +310,7 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
   if.app-id = 'com.linear'
-  run       = 'move-node-to-workspace Linear'
+  run       = ['move-node-to-workspace Linear', 'layout floating']
 
 [[on-window-detected]]
   if.app-name-regex-substring = "Desk Control"
@@ -311,3 +319,11 @@ automatically-unhide-macos-hidden-apps = true
 [[on-window-detected]]
   if.app-name-regex-substring = "Loom .*"
   run                         = "layout floating"
+
+[[on-window-detected]]
+  if.app-id = 'md.obsidian'
+  run       = ['move-node-to-workspace Docs', 'layout floating']
+
+[[on-window-detected]]
+  if.app-id = 'notion.id'
+  run       = ['move-node-to-workspace Docs', 'layout floating']
