@@ -19,11 +19,6 @@
             stderr: true
 - shell:
     - description: Install catppuccin k9s skins
-      command: |
-        bash <<'EOF'
-        OUT="$HOME/Library/Application Support/k9s/skins"
-        mkdir -p "$OUT"
-        curl -fsSL https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT" --strip-components=2 k9s-main/dist
-        EOF
+      command: bash -c 'OUT="$HOME/Library/Application Support/k9s/skins"; mkdir -p "$OUT" && curl -fsSL https://github.com/catppuccin/k9s/archive/main.tar.gz | tar xz -C "$OUT" --strip-components=2 k9s-main/dist'
       stdout: true
       stderr: true
