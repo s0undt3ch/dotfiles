@@ -22,7 +22,6 @@
     git: dotbot.yaml
     aerospace: dotbot.yaml
     alt-tab: dotbot.yaml
-    kitty: dotbot.yaml
     fonts: dotbot.yaml
     fish: dotbot.yaml
     sqlitebrowser: dotbot.yaml
