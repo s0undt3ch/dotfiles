@@ -1,0 +1,19 @@
+- if:
+    cond: command -v pipx &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install pipx
+            stdin: true
+            stdout: true
+            stderr: true
+- if:
+    cond: command -v linak-controller &>/dev/null
+    unmet:
+      - shell:
+          - command: pipx install linak-controller
+            stdin: true
+            stdout: true
+            stderr: true
+
+#- link:
+#    ~/.config/linak-controller/config: linak-controller.conf
