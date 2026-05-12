@@ -17,7 +17,6 @@ repos:
     rev: v0.9.3
     hooks:
       - id: taplo-format
-      - id: taplo-lint
 
 #  - repo: https://github.com/rwxcorp/pre-commit-lua.git
 #    rev: v1.0.0

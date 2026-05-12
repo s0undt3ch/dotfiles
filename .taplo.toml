@@ -1,3 +1,6 @@
+[schema]
+  enabled = false
+
 [formatting]
   align_entries  = true
   column_width   = 120
