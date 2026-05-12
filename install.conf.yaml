@@ -29,6 +29,7 @@
     k9s: dotbot.yaml
     zed: dotbot.yaml
     ghostty: dotbot.yaml
+    linak-controller: dotbot.yaml
 
 #- includes:
 #    pacdef: dotbot.yaml
