@@ -4,6 +4,7 @@
   uv                    = "latest"
   aws                   = "latest"
   "github:PaddleHQ/pdl" = "latest"
+  usage                 = "latest"
 
 [settings]
   python.uv_venv_auto                 = true
