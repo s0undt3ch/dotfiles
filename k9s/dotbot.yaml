@@ -10,6 +10,14 @@
             stdout: true
             stderr: true
 - if:
+    cond: brew ls --versions hl &>/dev/null
+    unmet:
+      - shell:
+          - command: brew install hl
+            stdin: true
+            stdout: true
+            stderr: true
+- if:
     cond: brew ls --versions kubernetes-cli &>/dev/null
     unmet:
       - shell:
