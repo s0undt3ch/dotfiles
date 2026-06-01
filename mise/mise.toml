@@ -1,14 +1,14 @@
 [tools]
-  python                = "3.11"
-  toolr                 = "latest"
-  uv                    = "latest"
-  aws                   = "latest"
-  "github:PaddleHQ/pdl" = "latest"
-  usage                 = "latest"
-  "pipx:snowflake-cli"  = "latest"
-  github-cli            = "latest"
-  aqua                  = "latest"
-  semgrep               = "latest"
+  python                 = "3.11"
+  uv                     = "latest"
+  aws                    = "latest"
+  "github:PaddleHQ/pdl"  = "latest"
+  usage                  = "latest"
+  "pipx:snowflake-cli"   = "latest"
+  github-cli             = "latest"
+  aqua                   = "latest"
+  semgrep                = "latest"
+  "aqua:s0undt3ch/ToolR" = "latest"
 
 [settings]
   python.uv_venv_auto                 = true
