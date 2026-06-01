@@ -20,7 +20,7 @@
             stderr: true
 
 - if:
-    cond: brew ls --versions --cask borders &>/dev/null
+    cond: brew ls --versions --formula borders &>/dev/null
     unmet:
       - shell:
           - command: brew tap FelixKratz/formulae
