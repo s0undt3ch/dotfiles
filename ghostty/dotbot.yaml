@@ -9,3 +9,4 @@
 
 - link:
     ~/.config/ghostty/config: ghostty.conf
+    ~/.config/ghostty/themes: themes

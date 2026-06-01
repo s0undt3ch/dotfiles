@@ -7,7 +7,7 @@ k9s:
   noExitOnCtrlC: false
   portForwardAddress: localhost
   ui:
-    skin: catppuccin-mocha
+    skin: gruvbox-material-dark-hard
     enableMouse: false
     headless: false
     logoless: false
