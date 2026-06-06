@@ -2,7 +2,6 @@
   python                 = "3.11"
   uv                     = "latest"
   aws                    = "latest"
-  "github:PaddleHQ/pdl"  = "latest"
   usage                  = "latest"
   "pipx:snowflake-cli"   = "latest"
   github-cli             = "latest"
