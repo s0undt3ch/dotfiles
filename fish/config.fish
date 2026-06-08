@@ -11,7 +11,7 @@ set fish_prompt_pwd_dir_length 0
 set fish_greeting
 
 if status is-interactive
-    eval "$(brew shellenv)"
+    eval (brew shellenv fish)
 end
 
 alias vi=$(which nvim)
