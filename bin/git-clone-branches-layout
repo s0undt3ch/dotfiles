@@ -1,0 +1,34 @@
+#!/usr/bin/zsh
+
+PWD=$(pwd)
+GH=$(command -v gh)
+GIT=$(command -v git)
+echo "GH $GH"
+echo "P $PATH"
+
+if [ $# -eq 3 ]; then
+  REPO=$1
+  PATH=$2
+  BRANCH=$3
+elif [ $# -eq 2 ]; then
+  REPO=$1
+  PATH=$2
+  BRANCH=""
+else
+  echo "Wrong number of arguments passed"
+  echo "Acceptable calls:"
+  echo "  1 - $0 <repo> <clone-to-path> <branch>"
+  echo "  2 - $0 <repo> <clone-to-path>"
+fi
+
+echo "Cloning ${REPO} to ${PATH}"
+$GH repo clone ${REPO} -- --bare ${PATH}
+if [ -z "${BRANCH}" ]; then
+  cd ${PATH}
+  BRANCH=$($GH repo view --json defaultBranchRef --jq '.defaultBranchRef["name"]')
+fi
+
+echo "Creating worktree for branch ${BRANCH}"
+${GIT} worktree add -B ${BRANCH} branches/${BRANCH}
+
+echo "Done!"

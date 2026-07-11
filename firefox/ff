@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-firefox --profile ~/.mozilla/firefox/FF --new-instance

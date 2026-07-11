@@ -1,0 +1,6 @@
+[tools]
+  "github:abhinav/git-spice" = "latest"
+  "npm:@tobilu/qmd"          = "latest"
+  "npm:qmd"                  = "latest"
+  "pipx:mempalace"           = "latest"
+  usage                      = "latest"

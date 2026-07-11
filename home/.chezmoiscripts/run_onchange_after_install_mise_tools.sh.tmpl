@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Install the tools declared in ~/.config/mise/config.toml.
+# Runs in the "after" phase (once the config file has been applied) and
+# re-runs whenever the mise config changes, via the hash below.
+#
+# mise config sha256: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
+if ! command -v mise >/dev/null 2>&1; then
+    echo "mise not installed; skipping tool install."
+    exit 0
+fi
+
+echo "==> Installing mise tools (mise install)"
+mise install

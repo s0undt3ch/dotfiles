@@ -1,0 +1,4 @@
+# Ghostty config
+# Note: Ghostty uses `key = value` with hyphens, unlike kitty's `key value`.
+
+font-family = SauceCodePro Nerd Font Mono

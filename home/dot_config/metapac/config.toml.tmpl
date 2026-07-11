@@ -1,0 +1,14 @@
+# metapac — declarative, cross-platform package management (pacdef successor).
+# Backend is selected per-OS: the Arch backend drives yay (official repos + AUR)
+# on Linux; the Homebrew backend drives brew (formulae + casks) on macOS.
+{{ if eq .chezmoi.os "darwin" -}}
+enabled_backends = ["brew"]
+{{ else -}}
+enabled_backends = ["arch"]
+{{ end }}
+# Use every group file under groups/ regardless of hostname; metapac only acts
+# on sections matching an enabled backend, so arch.toml and brew.toml coexist.
+hostname_groups_enabled = false
+
+[arch]
+package_manager = "yay"

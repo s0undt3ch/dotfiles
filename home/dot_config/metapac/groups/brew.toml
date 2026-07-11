@@ -1,0 +1,40 @@
+# macOS Homebrew packages (formulae + casks), ported from the previous dotbot
+# brew hooks. Only acted on when the brew backend is enabled (macOS).
+# metapac's brew backend has no tap support, so tapped casks/formulae are given
+# as full `tap/name` paths, which `brew install` auto-taps.
+[brew]
+  packages = [
+    # formulae
+    "uv",
+    "mise",
+    "eza",
+    "zoxide",
+    "fzf",
+    "stylua",
+    "fd",
+    "ripgrep",
+    "neovim",
+    "tmux",
+    "starship",
+    "git",
+    "terminal-notifier",
+    "fish",
+    "fisher",
+    "bat",
+    "k9s",
+    "kubernetes-cli",
+    "pipx",
+    "FelixKratz/formulae/borders",
+    # casks
+    "notunes",
+    "naps2",
+    "nikitabobko/tap/aerospace",
+    "alt-tab",
+    "db-browser-for-sqlite",
+    "logitech-options",
+    "zed",
+    "ghostty",
+    "font-sauce-code-pro-nerd-font",
+    "font-proggy-clean-tt-nerd-font",
+    "font-hack-nerd-font",
+  ]

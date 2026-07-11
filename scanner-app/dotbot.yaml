@@ -1,8 +1,0 @@
-- if:
-    cond: brew ls --versions --cask naps2 &>/dev/null
-    unmet:
-      - shell:
-          - command: brew install --cask naps2
-            stdin: true
-            stdout: true
-            stderr: true

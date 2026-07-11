@@ -1,5 +1,2 @@
-pacdef/groups/**
-# Compiled zmodules
-**/*.zwc
-# LazyVim lockfile and non vcs config
-neovim/nvim/*.json
+# chezmoi source: LazyVim lockfile / generated config are owned by nvim, not vcs
+home/dot_config/nvim/*.json

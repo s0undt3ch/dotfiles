@@ -1,0 +1,14 @@
+[user]
+	email = pedro@algarvio.me
+  name = Pedro Aalgarvio
+  signingkey = 84A298FF
+[commit]
+  gpgsign = true
+[log]
+	decorate = full
+[alias]
+	l = log --oneline --decorate
+	ll = log --stat --decorate --abbrev-commit --date=relative
+	lll = log -p --stat --decorate --abbrev-commit --date=relative
+	llll = "!sh -c 'git lll $@ \
+		| gvim - -R -v -c \"set ft=git\" -c \"set fdm=syntax\"' -"

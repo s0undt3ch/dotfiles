@@ -1,0 +1,8 @@
+{{/* macOS-only targets: never apply them off macOS. */}}
+{{ if ne .chezmoi.os "darwin" }}
+Library
+{{ end }}
+{{/* nvim owns these at runtime; don't let chezmoi manage or fight them. */}}
+.config/nvim/lazy-lock.json
+.config/nvim/lazyvim.json
+.DS_Store

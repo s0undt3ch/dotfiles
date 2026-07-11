@@ -1,0 +1,50 @@
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Declarative, cross-platform package sync via metapac (pacdef successor).
+# Runs in the "after" phase, once ~/.config/metapac/ has been applied, and
+# re-runs automatically whenever the config or group files change, via the
+# hashes below.
+#
+# metapac config.toml.tmpl sha256: {{ include "dot_config/metapac/config.toml.tmpl" | sha256sum }}
+# metapac groups/arch.toml  sha256: {{ include "dot_config/metapac/groups/arch.toml" | sha256sum }}
+# metapac groups/brew.toml  sha256: {{ include "dot_config/metapac/groups/brew.toml" | sha256sum }}
+
+os="$(uname)"
+
+# On Linux, metapac drives pacman/yay, which needs root. Skip cleanly when
+# running non-interactively without passwordless sudo (e.g. an automated
+# apply); the user can re-run `chezmoi apply` from a terminal to sync.
+if [ "$os" = "Linux" ] && ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
+    echo "metapac-sync: no passwordless sudo and not interactive; skipping."
+    echo "Run 'chezmoi apply' from a terminal to sync packages."
+    exit 0
+fi
+
+# Bootstrap metapac itself if it isn't installed yet.
+if ! command -v metapac >/dev/null 2>&1; then
+    if [ "$os" = "Linux" ]; then
+        if ! command -v yay >/dev/null 2>&1; then
+            echo "yay (AUR helper) not found; cannot bootstrap metapac. Install yay first."
+            exit 0
+        fi
+        echo "==> Installing metapac from the AUR (yay --needed --noconfirm)"
+        yay -S --needed --noconfirm metapac
+    else
+        if command -v brew >/dev/null 2>&1 && brew install metapac 2>/dev/null; then
+            :
+        elif command -v cargo >/dev/null 2>&1; then
+            echo "==> Installing metapac via cargo"
+            cargo install metapac
+        else
+            echo "metapac not found and no brew/cargo to bootstrap it; skipping."
+            echo "Install metapac (https://github.com/ripytide/metapac) then re-run 'chezmoi apply'."
+            exit 0
+        fi
+    fi
+fi
+
+echo "==> metapac sync --no-confirm"
+metapac sync --no-confirm
+{{ end -}}
