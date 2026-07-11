@@ -2,3 +2,8 @@
 # Note: Ghostty uses `key = value` with hyphens, unlike kitty's `key value`.
 
 font-family = SauceCodePro Nerd Font Mono
+
+# Splits keep the current working directory; new tabs start at ~
+split-inherit-working-directory = true
+tab-inherit-working-directory = false
+working-directory = home

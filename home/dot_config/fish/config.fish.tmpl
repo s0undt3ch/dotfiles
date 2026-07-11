@@ -16,14 +16,17 @@ end
 
 alias vi=$(which nvim)
 alias vim=$(which nvim)
-alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
-alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name production --region us-east-1; end; k9s'
-alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
 alias git-push-source-branch='git push --set-upstream origin (git branch --show-current)'
 alias gs=git-spice
+
+{{- if eq .chezmoi.os "darwin" }}
+alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name production --region us-east-1; end; k9s'
+alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
+alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
 alias claude='claude-switch work'
 alias claude-work='claude-switch work'
 alias claude-personal='claude-switch personal'
+{{- end }}
 
 function git --wraps git
     if test "$argv[1]" = "cliff" && test -f ~/.config/git-cliff/github-token
@@ -43,6 +46,8 @@ end
 # activation, letting mise prepend its tool install dirs last (highest
 # priority).
 
+{{- if eq .chezmoi.os "darwin" }}
 # Set COMPOSE_PROJECT_NAME so that the dashtastic containers share the same name,
 # and not rely on the current directory for that.
 set -Ux COMPOSE_PROJECT_NAME dashtastic
+{{- end }}
