@@ -42,6 +42,13 @@ if type -q bat
   abbr --add -g cat 'bat'
 end
 
+# `zed` → `zeditor` abbreviation
+# The Arch `zed` package ships its binary as `zeditor` (avoids colliding with
+# the ZFS Event Daemon), so map the familiar `zed` command onto it.
+if type -q zeditor
+  abbr --add -g zed 'zeditor'
+end
+
 # PATH ordering lives in conf.d/00_paths.fish so it runs before mise
 # activation, letting mise prepend its tool install dirs last (highest
 # priority).
