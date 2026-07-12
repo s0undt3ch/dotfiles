@@ -1,0 +1,57 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  // `config:recommended` brings the dependency dashboard, monorepo
+  // groupings, and semantic commit prefixes.
+  extends: [
+    "config:recommended",
+  ],
+
+  timezone: "Etc/UTC",
+  schedule: ["before 6am on monday"],
+
+  // Remediate vulnerable deps directly from OSV data. Security PRs bypass
+  // the weekly schedule above.
+  osvVulnerabilityAlerts: true,
+
+  // The pre-commit manager is disabled by default — turn it on so the
+  // hook `rev:` pins in .pre-commit-config.yaml get updated too.
+  "pre-commit": {
+    enabled: true,
+  },
+
+  assignees: ["s0undt3ch"],
+  labels: ["dependencies"],
+
+  packageRules: [
+    // ---- Ecosystem labels ----
+    {
+      description: "Tag mise tool pins",
+      matchManagers: ["mise"],
+      addLabels: ["dependencies:mise"],
+    },
+    {
+      description: "Tag pre-commit hook updates",
+      matchManagers: ["pre-commit"],
+      addLabels: ["dependencies:pre-commit"],
+    },
+
+    // ---- Grouping to cut PR noise ----
+    {
+      // mise CLI tooling pinned to exact versions in mise.toml. Group so
+      // we don't get a PR per tool. Tools pinned to `latest` have no
+      // version for Renovate to bump and are silently skipped; only
+      // version-pinned entries produce updates.
+      description: "Group mise tooling updates",
+      groupName: "mise tools",
+      matchManagers: ["mise"],
+    },
+    {
+      // The pre-commit hook repos move independently; group them into a
+      // single weekly PR.
+      description: "Group pre-commit hook updates",
+      groupName: "pre-commit hooks",
+      matchManagers: ["pre-commit"],
+    },
+  ],
+}
