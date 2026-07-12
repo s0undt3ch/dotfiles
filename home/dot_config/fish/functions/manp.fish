@@ -34,7 +34,7 @@ they will be cleared on any OS upgrade.'
     if test -f $man_path
         # Save every man page PDF into a sub-folder for the current OS version
         # (and build) since man pages can be updated between OS versions, and
-        # don't want to retrieve an old cached version from a preivous OS
+        # don't want to retrieve an old cached version from a previous OS
         # (when not saving to a temporary location).
         set --local os_path $cache_path"/"(/usr/bin/sw_vers -productVersion)" ("(/usr/bin/sw_vers -buildVersion)")"
 

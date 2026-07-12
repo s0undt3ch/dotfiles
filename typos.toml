@@ -1,0 +1,24 @@
+# typos (https://github.com/crate-ci/typos) configuration.
+# The pre-commit hook runs `typos --write-changes`, so anything not ignored
+# here would be auto-"corrected". These rules keep false positives — hex colour
+# codes, platform names, and API identifiers — out of its reach, while still
+# catching genuine typos elsewhere.
+
+[default]
+  extend-ignore-re = [
+    # 6-digit hex colour codes in fish theme/scheme definitions (e.g. f38ba8,
+    # c0caf5) — otherwise fragments like `ba` and `caf` get flagged.
+    "(?i)\\b[0-9a-f]{6}\\b",
+    # `LESS_TERMCAP_*` terminal-capability variable names (e.g. LESS_TERMCAP_ue).
+    "LESS_TERMCAP_\\w+",
+  ]
+
+  [default.extend-identifiers]
+    # macOS Spotlight metadata attribute — not a misspelling of "Forms".
+    kMDItemWhereFroms = "kMDItemWhereFroms"
+
+  [default.extend-words]
+    # macOS release name "Big Sur".
+    Sur = "Sur"
+    # Case-branch alias in mac.fish (`case font-smoothing fo`).
+    fo = "fo"

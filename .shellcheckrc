@@ -1,0 +1,9 @@
+# ShellCheck project configuration.
+
+# SC1007: `CDPATH= cd ...` — deliberate empty-assignment env prefix to neutralise
+#         CDPATH for a single command, not an accidental assignment.
+disable=SC1007
+
+# SC2015: `A && B || C` — used intentionally as a terse conditional in the
+#         tmux helper; C is meant to run when the has-session probe fails.
+disable=SC2015

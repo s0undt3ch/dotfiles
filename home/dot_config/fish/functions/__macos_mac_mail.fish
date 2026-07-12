@@ -18,7 +18,7 @@ function __macos_mac_mail
 
 Performs operations on Mail.app configuration and database.
 
-Before running vaccuum after any OS upgrade, Mail.app must have been opened
+Before running vacuum after any OS upgrade, Mail.app must have been opened
 at least once so that the database and index formats have been updated.
 
 Subcommands:

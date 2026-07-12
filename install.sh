@@ -40,7 +40,7 @@ echo "==> Using $("${CHEZMOI}" --version)"
 
 # Point plain `chezmoi` invocations at this repo for future runs.
 mkdir -p "${HOME}/.config/chezmoi"
-cat > "${HOME}/.config/chezmoi/chezmoi.toml" <<EOF
+cat >"${HOME}/.config/chezmoi/chezmoi.toml" <<EOF
 sourceDir = "${SCRIPT_DIR}"
 EOF
 

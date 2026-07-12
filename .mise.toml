@@ -1,2 +1,0 @@
-[tools]
-  prek = { version = "latest", postinstall = "prek install && prek prepare-hooks" }
