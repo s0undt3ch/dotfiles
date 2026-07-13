@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Kill only the Firefox instance running the dedicated "FF" profile, matched by
+# its full command line so other Firefox profiles/windows are left untouched.
+pkill -KILL -f "firefox --profile ${HOME}/.mozilla/firefox/FF --new-instance"

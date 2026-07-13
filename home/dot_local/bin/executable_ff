@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Launch Firefox with the dedicated "FF" profile in its own instance.
+exec firefox --profile "${HOME}/.mozilla/firefox/FF" --new-instance "$@"
