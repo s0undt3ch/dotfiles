@@ -45,6 +45,7 @@
     "firefox-i18n-pt-pt",
     "fish",
     "flatpak-kcm",
+    "fprintd",                      # thinkpad finger print
     "fzf",
     "ghostty",
     "git",

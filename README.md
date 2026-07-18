@@ -91,3 +91,11 @@ mise exec -- prek run -av
 
 Supporting config: `typos.toml` (spell-check allowlist), `.shellcheckrc` (disabled idiom checks),
 `.taplo.toml` (TOML formatting), `.stylua.toml` (Lua formatting), and `.editorconfig`.
+
+## Manual host setup
+
+Some host configuration lives outside chezmoi (root-owned system files that `chezmoi apply` does not
+manage). Redo these by hand on a new machine:
+
+- [Fingerprint auth on Arch](docs/fingerprint-auth-arch.md) — `fprintd` + PAM for `sudo`, TTY login,
+  polkit, and the KDE lock screen.
