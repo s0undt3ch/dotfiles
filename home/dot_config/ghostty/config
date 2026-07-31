@@ -1,9 +1,19 @@
 # Ghostty config
 # Note: Ghostty uses `key = value` with hyphens, unlike kitty's `key value`.
 
+theme = dark:gruvbox-material-hard-dark,light:gruvbox-material-medium-light
 font-family = SauceCodePro Nerd Font Mono
+font-size = 15.0
 
-# Splits keep the current working directory; new tabs start at ~
+# Default split-divider-color is nearly invisible against gruvbox-material's
+# #1d2021 dark background; use the theme's mid-gray for contrast instead.
+split-divider-color = #7c6f64
+
+# Splits keep the current working directory; new tabs and windows start at ~
 split-inherit-working-directory = true
 tab-inherit-working-directory = false
+window-inherit-working-directory = false
 working-directory = home
+
+# Edit the config in nvim instead of TextEdit.
+keybind = cmd+comma=text:"nvim ~/.config/ghostty/config\n"
