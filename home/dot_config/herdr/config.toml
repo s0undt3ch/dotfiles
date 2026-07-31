@@ -1,0 +1,10 @@
+# herdr configuration
+# https://herdr.dev
+
+[theme]
+  name        = "gruvbox"
+  auto_switch = true
+  dark_name   = "gruvbox"
+  # No confirmed light "gruvbox" variant in herdr's builtin theme list, so both
+  # modes point at the same dark-oriented theme for now.
+  light_name = "gruvbox"
