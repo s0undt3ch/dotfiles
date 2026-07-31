@@ -1,6 +1,44 @@
 [tools]
   "github:abhinav/git-spice" = "latest"
-  "npm:@tobilu/qmd"          = "latest"
-  "npm:qmd"                  = "latest"
   "pipx:mempalace"           = "latest"
   usage                      = "latest"
+
+  python                  = "3.11"
+  uv                      = "latest"
+  github-cli              = "latest"
+  aqua                    = "latest"
+  semgrep                 = "latest"
+  "aqua:s0undt3ch/ToolR"  = "latest"
+  bun                     = "latest"
+  "aqua:quarylabs/sqruff" = "latest"
+
+  # Node 22+ is required by qmd below. GOTCHA: qmd bundles better-sqlite3, a
+  # native addon compiled against a specific Node ABI, and mise's npm backend
+  # does NOT rebuild npm: tools when node changes — so bumping this pin silently
+  # breaks qmd and its MCP server with "Could not locate the bindings file".
+  # After any node bump:
+  #
+  #   mise uninstall npm:@tobilu/qmd --all && mise install npm:@tobilu/qmd
+  #
+  node                         = "24"
+  "npm:@tobilu/qmd"            = "latest"
+  "npm:qmd"                    = "latest"
+  "aqua:quarto-dev/quarto-cli" = "1.10.18"
+  herdr                        = "latest"
+{{ if eq .chezmoi.os "darwin" -}}
+
+  # Work-only (Paddle).
+  aws                     = "latest"
+  "pipx:snowflake-cli"    = "latest"
+  "npm:@dust-tt/dust-cli" = "latest"
+{{ end -}}
+
+[settings]
+  python.uv_venv_auto                 = true
+  python.uv_venv_create_args          = ['--seed']
+  python.compile                      = false
+  experimental                        = true
+  idiomatic_version_file_enable_tools = ["python"]
+
+[env]
+  _.file = [{ path = "~/.env" }, { path = "~/.env.secrets", redact = true }]

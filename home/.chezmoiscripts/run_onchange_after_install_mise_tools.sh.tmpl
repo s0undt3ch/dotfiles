@@ -5,7 +5,7 @@ set -euo pipefail
 # Runs in the "after" phase (once the config file has been applied) and
 # re-runs whenever the mise config changes, via the hash below.
 #
-# mise config sha256: {{ include "dot_config/mise/config.toml" | sha256sum }}
+# mise config sha256: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
 
 if ! command -v mise >/dev/null 2>&1; then
     echo "mise not installed; skipping tool install."
