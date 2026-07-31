@@ -1,13 +1,29 @@
 [tools]
-  python                 = "3.11"
-  uv                     = "latest"
-  aws                    = "latest"
-  usage                  = "latest"
-  "pipx:snowflake-cli"   = "latest"
-  github-cli             = "latest"
-  aqua                   = "latest"
-  semgrep                = "latest"
-  "aqua:s0undt3ch/ToolR" = "latest"
+  python                  = "3.11"
+  uv                      = "latest"
+  aws                     = "latest"
+  usage                   = "latest"
+  "pipx:snowflake-cli"    = "latest"
+  github-cli              = "latest"
+  aqua                    = "latest"
+  semgrep                 = "latest"
+  "aqua:s0undt3ch/ToolR"  = "latest"
+  bun                     = "latest"
+  "aqua:quarylabs/sqruff" = "latest"
+
+  # Node 22+ is required by qmd below. GOTCHA: qmd bundles better-sqlite3, a
+  # native addon compiled against a specific Node ABI, and mise's npm backend
+  # does NOT rebuild npm: tools when node changes — so bumping this pin silently
+  # breaks qmd and its MCP server with "Could not locate the bindings file".
+  # After any node bump:
+  #
+  #   mise uninstall npm:@tobilu/qmd --all && mise install npm:@tobilu/qmd
+  #
+  node                         = "24"
+  "npm:@tobilu/qmd"            = "latest"
+  "npm:@dust-tt/dust-cli"      = "latest"
+  "aqua:quarto-dev/quarto-cli" = "1.10.18"
+  herdr                        = "latest"
 
 [settings]
   python.uv_venv_auto                 = true
