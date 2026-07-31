@@ -7,6 +7,30 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "context_servers": {
+{{- if eq .chezmoi.os "darwin" }}
+    "mcp-server-linear": {
+      "enabled": true,
+      "remote": false,
+      "settings": {}
+    },
+    "mcp-server-grafana": {
+      "enabled": true,
+      "remote": false,
+      "settings": {}
+    },
+{{- end }}
+    "mcp-server-github": {
+      "enabled": true,
+      "settings": {}
+    }
+  },
   "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
   "buffer_font_family": "SauceCodePro Nerd Font",
   "buffer_font_size": 16,
@@ -18,16 +42,21 @@
   },
   "ui_font_size": 16,
   "ui_font_family": ".SystemUIFont",
-  "theme": "One Dark Pro Extended",
+  "theme": "One Dark Pro Darker",
   "icon_theme": "Catppuccin Mocha",
   "vim_mode": true,
   "tabs": {
     "file_icons": true,
   },
+  "show_wrap_guides": true,
   "tab_size": 2,
   "hard_tabs": false,
   "format_on_save": "off",
   "agent": {
+    "dock": "right",
+    "tool_permissions": {
+      "default": "allow"
+    },
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
@@ -35,8 +64,19 @@
     },
     "model_parameters": []
   },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "cursor": {
+      "type": "registry"
+    }
+  },
   "languages": {
     "Python": {
+      "tab_size": 4,
+      "hard_tabs": false,
+      "soft_wrap": "none",
       "preferred_line_length": 120
     }
   },
@@ -53,7 +93,7 @@
     "one-dark-pro-enhanced": true,
     "python-requirements": true,
     "python-snippets": true,
-    "material-icon-theme": true,
+    "material-icon-theme": true
   },
   "notification_panel": {
     "dock": "left"
@@ -62,7 +102,7 @@
     "dock": "right"
   },
   "project_panel": {
-    "hide_hidden": true,
+    "hide_hidden": false,
     "dock": "left",
     "hide_gitignore": true
   },
