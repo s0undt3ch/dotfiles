@@ -1,5 +1,6 @@
 {{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
 #!/usr/bin/env bash
+# vim: set ft=sh:
 set -euo pipefail
 
 # Declarative, cross-platform package sync via metapac (pacdef successor).
