@@ -1,7 +1,11 @@
+[includeIf "gitdir:~/projects/me/**"]
+  path = .gitconfig.personal
+[includeIf "gitdir:~/projects/paddle/**"]
+  path = .gitconfig.work
 [user]
 	email = pedro@algarvio.me
-  name = Pedro Aalgarvio
-  signingkey = 84A298FF
+  name = Pedro Algarvio
+  signingkey = BB36BF6584A298FF
 [commit]
   gpgsign = true
 [log]
