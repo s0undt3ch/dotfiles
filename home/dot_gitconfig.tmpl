@@ -1,7 +1,12 @@
 [includeIf "gitdir:~/projects/me/**"]
   path = .gitconfig.personal
+{{ if eq .chezmoi.os "darwin" -}}
 [includeIf "gitdir:~/projects/paddle/**"]
   path = .gitconfig.work
+{{ else -}}
+[includeIf "gitdir:~/projects/work/**"]
+  path = .gitconfig.work
+{{ end -}}
 [user]
 	email = pedro@algarvio.me
   name = Pedro Algarvio
