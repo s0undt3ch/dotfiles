@@ -2,5 +2,5 @@
 	email = pedro.algarvio@paddle.com
 #[commit]
 #	template = ~/.git-message
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+#[url "ssh://git@github.com/"]
+#	insteadOf = https://github.com/
