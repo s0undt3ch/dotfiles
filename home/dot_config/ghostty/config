@@ -1,7 +1,7 @@
 # Ghostty config
 # Note: Ghostty uses `key = value` with hyphens, unlike kitty's `key value`.
 
-theme = dark:gruvbox-material-hard-dark,light:gruvbox-material-medium-light
+theme = dark:Gruvbox Material Dark,light:Gruvbox Material Light
 font-family = SauceCodePro Nerd Font Mono
 font-size = 15.0
 
