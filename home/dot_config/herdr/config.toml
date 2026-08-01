@@ -1,6 +1,10 @@
 # herdr configuration
 # https://herdr.dev
 
+[keys]
+  # Use CTRL-A as the prefix instead of the default CTRL-B.
+  prefix = "ctrl+a"
+
 [theme]
   name        = "gruvbox"
   auto_switch = true
