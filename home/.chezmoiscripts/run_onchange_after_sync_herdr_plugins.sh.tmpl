@@ -9,6 +9,16 @@ set -euo pipefail
 #
 # plugins.list sha256: {{ include "dot_config/herdr/plugins/config/herdr-lazy/plugins.list.tmpl" | sha256sum }}
 
+# chezmoi's script shell doesn't activate mise, so mise-managed tools like
+# herdr aren't on PATH here even though the mise-tools script just installed
+# them. Resolve herdr through mise and put it on PATH before the checks below.
+if ! command -v herdr >/dev/null 2>&1 && command -v mise >/dev/null 2>&1; then
+    herdr_bin=$(mise which herdr 2>/dev/null || true)
+    if [ -n "${herdr_bin}" ]; then
+        PATH="$(dirname "${herdr_bin}"):${PATH}"
+    fi
+fi
+
 if ! command -v herdr >/dev/null 2>&1; then
     echo "herdr not installed; skipping plugin sync."
     exit 0
