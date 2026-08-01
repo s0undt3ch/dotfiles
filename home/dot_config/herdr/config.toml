@@ -5,6 +5,11 @@
   # Use CTRL-A as the prefix instead of the default CTRL-B.
   prefix = "ctrl+a"
 
+[terminal]
+  # New panes/tabs/workspaces (e.g. a split) inherit the source pane's
+  # directory instead of defaulting to $HOME.
+  new_cwd = "follow"
+
 [theme]
   name        = "gruvbox"
   auto_switch = true
