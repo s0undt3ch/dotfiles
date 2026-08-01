@@ -1,0 +1,15 @@
+# chezmoi's own config, rendered to ~/.config/chezmoi/chezmoi.toml by
+# `chezmoi init`. This is the source of truth — the target file is generated,
+# so edit here, not there.
+
+sourceDir = {{ printf "%s/projects/me/dotfiles" .chezmoi.homeDir | quote }}
+
+# Page long output through less, passing ANSI color escapes through (-R) so
+# piped/paged output stays colored.
+pager = "less -R"
+
+[diff]
+# `chezmoi diff` uses diff.pager (not the top-level pager) and defaults color
+# to `auto`, which strips color whenever output isn't a terminal. Force both.
+color = "on"
+pager = "less -R"

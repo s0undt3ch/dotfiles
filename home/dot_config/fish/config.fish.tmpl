@@ -20,6 +20,10 @@ end
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
+# Make `less` pass ANSI color escapes through instead of printing them
+# literally, so `chezmoi diff | less`, `git ... | less`, etc. stay colored.
+set -gx LESS -R
+
 # Disable the Claude Code feedback survey prompt
 set -gx CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY 1
 
