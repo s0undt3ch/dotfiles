@@ -4,7 +4,7 @@
   path = .gitconfig.personal
 {{ if eq .chezmoi.os "darwin" -}}
 [includeIf "gitdir:~/projects/paddle/**"]
-  path = .gitconfig.work
+  path = .gitconfig.paddle
 {{ else -}}
 [includeIf "gitdir:~/projects/work/**"]
   path = .gitconfig.work
