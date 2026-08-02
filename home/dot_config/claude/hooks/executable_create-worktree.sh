@@ -6,8 +6,8 @@ set -euo pipefail
 # .claude/worktrees/. Contract: https://code.claude.com/docs/en/hooks#worktreecreate
 
 input=$(cat)
-base_path=$(jq -r '.base_worktree_path' <<<"$input")
-worktree_name=$(jq -r '.worktree_name' <<<"$input")
+base_path=$(jq -r '.cwd' <<<"$input")
+worktree_name=$(jq -r '.name' <<<"$input")
 
 worktrees_dir="${base_path}/.worktrees"
 new_path="${worktrees_dir}/${worktree_name}"
