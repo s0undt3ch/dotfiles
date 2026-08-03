@@ -1,4 +1,7 @@
-{{- $work := promptBoolOnce . "work" "Is this a work machine" false -}}
+{{/* Personal machines by hostname (chezmoi's .chezmoi.hostname). Anything
+     not listed is treated as a work machine. Find a machine's name with:
+       chezmoi execute-template '{{ "{{ .chezmoi.hostname }}" }}' */}}
+{{- $personalHostnames := list "archie" -}}
 # chezmoi's own config, rendered to ~/.config/chezmoi/chezmoi.toml by
 # `chezmoi init`. This is the source of truth — the target file is generated,
 # so edit here, not there.
@@ -10,9 +13,9 @@ sourceDir = {{ printf "%s/projects/me/dotfiles" .chezmoi.homeDir | quote }}
 pager = "less -R"
 
 [data]
-# Machine role, answered once at `chezmoi init` and remembered here. Gate
+# True on work machines (hostname NOT in the personal list above). Gate
 # work-only config in any template with `{{ "{{ if .work }}...{{ end }}" }}`.
-work = {{ $work }}
+work = {{ not (has .chezmoi.hostname $personalHostnames) }}
 
 [diff]
 # `chezmoi diff` uses diff.pager (not the top-level pager) and defaults color
