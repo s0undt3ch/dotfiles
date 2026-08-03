@@ -1,0 +1,18 @@
+# Provide a GitHub token to mise so it can resolve releases from private
+# repos via the github backend. Falls back silently if `gh` is not
+# installed or not authenticated.
+if not set -q GITHUB_TOKEN
+    if type -q gh
+        set -l token (gh auth token 2>/dev/null)
+        if test -n "$token"
+            set -gx GITHUB_TOKEN $token
+        end
+    end
+end
+{{ if eq .chezmoi.os "darwin" }}
+# Homebrew (work laptop / macOS only) reads HOMEBREW_GITHUB_API_TOKEN to
+# fetch formulae from private taps.
+if set -q GITHUB_TOKEN; and not set -q HOMEBREW_GITHUB_API_TOKEN
+    set -gx HOMEBREW_GITHUB_API_TOKEN $GITHUB_TOKEN
+end
+{{ end -}}
