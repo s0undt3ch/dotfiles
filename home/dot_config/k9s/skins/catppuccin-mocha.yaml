@@ -1,0 +1,112 @@
+# Catppuccin Mocha
+# https://github.com/catppuccin/k9s
+foreground: &foreground "#cdd6f4"
+background: &background "#1e1e2e"
+current_line: &current_line "#313244"
+selection: &selection "#45475a"
+comment: &comment "#7f849c"
+rosewater: &rosewater "#f5e0dc"
+flamingo: &flamingo "#f2cdcd"
+pink: &pink "#f5c2e7"
+mauve: &mauve "#cba6f7"
+red: &red "#f38ba8"
+maroon: &maroon "#eba0ac"
+peach: &peach "#fab387"
+yellow: &yellow "#f9e2af"
+green: &green "#a6e3a1"
+teal: &teal "#94e2d5"
+sky: &sky "#89dceb"
+sapphire: &sapphire "#74c7ec"
+blue: &blue "#89b4fa"
+lavender: &lavender "#b4befe"
+k9s:
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *blue
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *blue
+  info:
+    fgColor: *pink
+    sectionColor: *foreground
+  dialog:
+    fgColor: *foreground
+    bgColor: *background
+    buttonFgColor: *foreground
+    buttonBgColor: *mauve
+    buttonFocusFgColor: *yellow
+    buttonFocusBgColor: *pink
+    labelFgColor: *peach
+    fieldFgColor: *foreground
+  frame:
+    border:
+      fgColor: *selection
+      focusColor: *current_line
+    menu:
+      fgColor: *foreground
+      keyColor: *pink
+      numKeyColor: *pink
+    crumbs:
+      fgColor: *foreground
+      bgColor: *current_line
+      activeColor: *current_line
+    status:
+      newColor: *blue
+      modifyColor: *mauve
+      addColor: *green
+      pendingColor: *peach
+      errorColor: *red
+      highlightColor: *sky
+      killColor: *comment
+      completedColor: *comment
+    title:
+      fgColor: *foreground
+      bgColor: *background
+      highlightColor: *pink
+      counterColor: *mauve
+      filterColor: *sapphire
+  views:
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *blue
+        - *red
+      defaultChartColors:
+        - *blue
+        - *red
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      cursorFgColor: *current_line
+      cursorBgColor: *selection
+      markColor: *mauve
+      header:
+        fgColor: *foreground
+        bgColor: *background
+        sorterColor: *sky
+    xray:
+      fgColor: *foreground
+      bgColor: *background
+      cursorColor: *current_line
+      cursorTextColor: *current_line
+      graphicColor: *mauve
+    yaml:
+      keyColor: *pink
+      colonColor: *mauve
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *foreground
+        bgColor: *mauve
+        toggleOnColor: *green
+        toggleOffColor: *comment
+    help:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *mauve
+        bgColor: *background
