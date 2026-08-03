@@ -1,3 +1,4 @@
+{{- $work := promptBoolOnce . "work" "Is this a work machine" false -}}
 # chezmoi's own config, rendered to ~/.config/chezmoi/chezmoi.toml by
 # `chezmoi init`. This is the source of truth — the target file is generated,
 # so edit here, not there.
@@ -7,6 +8,11 @@ sourceDir = {{ printf "%s/projects/me/dotfiles" .chezmoi.homeDir | quote }}
 # Page long output through less, passing ANSI color escapes through (-R) so
 # piped/paged output stays colored.
 pager = "less -R"
+
+[data]
+# Machine role, answered once at `chezmoi init` and remembered here. Gate
+# work-only config in any template with `{{ "{{ if .work }}...{{ end }}" }}`.
+work = {{ $work }}
 
 [diff]
 # `chezmoi diff` uses diff.pager (not the top-level pager) and defaults color
