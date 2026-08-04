@@ -15,6 +15,9 @@
   signingkey = BB36BF6584A298FF
 [commit]
   gpgsign = true
+[spice "branchCreate"]
+  # Don't create an empty commit when a new stacked branch has no staged changes.
+  commit = false
 [log]
 	decorate = full
 [alias]
