@@ -1,6 +1,8 @@
 # herdr configuration
 # https://herdr.dev
 
+onboarding = false
+
 [keys]
   # Use CTRL-A as the prefix instead of the default CTRL-B.
   prefix = "ctrl+a"
@@ -17,3 +19,6 @@
   # No confirmed light "gruvbox" variant in herdr's builtin theme list, so both
   # modes point at the same dark-oriented theme for now.
   light_name = "gruvbox"
+
+[ui.toast]
+  delivery = "system"
