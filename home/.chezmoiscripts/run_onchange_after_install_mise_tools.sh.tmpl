@@ -16,14 +16,16 @@ fi
 echo "==> Installing mise tools (mise install)"
 mise install
 
-# qmd bundles better-sqlite3, a native addon. mise's npm backend (bun) skips
-# native build scripts, so a bare install leaves no compiled binding — see
-# the comment above the qmd pin in mise/config.toml. Rebuild it in place
-# whenever it's missing (fresh install, or a node/qmd bump changed the ABI).
+# qmd bundles better-sqlite3 12.10.0, which predates better-sqlite3's move to
+# N-API (13.0.0) and crashes intermittently under our pinned node's (24) newer
+# V8 internals (RemoveEnvironmentCleanupHook assertion, confirmed reproducible
+# under load). qmd is run under node 22 instead (see the qmd.fish function),
+# whose ABI matches what better-sqlite3 12.x actually supports — so build the
+# binding against node 22 here too, not whatever mise's npm backend used.
 if qmd_dir=$(mise where npm:@tobilu/qmd 2>/dev/null); then
     bsqlite_dir="${qmd_dir}/node_modules/.mise/node_modules/better-sqlite3"
-    if [ -d "${bsqlite_dir}" ] && ! mise exec -- node -e "require('${bsqlite_dir}')" >/dev/null 2>&1; then
-        echo "==> Rebuilding better-sqlite3 native binding for qmd"
-        (cd "${bsqlite_dir}" && mise exec -- npx --yes node-gyp rebuild --release)
+    if [ -d "${bsqlite_dir}" ] && ! mise exec node@22 -- node -e "require('${bsqlite_dir}')" >/dev/null 2>&1; then
+        echo "==> Rebuilding better-sqlite3 native binding for qmd (node 22)"
+        (cd "${bsqlite_dir}" && mise exec node@22 -- npx --yes node-gyp rebuild --release)
     fi
 fi

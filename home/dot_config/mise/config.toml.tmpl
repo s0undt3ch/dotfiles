@@ -15,14 +15,11 @@
   "aqua:quarylabs/sqruff" = "0.39.0"
   jq                      = "1.8.2"
 
-  # Node 22+ is required by qmd below. GOTCHA: qmd bundles better-sqlite3, a
-  # native addon compiled against a specific Node ABI, and mise's npm backend
-  # does NOT rebuild npm: tools when node changes — so bumping this pin silently
-  # breaks qmd and its MCP server with "Could not locate the bindings file".
-  # After any node bump:
-  #
-  #   mise uninstall npm:@tobilu/qmd --all && mise install npm:@tobilu/qmd
-  #
+  # qmd bundles better-sqlite3 12.10.0 (pre-N-API), which crashes under this
+  # node's V8 internals under load. qmd always runs under node 22 instead —
+  # see the qmd fish function (conf.d/qmd.fish) and the better-sqlite3 rebuild
+  # step in .chezmoiscripts/run_onchange_after_install_mise_tools.sh.tmpl —
+  # so bumping this pin does not affect qmd.
   node                         = "24"
   "npm:@tobilu/qmd"            = "2.5.3"
   "aqua:quarto-dev/quarto-cli" = "1.10.18"
