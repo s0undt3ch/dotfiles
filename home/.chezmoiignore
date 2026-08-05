@@ -8,8 +8,6 @@ Library
 .config/k9s/**
 .config/herdr/plugins/config/herdr-spreader
 .config/herdr/plugins/config/herdr-spreader/**
-.config/herdr/plugins/local/startup-layout
-.config/herdr/plugins/local/startup-layout/**
 .local/bin/claude-work
 .local/bin/claude-personal
 {{ end }}
