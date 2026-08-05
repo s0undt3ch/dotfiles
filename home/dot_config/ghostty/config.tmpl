@@ -3,7 +3,7 @@
 
 theme = dark:Gruvbox Material Dark,light:Gruvbox Material Light
 font-family = SauceCodePro Nerd Font Mono
-font-size = 15.0
+font-size = {{ if .work }}15.0{{ else }}14.0{{ end }}
 
 # Mouse-wheel scrolling felt too fast; `discrete` is the wheel multiplier
 # (default 3), `precision` is the trackpad (left at the default 1). Lower
