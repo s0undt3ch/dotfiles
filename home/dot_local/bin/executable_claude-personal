@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# Launch Claude with the personal profile.
+export CLAUDE_CONFIG_DIR="${HOME}/.claude-personal"
+exec claude "$@"

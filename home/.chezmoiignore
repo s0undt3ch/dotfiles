@@ -10,6 +10,8 @@ Library
 .config/herdr/plugins/config/herdr-spreader/**
 .config/herdr/plugins/local/startup-layout
 .config/herdr/plugins/local/startup-layout/**
+.local/bin/claude-work
+.local/bin/claude-personal
 {{ end }}
 {{/* nvim owns these at runtime; don't let chezmoi manage or fight them. */}}
 .config/nvim/lazy-lock.json

@@ -37,8 +37,6 @@ alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PRO
 alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
 alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
 alias claude='claude-switch work'
-alias claude-work='claude-switch work'
-alias claude-personal='claude-switch personal'
 {{- end }}
 
 function git --wraps git
