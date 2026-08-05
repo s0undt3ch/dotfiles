@@ -322,7 +322,7 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
   if.app-id = 'md.obsidian'
-  run       = ['move-node-to-workspace Video']
+  run       = ['move-node-to-workspace Docs', 'layout floating']
 
 [[on-window-detected]]
   if.app-id = 'notion.id'
