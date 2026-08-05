@@ -6,6 +6,10 @@ Library
 {{ if not .work }}
 .config/k9s
 .config/k9s/**
+.config/herdr/plugins/config/herdr-spreader
+.config/herdr/plugins/config/herdr-spreader/**
+.config/herdr/plugins/local/startup-layout
+.config/herdr/plugins/local/startup-layout/**
 {{ end }}
 {{/* nvim owns these at runtime; don't let chezmoi manage or fight them. */}}
 .config/nvim/lazy-lock.json

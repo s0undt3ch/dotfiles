@@ -8,6 +8,15 @@ set -euo pipefail
 # been applied) and re-runs whenever that list changes, via the hash below.
 #
 # plugins.list sha256: {{ include "dot_config/herdr/plugins/config/herdr-lazy/plugins.list.tmpl" | sha256sum }}
+{{ if .work -}}
+#
+# Also link the local startup-layout plugin, which applies the
+# herdr-spreader project layout on server start (see herdr-spreader in
+# plugins.list above). Re-runs when either file changes, via the hashes
+# below.
+# startup-layout manifest sha256: {{ include "dot_config/herdr/plugins/local/startup-layout/herdr-plugin.toml.tmpl" | sha256sum }}
+# herdr-spreader config sha256: {{ include "dot_config/herdr/plugins/config/herdr-spreader/config.yaml.tmpl" | sha256sum }}
+{{ end -}}
 
 # chezmoi's script shell doesn't activate mise, so mise-managed tools like
 # herdr aren't on PATH here even though the mise-tools script just installed
@@ -43,3 +52,11 @@ fi
 
 echo "==> Syncing herdr plugins (herdr-lazy sync)"
 HERDR_BIN_PATH=$(command -v herdr) "${plugin_root}/target/release/herdr-lazy" sync
+
+{{ if .work -}}
+startup_layout_dir="{{ .chezmoi.homeDir }}/.config/herdr/plugins/local/startup-layout"
+if ! herdr plugin list --json | jq -e '.result.plugins[] | select(.plugin_id == "startup-layout")' >/dev/null; then
+    echo "==> Linking startup-layout plugin"
+    herdr plugin link "${startup_layout_dir}"
+fi
+{{ end -}}

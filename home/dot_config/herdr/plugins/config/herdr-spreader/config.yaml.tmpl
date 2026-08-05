@@ -1,0 +1,47 @@
+{{- /* Work-only layout: each project space, two tabs — claude, then a shell. */ -}}
+workspaces:
+  - name: dotfiles
+    root: ~/projects/me/dotfiles
+    tabs:
+      - label: claude
+        panes:
+          - command: claude-work
+      - label: shell
+        panes:
+          - {}
+  - name: obsidiary
+    root: ~/projects/me/obsidiary
+    tabs:
+      - label: claude
+        panes:
+          - command: claude-work
+      - label: shell
+        panes:
+          - {}
+  - name: toolr
+    root: ~/projects/me/toolr
+    tabs:
+      - label: claude
+        panes:
+          - command: claude-work
+      - label: shell
+        panes:
+          - {}
+  - name: dashtastic
+    root: ~/projects/paddle/dashtastic
+    tabs:
+      - label: claude
+        panes:
+          - command: claude-work
+      - label: shell
+        panes:
+          - {}
+  - name: dbt-ssot
+    root: ~/projects/paddle/dbt-ssot
+    tabs:
+      - label: claude
+        panes:
+          - command: claude-work
+      - label: shell
+        panes:
+          - {}

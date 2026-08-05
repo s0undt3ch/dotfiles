@@ -1,0 +1,15 @@
+id = "startup-layout"
+name = "startup-layout"
+version = "0.1.0"
+min_herdr_version = "0.7.5"
+description = "Apply the herdr-spreader project layout on server start"
+platforms = ["macos"]
+
+# herdr-spreader has no startup hook of its own (it's meant to be invoked
+# manually), so this local plugin supplies one: run it once whenever the
+# herdr server starts, against our own layout file. herdr-spreader's binary
+# isn't on PATH (herdr builds it into its own plugin root, not a shared bin
+# dir), so resolve its plugin_root via the socket API first.
+[[startup]]
+platforms = ["macos"]
+command = ["/bin/sh", "-c", {{ printf "root=$(herdr plugin list --json | jq -r '.result.plugins[] | select(.plugin_id == \"herdr-spreader\") | .plugin_root'); exec \"$root/target/release/herdr-spreader\" apply --file %s/.config/herdr/plugins/config/herdr-spreader/config.yaml" .chezmoi.homeDir | quote }}]
