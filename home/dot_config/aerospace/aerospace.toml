@@ -313,6 +313,10 @@ automatically-unhide-macos-hidden-apps = true
   run       = ['move-node-to-workspace Linear', 'layout floating']
 
 [[on-window-detected]]
+  if.app-id = 'local.fancy-recorder.launcher'
+  run       = "layout floating"
+
+[[on-window-detected]]
   if.app-name-regex-substring = "Desk Control"
   run                         = "layout floating"
 
