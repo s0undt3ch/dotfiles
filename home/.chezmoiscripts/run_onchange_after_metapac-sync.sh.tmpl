@@ -47,5 +47,5 @@ if ! command -v metapac >/dev/null 2>&1; then
 fi
 
 echo "==> metapac sync --no-confirm"
-metapac sync --no-confirm
+metapac --config-dir "$HOME/.config/metapac" sync --no-confirm
 {{ end -}}
