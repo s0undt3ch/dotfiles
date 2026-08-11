@@ -1,3 +1,4 @@
+config-version = 2
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
@@ -314,6 +315,14 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
   if.app-id = 'local.fancy-recorder.launcher'
+  run       = "layout floating"
+
+[[on-window-detected]]
+  if.app-id = "so.cap.desktop"
+  run       = "layout floating"
+
+[[on-window-detected]]
+  if.app-id = "com.apple.QuickTimePlayerX"
   run       = "layout floating"
 
 [[on-window-detected]]
