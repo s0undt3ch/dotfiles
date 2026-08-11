@@ -2,3 +2,4 @@
 .config/fish/conf.d/claude-personal.fish
 .config/herdr/plugins/local/startup-layout
 .config/herdr/plugins/local/startup-layout/herdr-plugin.toml
+.config/claude/hooks/create-worktree.sh
