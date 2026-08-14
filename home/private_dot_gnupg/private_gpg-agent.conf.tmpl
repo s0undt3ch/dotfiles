@@ -4,5 +4,9 @@ default-cache-ttl 36000
 max-cache-ttl 36000
 default-cache-ttl-ssh 36000
 max-cache-ttl-ssh 36000
+{{ if eq .chezmoi.os "darwin" -}}
+pinentry-program /opt/homebrew/bin/pinentry-mac
+{{- else -}}
 pinentry-program /usr/bin/pinentry
+{{- end }}
 no-allow-external-cache

@@ -18,6 +18,7 @@
     "kubernetes-cli",
     "mise",
     "neovim",
+    "pinentry-mac",
     "pipx",
     "ripgrep",
     "starship",
