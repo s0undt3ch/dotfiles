@@ -1,6 +1,11 @@
 {{/* macOS-only targets: never apply them off macOS. */}}
 {{ if ne .chezmoi.os "darwin" }}
 Library
+.config/metapac/groups/brew.toml
+{{ end }}
+{{/* Linux-only targets: never apply them on macOS. */}}
+{{ if ne .chezmoi.os "linux" }}
+.config/metapac/groups/arch.toml
 {{ end }}
 {{/* Work-only targets: skip on personal machines (see .chezmoi.toml.tmpl). */}}
 {{ if not .work }}
