@@ -26,7 +26,14 @@
   herdr                        = "0.8.0"
 
   # llmtrim CLI, required by the llmtrim-herdr plugin (herdr-lazy plugins.list).
-  "npm:@llmtrim/cli" = "0.12.6"
+  # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
+  # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
+  # gnu "tray" GUI build); pin matching=musl so ubi/github doesn't grab the tray one.
+{{- if eq .chezmoi.os "darwin" }}
+  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.2"
+{{- else }}
+  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.2"
+{{- end }}
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).
