@@ -5,10 +5,12 @@ theme = dark:Gruvbox Material Dark,light:Gruvbox Material Light
 font-family = SauceCodePro Nerd Font Mono
 font-size = {{ if .work }}15.0{{ else }}14.0{{ end }}
 
+{{ if eq .chezmoi.os "linux" -}}
 # Mouse-wheel scrolling felt too fast; `discrete` is the wheel multiplier
 # (default 3), `precision` is the trackpad (left at the default 1). Lower
 # `discrete` to slow the wheel — this is independent of OS mouse settings.
 mouse-scroll-multiplier = precision:1,discrete:0.5
+{{ end -}}
 
 # Default split-divider-color is nearly invisible against gruvbox-material's
 # #1d2021 dark background; use the theme's mid-gray for contrast instead.
