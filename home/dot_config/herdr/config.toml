@@ -20,5 +20,10 @@ onboarding = false
   # modes point at the same dark-oriented theme for now.
   light_name = "gruvbox"
 
-[ui.toast]
-  delivery = "system"
+[ui]
+  # Without this, a single-pane workspace loses the outer frame that
+  # otherwise separates it from the sidebar.
+  pane_outer_borders = true
+
+  [ui.toast]
+    delivery = "system"
