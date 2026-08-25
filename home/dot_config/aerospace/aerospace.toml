@@ -231,7 +231,7 @@ automatically-unhide-macos-hidden-apps = true
   run       = 'move-node-to-workspace Slack'
 
 [[on-window-detected]]
-  if.app-id = 'com.google.Chrome.app.fmgjjmmmlfnkbppncabfkddbjimcfncm'
+  if.app-id = 'io.island.Island.app.fmgjjmmmlfnkbppncabfkddbjimcfncm'
   run       = 'move-node-to-workspace Mail'
 
 [[on-window-detected]]
@@ -261,6 +261,10 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
   if.app-id = 'com.google.Chrome'
+  run       = ['move-node-to-workspace Browser', 'layout floating']
+
+[[on-window-detected]]
+  if.app-id = 'io.island.Island'
   run       = ['move-node-to-workspace Browser', 'layout floating']
 
 [[on-window-detected]]
