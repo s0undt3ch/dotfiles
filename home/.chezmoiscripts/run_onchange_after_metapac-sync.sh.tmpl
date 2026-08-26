@@ -48,4 +48,14 @@ fi
 
 echo "==> metapac sync --no-confirm"
 metapac --config-dir "$HOME/.config/metapac" sync --no-confirm
+
+# Pull the Ollama model mempalace uses for LLM-assisted entity refinement
+# (mempalace init --llm-provider ollama, default model). No-op once cached.
+if command -v ollama >/dev/null 2>&1; then
+    if [ "$os" = "Linux" ]; then
+        systemctl is-active --quiet ollama || sudo systemctl enable --now ollama
+    fi
+    echo "==> ollama pull gemma3:4b"
+    ollama pull gemma3:4b || echo "ollama pull failed (server not reachable?); skipping."
+fi
 {{ end -}}
