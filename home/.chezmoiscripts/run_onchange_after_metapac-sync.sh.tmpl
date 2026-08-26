@@ -55,7 +55,7 @@ if command -v ollama >/dev/null 2>&1; then
     if [ "$os" = "Linux" ]; then
         systemctl is-active --quiet ollama || sudo systemctl enable --now ollama
     fi
-    echo "==> ollama pull gemma3:4b"
-    ollama pull gemma3:4b || echo "ollama pull failed (server not reachable?); skipping."
+    echo "==> ollama pull gemma4:e4b"
+    ollama pull gemma4:e4b || echo "ollama pull failed (server not reachable?); skipping."
 fi
 {{ end -}}
