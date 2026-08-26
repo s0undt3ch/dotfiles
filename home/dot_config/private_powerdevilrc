@@ -1,0 +1,10 @@
+[AC][SuspendAndShutdown]
+PowerButtonAction=1
+SleepMode=0
+
+[Battery][SuspendAndShutdown]
+PowerButtonAction=1
+SleepMode=0
+
+[Inhibitions]
+BlockedInhibitions=firefox:Playing audio
