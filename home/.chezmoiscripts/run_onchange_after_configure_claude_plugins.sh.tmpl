@@ -1,0 +1,33 @@
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# Declaratively ensure the mempalace and mi-claude marketplaces/plugins are
+# registered with Claude Code. `claude plugin marketplace add` and
+# `claude plugin install` are both idempotent (no-op, no error, if already
+# present), so this is safe to run unconditionally on every apply.
+
+if ! command -v claude >/dev/null 2>&1; then
+    echo "claude not installed; skipping plugin marketplace setup."
+    exit 0
+fi
+
+echo "==> Ensuring mempalace marketplace/plugin are configured"
+claude plugin marketplace add MemPalace/mempalace
+claude plugin install mempalace@mempalace
+
+mi_claude_dir="{{ .chezmoi.homeDir }}/projects/me/mi-claude"
+if [ -d "${mi_claude_dir}" ]; then
+    echo "==> Ensuring mi-claude marketplace/plugin are configured (local checkout)"
+    claude plugin marketplace add "${mi_claude_dir}"
+    claude plugin install mi-claude@mi-claude
+else
+    echo "mi-claude checkout not found at ${mi_claude_dir}; skipping."
+    echo "Clone it first:"
+    echo "  git clone git@github.com:s0undt3ch/mi-claude.git ${mi_claude_dir}"
+    echo "Then either re-run 'chezmoi apply', or run directly:"
+    echo "  claude plugin marketplace add ${mi_claude_dir}"
+    echo "  claude plugin install mi-claude@mi-claude"
+fi
+{{ end -}}
