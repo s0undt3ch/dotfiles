@@ -15,13 +15,7 @@
   "aqua:quarylabs/sqruff" = "0.40.0"
   jq                      = "1.8.2"
 
-  # qmd bundles better-sqlite3 12.10.0 (pre-N-API), which crashes under this
-  # node's V8 internals under load. qmd always runs under node 22 instead —
-  # see the qmd fish function (conf.d/qmd.fish) and the better-sqlite3 rebuild
-  # step in .chezmoiscripts/run_onchange_after_install_mise_tools.sh.tmpl —
-  # so bumping this pin does not affect qmd.
   node                         = "26"
-  "npm:@tobilu/qmd"            = "2.8.3"
   "aqua:quarto-dev/quarto-cli" = "1.10.18"
   herdr                        = "0.8.2"
 
