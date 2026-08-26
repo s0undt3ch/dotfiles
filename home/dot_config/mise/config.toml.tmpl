@@ -2,17 +2,17 @@
 
 [tools]
   "github:abhinav/git-spice" = "0.31.2"
-  "pipx:mempalace"           = "3.7.0"
-  usage                      = "5.1.0"
+  "pipx:mempalace"           = "3.8.0"
+  usage                      = "6.4.0"
 
   python                  = "3.14"
-  uv                      = "0.12.3"
-  github-cli              = "2.97.0"
+  uv                      = "0.12.5"
+  github-cli              = "2.98.0"
   aqua                    = "2.62.3"
-  semgrep                 = "1.172.0"
-  "aqua:s0undt3ch/ToolR"  = "0.28.0"
-  bun                     = "1.3.14"
-  "aqua:quarylabs/sqruff" = "0.39.0"
+  semgrep                 = "1.174.0"
+  "aqua:s0undt3ch/ToolR"  = "0.32.0"
+  bun                     = "1.4.0"
+  "aqua:quarylabs/sqruff" = "0.40.0"
   jq                      = "1.8.2"
 
   # qmd bundles better-sqlite3 12.10.0 (pre-N-API), which crashes under this
@@ -21,7 +21,7 @@
   # step in .chezmoiscripts/run_onchange_after_install_mise_tools.sh.tmpl —
   # so bumping this pin does not affect qmd.
   node                         = "26"
-  "npm:@tobilu/qmd"            = "2.5.3"
+  "npm:@tobilu/qmd"            = "2.8.3"
   "aqua:quarto-dev/quarto-cli" = "1.10.18"
   herdr                        = "0.8.2"
 
@@ -37,8 +37,8 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).
-  aws                     = { version = "2.36.23", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.24.1"
+  aws                     = { version = "2.36.31", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.25.0"
   "npm:@dust-tt/dust-cli" = "0.4.5"
 {{ end -}}
 
