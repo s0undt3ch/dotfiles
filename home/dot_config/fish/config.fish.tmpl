@@ -73,6 +73,15 @@ end
 set -Ux COMPOSE_PROJECT_NAME dashtastic
 {{- end }}
 
+{{- if eq .chezmoi.os "linux" }}
+
+if command -q android-studio
+    set -gx ANDROID_HOME ~/.android/sdk
+    fish_add_path $ANDROID_HOME/emulator
+    fish_add_path $ANDROID_HOME/platform-tools
+end
+{{- end }}
+
 # >>> llmtrim >>>
 if command -q llmtrim; and llmtrim _alive 2>/dev/null
     set -gx HTTPS_PROXY 'http://127.0.0.1:43117'
