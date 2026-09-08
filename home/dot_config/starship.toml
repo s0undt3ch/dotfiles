@@ -26,6 +26,7 @@ $conda\
 $time\
 [ ](fg:color_bg1)\
 ($cmd_duration)\
+($status)\
 $line_break$character"""
 
 palette = 'gruvbox_dark'
@@ -170,6 +171,12 @@ palette = 'gruvbox_dark'
   vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
   vimcmd_replace_symbol     = '[](bold fg:color_purple)'
   vimcmd_visual_symbol      = '[](bold fg:color_yellow)'
+
+[status]
+  disabled = false
+  format   = '[$symbol$status]($style) '
+  symbol   = '‼ '
+  style    = 'bold fg:color_red'
 
 [cmd_duration]
   show_notifications = false
