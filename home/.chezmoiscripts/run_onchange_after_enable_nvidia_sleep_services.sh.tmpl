@@ -1,0 +1,23 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# Enable nvidia systemd services required for hibernate and suspend.
+# Without these the GPU state is not saved/restored and hibernate fails.
+
+if ! lsmod | grep -q '^nvidia'; then
+    echo "nvidia module not loaded; skipping."
+    exit 0
+fi
+
+if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
+    echo "nvidia-sleep: no passwordless sudo and not interactive; skipping."
+    echo "Run 'chezmoi apply' from a terminal, or manually:"
+    echo "  sudo systemctl enable --now nvidia-hibernate nvidia-resume nvidia-suspend"
+    exit 0
+fi
+
+echo "==> Enabling nvidia sleep services (hibernate/resume/suspend)"
+sudo systemctl enable --now nvidia-hibernate nvidia-resume nvidia-suspend
+{{ end -}}
