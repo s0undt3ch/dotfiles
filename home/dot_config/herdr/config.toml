@@ -11,6 +11,8 @@ onboarding = false
   # New panes/tabs/workspaces (e.g. a split) inherit the source pane's
   # directory instead of defaulting to $HOME.
   new_cwd = "follow"
+  # Render pane images in Kitty graphics-compatible outer terminals.
+  kitty_graphics = true
 
 [theme]
   name        = "gruvbox"
@@ -21,9 +23,26 @@ onboarding = false
   light_name = "gruvbox"
 
 [ui]
-  # Without this, a single-pane workspace loses the outer frame that
-  # otherwise separates it from the sidebar.
+  mouse_scroll_lines = 1
+  # Ask for a tab name before creating a new tab.
+  # Set false to create tabs immediately with generated names.
+  prompt_new_tab_name = false
+  # Draw borders around split panes.
+  # "auto" draws them only for split panes, "always" also frames a lone pane
+  # (only while pane_outer_borders is enabled), "off" disables them.
+  # Legacy booleans still parse: true = "auto", false = "off".
+  pane_borders = "always"
+
+  # Draw borders along the outside edge of the pane area.
+  # Disable for tmux-style internal splitters without an outside frame.
   pane_outer_borders = true
+
+  # Draw interactive scrollbars beside terminal panes.
+  # Set false to reclaim the scrollbar column and keep it out of terminal-native selections.
+  pane_scrollbars = true
+
+  # Keep split panes visually separated instead of sharing divider borders.
+  pane_gaps = false
 
   [ui.toast]
     delivery = "system"
