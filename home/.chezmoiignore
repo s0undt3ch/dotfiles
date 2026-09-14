@@ -13,8 +13,6 @@ Library
 .config/aerospace/**
 .config/k9s
 .config/k9s/**
-.config/herdr/plugins/config/herdr-spreader
-.config/herdr/plugins/config/herdr-spreader/**
 .local/bin/claude-work
 .local/bin/claude-personal
 {{ end }}
