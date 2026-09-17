@@ -43,6 +43,10 @@
   python.compile                      = false
   experimental                        = true
   idiomatic_version_file_enable_tools = ["python"]
+{{ if eq .chezmoi.os "linux" -}}
+  # Local checkout used until mise's embedded aqua-registry includes redhat-et/ripwire.
+  aqua.registry_url = "file://{{ .chezmoi.homeDir }}/projects/3rd-party/aqua-registry"
+{{- end }}
 
 [env]
   _.file = [{ path = "~/.env" }, { path = "~/.env.secrets", redact = true }]
