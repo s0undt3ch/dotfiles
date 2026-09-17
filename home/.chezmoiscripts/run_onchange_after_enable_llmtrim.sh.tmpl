@@ -1,0 +1,26 @@
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# llmtrim's own `autostart` command owns the login-item mechanism
+# (systemd/launchd/registry) and knows how to wire itself up correctly.
+# Re-run whenever the llmtrim pin in mise.toml changes, so a fresh install
+# or version bump keeps autostart pointed at the current binary.
+#
+# mise config.toml sha256: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+
+if ! command -v llmtrim >/dev/null 2>&1; then
+    echo "llmtrim not on PATH yet; skipping autostart setup."
+    exit 0
+fi
+
+echo "==> llmtrim autostart --port 43117"
+llmtrim autostart --port 43117
+
+echo "==> llmtrim start"
+llmtrim start
+
+echo "==> llmtrim ensure"
+llmtrim ensure
+{{ end -}}
