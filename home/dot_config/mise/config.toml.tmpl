@@ -2,21 +2,21 @@
 
 [tools]
   "github:abhinav/git-spice" = "0.31.2"
-  "pipx:mempalace"           = "3.9.0"
-  usage                      = "6.8.0"
+  "pipx:mempalace"           = "3.10.0"
+  usage                      = "6.9.1"
 
   python                  = "3.14.7"
-  uv                      = "0.12.10"
-  github-cli              = "2.100.0"
-  aqua                    = "2.62.3"
-  semgrep                 = "1.176.1"
-  "aqua:s0undt3ch/ToolR"   = "0.32.0"
-  "aqua:redhat-et/ripwire" = "0.6.0"
+  uv                      = "0.12.15"
+  github-cli              = "2.101.0"
+  aqua                    = "2.63.0"
+  semgrep                 = "1.177.0"
+  "aqua:s0undt3ch/ToolR"   = "0.33.0"
+  "aqua:redhat-et/ripwire" = "0.6.1"
   bun                      = "1.4.2"
   "aqua:quarylabs/sqruff"  = "0.40.0"
   jq                       = "1.8.2"
 
-  node                         = "26.8.1"
+  node                         = "26.9.0"
   "aqua:quarto-dev/quarto-cli" = "1.10.18"
   herdr                        = "0.9.0"
 
@@ -25,16 +25,16 @@
   # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
   # gnu "tray" GUI build); pin matching=musl so ubi/github doesn't grab the tray one.
 {{- if eq .chezmoi.os "darwin" }}
-  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.3"
+  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.6"
 {{- else }}
-  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.3"
+  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.6"
 {{- end }}
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).
-  aws                     = { version = "2.36.31", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.25.0"
-  "npm:@dust-tt/dust-cli" = "0.4.5"
+  aws                     = { version = "2.36.47", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.27.0"
+  "npm:@dust-tt/dust-cli" = "0.4.6"
 {{ end -}}
 
 [settings]
