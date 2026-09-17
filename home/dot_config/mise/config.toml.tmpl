@@ -43,8 +43,6 @@
   python.compile                      = false
   experimental                        = true
   idiomatic_version_file_enable_tools = ["python"]
-  # Override the embedded aqua-registry with the upstream until mise ships a build that includes it.
-  aqua.registry_url = "https://github.com/aquaproj/aqua-registry"
 
 [env]
   _.file = [{ path = "~/.env" }, { path = "~/.env.secrets", redact = true }]
