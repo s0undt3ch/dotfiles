@@ -22,6 +22,7 @@
     "chezmoi",
     "chromium",
     "claude-code",
+    "cnrdrvcups-lb",                # Canon UFR II/LIPS LX print driver (MF752CDW II)
     "cocainate-bin",
     "coreutils",
     "cronie",
