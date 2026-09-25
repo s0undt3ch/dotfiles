@@ -5,9 +5,13 @@ onboarding = false
 
 [keys]
   # Use CTRL-A as the prefix instead of the default CTRL-B.
-  prefix       = "ctrl+a"
-  next_tab     = "ctrl+tab"
-  previous_tab = "ctrl+shift+tab"
+  prefix           = "ctrl+a"
+  next_tab         = "ctrl+tab"
+  previous_tab     = "ctrl+shift+tab"
+  focus_pane_left  = "prefix+left"
+  focus_pane_right = "prefix+right"
+  focus_pane_up    = "prefix+up"
+  focus_pane_down  = "prefix+down"
 
 [terminal]
   # New panes/tabs/workspaces (e.g. a split) inherit the source pane's
