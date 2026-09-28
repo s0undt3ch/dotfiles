@@ -26,5 +26,12 @@ working-directory = home
 keybind = cmd+comma=text:"nvim ~/.config/ghostty/config\n"
 
 # Pass Ctrl+Tab and Ctrl+Shift+Tab through to herdr for tab cycling.
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS eats an unbound ctrl+tab for native tab switching, so send the CSI-u
+# sequence explicitly: https://github.com/ghostty-org/ghostty/discussions/9381
+keybind = ctrl+tab=esc:[9;5u
+keybind = ctrl+shift+tab=esc:[9;6u
+{{- else -}}
 keybind = ctrl+tab=unbind
 keybind = ctrl+shift+tab=unbind
+{{- end }}
