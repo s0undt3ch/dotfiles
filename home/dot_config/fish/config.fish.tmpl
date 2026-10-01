@@ -39,7 +39,7 @@ alias gs=git-spice
 alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name production --region us-east-1; end; k9s'
 alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
 alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
-alias claude='claude-switch work'
+alias claude=claude-work
 
 
 # >>> dbt-engineering-config dbtvenv >>>
@@ -89,16 +89,3 @@ if command -q android-studio
     fish_add_path $ANDROID_HOME/platform-tools
 end
 {{- end }}
-
-# >>> llmtrim >>>
-if command -q llmtrim; and llmtrim _alive 2>/dev/null
-    set -gx HTTPS_PROXY 'http://127.0.0.1:43117'
-    set -gx HTTP_PROXY 'http://127.0.0.1:43117'
-    set -gx NO_PROXY 'localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,fd00::/8,*.local'
-    set -gx no_proxy 'localhost,127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,fd00::/8,*.local'
-    set -gx NODE_EXTRA_CA_CERTS '{{ .chezmoi.homeDir }}/.llmtrim/ca.pem'
-    set -gx NODE_USE_ENV_PROXY '1'
-    set -gx SSL_CERT_FILE '{{ .chezmoi.homeDir }}/.llmtrim/ca-bundle.pem'
-    set -gx CURL_CA_BUNDLE '{{ .chezmoi.homeDir }}/.llmtrim/ca-bundle.pem'
-end
-# <<< llmtrim <<<

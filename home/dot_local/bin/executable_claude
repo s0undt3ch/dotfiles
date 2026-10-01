@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+# Shadows the real claude so only Claude Code (and what it spawns) goes through
+# the llmtrim proxy, not every shell.
+
+self_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
+
+real=
+set -f
+IFS=:
+for dir in $PATH; do
+	[ -n "$dir" ] || continue
+	# Skip ourselves, or we'd exec this shim forever.
+	[ "$(CDPATH='' cd -- "$dir" 2>/dev/null && pwd -P)" = "$self_dir" ] && continue
+	if [ -f "$dir/claude" ] && [ -x "$dir/claude" ]; then
+		real="$dir/claude"
+		break
+	fi
+done
+unset IFS
+set +f
+
+if [ -z "$real" ]; then
+	echo "claude: no real claude found on PATH" >&2
+	exit 127
+fi
+
+if command -v llmtrim >/dev/null 2>&1 && llmtrim _alive 2>/dev/null; then
+	eval "$(llmtrim setup --env --port 43117 2>/dev/null)"
+fi
+
+exec "$real" "$@"
