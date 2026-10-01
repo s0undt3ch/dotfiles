@@ -17,6 +17,21 @@ fi
 
 echo "==> llmtrim autostart --port 43117"
 llmtrim autostart --port 43117
+{{- if eq .chezmoi.os "darwin" }}
+
+# autostart rewrites the plist but launchd keeps the old definition (and old
+# binary path) loaded, and the plist has no KeepAlive, so a version bump leaves
+# the daemon dead until reboot. Reload so launchd runs the current binary.
+echo "==> reloading llmtrim launchd agent"
+domain="gui/$(id -u)"
+launchctl bootout "${domain}/llmtrim" 2>/dev/null || true
+# bootout returns before teardown finishes; bootstrapping too early fails with EIO.
+for _ in $(seq 1 20); do
+    launchctl print "${domain}/llmtrim" >/dev/null 2>&1 || break
+    sleep 0.25
+done
+launchctl bootstrap "${domain}" "${HOME}/Library/LaunchAgents/llmtrim.plist"
+{{- end }}
 
 echo "==> llmtrim start"
 llmtrim start
