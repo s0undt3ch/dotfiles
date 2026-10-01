@@ -19,22 +19,42 @@ echo "==> llmtrim autostart --port 43117"
 llmtrim autostart --port 43117
 {{- if eq .chezmoi.os "darwin" }}
 
-# autostart rewrites the plist but launchd keeps the old definition (and old
-# binary path) loaded, and the plist has no KeepAlive, so a version bump leaves
-# the daemon dead until reboot. Reload so launchd runs the current binary.
+plist="${HOME}/Library/LaunchAgents/llmtrim.plist"
+
+# llmtrim's plist only has RunAtLoad, so a SIGTERM'd daemon (e.g. by ensure's
+# version-skew restart) stays dead until reboot. autostart regenerates the plist
+# on every run, so patch it here each time.
+echo "==> adding KeepAlive to llmtrim launchd agent"
+/usr/libexec/PlistBuddy -c "Delete :KeepAlive" "${plist}" 2>/dev/null || true
+/usr/libexec/PlistBuddy -c "Add :KeepAlive dict" -c "Add :KeepAlive:SuccessfulExit bool false" "${plist}"
+
+# launchd keeps the old job (and old binary path) loaded until it's reloaded.
 echo "==> reloading llmtrim launchd agent"
 domain="gui/$(id -u)"
 launchctl bootout "${domain}/llmtrim" 2>/dev/null || true
+# A detached daemon from `llmtrim start` would hold the port and send the
+# KeepAlive job into an exit-1 respawn loop, so launchd must be the only owner.
+llmtrim stop >/dev/null 2>&1 || true
 # bootout returns before teardown finishes; bootstrapping too early fails with EIO.
 for _ in $(seq 1 20); do
     launchctl print "${domain}/llmtrim" >/dev/null 2>&1 || break
     sleep 0.25
 done
-launchctl bootstrap "${domain}" "${HOME}/Library/LaunchAgents/llmtrim.plist"
-{{- end }}
+launchctl bootstrap "${domain}" "${plist}"
+
+for _ in $(seq 1 40); do
+    llmtrim _alive 2>/dev/null && break
+    sleep 0.25
+done
+llmtrim _alive || {
+    echo "llmtrim daemon didn't come up under launchd." >&2
+    exit 1
+}
+{{- else }}
 
 echo "==> llmtrim start"
 llmtrim start
+{{- end }}
 
 echo "==> llmtrim ensure"
 llmtrim ensure
