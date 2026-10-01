@@ -3,37 +3,37 @@
 [tools]
   "github:abhinav/git-spice" = "0.31.2"
   "pipx:mempalace"           = "3.10.0"
-  usage                      = "6.9.1"
+  usage                      = "6.12.0"
 
   python                  = "3.14.7"
-  uv                      = "0.12.15"
-  github-cli              = "2.101.0"
+  uv                      = "0.12.21"
+  github-cli              = "2.102.0"
   aqua                    = "2.63.0"
-  semgrep                 = "1.177.0"
+  semgrep                 = "1.178.0"
   "aqua:s0undt3ch/ToolR"   = "0.33.0"
-  "aqua:redhat-et/ripwire" = "0.6.1"
+  "aqua:redhat-et/ripwire" = "0.6.5"
   bun                      = "1.4.2"
   "aqua:quarylabs/sqruff"  = "0.40.0"
   jq                       = "1.8.2"
 
-  node                         = "26.9.0"
+  node                         = "26.10.0"
   "aqua:quarto-dev/quarto-cli" = "1.10.18"
-  herdr                        = "0.9.1"
+  herdr                        = "0.9.3"
 
   # llmtrim CLI, required by the llmtrim-herdr plugin (herdr-lazy plugins.list).
   # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
   # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
   # gnu "tray" GUI build); pin matching=musl so ubi/github doesn't grab the tray one.
 {{- if eq .chezmoi.os "darwin" }}
-  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.6"
+  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.7"
 {{- else }}
-  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.6"
+  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.7"
 {{- end }}
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).
-  aws                     = { version = "2.36.47", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.27.0"
+  aws                     = { version = "2.37.7", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.28.0"
   "npm:@dust-tt/dust-cli" = "0.4.6"
 {{ end -}}
 
