@@ -13,7 +13,7 @@ repos:
   # System-installed tools, versions pinned in mise.toml (single source of
   # truth — no drift). See https://github.com/s0undt3ch/pre-commit-hooks.
   - repo: https://github.com/s0undt3ch/pre-commit-hooks
-    rev: v1.2.0
+    rev: v1.3.1
     hooks:
       - id: gitleaks # Scan staged changes for hardcoded secrets.
       - id: typos # Source-code spell checker (config in typos.toml).
