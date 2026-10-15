@@ -1,24 +1,24 @@
 # vim: set ft=toml:
 
 [tools]
-  "github:abhinav/git-spice" = "0.31.2"
-  "pipx:mempalace"           = "3.10.0"
-  usage                      = "6.12.0"
+  "github:abhinav/git-spice" = "0.32.0"
+  "pipx:mempalace"           = "3.11.0"
+  usage                      = "7.0.0"
 
-  python                  = "3.14.7"
-  uv                      = "0.12.21"
+  python                  = "3.14.8"
+  uv                      = "0.13.1"
   github-cli              = "2.102.0"
-  aqua                    = "2.63.0"
-  semgrep                 = "1.178.0"
-  "aqua:s0undt3ch/ToolR"   = "0.33.0"
-  "aqua:redhat-et/ripwire" = "0.6.5"
-  bun                      = "1.4.2"
-  "aqua:quarylabs/sqruff"  = "0.40.0"
+  aqua                    = "2.64.0"
+  semgrep                 = "1.180.0"
+  "aqua:s0undt3ch/ToolR"   = "0.34.1"
+  "aqua:redhat-et/ripwire" = "0.6.7"
+  bun                      = "1.4.3"
+  "aqua:quarylabs/sqruff"  = "0.41.0"
   jq                       = "1.8.2"
 
-  node                         = "26.10.0"
-  "aqua:quarto-dev/quarto-cli" = "1.10.18"
-  herdr                        = "0.9.3"
+  node                         = "26.12.0"
+  "aqua:quarto-dev/quarto-cli" = "1.10.19"
+  herdr                        = "0.9.4"
   vale                         = "3.24.0"
 
   # llmtrim CLI, required by the llmtrim-herdr plugin (herdr-lazy plugins.list).
@@ -33,8 +33,8 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).
-  aws                     = { version = "2.37.7", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.28.0"
+  aws                     = { version = "2.38.1", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.29.0"
   "npm:@dust-tt/dust-cli" = "0.4.6"
 {{ end -}}
 
