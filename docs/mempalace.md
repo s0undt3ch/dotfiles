@@ -106,9 +106,14 @@ the weekly report.
    Qdrant facet counts instead.
 4. Designs a room set for every wing of 50+ drawers that lacks one, files
    drawers from the generic rooms into it, and maps one-off KG predicates onto
-   a closed vocabulary. These steps need an LLM and run only when
-   `MEMPALACE_MAINTAIN_MODEL` names a local Ollama model. `gemma4:e4b` is too
-   small: given transcript excerpts, it answers with made-up tool calls.
+   a closed vocabulary. These steps use a local Ollama model, `qwen3:8b` by
+   default (`MEMPALACE_MAINTAIN_MODEL` overrides it), and are skipped if the
+   model isn't pulled: `ollama pull qwen3:8b`. The helper calls mempalace
+   in-process with a 16k context. The CLI leaves Ollama at its 4096-token
+   default, which truncates the sampled excerpts and makes every model,
+   `gemma4:e4b` and `qwen3:8b` included, answer with junk. Nobody reviews the
+   room sets, so a set where fewer than half the rooms match a sampled drawer
+   is dropped rather than applied.
 5. Scores the palace with `mempalace audit`.
 
 Project mines also rebuild their wing's topic tunnels and hallways as they go.

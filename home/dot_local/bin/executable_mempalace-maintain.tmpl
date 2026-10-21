@@ -5,10 +5,10 @@ Runs in mempalace's own venv because `mempalace tunnels` reads its wing list
 from chroma.sqlite3 and refuses a Qdrant palace; the Qdrant collection's facet
 counts give the same list. Mempalace indexes only the document text in Qdrant,
 so faceting and every wing or source filter need the keyword indexes below.
-Everything else goes through the CLI. The LLM steps (room sets, KG
-predicates) run only when MEMPALACE_MAINTAIN_MODEL names a local Ollama model,
-so no palace content leaves the machine. gemma4:e4b is too small: it answers
-transcript excerpts with made-up tool calls.
+The LLM steps (room sets, KG predicates) use a local Ollama model, so no
+palace content leaves the machine. They run in-process because the CLI never
+sets num_ctx: Ollama then loads the model at 4096 tokens, the 60 sampled
+excerpts push the instructions out, and any model answers with junk.
 """
 
 import json
@@ -18,19 +18,45 @@ import sys
 import urllib.request
 
 from mempalace.config import MempalaceConfig
-from mempalace.palace import get_collection, mine_lock
-from mempalace.palace_graph import _get_tunnel_file, _load_tunnels, _save_tunnels
 from mempalace.hallways import list_hallways
-from mempalace.rooms import room_set_path
+from mempalace.kg_normalize import (
+    DEFAULT_VOCABULARY,
+    off_vocabulary_facts,
+    plan_normalize,
+    save_normalize_plan,
+)
+from mempalace.knowledge_graph import KnowledgeGraph
+from mempalace.llm_client import LLMError, get_provider
+from mempalace.palace import get_collection, mine_lock
+from mempalace.palace_audit import resolve_kg_path
+from mempalace.palace_graph import _get_tunnel_file, _load_tunnels, _save_tunnels
+from mempalace.rooms import (
+    existing_rooms,
+    propose_rooms,
+    room_set_path,
+    sample_drawers,
+    save_room_set,
+)
 from mempalace.tunnels_tool import apply_proposal, propose_tunnels, prune_tunnels
 
 MEMPALACE = os.path.expanduser("~/.local/share/mise/shims/mempalace")
 OLLAMA_URL = "http://127.0.0.1:11434"
-MODEL = os.environ.get("MEMPALACE_MAINTAIN_MODEL", "")
-LLM = ["--llm-provider", "ollama", "--llm-endpoint", OLLAMA_URL, "--llm-model", MODEL]
-INDEXED_FIELDS = ("wing", "room", "hall", "source_file", "added_by", "ingest_mode", "type")
+MODEL = os.environ.get("MEMPALACE_MAINTAIN_MODEL", "qwen3:8b")
+NUM_CTX = 16384
+INDEXED_FIELDS = (
+    "wing",
+    "room",
+    "hall",
+    "source_file",
+    "added_by",
+    "ingest_mode",
+    "type",
+)
 # Below this a wing is too small for a room set to mean anything.
 ROOMS_MIN_DRAWERS = 50
+# A room no sampled drawer fits is a generic guess. Nobody reviews these sets,
+# so a set made mostly of guesses is dropped, not applied.
+ROOMS_MIN_FILLED = 0.5
 
 
 def step(title):
@@ -44,12 +70,55 @@ def cli(*args):
     return result.returncode == 0
 
 
-def ollama_up():
+def ollama_has_model():
     try:
-        with urllib.request.urlopen(f"{OLLAMA_URL}/api/tags", timeout=5):
-            return True
+        with urllib.request.urlopen(f"{OLLAMA_URL}/api/tags", timeout=5) as resp:
+            names = {m["name"] for m in json.load(resp)["models"]}
     except OSError:
         return False
+    return MODEL in names or f"{MODEL}:latest" in names
+
+
+def propose_room_sets(config, col, wings, provider):
+    failures = 0
+    for wing, count in sorted(wings.items()):
+        if count < ROOMS_MIN_DRAWERS or os.path.exists(room_set_path(config, wing)):
+            continue
+        print(f"  {wing} ({count} drawers)", flush=True)
+        try:
+            samples = sample_drawers(col, wing)
+            room_set = propose_rooms(wing, samples, provider, existing=existing_rooms(col, wing))
+        except (ValueError, LLMError) as exc:
+            print(f"    failed: {exc}", flush=True)
+            failures += 1
+            continue
+        filled = sum(1 for r in room_set.rooms if r.exemplars)
+        if filled < ROOMS_MIN_FILLED * len(room_set.rooms):
+            print(
+                f"    dropped: only {filled} of {len(room_set.rooms)} rooms fit a sample",
+                flush=True,
+            )
+            continue
+        save_room_set(config, room_set)
+        print(f"    {', '.join(r.name for r in room_set.rooms)}", flush=True)
+    return failures
+
+
+def plan_kg_normalize(config, provider):
+    kg_path = resolve_kg_path(config.palace_path, explicit=False)
+    if not os.path.isfile(kg_path):
+        return None
+    facts = off_vocabulary_facts(KnowledgeGraph(db_path=kg_path), DEFAULT_VOCABULARY)
+    print(f"  {len(facts)} facts off the vocabulary", flush=True)
+    if not facts:
+        return None
+    plan = plan_normalize(facts, provider)
+    save_normalize_plan(config, plan)
+    print(
+        f"  {len(plan['facts'])} rewrites planned, {plan['rejected']} rejected",
+        flush=True,
+    )
+    return plan
 
 
 def ensure_indexes(qdrant_url):
@@ -73,7 +142,8 @@ def main():
     config = MempalaceConfig()
     step("qdrant: keyword indexes on drawer metadata")
     ensure_indexes(config.qdrant_url)
-    wings = get_collection(config.palace_path).facet_counts("wing")
+    col = get_collection(config.palace_path)
+    wings = col.facet_counts("wing")
     failures = 0
 
     step("hallways: drop spelling artifacts")
@@ -89,14 +159,16 @@ def main():
     created = apply_proposal(plan, config=config) if plan["tunnels"] else 0
     print(f"  created {created}")
 
-    if not MODEL:
-        step("MEMPALACE_MAINTAIN_MODEL is unset; skipped rooms and kg")
-    elif ollama_up():
-        step("rooms: design a room set for big wings that lack one")
-        for wing, count in sorted(wings.items()):
-            if count >= ROOMS_MIN_DRAWERS and not os.path.exists(room_set_path(config, wing)):
-                print(f"  {wing} ({count} drawers)", flush=True)
-                failures += not cli("rooms", "propose", "--wing", wing, *LLM)
+    if ollama_has_model():
+        provider = get_provider(
+            name="ollama",
+            model=MODEL,
+            endpoint=OLLAMA_URL,
+            timeout=600,
+            num_ctx=NUM_CTX,
+        )
+        step(f"rooms: design a room set for big wings that lack one ({MODEL})")
+        failures += propose_room_sets(config, col, wings, provider)
 
         step("rooms: file drawers from generic rooms into each wing's set")
         for wing in sorted(wings):
@@ -104,10 +176,14 @@ def main():
                 failures += not cli("rooms", "apply", "--wing", wing, "--yes")
 
         step("kg: map one-off predicates onto the closed vocabulary")
-        if cli("kg", "normalize", *LLM):
-            failures += not cli("kg", "normalize", "--yes")
+        try:
+            if plan_kg_normalize(config, provider):
+                failures += not cli("kg", "normalize", "--yes")
+        except (ValueError, LLMError) as exc:
+            print(f"  failed: {exc}", flush=True)
+            failures += 1
     else:
-        step("ollama is not answering; skipped rooms and kg")
+        step(f"ollama is down or lacks {MODEL}; skipped rooms and kg")
         failures += 1
 
     step("audit")
