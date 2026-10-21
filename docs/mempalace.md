@@ -90,6 +90,29 @@ drawers whose `source_file` is the transcript path. The weekly sync passes each
 project dir as its root, so transcript drawers stay out of scope. When Claude
 Code prunes an old transcript (`cleanupPeriodDays`), its drawers survive.
 
+## Weekly maintenance
+
+`dot_local/bin/executable_mempalace-maintain.tmpl` runs after the weekly
+mining pass and applies its changes rather than proposing them. Output goes to
+the weekly report.
+
+1. Adds keyword indexes on drawer metadata (`wing`, `room`, `source_file`, ...)
+   in Qdrant. Mempalace indexes only the document text, so without these,
+   faceting fails and every wing or source filter scans the whole collection.
+2. Drops hallway spelling artifacts.
+3. Prunes generic, dangling and duplicate tunnels, then creates the strongest
+   missing entity tunnels. `mempalace tunnels` can't do this on Qdrant: it
+   reads the wing list from `chroma.sqlite3`. The helper gets the list from the
+   Qdrant facet counts instead.
+4. Designs a room set for every wing of 50+ drawers that lacks one, files
+   drawers from the generic rooms into it, and maps one-off KG predicates onto
+   a closed vocabulary. These steps need an LLM and run only when
+   `MEMPALACE_MAINTAIN_MODEL` names a local Ollama model. `gemma4:e4b` is too
+   small: given transcript excerpts, it answers with made-up tool calls.
+5. Scores the palace with `mempalace audit`.
+
+Project mines also rebuild their wing's topic tunnels and hallways as they go.
+
 ## Weekly sync is dry-run
 
 `MEMPALACE_SYNC_APPLY=0` is set in the launchd plist and the systemd service.

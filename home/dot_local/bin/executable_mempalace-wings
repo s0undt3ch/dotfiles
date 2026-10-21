@@ -86,10 +86,15 @@ for group in "${groups[@]}"; do
     done
 done
 
-# Sync before mining: it only touches wings that already exist.
 mkdir -p "${report_dir}"
+weekly=0
 if [ ! -e "${marker}" ] || [ -n "$(find "${marker}" -mtime +6)" ]; then
-    report="${report_dir}/$(date +%F).log"
+    weekly=1
+fi
+report="${report_dir}/$(date +%F).log"
+
+# Sync before mining: it only touches wings that already exist.
+if [ "${weekly}" = 1 ]; then
     sync_flags=()
     mode="dry-run"
     if [ "${apply}" = 1 ]; then
@@ -107,7 +112,6 @@ if [ ! -e "${marker}" ] || [ -n "$(find "${marker}" -mtime +6)" ]; then
         "${mempalace}" sync "${dirs[i]}" --wing "${wings[i]}" ${sync_flags[@]+"${sync_flags[@]}"} >>"${report}" 2>&1 ||
             failed=$((failed + 1))
     done
-    touch "${marker}"
     notify "sync ${mode}: ${checked} wings checked, ${failed} failed. Report: ${report}"
 fi
 
@@ -144,4 +148,14 @@ if [ "${sweep_failed}" -eq 0 ]; then
 else
     rm -f "${sweep_started}"
     notify "transcript sweep: ${sweep_failed} failed, will retry next run."
+fi
+
+# After mining, so tunnels and rooms see this run's drawers.
+if [ "${weekly}" = 1 ]; then
+    if "${HOME}/.local/bin/mempalace-maintain" >>"${report}" 2>&1; then
+        notify "maintenance done. Report: ${report}"
+    else
+        notify "maintenance had failures. Report: ${report}"
+    fi
+    touch "${marker}"
 fi
