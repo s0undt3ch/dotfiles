@@ -5,4 +5,5 @@ Description=Mine project dirs and Claude transcripts into MemPalace, weekly sync
 Type=oneshot
 WorkingDirectory=%h
 Environment=MEMPALACE_SYNC_APPLY=0
+Environment=MEMPALACE_MAINTAIN_MODEL={{ .mempalace.llmModel }}
 ExecStart=%h/.local/bin/mempalace-wings

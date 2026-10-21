@@ -41,7 +41,7 @@ from mempalace.tunnels_tool import apply_proposal, propose_tunnels, prune_tunnel
 
 MEMPALACE = os.path.expanduser("~/.local/share/mise/shims/mempalace")
 OLLAMA_URL = "http://127.0.0.1:11434"
-MODEL = os.environ.get("MEMPALACE_MAINTAIN_MODEL", "qwen3:8b")
+MODEL = os.environ.get("MEMPALACE_MAINTAIN_MODEL", "{{ .mempalace.llmModel }}")
 NUM_CTX = 16384
 INDEXED_FIELDS = (
     "wing",

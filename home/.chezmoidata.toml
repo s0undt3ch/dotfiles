@@ -1,0 +1,4 @@
+[mempalace]
+  # Local Ollama model for the weekly room-set and KG upkeep. The wings job
+  # gets it as MEMPALACE_MAINTAIN_MODEL, and chezmoi apply pulls it.
+  llmModel = "qwen3:8b"

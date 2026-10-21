@@ -1,0 +1,33 @@
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# Pull the model mempalace-maintain uses. Re-runs when .chezmoidata.toml
+# names another one. Sorts after metapac-sync, which installs ollama.
+model={{ .mempalace.llmModel | quote }}
+
+if ! command -v ollama >/dev/null 2>&1; then
+    echo "ollama not installed; skipping pull of ${model}."
+    exit 0
+fi
+{{- if eq .chezmoi.os "darwin" }}
+brew services start ollama >/dev/null
+{{- end }}
+
+for _ in $(seq 1 40); do
+    curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1 && break
+    sleep 0.25
+done
+if ! curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+    echo "ollama is not answering on 127.0.0.1:11434; skipping pull of ${model}."
+    exit 0
+fi
+
+if ollama list | awk 'NR > 1 { print $1 }' | grep -qxF -e "${model}" -e "${model}:latest"; then
+    echo "ollama already has ${model}."
+else
+    echo "==> ollama pull ${model}"
+    ollama pull "${model}"
+fi
+{{ end -}}

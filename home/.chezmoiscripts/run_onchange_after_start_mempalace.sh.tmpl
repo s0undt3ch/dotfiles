@@ -9,13 +9,14 @@ set -euo pipefail
 #
 # mise config sha256: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
 # qdrant config sha256: {{ include "dot_config/qdrant/config.yaml.tmpl" | sha256sum }}
+# maintain model: {{ .mempalace.llmModel }}
 # wings script sha256: {{ include "dot_local/bin/executable_mempalace-wings" | sha256sum }}
 {{- if eq .chezmoi.os "darwin" }}
 # qdrant plist sha256: {{ include "Library/LaunchAgents/com.pedro.qdrant.plist.tmpl" | sha256sum }}
 # hub plist sha256: {{ include "Library/LaunchAgents/com.pedro.mempalace-hub.plist.tmpl" | sha256sum }}
 # wings plist sha256: {{ include "Library/LaunchAgents/com.pedro.mempalace-wings.plist.tmpl" | sha256sum }}
 {{- else }}
-# units sha256: {{ include "dot_config/systemd/user/qdrant.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-hub.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-wings.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-wings.timer" | sha256sum }}
+# units sha256: {{ include "dot_config/systemd/user/qdrant.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-hub.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-wings.service.tmpl" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-wings.timer" | sha256sum }}
 {{- end }}
 
 shims="${HOME}/.local/share/mise/shims"

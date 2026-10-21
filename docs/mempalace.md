@@ -106,9 +106,10 @@ the weekly report.
    Qdrant facet counts instead.
 4. Designs a room set for every wing of 50+ drawers that lacks one, files
    drawers from the generic rooms into it, and maps one-off KG predicates onto
-   a closed vocabulary. These steps use a local Ollama model, `qwen3:8b` by
-   default (`MEMPALACE_MAINTAIN_MODEL` overrides it), and are skipped if the
-   model isn't pulled: `ollama pull qwen3:8b`. The helper calls mempalace
+   a closed vocabulary. These steps use the local Ollama model named by
+   `mempalace.llmModel` in `home/.chezmoidata.toml` (`qwen3:8b`). The wings
+   job gets it as `MEMPALACE_MAINTAIN_MODEL`, and `chezmoi apply` starts
+   Ollama and pulls it. If the model is missing, the steps are skipped. The helper calls mempalace
    in-process with a 16k context. The CLI leaves Ollama at its 4096-token
    default, which truncates the sampled excerpts and makes every model,
    `gemma4:e4b` and `qwen3:8b` included, answer with junk. Nobody reviews the
