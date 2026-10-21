@@ -2,6 +2,7 @@
 # `halostatue_fish_mise.fish`, which means mise's `activate fish` prepends
 # its tool install dirs *after* these — so mise tools take priority over
 # brew, mysql-client, and ~/.local/bin.
+{{ if eq .chezmoi.os "darwin" -}}
 #
 # We can't rely on `brew --prefix` here because the brew conf.d file
 # (`halostatue_fish_brew.fish`) hasn't put brew on PATH yet. Hardcode the
@@ -17,7 +18,8 @@ end
 
 fish_add_path --prepend --path --move $brew_prefix/opt/mysql-client@8.4/bin
 fish_add_path --prepend --path --move $brew_prefix/bin
+{{ end -}}
 fish_add_path --prepend --path --move $HOME/.local/bin
 
 # Final order (lowest priority → highest):
-#   system PATH > mysql-client > Homebrew > ~/.local/bin > mise tool installs
+#   system PATH{{ if eq .chezmoi.os "darwin" }} > mysql-client > Homebrew{{ end }} > ~/.local/bin > mise tool installs
