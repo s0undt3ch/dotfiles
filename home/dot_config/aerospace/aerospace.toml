@@ -344,3 +344,7 @@ automatically-unhide-macos-hidden-apps = true
 [[on-window-detected]]
   if.app-id = 'notion.id'
   run       = ['move-node-to-workspace Docs', 'layout floating']
+
+[[on-window-detected]]
+  if.app-id = 'dev.loam.Loam'
+  run       = ['move-node-to-workspace Code', 'layout floating']
