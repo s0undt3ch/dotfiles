@@ -42,6 +42,16 @@ if ! curl -fsS http://127.0.0.1:6333/readyz >/dev/null 2>&1; then
     exit 0
 fi
 
+# Mirrors mempalace's hooks_cli._safe_wing_slug: the hooks file transcripts
+# under this spelling, so code and backfilled transcripts must use it too.
+wing_slug() {
+    local s
+    s="$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]' |
+        sed -E "s/[ -]/_/g; s/[^[:alnum:]_.']+/_/g; s/\.{2,}/./g")"
+    s="$(printf '%s' "${s:0:120}" | sed -E "s/^[_.']+//; s/[_.']+\$//")"
+    echo "${s:-sessions}"
+}
+
 # Mirrors mempalace's hooks_cli._ingest_wing so a backfilled transcript lands
 # in the same wing the Stop/SessionEnd hooks would pick.
 transcript_wing() {
@@ -57,14 +67,14 @@ transcript_wing() {
         *) echo linux_workstation ;;
         esac
     else
-        basename "${cwd}"
+        wing_slug "$(basename "${cwd}")"
     fi
 }
 
 existing="$("${mempalace}" status 2>/dev/null | sed -n 's/^  WING: //p' || true)"
 
-# Bare dir name, matching the wing the transcript hooks use for the same repo.
-# Prefix with the group only when the name exists in more than one group.
+# Slugged dir name, matching the wing the transcript hooks use for the same
+# repo. Prefix with the group only when the name exists in more than one group.
 dup_names="$(for group in "${groups[@]}"; do
     for dir in "${projects}/${group}"/*/; do
         [ -d "${dir}" ] && basename "${dir}"
@@ -77,9 +87,9 @@ for group in "${groups[@]}"; do
     for dir in "${projects}/${group}"/*/; do
         [ -d "${dir}" ] || continue
         name="$(basename "${dir}")"
-        wing="${name}"
+        wing="$(wing_slug "${name}")"
         if grep -qxF -- "${name}" <<<"${dup_names}"; then
-            wing="${group}-${name}"
+            wing="$(wing_slug "${group}-${name}")"
         fi
         dirs+=("${dir%/}")
         wings+=("${wing}")
