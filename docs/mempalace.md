@@ -20,9 +20,28 @@ session's MCP server and hooks can write at once.
 - `com.pedro.mempalace-hub.plist.tmpl` / `mempalace-hub.service` run
   `mempalace serve` on 127.0.0.1:8765. See below.
 - `dot_local/bin/executable_mempalace-wings` plus its launchd agent / systemd
-  timer runs daily at 03:30. See below.
+  timer runs daily at 03:00. See below.
+- `run_onchange_after_install_mempalace_wake.sh.tmpl` (macOS) installs a root
+  LaunchDaemon, `com.pedro.mempalace-wake`, that books a wake for 02:58. It
+  asks for sudo once, on the `chezmoi apply` that installs or changes it.
 - `run_onchange_after_start_mempalace_daemon.sh.tmpl` loads the lot. It reruns
   on any change to the mise config, the Qdrant config or the units.
+
+## Waking the Mac at 03:00
+
+`pmset repeat` holds a single repeating wake, and obsidiary owns it. So
+`com.pedro.mempalace-wake` books a one-off `pmset schedule wake` for the next
+02:58, at load and daily at 03:05. Those one-off wakes don't clash with the
+repeating one.
+
+The wings job runs under `caffeinate -s`, which keeps the Mac awake for the
+whole run on AC power only. If the Mac woke on battery and the keyboard has
+been idle for 5 minutes, the job skips the run and calls `pmset sleepnow`. The
+next run covers the gap: the transcript sweep goes by its marker, not by date.
+If a 03:00 run is missed, launchd runs it at the next wake.
+
+    pmset -g sched                                         # 02:58 wake booked?
+    sudo launchctl print system/com.pedro.mempalace-wake
 
 ## Why a hub, not the daemon
 
@@ -60,7 +79,7 @@ whatever the backend, and it carries over unchanged.
   backstop. It visits only transcripts changed since the last sweep
   (`~/.mempalace/transcript-sweep.last`). The first run has no marker and
   backfills every transcript, one cold CLI start each, so expect it to take
-  hours. Kick it off by hand rather than waiting for 03:30:
+  hours. Kick it off by hand rather than waiting for 03:00:
   `launchctl kickstart gui/$(id -u)/com.pedro.mempalace-wings`.
 
 Mining writes no file: the hook normalises the JSONL in memory and files

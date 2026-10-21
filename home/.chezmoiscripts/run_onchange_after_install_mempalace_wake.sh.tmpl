@@ -1,0 +1,53 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# Root LaunchDaemon that keeps a one-off `pmset schedule wake` booked for the
+# next 02:58, so the 03:00 mempalace-wings run finds the Mac awake.
+# `pmset repeat` would do it in one line, but it holds a single repeating wake
+# and obsidiary already owns that.
+
+label=com.pedro.mempalace-wake
+plist="/Library/LaunchDaemons/${label}.plist"
+
+if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
+    echo "${label}: no passwordless sudo and not interactive; skipping."
+    exit 0
+fi
+
+tmp="$(mktemp)"
+trap 'rm -f "${tmp}"' EXIT
+cat >"${tmp}" <<'PLIST'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.pedro.mempalace-wake</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/sh</string>
+		<string>-c</string>
+		<string>if [ "$(date +%H%M)" -lt 0258 ]; then d="$(date +%m/%d/%y)"; else d="$(date -v+1d +%m/%d/%y)"; fi; pmset -g sched | grep -q "wake at $d 02:58:00" || pmset schedule wake "$d 02:58:00"</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>3</integer>
+		<key>Minute</key>
+		<integer>5</integer>
+	</dict>
+</dict>
+</plist>
+PLIST
+
+echo "==> installing ${label} (sudo)"
+sudo launchctl bootout "system/${label}" 2>/dev/null || true
+sudo install -m 644 -o root -g wheel "${tmp}" "${plist}"
+sudo launchctl bootstrap system "${plist}"
+sleep 1
+pmset -g sched | grep -F '02:58:00' || echo "${label}: no 02:58 wake booked yet." >&2
+{{ end -}}

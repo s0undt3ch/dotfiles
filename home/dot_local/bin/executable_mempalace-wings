@@ -26,6 +26,17 @@ notify() {
     esac
 }
 
+# com.pedro.mempalace-wake wakes the Mac for this run whatever the power source.
+# On battery with nobody at the keyboard, go straight back to sleep instead.
+if [ "$(uname)" = Darwin ] && pmset -g batt | head -n 1 | grep -q 'Battery Power'; then
+    idle_ns="$(ioreg -c IOHIDSystem | awk '/HIDIdleTime/ { print $NF; exit }')"
+    if [ "${idle_ns:-0}" -gt 300000000000 ]; then
+        echo "on battery and idle; skipping and sleeping."
+        pmset sleepnow
+        exit 0
+    fi
+fi
+
 if ! curl -fsS http://127.0.0.1:6333/readyz >/dev/null 2>&1; then
     notify "Qdrant is not answering on 127.0.0.1:6333, skipping."
     exit 0
