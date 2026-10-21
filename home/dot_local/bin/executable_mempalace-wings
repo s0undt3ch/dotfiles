@@ -118,10 +118,11 @@ done
 
 # Backstop for the transcript hooks. One file at a time: mining a projects dir
 # would also pick up memory/*.md and tool-results/*.txt. Each mine is a cold
-# CLI start, so only transcripts changed since the last sweep are visited; the
-# first run, with no marker yet, is the full backfill.
+# CLI start, so only transcripts changed since the last clean sweep are
+# visited; the first run, with no marker yet, is the full backfill.
 sweep_marker="${HOME}/.mempalace/transcript-sweep.last"
 sweep_started="$(mktemp "${HOME}/.mempalace/.transcript-sweep.XXXXXX")"
+sweep_failed=0
 newer=()
 [ -e "${sweep_marker}" ] && newer=(-newer "${sweep_marker}")
 roots="$(for root in "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}" "${HOME}"/.claude-*; do
@@ -130,8 +131,17 @@ done | sort -u)"
 while IFS= read -r root; do
     [ -n "${root}" ] || continue
     while IFS= read -r -d '' transcript; do
-        "${mempalace}" mine "${transcript}" --mode convos --wing "$(transcript_wing "${transcript}")" >/dev/null ||
+        if ! "${mempalace}" mine "${transcript}" --mode convos --wing "$(transcript_wing "${transcript}")" >/dev/null; then
             echo "transcript mine failed: ${transcript}" >&2
+            sweep_failed=$((sweep_failed + 1))
+        fi
     done < <(find "${root}/projects" -mindepth 2 -maxdepth 2 -name '*.jsonl' -size +0 ${newer[@]+"${newer[@]}"} -print0)
 done <<<"${roots}"
-mv "${sweep_started}" "${sweep_marker}"
+# A failed transcript is older than a new marker, so moving it would drop the
+# file for good; keep the old marker and retry everything since then.
+if [ "${sweep_failed}" -eq 0 ]; then
+    mv "${sweep_started}" "${sweep_marker}"
+else
+    rm -f "${sweep_started}"
+    notify "transcript sweep: ${sweep_failed} failed, will retry next run."
+fi

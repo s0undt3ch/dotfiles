@@ -64,8 +64,11 @@ Qdrant. The old Chroma palace at `~/projects/.mempalace` stays put as an archive
 Mempalace refuses to open a dir that holds artifacts from another backend, so
 the two can't share a path.
 
-The knowledge graph (`~/.mempalace/knowledge_graph.sqlite3`) is SQLite
-whatever the backend, and it carries over unchanged.
+The knowledge graph is SQLite whatever the backend. It lives inside the
+palace dir, at `~/.mempalace/qdrant-palace/knowledge_graph.sqlite3`. The hub
+runs with `--palace`, and mines write there too. The file at
+`~/.mempalace/knowledge_graph.sqlite3` belongs to the legacy default palace,
+and nothing uses it.
 
 ## What gets mined
 
