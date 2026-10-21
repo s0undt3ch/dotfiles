@@ -12,10 +12,6 @@ set fish_prompt_pwd_dir_length 0
 # Disable greeting
 set fish_greeting
 
-if status is-interactive; and type -q brew
-    eval "$(brew shellenv)"
-end
-
 # Use Neovim as the default editor
 set -gx EDITOR nvim
 set -gx VISUAL nvim
@@ -39,7 +35,6 @@ alias gs=git-spice
 alias k9s-prod='begin; set -lx AWS_PROFILE pw-production; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name production --region us-east-1; end; k9s'
 alias k9s-staging='begin; set -lx AWS_PROFILE pw-staging; pdl login aws $AWS_PROFILE; aws eks update-kubeconfig --name $AWS_PROFILE --region us-east-1;  end; k9s'
 alias sqlitebrowser='/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite'
-alias claude=claude-work
 
 
 # >>> dbt-engineering-config dbtvenv >>>

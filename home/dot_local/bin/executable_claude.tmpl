@@ -28,4 +28,10 @@ if command -v llmtrim >/dev/null 2>&1 && llmtrim _alive 2>/dev/null; then
 	eval "$(SHELL=/bin/sh llmtrim setup --env --port 43117 2>/dev/null)"
 fi
 
+{{ if and (eq .chezmoi.os "darwin") .work -}}
+# On macOS plain `claude` means the work profile; claude-personal still overrides.
+: "${CLAUDE_CONFIG_DIR:=${HOME}/.claude-work}"
+export CLAUDE_CONFIG_DIR
+
+{{ end -}}
 exec "$real" "$@"

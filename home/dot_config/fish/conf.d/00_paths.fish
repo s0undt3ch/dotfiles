@@ -9,6 +9,12 @@
 
 set -l brew_prefix /opt/homebrew
 
+# Run shellenv here, not in config.fish: it moves brew to the front of PATH,
+# and running it after this file would bury ~/.local/bin again.
+if test -x $brew_prefix/bin/brew
+    $brew_prefix/bin/brew shellenv fish | source
+end
+
 fish_add_path --prepend --path --move $brew_prefix/opt/mysql-client@8.4/bin
 fish_add_path --prepend --path --move $brew_prefix/bin
 fish_add_path --prepend --path --move $HOME/.local/bin
