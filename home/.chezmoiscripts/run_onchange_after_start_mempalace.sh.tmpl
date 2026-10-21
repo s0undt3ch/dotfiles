@@ -1,0 +1,56 @@
+{{ if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# (Re)load qdrant, the mempalace hub and the daily wings job. All call mise
+# shims, so a version bump needs no service edit, only a restart.
+# Sorts after install_mise_tools so the shim targets exist on a fresh machine.
+#
+# mise config sha256: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+# qdrant config sha256: {{ include "dot_config/qdrant/config.yaml.tmpl" | sha256sum }}
+# wings script sha256: {{ include "dot_local/bin/executable_mempalace-wings" | sha256sum }}
+{{- if eq .chezmoi.os "darwin" }}
+# qdrant plist sha256: {{ include "Library/LaunchAgents/com.pedro.qdrant.plist.tmpl" | sha256sum }}
+# hub plist sha256: {{ include "Library/LaunchAgents/com.pedro.mempalace-hub.plist.tmpl" | sha256sum }}
+# wings plist sha256: {{ include "Library/LaunchAgents/com.pedro.mempalace-wings.plist.tmpl" | sha256sum }}
+{{- else }}
+# units sha256: {{ include "dot_config/systemd/user/qdrant.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-hub.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-wings.service" | sha256sum }} {{ include "dot_config/systemd/user/mempalace-wings.timer" | sha256sum }}
+{{- end }}
+
+shims="${HOME}/.local/share/mise/shims"
+for tool in qdrant mempalace; do
+    if [ ! -x "${shims}/${tool}" ]; then
+        echo "${tool} shim not found; skipping mempalace service setup."
+        exit 0
+    fi
+done
+mkdir -p "${HOME}/.local/share/qdrant"
+{{- if eq .chezmoi.os "darwin" }}
+
+domain="gui/$(id -u)"
+for label in com.pedro.qdrant com.pedro.mempalace-hub com.pedro.mempalace-wings; do
+    plist="${HOME}/Library/LaunchAgents/${label}.plist"
+    echo "==> reloading ${label}"
+    launchctl bootout "${domain}/${label}" 2>/dev/null || true
+    # bootout returns before teardown finishes; bootstrapping too early fails with EIO.
+    for _ in $(seq 1 20); do
+        launchctl print "${domain}/${label}" >/dev/null 2>&1 || break
+        sleep 0.25
+    done
+    launchctl bootstrap "${domain}" "${plist}"
+done
+{{- else }}
+
+echo "==> enabling qdrant, mempalace hub and wings timer"
+systemctl --user daemon-reload
+systemctl --user enable qdrant.service mempalace-hub.service
+systemctl --user restart qdrant.service mempalace-hub.service
+systemctl --user enable --now mempalace-wings.timer
+{{- end }}
+
+for _ in $(seq 1 40); do
+    curl -fsS http://127.0.0.1:6333/readyz >/dev/null 2>&1 && break
+    sleep 0.25
+done
+{{ end -}}

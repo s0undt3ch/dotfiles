@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# Daily: mine every project dir under ~/projects/{me,paddle,3rd-party} into its
+# own wing, and every Claude Code transcript into its project's wing. Each mine
+# forwards to the hub (`mempalace serve`) when it is up. Weekly: run
+# `mempalace sync` per wing, dry-run unless MEMPALACE_SYNC_APPLY=1, and notify
+# with the report path.
+
+shims="${HOME}/.local/share/mise/shims"
+mempalace="${shims}/mempalace"
+jq="${shims}/jq"
+[ -x "${jq}" ] || jq=jq
+projects="${HOME}/projects"
+groups=(me paddle 3rd-party)
+report_dir="${HOME}/.mempalace/sync-reports"
+marker="${report_dir}/.last"
+apply="${MEMPALACE_SYNC_APPLY:-0}"
+
+notify() {
+    echo "$1"
+    case "$(uname)" in
+    Darwin) osascript -e "display notification \"${1//\"/\\\"}\" with title \"mempalace\"" || true ;;
+    *) if command -v notify-send >/dev/null 2>&1; then notify-send mempalace "$1" || true; fi ;;
+    esac
+}
+
+if ! curl -fsS http://127.0.0.1:6333/readyz >/dev/null 2>&1; then
+    notify "Qdrant is not answering on 127.0.0.1:6333, skipping."
+    exit 0
+fi
+
+# Mirrors mempalace's hooks_cli._ingest_wing so a backfilled transcript lands
+# in the same wing the Stop/SessionEnd hooks would pick.
+transcript_wing() {
+    local cwd
+    cwd="$(head -n 200 "$1" | "${jq}" -Rnr 'first(inputs | fromjson? | .cwd? | strings) // empty' 2>/dev/null || true)"
+    cwd="${cwd%%/.claude/worktrees/*}"
+    cwd="${cwd%/}"
+    if [ -z "${cwd}" ]; then
+        echo sessions
+    elif [ "${cwd}" = "${HOME}" ]; then
+        case "$(uname)" in
+        Darwin) echo mac_workstation ;;
+        *) echo linux_workstation ;;
+        esac
+    else
+        basename "${cwd}"
+    fi
+}
+
+existing="$("${mempalace}" status 2>/dev/null | sed -n 's/^  WING: //p' || true)"
+
+# Bare dir name, matching the wing the transcript hooks use for the same repo.
+# Prefix with the group only when the name exists in more than one group.
+dup_names="$(for group in "${groups[@]}"; do
+    for dir in "${projects}/${group}"/*/; do
+        [ -d "${dir}" ] && basename "${dir}"
+    done
+done | sort | uniq -d)"
+
+dirs=()
+wings=()
+for group in "${groups[@]}"; do
+    for dir in "${projects}/${group}"/*/; do
+        [ -d "${dir}" ] || continue
+        name="$(basename "${dir}")"
+        wing="${name}"
+        if grep -qxF -- "${name}" <<<"${dup_names}"; then
+            wing="${group}-${name}"
+        fi
+        dirs+=("${dir%/}")
+        wings+=("${wing}")
+    done
+done
+
+# Sync before mining: it only touches wings that already exist.
+mkdir -p "${report_dir}"
+if [ ! -e "${marker}" ] || [ -n "$(find "${marker}" -mtime +6)" ]; then
+    report="${report_dir}/$(date +%F).log"
+    sync_flags=()
+    mode="dry-run"
+    if [ "${apply}" = 1 ]; then
+        sync_flags+=(--apply)
+        mode="applied"
+    fi
+    failed=0
+    checked=0
+    # Passing the project dir as the root leaves the wing's transcript drawers
+    # out of scope, so Claude pruning old transcripts never deletes them.
+    for i in ${!dirs[@]+"${!dirs[@]}"}; do
+        grep -qxF -- "${wings[i]}" <<<"${existing}" || continue
+        checked=$((checked + 1))
+        echo "== ${wings[i]}" >>"${report}"
+        "${mempalace}" sync "${dirs[i]}" --wing "${wings[i]}" ${sync_flags[@]+"${sync_flags[@]}"} >>"${report}" 2>&1 ||
+            failed=$((failed + 1))
+    done
+    touch "${marker}"
+    notify "sync ${mode}: ${checked} wings checked, ${failed} failed. Report: ${report}"
+fi
+
+for i in ${!dirs[@]+"${!dirs[@]}"}; do
+    "${mempalace}" mine "${dirs[i]}" --wing "${wings[i]}" ||
+        echo "mine failed: ${wings[i]}" >&2
+done
+
+# Backstop for the transcript hooks: an already-mined, unchanged transcript is
+# a cheap mtime no-op, so sweeping every one daily costs little.
+for root in "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}" "${HOME}"/.claude-*; do
+    [ -d "${root}/projects" ] || continue
+    for transcript in "${root}"/projects/*/*.jsonl; do
+        [ -s "${transcript}" ] || continue
+        "${mempalace}" mine "${transcript}" --mode convos --wing "$(transcript_wing "${transcript}")" >/dev/null ||
+            echo "transcript mine failed: ${transcript}" >&2
+    done
+done

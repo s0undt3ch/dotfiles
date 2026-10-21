@@ -6,6 +6,8 @@ Library
 {{/* Linux-only targets: never apply them on macOS. */}}
 {{ if ne .chezmoi.os "linux" }}
 .config/metapac/groups/arch.toml
+.config/systemd
+.config/systemd/**
 {{ end }}
 {{/* Work-only targets: skip on personal machines (see .chezmoi.toml.tmpl). */}}
 {{ if not .work }}

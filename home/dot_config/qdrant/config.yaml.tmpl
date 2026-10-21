@@ -1,0 +1,12 @@
+# Loopback only: the palace holds raw session transcripts.
+service:
+  host: 127.0.0.1
+  http_port: 6333
+  grpc_port: 6334
+
+storage:
+  storage_path: {{ .chezmoi.homeDir }}/.local/share/qdrant/storage
+  snapshots_path: {{ .chezmoi.homeDir }}/.local/share/qdrant/snapshots
+
+telemetry_disabled: true
+log_level: INFO

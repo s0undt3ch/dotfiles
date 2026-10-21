@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# vim: set ft=sh:
+set -euo pipefail
+
+# chezmoi modify_ script: stdin is the live ~/.mempalace/config.json, stdout is
+# the new content. Only the backend selection and write_routing.hooks are owned
+# here. Everything else (wings, hall_keywords) is machine-local and passes
+# through untouched.
+
+original="$(cat)"
+input="${original}"
+[ -n "${input}" ] || input='{}'
+
+run_jq() {
+    if command -v jq >/dev/null 2>&1; then
+        jq "$@"
+    elif command -v mise >/dev/null 2>&1; then
+        mise exec -- jq "$@"
+    else
+        return 127
+    fi
+}
+
+# A new palace_path: the old one holds chroma artifacts, and mempalace refuses
+# to open a palace dir that mixes backends.
+# shellcheck disable=SC2016
+filter='
+    .write_routing.hooks = "direct"
+    | .backend = "qdrant"
+    | .qdrant_url = "http://127.0.0.1:6333"
+    | .qdrant_timeout = 60
+    | .palace_path = $palace
+'
+if ! updated="$(printf '%s' "${input}" | run_jq --arg palace "${HOME}/.mempalace/qdrant-palace" "${filter}")"; then
+    echo "mempalace config.json: could not merge backend settings, leaving it as is." >&2
+    printf '%s' "${original}"
+    exit 0
+fi
+
+printf '%s\n' "${updated}"

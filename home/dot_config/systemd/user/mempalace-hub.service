@@ -1,0 +1,13 @@
+[Unit]
+Description=MemPalace hub (loopback MCP server shared by every session)
+Wants=qdrant.service
+After=qdrant.service
+
+[Service]
+WorkingDirectory=%h
+ExecStart=%h/.local/share/mise/shims/mempalace serve
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=default.target

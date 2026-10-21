@@ -30,6 +30,14 @@
 {{- else }}
   "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.7"
 {{- end }}
+
+  # MemPalace vector store, run as a user service (qdrant launchd/systemd unit).
+  # Linux x86_64 ships gnu and musl tarballs; pin gnu so the pick is stable.
+{{- if eq .chezmoi.os "darwin" }}
+  "github:qdrant/qdrant" = "1.19.2"
+{{- else }}
+  "github:qdrant/qdrant[matching=linux-gnu]" = "1.19.2"
+{{- end }}
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).

@@ -1,0 +1,11 @@
+[Unit]
+Description=Qdrant vector store for MemPalace
+
+[Service]
+WorkingDirectory=%h/.local/share/qdrant
+ExecStart=%h/.local/share/mise/shims/qdrant --config-path %h/.config/qdrant/config.yaml
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

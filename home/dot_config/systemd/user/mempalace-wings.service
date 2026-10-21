@@ -1,0 +1,8 @@
+[Unit]
+Description=Mine project dirs and Claude transcripts into MemPalace, weekly sync dry-run
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h
+Environment=MEMPALACE_SYNC_APPLY=0
+ExecStart=%h/.local/bin/mempalace-wings
