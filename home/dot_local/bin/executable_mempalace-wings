@@ -105,13 +105,22 @@ for i in ${!dirs[@]+"${!dirs[@]}"}; do
         echo "mine failed: ${wings[i]}" >&2
 done
 
-# Backstop for the transcript hooks: an already-mined, unchanged transcript is
-# a cheap mtime no-op, so sweeping every one daily costs little.
-for root in "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}" "${HOME}"/.claude-*; do
-    [ -d "${root}/projects" ] || continue
-    for transcript in "${root}"/projects/*/*.jsonl; do
-        [ -s "${transcript}" ] || continue
+# Backstop for the transcript hooks. One file at a time: mining a projects dir
+# would also pick up memory/*.md and tool-results/*.txt. Each mine is a cold
+# CLI start, so only transcripts changed since the last sweep are visited; the
+# first run, with no marker yet, is the full backfill.
+sweep_marker="${HOME}/.mempalace/transcript-sweep.last"
+sweep_started="$(mktemp "${HOME}/.mempalace/.transcript-sweep.XXXXXX")"
+newer=()
+[ -e "${sweep_marker}" ] && newer=(-newer "${sweep_marker}")
+roots="$(for root in "${CLAUDE_CONFIG_DIR:-${HOME}/.claude}" "${HOME}"/.claude-*; do
+    [ -d "${root}/projects" ] && (cd "${root}" && pwd -P)
+done | sort -u)"
+while IFS= read -r root; do
+    [ -n "${root}" ] || continue
+    while IFS= read -r -d '' transcript; do
         "${mempalace}" mine "${transcript}" --mode convos --wing "$(transcript_wing "${transcript}")" >/dev/null ||
             echo "transcript mine failed: ${transcript}" >&2
-    done
-done
+    done < <(find "${root}/projects" -mindepth 2 -maxdepth 2 -name '*.jsonl' -size +0 ${newer[@]+"${newer[@]}"} -print0)
+done <<<"${roots}"
+mv "${sweep_started}" "${sweep_marker}"

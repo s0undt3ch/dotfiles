@@ -33,8 +33,11 @@
 
   # MemPalace vector store, run as a user service (qdrant launchd/systemd unit).
   # Linux x86_64 ships gnu and musl tarballs; pin gnu so the pick is stable.
+  # arm64 Linux only gets musl.
 {{- if eq .chezmoi.os "darwin" }}
   "github:qdrant/qdrant" = "1.19.2"
+{{- else if eq .chezmoi.arch "arm64" }}
+  "github:qdrant/qdrant[matching=aarch64-unknown-linux-musl]" = "1.19.2"
 {{- else }}
   "github:qdrant/qdrant[matching=linux-gnu]" = "1.19.2"
 {{- end }}

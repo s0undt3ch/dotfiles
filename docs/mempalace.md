@@ -57,7 +57,11 @@ whatever the backend, and it carries over unchanged.
   mine each session's JSONL straight into the project's wing. Mempalace parses
   Claude Code JSONL itself, so there is no markdown conversion step. The daily
   job sweeps `<config dir>/projects/*/*.jsonl` for every Claude profile as a
-  backstop. An unchanged transcript is an mtime no-op.
+  backstop. It visits only transcripts changed since the last sweep
+  (`~/.mempalace/transcript-sweep.last`). The first run has no marker and
+  backfills every transcript, one cold CLI start each, so expect it to take
+  hours. Kick it off by hand rather than waiting for 03:30:
+  `launchctl kickstart gui/$(id -u)/com.pedro.mempalace-wings`.
 
 Mining writes no file: the hook normalises the JSONL in memory and files
 drawers whose `source_file` is the transcript path. The weekly sync passes each
