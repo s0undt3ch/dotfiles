@@ -6,7 +6,8 @@ set -euo pipefail
 # Root LaunchDaemon that keeps a one-off `pmset schedule wake` booked for the
 # next 02:58, so the 03:00 mempalace-wings run finds the Mac awake.
 # `pmset repeat` would do it in one line, but it holds a single repeating wake
-# and obsidiary already owns that.
+# and obsidiary already owns that. `pmset schedule` takes a two-digit year but
+# `pmset -g sched` prints four, hence %y to book and %Y to check.
 
 label=com.pedro.mempalace-wake
 plist="/Library/LaunchDaemons/${label}.plist"
@@ -29,7 +30,7 @@ cat >"${tmp}" <<'PLIST'
 	<array>
 		<string>/bin/sh</string>
 		<string>-c</string>
-		<string>if [ "$(date +%H%M)" -lt 0258 ]; then d="$(date +%m/%d/%y)"; else d="$(date -v+1d +%m/%d/%y)"; fi; pmset -g sched | grep -q "wake at $d 02:58:00" || pmset schedule wake "$d 02:58:00"</string>
+		<string>if [ "$(date +%H%M)" -lt 0258 ]; then o=+0d; else o=+1d; fi; pmset -g sched | grep -q "wake at $(date -v$o +%m/%d/%Y) 02:58:00" || pmset schedule wake "$(date -v$o +%m/%d/%y) 02:58:00"</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
