@@ -16,8 +16,18 @@ in this repo, then `chezmoi apply` writes them to `$HOME`.
 - Formatter hooks (shfmt, taplo, yamlfmt) **modify files then report failure** on
   the run that changed them. Re-stage and commit again — it passes once formatted.
 - Work commits **directly on `main`** (personal repo, no PR flow). Push only when asked.
-- Tool versions are pinned to exact versions in `mise.toml` so Renovate can bump
-  them — don't set them back to `"latest"`.
+
+## Bumping mise tool versions
+
+- "Update mise tools" means **`home/dot_config/mise/config.toml.tmpl`** (the
+  user's global tools). Leave the repo-root `mise.toml` alone — Renovate owns it.
+- Never write `"latest"` in either file. Resolve the real version with
+  `mise latest <tool>` (e.g. `mise latest node`, `mise latest "aqua:quarylabs/sqruff"`)
+  and pin that exact string.
+- Some tools appear more than once inside OS/arch `{{ if }}` branches (llmtrim,
+  qdrant). Bump every branch to the same version.
+- Then **ask** whether to run `chezmoi apply ~/.config/mise/config.toml` and
+  `mise install`. Don't run them unprompted.
 
 ## chezmoi layout
 
