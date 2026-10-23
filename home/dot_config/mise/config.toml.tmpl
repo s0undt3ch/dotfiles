@@ -3,22 +3,22 @@
 [tools]
   "github:abhinav/git-spice" = "0.32.0"
   "pipx:mempalace"           = "3.11.0"
-  usage                      = "7.0.0"
+  usage                      = "7.1.1"
 
-  python                  = "3.14.8"
-  uv                      = "0.13.1"
-  github-cli              = "2.102.0"
-  aqua                    = "2.64.0"
-  semgrep                 = "1.180.0"
-  "aqua:s0undt3ch/ToolR"   = "0.34.1"
-  "aqua:redhat-et/ripwire" = "0.6.7"
-  bun                      = "1.4.3"
-  "aqua:quarylabs/sqruff"  = "0.41.0"
+  python                  = "3.14.9"
+  uv                      = "0.13.5"
+  github-cli              = "2.103.0"
+  aqua                    = "2.65.1"
+  semgrep                 = "1.182.1"
+  "aqua:s0undt3ch/ToolR"   = "0.35.0"
+  "aqua:redhat-et/ripwire" = "0.6.8"
+  bun                      = "1.4.4"
+  "aqua:quarylabs/sqruff"  = "0.42.0"
   jq                       = "1.8.2"
 
-  node                         = "26.12.0"
+  node                         = "26.12.1"
   "aqua:quarto-dev/quarto-cli" = "1.10.19"
-  herdr                        = "0.9.4"
+  herdr                        = "0.9.5"
   vale                         = "3.24.0"
 
   # llmtrim CLI, required by the llmtrim-herdr plugin (herdr-lazy plugins.list).
@@ -44,8 +44,8 @@
 {{ if eq .chezmoi.os "darwin" -}}
 
   # Work-only (Paddle).
-  aws                     = { version = "2.38.1", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.29.0"
+  aws                     = { version = "2.38.4", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.30.0"
   "npm:@dust-tt/dust-cli" = "0.4.6"
 {{ end -}}
 
