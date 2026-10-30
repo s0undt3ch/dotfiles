@@ -3,6 +3,14 @@
 # Enable Starship prompt
 starship init fish | source
 
+# Atuin owns Ctrl+R; the up arrow stays as fish's own history. Installed by
+# mise, which conf.d activates before config.fish runs, so it's on PATH here.
+if type -q atuin
+    # Drop fzf.fish's history widget so it can't fight Atuin for Ctrl+R.
+    functions -q fzf_configure_bindings; and fzf_configure_bindings --history=
+    atuin init fish --disable-up-arrow | source
+end
+
 
 #fish_config theme save "Catppuccin Mocha"
 
