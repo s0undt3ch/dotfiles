@@ -1,5 +1,5 @@
 [tools]
-  prek = { version = "0.5.5", postinstall = "prek install && prek prepare-hooks" }
+  prek = { version = "0.5.9", postinstall = "prek install && prek prepare-hooks" }
 
   # Tools run by the s0undt3ch/pre-commit-hooks hooks. These pins are the single
   # source of truth — the hooks run whatever version is on PATH here. Pinned to
