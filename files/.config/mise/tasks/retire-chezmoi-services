@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#MISE description="Stop the pre-mise mempalace/mute agents and units so the dev.mise.* ones own the ports"
+set -euo pipefail
+
+# Two qdrants would fight over 6333. Safe to re-run: missing jobs are ignored.
+case "$(uname)" in
+Darwin)
+	domain="gui/$(id -u)"
+	for label in com.pedro.qdrant com.pedro.mempalace-hub com.pedro.mempalace-wings com.pedro.mute-at-2100 com.pedro.unmute-at-0900; do
+		if launchctl print "${domain}/${label}" >/dev/null 2>&1; then
+			echo "==> booting out ${label}"
+			launchctl bootout "${domain}/${label}" || true
+		fi
+	done
+	;;
+Linux)
+	for unit in qdrant.service mempalace-hub.service mempalace-wings.timer mempalace-wings.service; do
+		if systemctl --user is-enabled --quiet "${unit}" 2>/dev/null || systemctl --user is-active --quiet "${unit}" 2>/dev/null; then
+			echo "==> disabling ${unit}"
+			systemctl --user disable --now "${unit}" || true
+		fi
+	done
+	;;
+esac

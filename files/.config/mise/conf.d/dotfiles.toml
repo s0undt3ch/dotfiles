@@ -53,3 +53,19 @@
   "~/.config/herdr/config.toml"                               = { mode = "copy" }
   "~/.config/herdr/plugins/config/herdr-lazy/plugins.list"    = { mode = "template", source = "~/projects/me/dotfiles/files/.config/herdr/plugins/config/herdr-lazy/plugins.list.tera" }
   "~/.config/herdr/plugins/config/herdr-spreader/config.yaml" = { mode = "copy" }
+
+  # mempalace: qdrant config and the scripts the services run.
+  "~/.config/qdrant/config.yaml"    = { mode = "template", source = "~/projects/me/dotfiles/files/.config/qdrant/config.yaml.tera" }
+  "~/.local/bin/mempalace-wings"    = { mode = "copy", permissions = "0755" }
+  "~/.local/bin/mempalace-maintain" = { mode = "template", source = "~/projects/me/dotfiles/files/.local/bin/mempalace-maintain.tera", permissions = "0755" }
+
+  # Pre-mise service definitions, replaced by dev.mise.* (tasks/retire-chezmoi-services stops them).
+  "~/Library/LaunchAgents/com.pedro.qdrant.plist"          = { mode = "absent", variants = [{ os = "macos" }] }
+  "~/Library/LaunchAgents/com.pedro.mempalace-hub.plist"   = { mode = "absent", variants = [{ os = "macos" }] }
+  "~/Library/LaunchAgents/com.pedro.mempalace-wings.plist" = { mode = "absent", variants = [{ os = "macos" }] }
+  "~/Library/LaunchAgents/com.pedro.mute-at-2100.plist"    = { mode = "absent", variants = [{ os = "macos" }] }
+  "~/Library/LaunchAgents/com.pedro.unmute-at-0900.plist"  = { mode = "absent", variants = [{ os = "macos" }] }
+  "~/.config/systemd/user/qdrant.service"                  = { mode = "absent", variants = [{ os = "linux" }] }
+  "~/.config/systemd/user/mempalace-hub.service"           = { mode = "absent", variants = [{ os = "linux" }] }
+  "~/.config/systemd/user/mempalace-wings.service"         = { mode = "absent", variants = [{ os = "linux" }] }
+  "~/.config/systemd/user/mempalace-wings.timer"           = { mode = "absent", variants = [{ os = "linux" }] }

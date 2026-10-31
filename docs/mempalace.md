@@ -8,24 +8,28 @@ session's MCP server and hooks can write at once.
 
 ## Pieces, all in `home/`
 
-- `dot_config/mise/config.toml.tmpl` pins `github:qdrant/qdrant`. It is one
-  binary from the GitHub release, with no Docker.
-- `dot_config/qdrant/config.yaml.tmpl` binds to 127.0.0.1 only, keeps data in
+- `files/.config/mise/config.toml` pins `github:qdrant/qdrant` (the macOS and
+  arm64 asset picks live in `config.macos.toml` / `config.linux-arm64.toml`).
+  It is one binary from the GitHub release, with no Docker.
+- `files/.config/qdrant/config.yaml.tera` binds to 127.0.0.1 only, keeps data in
   `~/.local/share/qdrant` and turns telemetry off.
-- `Library/LaunchAgents/com.pedro.qdrant.plist.tmpl` (macOS) and
-  `dot_config/systemd/user/qdrant.service` (Linux) keep Qdrant running.
-- `private_dot_mempalace/modify_private_config.json` sets `backend`,
-  `qdrant_url`, `qdrant_timeout`, `palace_path` and `write_routing.hooks` in
-  `~/.mempalace/config.json`. It leaves every other key alone.
-- `com.pedro.mempalace-hub.plist.tmpl` / `mempalace-hub.service` run
-  `mempalace serve` on 127.0.0.1:8765. See below.
-- `dot_local/bin/executable_mempalace-wings` plus its launchd agent / systemd
-  timer runs daily at 03:00. See below.
-- `run_onchange_after_install_mempalace_wake.sh.tmpl` (macOS) installs a root
-  LaunchDaemon, `com.pedro.mempalace-wake`, that books a wake for 02:58. It
-  asks for sudo once, on the `chezmoi apply` that installs or changes it.
-- `run_onchange_after_start_mempalace_daemon.sh.tmpl` loads the lot. It reruns
-  on any change to the mise config, the Qdrant config or the units.
+- `files/.mempalace/config.merge.json.tera` sets `backend`, `qdrant_url`,
+  `qdrant_timeout`, `palace_path` and `write_routing.hooks` in
+  `~/.mempalace/config.json`, as a mise merge edit. It leaves every other key
+  alone.
+- The services are mise launchd agents (`config.macos.toml`) and systemd user
+  units (`config.linux.toml`), all named `dev.mise.<name>`:
+  - `dev.mise.qdrant` keeps Qdrant running.
+  - `dev.mise.mempalace-hub` runs `mempalace serve` on 127.0.0.1:8765. See below.
+  - `dev.mise.mempalace-wings` runs `files/.local/bin/mempalace-wings` daily at
+    03:00 (on Linux through `dev.mise.mempalace-wings-timer.timer`). See below.
+- `tasks/mempalace-wake` (macOS) installs a root LaunchDaemon,
+  `com.pedro.mempalace-wake`, that books a wake for 02:58. mise only manages
+  user agents, so this one stays a task. It asks for sudo on the
+  `mise bootstrap` that installs or changes it.
+- `tasks/restart-mempalace` restarts qdrant and the hub on any change to the mise
+  config, the Qdrant config or the wings script. mise itself only restarts a
+  service whose definition changed.
 
 ## Waking the Mac at 03:00
 
@@ -83,7 +87,7 @@ and nothing uses it.
   (`~/.mempalace/transcript-sweep.last`). The first run has no marker and
   backfills every transcript, one cold CLI start each, so expect it to take
   hours. Kick it off by hand rather than waiting for 03:00:
-  `launchctl kickstart gui/$(id -u)/com.pedro.mempalace-wings`.
+  `launchctl kickstart gui/$(id -u)/dev.mise.mempalace-wings`.
 
 Mining writes no file: the hook normalises the JSONL in memory and files
 drawers whose `source_file` is the transcript path. The weekly sync passes each
@@ -107,9 +111,9 @@ the weekly report.
 4. Designs a room set for every wing of 50+ drawers that lacks one, files
    drawers from the generic rooms into it, and maps one-off KG predicates onto
    a closed vocabulary. These steps use the local Ollama model named by
-   `mempalace.llmModel` in `home/.chezmoidata.toml` (`qwen3:8b`). The wings
-   job gets it as `MEMPALACE_MAINTAIN_MODEL`, and `chezmoi apply` starts
-   Ollama and pulls it. If the model is missing, the steps are skipped. The helper calls mempalace
+   `[vars] mempalace_llm_model` in `files/.config/mise/config.toml`
+   (`qwen3:8b`). The wings job gets it as `MEMPALACE_MAINTAIN_MODEL`, and the
+   `ollama-pull` task starts Ollama and pulls it. If the model is missing, the steps are skipped. The helper calls mempalace
    in-process with a 16k context. The CLI leaves Ollama at its 4096-token
    default, which truncates the sampled excerpts and makes every model,
    `gemma4:e4b` and `qwen3:8b` included, answer with junk. Nobody reviews the
@@ -124,16 +128,16 @@ Project mines also rebuild their wing's topic tunnels and hallways as they go.
 `MEMPALACE_SYNC_APPLY=0` is set in the launchd plist and the systemd service.
 Each run writes `~/.mempalace/sync-reports/YYYY-MM-DD.log` and sends a desktop
 notification with the path. Read a few reports, then flip the variable to `1` in
-the repo and `chezmoi apply`. `--apply` deletes drawers.
+the repo and run `mise bootstrap`. `--apply` deletes drawers.
 
 ## Checks
 
     curl -s http://127.0.0.1:6333/readyz
     curl -s http://127.0.0.1:8765/healthz
     mempalace status
-    launchctl print gui/$(id -u)/com.pedro.qdrant          # macOS
-    launchctl print gui/$(id -u)/com.pedro.mempalace-hub   # macOS
-    systemctl --user status qdrant mempalace-hub           # Linux
+    launchctl print gui/$(id -u)/dev.mise.qdrant                  # macOS
+    launchctl print gui/$(id -u)/dev.mise.mempalace-hub           # macOS
+    systemctl --user status dev.mise.qdrant dev.mise.mempalace-hub # Linux
 
 ## Known trade-off
 

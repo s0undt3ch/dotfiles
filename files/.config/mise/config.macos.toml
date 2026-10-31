@@ -47,3 +47,51 @@
   "brew-cask:naps2"                          = {}
   "brew-cask:notunes"                        = {}
   "brew-cask:zed"                            = {}
+
+# mempalace services. Programs go through mise shims, so a tool bump needs only
+# a restart (tasks/restart-mempalace), not a plist change.
+[bootstrap.macos.launchd.agents.qdrant]
+  program           = "~/.local/share/mise/shims/qdrant"
+  args              = ["--config-path", "{{ config_root }}/.config/qdrant/config.yaml"]
+  working_directory = "~/.local/share/qdrant"
+  run_at_load       = true
+  keep_alive        = true
+  throttle_interval = 10
+  stdout_path       = "~/Library/Logs/qdrant.log"
+  stderr_path       = "~/Library/Logs/qdrant.log"
+
+[bootstrap.macos.launchd.agents.mempalace-hub]
+  program           = "~/.local/share/mise/shims/mempalace"
+  args              = ["serve"]
+  working_directory = "~"
+  run_at_load       = true
+  keep_alive        = true
+  throttle_interval = 30
+  stdout_path       = "~/Library/Logs/mempalace-hub.log"
+  stderr_path       = "~/Library/Logs/mempalace-hub.log"
+
+[bootstrap.macos.launchd.agents.mempalace-wings]
+  program                 = "/usr/bin/caffeinate"
+  args                    = ["-s", "{{ config_root }}/.local/bin/mempalace-wings"]
+  working_directory       = "~"
+  start_calendar_interval = { hour = 3, minute = 0 }
+  stdout_path             = "~/Library/Logs/mempalace-wings.log"
+  stderr_path             = "~/Library/Logs/mempalace-wings.log"
+
+  [bootstrap.macos.launchd.agents.mempalace-wings.environment]
+    PATH                     = "/usr/bin:/bin:/usr/sbin:/sbin"
+    MEMPALACE_SYNC_APPLY     = "0"
+    MEMPALACE_MAINTAIN_MODEL = "{{ vars.mempalace_llm_model }}"
+
+# Quiet hours.
+[bootstrap.macos.launchd.agents.mute-at-2100]
+  program                 = "/usr/bin/osascript"
+  args                    = ["-e", "set volume output muted true"]
+  run_at_load             = false
+  start_calendar_interval = { hour = 21, minute = 0 }
+
+[bootstrap.macos.launchd.agents.unmute-at-0900]
+  program                 = "/usr/bin/osascript"
+  args                    = ["-e", "set volume output muted false"]
+  run_at_load             = false
+  start_calendar_interval = { hour = 9, minute = 0 }

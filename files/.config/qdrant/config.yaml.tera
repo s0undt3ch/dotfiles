@@ -5,8 +5,8 @@ service:
   grpc_port: 6334
 
 storage:
-  storage_path: {{ .chezmoi.homeDir }}/.local/share/qdrant/storage
-  snapshots_path: {{ .chezmoi.homeDir }}/.local/share/qdrant/snapshots
+  storage_path: {{ env.HOME }}/.local/share/qdrant/storage
+  snapshots_path: {{ env.HOME }}/.local/share/qdrant/snapshots
 
 telemetry_disabled: true
 log_level: INFO

@@ -92,12 +92,14 @@ fi
 [tasks.bootstrap]
   description = "Post-install setup: plugins, models, login items, root bits"
   run = [
+    { task = "retire-chezmoi-services" },
     { task = "brew-tap-casks" },
     { task = "claude-plugins" },
     { task = "herdr-sync" },
     { task = "llmtrim-autostart" },
     { task = "ollama-pull-gemma" },
     { task = "ollama-pull" },
+    { task = "restart-mempalace" },
     { task = "nvidia-sleep" },
     { task = "nm-wifi-powersave" },
     { task = "mempalace-wake" },

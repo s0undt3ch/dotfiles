@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+#MISE description="Restart qdrant and the mempalace hub after a tool bump or config change"
+#MISE sources=["{{env.HOME}}/.config/mise/config*.toml", "{{env.HOME}}/.config/qdrant/config.yaml", "{{env.HOME}}/.local/bin/mempalace-wings"]
+set -euo pipefail
+
+# mise only restarts a unit whose definition changed; a [tools] bump keeps the
+# same shim path, so the services need a kick here.
+
+shims="${HOME}/.local/share/mise/shims"
+for tool in qdrant mempalace; do
+	if [ ! -x "${shims}/${tool}" ]; then
+		echo "${tool} shim not found; skipping mempalace restart."
+		exit 0
+	fi
+done
+mkdir -p "${HOME}/.local/share/qdrant"
+
+# The hub opens Qdrant at start; launching it first costs a crash and a restart.
+wait_for_qdrant() {
+	for _ in $(seq 1 40); do
+		curl -fsS http://127.0.0.1:6333/readyz >/dev/null 2>&1 && return 0
+		sleep 0.25
+	done
+	echo "qdrant not ready after 10s; the hub will retry." >&2
+}
+
+if [ "$(uname)" = "Darwin" ]; then
+	domain="gui/$(id -u)"
+	echo "==> restarting dev.mise.qdrant"
+	launchctl kickstart -k "${domain}/dev.mise.qdrant"
+	wait_for_qdrant
+	echo "==> restarting dev.mise.mempalace-hub"
+	launchctl kickstart -k "${domain}/dev.mise.mempalace-hub"
+else
+	echo "==> restarting dev.mise.qdrant"
+	systemctl --user restart dev.mise.qdrant.service
+	wait_for_qdrant
+	echo "==> restarting dev.mise.mempalace-hub"
+	systemctl --user restart dev.mise.mempalace-hub.service
+fi

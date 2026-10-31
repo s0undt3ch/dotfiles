@@ -200,3 +200,40 @@
   "pacman:mitmproxy"       = {}
   "pacman:nmap"            = {}
   "pacman:wdiff"           = {}
+
+# mempalace services. Programs go through mise shims, so a tool bump needs only
+# a restart (tasks/restart-mempalace), not a unit change.
+[bootstrap.linux.systemd.units.qdrant]
+  description       = "Qdrant vector store for MemPalace"
+  working_directory = "~/.local/share/qdrant"
+  exec_start        = "~/.local/share/mise/shims/qdrant --config-path {{ config_root }}/.config/qdrant/config.yaml"
+  restart           = "always"
+  restart_sec       = "10"
+
+[bootstrap.linux.systemd.units.mempalace-hub]
+  description       = "MemPalace hub (loopback MCP server shared by every session)"
+  wants             = ["dev.mise.qdrant.service"]
+  after             = ["dev.mise.qdrant.service"]
+  working_directory = "~"
+  exec_start        = "~/.local/share/mise/shims/mempalace serve"
+  restart           = "always"
+  restart_sec       = "30"
+
+# Started only by the timer below.
+[bootstrap.linux.systemd.units.mempalace-wings]
+  description       = "Mine project dirs and Claude transcripts into MemPalace, weekly sync dry-run"
+  type              = "oneshot"
+  working_directory = "~"
+  exec_start        = "~/.local/bin/mempalace-wings"
+  wanted_by         = []
+  start             = false
+
+  [bootstrap.linux.systemd.units.mempalace-wings.environment]
+    MEMPALACE_SYNC_APPLY     = "0"
+    MEMPALACE_MAINTAIN_MODEL = "{{ vars.mempalace_llm_model }}"
+
+[bootstrap.linux.systemd.units.mempalace-wings-timer]
+  description = "Daily MemPalace wings mine"
+  on_calendar = "*-*-* 03:00:00"
+  persistent  = true
+  unit        = "mempalace-wings"
