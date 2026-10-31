@@ -18,9 +18,9 @@ repos:
       - id: gitleaks # Scan staged changes for hardcoded secrets.
       - id: typos # Source-code spell checker (config in typos.toml).
       - id: shellcheck # Static analysis for shell scripts.
-        exclude: '^bin/git-clone-branches-layout$|\.(tmpl|tera)$' # zsh / chezmoi templates
+        exclude: '^bin/git-clone-branches-layout$|\.tera$' # zsh / mise Tera templates
       - id: shfmt # Format shell scripts in place.
-        exclude: '^bin/git-clone-branches-layout$|\.(tmpl|tera)$' # zsh / chezmoi templates
+        exclude: '^bin/git-clone-branches-layout$|\.tera$' # zsh / mise Tera templates
       - id: yamlfmt # Format YAML files.
       - id: system-tool # Format TOML with taplo (respects .taplo.toml).
         alias: taplo-format

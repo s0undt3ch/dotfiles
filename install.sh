@@ -1,53 +1,77 @@
 #!/bin/sh
-# Bootstrap this dotfiles repo with chezmoi on any OS.
+# Bootstrap this machine from this dotfiles repo with mise.
 #
-#   ./install.sh            # install chezmoi (if needed), then init + apply
-#   ./install.sh --dry-run  # show what would change, don't apply
+#   ./install.sh                  # install mise (if needed), then mise bootstrap
+#   ./install.sh --work           # same, and turn on the work profile
+#   ./install.sh --dry-run        # show what would change, don't apply
 #
-# chezmoi is installed via the native package manager when available
-# (pacman / brew), falling back to the official standalone installer into
-# ~/.local/bin. The repo root (this directory) is used as the chezmoi source;
-# .chezmoiroot then redirects the actual source into home/.
+# The checkout must live at ~/projects/me/dotfiles: the global mise config
+# (files/.config/mise, linked to ~/.config/mise) points its dotfile sources there.
 set -eu
 
-# Directory containing this script == the chezmoi source root.
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+REPO_DIR="${HOME}/projects/me/dotfiles"
 BIN_DIR="${HOME}/.local/bin"
 
-DRY_RUN=0
-[ "${1:-}" = "--dry-run" ] && DRY_RUN=1
+DRY_RUN=
+WORK=0
+for arg in "$@"; do
+    case "${arg}" in
+    --dry-run) DRY_RUN=--dry-run ;;
+    --work) WORK=1 ;;
+    *)
+        echo "unknown argument: ${arg}" >&2
+        exit 2
+        ;;
+    esac
+done
 
-CHEZMOI=$(command -v chezmoi 2>/dev/null || true)
-[ -z "${CHEZMOI}" ] && [ -x "${BIN_DIR}/chezmoi" ] && CHEZMOI="${BIN_DIR}/chezmoi"
+if [ "${SCRIPT_DIR}" != "${REPO_DIR}" ]; then
+    echo "Clone this repo to ${REPO_DIR} and run install.sh from there." >&2
+    exit 1
+fi
 
-if [ -z "${CHEZMOI}" ]; then
-    echo "==> chezmoi not found; installing..."
+if [ "$(uname)" = "Linux" ] && ! command -v yay >/dev/null 2>&1; then
+    echo "yay (AUR helper) is needed for the aur: packages. Install it first:" >&2
+    echo "  sudo pacman -S --needed git base-devel" >&2
+    echo "  git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && (cd /tmp/yay-bin && makepkg -si)" >&2
+    exit 1
+fi
+
+MISE=$(command -v mise 2>/dev/null || true)
+[ -z "${MISE}" ] && [ -x "${BIN_DIR}/mise" ] && MISE="${BIN_DIR}/mise"
+
+if [ -z "${MISE}" ]; then
+    echo "==> mise not found; installing..."
     if command -v pacman >/dev/null 2>&1 && command -v sudo >/dev/null 2>&1; then
-        sudo pacman -S --needed --noconfirm chezmoi || true
+        sudo pacman -S --needed --noconfirm mise || true
     elif command -v brew >/dev/null 2>&1; then
-        brew install chezmoi || true
+        brew install mise || true
     fi
-    CHEZMOI=$(command -v chezmoi 2>/dev/null || true)
-    if [ -z "${CHEZMOI}" ]; then
-        echo "==> Falling back to the official standalone installer (-> ${BIN_DIR})"
-        mkdir -p "${BIN_DIR}"
-        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${BIN_DIR}"
-        CHEZMOI="${BIN_DIR}/chezmoi"
+    MISE=$(command -v mise 2>/dev/null || true)
+    if [ -z "${MISE}" ]; then
+        echo "==> Falling back to the official installer (-> ${BIN_DIR})"
+        curl -fsSL https://mise.run | MISE_INSTALL_PATH="${BIN_DIR}/mise" sh
+        MISE="${BIN_DIR}/mise"
     fi
 fi
 
-echo "==> Using $("${CHEZMOI}" --version)"
+echo "==> Using $("${MISE}" --version)"
 
-# Point plain `chezmoi` invocations at this repo for future runs.
-mkdir -p "${HOME}/.config/chezmoi"
-cat >"${HOME}/.config/chezmoi/chezmoi.toml" <<EOF
-sourceDir = "${SCRIPT_DIR}"
-EOF
-
-if [ "${DRY_RUN}" -eq 1 ]; then
-    echo "==> chezmoi diff (dry run)"
-    exec "${CHEZMOI}" --source "${SCRIPT_DIR}" diff
+# miserc.local.toml is gitignored and only read once ~/.config/mise is linked,
+# so the first run also needs -E work.
+if [ "${WORK}" -eq 1 ]; then
+    if [ -z "${DRY_RUN}" ]; then
+        printf 'env = ["work"]\n' >"${REPO_DIR}/files/.config/mise/miserc.local.toml"
+    fi
+    set -- -E work
+else
+    set --
 fi
 
-echo "==> chezmoi init --apply"
-exec "${CHEZMOI}" --source "${SCRIPT_DIR}" init --apply
+ORIGIN=$(git -C "${REPO_DIR}" remote get-url origin)
+# shellcheck disable=SC2086 # DRY_RUN is empty or one flag
+exec "${MISE}" "$@" bootstrap ${DRY_RUN} \
+    --from "${ORIGIN}" \
+    --from-dir "${REPO_DIR}" \
+    --config-dir files/.config/mise

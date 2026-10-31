@@ -1,58 +1,57 @@
 # dotfiles
 
-Personal dotfiles managed with [chezmoi](https://chezmoi.io). Arch Linux is the primary target;
-macOS is supported through chezmoi templating. Packages are installed declaratively with
-[metapac](https://github.com/ripytide/metapac), and development tooling is pinned with
-[mise](https://mise.jdx.dev).
+Personal dotfiles, packages and services, all driven by [mise](https://mise.jdx.dev): its
+[dotfiles](https://mise.jdx.dev/dotfiles/) and [bootstrap](https://mise.jdx.dev/bootstrap.html)
+features. Arch Linux is the primary target; macOS is supported through per-OS config files and Tera
+templates.
 
 ## Bootstrap a new machine
 
-The `install.sh` script installs chezmoi (via `pacman`/`brew`, or the standalone installer as a
-fallback), points it at this repo, and applies everything:
+The checkout must live at `~/projects/me/dotfiles`: the global mise config points its dotfile
+sources there. On Arch, install `yay` first (`install.sh` tells you how if it's missing).
 
 ```bash
-git clone https://github.com/s0undt3ch/dotfiles.git
-cd dotfiles
-./install.sh          # add --dry-run to preview with `chezmoi diff` first
+git clone git@github.com:s0undt3ch/dotfiles.git ~/projects/me/dotfiles
+cd ~/projects/me/dotfiles
+./install.sh            # add --work on a work machine, --dry-run to preview
 ```
 
-On first apply, chezmoi also runs the `run_onchange_` scripts that install packages via metapac and
-dev tools via mise.
+`install.sh` installs mise if needed, then runs `mise bootstrap`, which links `~/.config/mise` to
+`files/.config/mise` in this repo and applies everything: packages, dotfiles, services, tools and
+the `bootstrap` task.
 
 ## Everyday use
 
-- Preview what would change: `chezmoi diff`
-- Apply changes to `$HOME`: `chezmoi apply` (add `--dry-run --verbose` to preview)
-- Edit a managed file: change the **source** under `home/` in this repo, then `chezmoi apply`
+- Preview: `mise dot diff`, `mise bootstrap --dry-run`
+- Apply dotfiles: `mise dot apply`
+- Apply everything: `mise bootstrap`
+- Edit a managed file: change it under `files/` in this repo, then apply
 
-> Do not hand-edit files under `~` (e.g. `~/.config/...`). chezmoi owns them and `apply` will
-> overwrite local edits. Always edit the source in this repo.
+> Do not hand-edit files under `~` (e.g. `~/.config/...`). They are copies; the next apply
+> overwrites local edits. Always edit the source in this repo.
 
 ### Repo layout
 
-The chezmoi source root is `home/` (set in `.chezmoiroot`), so `home/dot_config/foo` maps to
-`~/.config/foo`. chezmoi's filename conventions:
+| Path                                   | What it holds                                                                 |
+|----------------------------------------|-------------------------------------------------------------------------------|
+| `files/`                               | Dotfile sources under their real names (`files/.config/foo` → `~/.config/foo`) |
+| `*.tera`                               | Tera templates, rendered by `mode = "template"` entries                       |
+| `files/.config/mise/config.toml`       | Global tools, settings, vars and the `bootstrap` task                         |
+| `files/.config/mise/config.macos.toml` | macOS-only tools, Homebrew packages and launchd agents                        |
+| `files/.config/mise/config.linux.toml` | Linux-only pacman/AUR packages, system services and systemd units             |
+| `files/.config/mise/config.work.toml`  | Work-profile vars                                                             |
+| `files/.config/mise/conf.d/dotfiles.toml` | The `[dotfiles]` entries                                                   |
+| `files/.config/mise/tasks/`            | One-off setup tasks run by `mise bootstrap`                                   |
 
-| Prefix / suffix   | Meaning                                              |
-|-------------------|------------------------------------------------------|
-| `dot_`            | Leading `.` in the target (`dot_config` → `.config`) |
-| `executable_`     | File is made executable                              |
-| `private_`        | File is created with `0600` permissions              |
-| `.tmpl`           | File is rendered as a Go template                    |
-| `run_onchange_*`  | Script re-run whenever its content hash changes      |
-
-OS-specific behaviour is gated in templates with `{{ if eq .chezmoi.os "darwin" }}...{{ end }}`, and
-whole files can be excluded per-OS via `.chezmoiignore`.
+`miserc.toml` sets `auto_env = true`, so mise loads the `config.<os>.toml` file for the machine
+it runs on. A work machine also has a gitignored `files/.config/mise/miserc.local.toml` with
+`env = ["work"]`, which loads `config.work.toml` and selects the `profile = "work"` dotfiles.
 
 ## Managing packages
 
-Packages are declared, not installed by hand. Edit the relevant metapac group file:
-
-- Arch (Linux, via `yay`): `home/dot_config/metapac/groups/arch.toml`
-- macOS (via Homebrew): `home/dot_config/metapac/groups/brew.toml`
-
-On the next `chezmoi apply`, the `run_onchange_after_metapac-sync` script runs `metapac sync` to
-install anything missing. The backend is chosen automatically per OS.
+Packages are declared, not installed by hand: add `"brew:<name>" = {}` (or `brew-cask:`) to
+`config.macos.toml`, or `"pacman:<name>" = {}` / `"aur:<name>" = {}` to `config.linux.toml`, then
+run `mise bootstrap --only packages`.
 
 ## Development tooling
 
@@ -94,7 +93,7 @@ Supporting config: `typos.toml` (spell-check allowlist), `.shellcheckrc` (disabl
 
 ## Manual host setup
 
-Some host configuration lives outside chezmoi (root-owned system files that `chezmoi apply` does not
+Some host configuration lives outside mise (root-owned system files that `mise bootstrap` does not
 manage). Redo these by hand on a new machine:
 
 - [Fingerprint auth on Arch](docs/fingerprint-auth-arch.md) — `fprintd` + PAM for `sudo`, TTY login,

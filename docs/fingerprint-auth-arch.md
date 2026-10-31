@@ -2,8 +2,8 @@
 
 Setup notes for `fprintd` / `libfprint` fingerprint authentication on Arch Linux.
 
-> **Not chezmoi-tracked.** Everything here lives under `/etc/pam.d/` (root-owned system config), so
-> `chezmoi apply` does **not** manage or restore it. Redo these steps by hand after a reinstall or a
+> **Not managed by mise.** Everything here lives under `/etc/pam.d/` (root-owned system config), so
+> `mise bootstrap` does **not** manage or restore it. Redo these steps by hand after a reinstall or a
 > new laptop.
 
 ## Reference hardware
@@ -21,8 +21,8 @@ ID. If enrollment fails, check the [libfprint supported devices][libfprint-devic
 ## 1. Install and enroll
 
 ```bash
-# add `fprintd` to home/dot_config/metapac/groups/arch.toml, then:
-chezmoi apply          # runs `metapac sync`
+# add "pacman:fprintd" to files/.config/mise/config.linux.toml, then:
+mise bootstrap --only packages
 
 fprintd-enroll         # enroll a finger (repeat the swipe/press until complete)
 fprintd-list "$USER"   # verify the enrolled finger(s)

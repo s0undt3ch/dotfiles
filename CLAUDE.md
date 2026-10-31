@@ -1,8 +1,9 @@
 # CLAUDE.md
 
-Personal dotfiles managed with [chezmoi](https://chezmoi.io). Arch Linux is the
-primary target; macOS is supported via templating. Edits go to the **source**
-in this repo, then `chezmoi apply` writes them to `$HOME`.
+Personal dotfiles, packages and services managed with mise's `[dotfiles]` and
+`[bootstrap.*]` features (mise >= 2026.10.24). Arch Linux is the primary target;
+macOS is supported via per-OS config files and Tera templates. Edits go to the
+**source** in this repo, then `mise dot apply` / `mise bootstrap` write them to `$HOME`.
 
 ## Committing (read this first)
 
@@ -19,34 +20,50 @@ in this repo, then `chezmoi apply` writes them to `$HOME`.
 
 ## Bumping mise tool versions
 
-- "Update mise tools" means **`home/dot_config/mise/config.toml.tmpl`** (the
-  user's global tools). Leave the repo-root `mise.toml` alone — Renovate owns it.
-- Never write `"latest"` in either file. Resolve the real version with
+- "Update mise tools" means **`files/.config/mise/config.toml`** plus the
+  platform files `config.macos.toml` and `config.linux-arm64.toml` (the user's
+  global tools). Renovate bumps both these and the repo-root `mise.toml`.
+- Never write `"latest"` in any mise file. Resolve the real version with
   `mise latest <tool>` (e.g. `mise latest node`, `mise latest "aqua:quarylabs/sqruff"`)
   and pin that exact string.
-- Some tools appear more than once inside OS/arch `{{ if }}` branches (llmtrim,
-  qdrant). Bump every branch to the same version.
-- Then **ask** whether to run `chezmoi apply ~/.config/mise/config.toml` and
-  `mise install`. Don't run them unprompted.
+- llmtrim and qdrant appear once per platform file (different asset picks).
+  Bump every copy to the same version.
+- Then **ask** whether to run `mise install`. Don't run it unprompted.
 
-## chezmoi layout
+## mise layout
 
-- Source root is **`home/`** (`.chezmoiroot`). A path like `~/.config/fish/config.fish`
-  lives at `home/dot_config/fish/config.fish.tmpl` in the repo.
-- Naming: `dot_` → `.`, `executable_` → +x, `private_` → 0600, `.tmpl` → templated,
-  `run_onchange_*` → scripts re-run when their content hash changes.
-- **Edit the source, not the target.** After editing, `chezmoi apply` (or
-  `chezmoi apply ~/.config/<path>` for one file). `chezmoi apply --dry-run --verbose`
-  to preview. Never hand-edit `~/.config/...` — chezmoi will overwrite it.
-- OS gating in templates: `{{ if eq .chezmoi.os "darwin" }}...{{ end }}`
-  (and `.chezmoiignore` gates whole files, e.g. macOS-only `Library`).
+- `~/.config/mise` is a symlink to **`files/.config/mise`** in this repo, so the
+  global config follows the checked-out branch.
+- `files/` holds dotfile sources under their real names: `~/.config/fish/config.fish`
+  comes from `files/.config/fish/config.fish.tera`. Entries live in
+  `conf.d/dotfiles.toml`. Default mode is `copy`; `.tera` files use
+  `mode = "template"` with an explicit `source = "~/projects/me/dotfiles/files/..."`.
+- Every `[dotfiles]` entry needs an explicit `mode` (or `permissions` only): an
+  entry with just `exclude`/`variants` is parsed as an edit and ignored.
+- OS-specific config goes in `config.macos.toml` / `config.linux.toml`
+  (`auto_env = true` in `miserc.toml` loads them). `conf.d/` loads every file
+  regardless of suffix, so it can't hold per-OS config. In templates use
+  `{% if os() == "macos" %}`.
+- Work profile: work machines set `env = ["work"]` in the gitignored
+  `files/.config/mise/miserc.local.toml`. Templates test
+  `vars.work | default(value=false)`; work-only dotfiles use
+  `variants = [{ profile = "work" }]`.
+- Task `sources` don't expand `~`: write `{{env.HOME}}/...`.
+- **Edit the source, not the target.** Preview with `mise dot diff` /
+  `mise bootstrap --dry-run`, then **ask** before `mise dot apply` or
+  `mise bootstrap`. Never hand-edit `~/.config/...`.
+- Nothing is tracked or autosaved: `history.enabled = false`; never use
+  `mode = "track"`, `mise dot track` or the `history-watch` service.
+- Services are mise launchd agents / systemd units named `dev.mise.<name>`.
+  The root `com.pedro.mempalace-wake` daemon stays a task (mise does user agents only).
 
 ## Packages (declarative, don't install ad-hoc)
 
-- Managed by [metapac](https://github.com/ripytide/metapac): edit
-  `home/dot_config/metapac/groups/arch.toml` (Linux/yay) or `brew.toml` (macOS).
-- `chezmoi apply` triggers `run_onchange_after_metapac-sync.sh.tmpl` →
-  `metapac sync`. Don't `yay -S` / `brew install` directly; add to the group file.
+- `[bootstrap.packages]` in `config.macos.toml` (`brew:` / `brew-cask:`) and
+  `config.linux.toml` (`pacman:` / `aur:` via yay), with `{}` as the value.
+- `mise bootstrap --only packages` installs anything missing. Don't
+  `yay -S` / `brew install` directly; add the line.
+- pacman and aur don't prune: removing a line doesn't uninstall the package.
 
 ## Conventions & gotchas
 
