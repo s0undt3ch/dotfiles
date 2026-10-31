@@ -42,3 +42,9 @@
   "~/.local/bin/claude"              = { mode = "template", source = "~/projects/me/dotfiles/files/.local/bin/claude.tera", permissions = "0755" }
   "~/.local/bin/claude-work"         = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }
   "~/.local/bin/claude-personal"     = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }
+
+  # Retired targets: remove them wherever they linger.
+  "~/.config/fish/conf.d/claude-work.fish"       = { mode = "absent" }
+  "~/.config/fish/conf.d/claude-personal.fish"   = { mode = "absent" }
+  "~/.config/herdr/plugins/local/startup-layout" = { mode = "absent" }
+  "~/.config/claude/hooks/create-worktree.sh"    = { mode = "absent" }
