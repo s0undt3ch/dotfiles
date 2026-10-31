@@ -1,0 +1,7 @@
+{
+  "write_routing": { "hooks": "direct" },
+  "backend": "qdrant",
+  "qdrant_url": "http://127.0.0.1:6333",
+  "qdrant_timeout": 60,
+  "palace_path": "{{ env.HOME }}/.mempalace/qdrant-palace"
+}

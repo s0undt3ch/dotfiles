@@ -69,3 +69,7 @@
   "~/.config/systemd/user/mempalace-hub.service"           = { mode = "absent", variants = [{ os = "linux" }] }
   "~/.config/systemd/user/mempalace-wings.service"         = { mode = "absent", variants = [{ os = "linux" }] }
   "~/.config/systemd/user/mempalace-wings.timer"           = { mode = "absent", variants = [{ os = "linux" }] }
+
+  # mempalace owns the rest of config.json (wings, hall_keywords); only these keys are ours.
+  "~/.mempalace"                    = { permissions = "0700" }
+  "~/.mempalace/config.json/shared" = { source = "~/projects/me/dotfiles/files/.mempalace/config.merge.json.tera", merge = true, template = "tera", permissions = "0600" }
