@@ -1,0 +1,44 @@
+# A copy source defaults to the target's path under files/. Templates need an
+# explicit source because of the .tera suffix.
+
+[dotfiles]
+  "~/.config/fish" = { mode = "copy", exclude = [
+    "conf.d/00_paths.fish.tera",
+    "conf.d/mise-github-token.fish.tera",
+    "config.fish.tera",
+    "**/.DS_Store",
+  ] }
+  "~/.config/fish/config.fish" = { mode = "template", source = "~/projects/me/dotfiles/files/.config/fish/config.fish.tera" }
+  "~/.config/fish/conf.d/00_paths.fish" = { mode = "template", source = "~/projects/me/dotfiles/files/.config/fish/conf.d/00_paths.fish.tera" }
+  "~/.config/fish/conf.d/mise-github-token.fish" = { mode = "template", source = "~/projects/me/dotfiles/files/.config/fish/conf.d/mise-github-token.fish.tera" }
+
+  # nvim owns its lockfile and lazyvim.json at runtime.
+  "~/.config/nvim" = { mode = "copy", exclude = ["lazy-lock.json", "lazyvim.json", "**/.DS_Store"] }
+
+  "~/.config/ghostty/config" = { mode = "template", source = "~/projects/me/dotfiles/files/.config/ghostty/config.tera" }
+  "~/.config/git/ignore"     = { mode = "copy" }
+  "~/.gitconfig"             = { mode = "template", source = "~/projects/me/dotfiles/files/.gitconfig.tera" }
+  "~/.gitconfig.paddle"      = { mode = "copy" }
+  "~/.gitconfig.personal"    = { mode = "copy" }
+  "~/.gitconfig.work"        = { mode = "copy" }
+
+  "~/.config/zed/settings.json"   = { mode = "template", source = "~/projects/me/dotfiles/files/.config/zed/settings.json.tera" }
+  "~/.config/wezterm/wezterm.lua" = { mode = "copy" }
+  "~/.config/starship.toml"       = { mode = "copy" }
+  "~/.tmux.conf"                  = { mode = "copy" }
+
+  "~/.gnupg"                = { permissions = "0700" }
+  "~/.gnupg/gpg-agent.conf" = { mode = "template", source = "~/projects/me/dotfiles/files/.gnupg/gpg-agent.conf.tera", permissions = "0600" }
+  "~/.config/powerdevilrc"  = { mode = "copy", permissions = "0600" }
+
+  "~/Library/KeyBindings/DefaultKeyBinding.dict" = { mode = "copy", variants = [{ os = "macos" }] }
+
+  "~/.config/aerospace" = { mode = "copy", variants = [{ profile = "work" }] }
+  "~/.config/k9s"       = { mode = "copy", variants = [{ profile = "work" }] }
+
+  "~/.local/bin/ff"                  = { mode = "copy", permissions = "0755" }
+  "~/.local/bin/kill-ff"             = { mode = "copy", permissions = "0755" }
+  "~/.local/bin/tmux-shared-windows" = { mode = "copy", permissions = "0755" }
+  "~/.local/bin/claude"              = { mode = "template", source = "~/projects/me/dotfiles/files/.local/bin/claude.tera", permissions = "0755" }
+  "~/.local/bin/claude-work"         = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }
+  "~/.local/bin/claude-personal"     = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }

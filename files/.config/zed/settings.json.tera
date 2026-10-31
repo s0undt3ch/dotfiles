@@ -16,7 +16,7 @@
     "dock": "left"
   },
   "context_servers": {
-{{- if eq .chezmoi.os "darwin" }}
+{%- if os() == "macos" %}
     "mcp-server-linear": {
       "enabled": true,
       "remote": false,
@@ -27,7 +27,7 @@
       "remote": false,
       "settings": {}
     },
-{{- end }}
+{%- endif %}
     "mcp-server-github": {
       "enabled": true,
       "settings": {}

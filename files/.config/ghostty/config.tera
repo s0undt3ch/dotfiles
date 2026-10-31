@@ -3,14 +3,14 @@
 
 theme = dark:Gruvbox Material Dark,light:Gruvbox Material Light
 font-family = SauceCodePro Nerd Font Mono
-font-size = {{ if .work }}15.0{{ else }}14.0{{ end }}
+font-size = {% if vars.work | default(value=false) %}15.0{% else %}14.0{% endif %}
 
-{{ if eq .chezmoi.os "linux" -}}
+{% if os() == "linux" -%}
 # Mouse-wheel scrolling felt too fast; `discrete` is the wheel multiplier
 # (default 3), `precision` is the trackpad (left at the default 1). Lower
 # `discrete` to slow the wheel — this is independent of OS mouse settings.
 mouse-scroll-multiplier = precision:1,discrete:0.5
-{{ end -}}
+{% endif -%}
 
 # Default split-divider-color is nearly invisible against gruvbox-material's
 # #1d2021 dark background; use the theme's mid-gray for contrast instead.
@@ -26,12 +26,12 @@ working-directory = home
 keybind = cmd+comma=text:"nvim ~/.config/ghostty/config\n"
 
 # Pass Ctrl+Tab and Ctrl+Shift+Tab through to herdr for tab cycling.
-{{ if eq .chezmoi.os "darwin" -}}
+{% if os() == "macos" -%}
 # macOS eats an unbound ctrl+tab for native tab switching, so send the CSI-u
 # sequence explicitly: https://github.com/ghostty-org/ghostty/discussions/9381
 keybind = ctrl+tab=esc:[9;5u
 keybind = ctrl+shift+tab=esc:[9;6u
-{{- else -}}
+{%- else -%}
 keybind = ctrl+tab=unbind
 keybind = ctrl+shift+tab=unbind
-{{- end }}
+{%- endif %}
