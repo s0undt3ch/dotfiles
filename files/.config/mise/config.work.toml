@@ -1,0 +1,4 @@
+# Loaded when miserc.local.toml sets env = ["work"].
+
+[vars]
+  work = true

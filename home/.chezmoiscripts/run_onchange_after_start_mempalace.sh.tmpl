@@ -7,7 +7,7 @@ set -euo pipefail
 # shims, so a version bump needs no service edit, only a restart.
 # Sorts after install_mise_tools so the shim targets exist on a fresh machine.
 #
-# mise config sha256: {{ include "dot_config/mise/config.toml.tmpl" | sha256sum }}
+# mise config sha256: {{ include (joinPath .chezmoi.sourceDir "../files/.config/mise/config.toml") | sha256sum }}
 # qdrant config sha256: {{ include "dot_config/qdrant/config.yaml.tmpl" | sha256sum }}
 # maintain model: {{ .mempalace.llmModel }}
 # wings script sha256: {{ include "dot_local/bin/executable_mempalace-wings" | sha256sum }}

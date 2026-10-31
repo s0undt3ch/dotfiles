@@ -1,0 +1,10 @@
+# macOS overrides for config.toml; keep versions in step with it.
+
+[tools]
+  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.7"
+  "github:qdrant/qdrant"               = "1.20.0"
+
+  # Work-only (Paddle).
+  aws                     = { version = "2.38.4", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.30.0"
+  "npm:@dust-tt/dust-cli" = "0.4.6"

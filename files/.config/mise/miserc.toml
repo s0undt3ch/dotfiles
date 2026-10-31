@@ -1,0 +1,2 @@
+# Loads config.<os>.toml / config.<os>-<arch>.toml alongside config.toml.
+auto_env = true

@@ -1,15 +1,17 @@
-# vim: set ft=toml:
+# Global mise config, symlinked from ~/.config/mise. Linux x86_64 asset picks
+# live here; config.macos.toml and config.linux-arm64.toml override them
+# (auto_env in miserc.toml loads the platform file).
 
 [tools]
   "github:abhinav/git-spice" = "0.33.0"
   "pipx:mempalace"           = "3.11.0"
   usage                      = "7.1.3"
 
-  python                  = "3.14.9"
-  uv                      = "0.13.5"
-  github-cli              = "2.103.2"
-  aqua                    = "2.65.2"
-  semgrep                 = "1.182.1"
+  python                   = "3.14.9"
+  uv                       = "0.13.5"
+  github-cli               = "2.103.2"
+  aqua                     = "2.65.2"
+  semgrep                  = "1.182.1"
   "aqua:s0undt3ch/ToolR"   = "0.35.0"
   "aqua:redhat-et/ripwire" = "0.6.8"
   bun                      = "1.4.4"
@@ -26,29 +28,11 @@
   # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
   # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
   # gnu "tray" GUI build); pin matching=musl so ubi/github doesn't grab the tray one.
-{{- if eq .chezmoi.os "darwin" }}
-  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.7"
-{{- else }}
   "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.7"
-{{- end }}
 
   # MemPalace vector store, run as a user service (qdrant launchd/systemd unit).
   # Linux x86_64 ships gnu and musl tarballs; pin gnu so the pick is stable.
-  # arm64 Linux only gets musl.
-{{- if eq .chezmoi.os "darwin" }}
-  "github:qdrant/qdrant" = "1.20.0"
-{{- else if eq .chezmoi.arch "arm64" }}
-  "github:qdrant/qdrant[matching=aarch64-unknown-linux-musl]" = "1.20.0"
-{{- else }}
   "github:qdrant/qdrant[matching=linux-gnu]" = "1.20.0"
-{{- end }}
-{{ if eq .chezmoi.os "darwin" -}}
-
-  # Work-only (Paddle).
-  aws                     = { version = "2.38.4", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.30.0"
-  "npm:@dust-tt/dust-cli" = "0.4.6"
-{{ end -}}
 
 [settings]
   python.uv_venv_auto                 = true
@@ -57,5 +41,14 @@
   experimental                        = true
   idiomatic_version_file_enable_tools = ["python"]
 
+  dotfiles.root = "~/projects/me/dotfiles/files"
+  # A git pull touches mtimes; only real content changes should re-run tasks.
+  task.source_freshness_hash_contents = true
+  # Even `mise dot status` starts a history repo otherwise; nothing is tracked.
+  history.enabled = false
+
 [env]
   _.file = [{ path = "~/.env" }, { path = "~/.env.secrets", redact = true }]
+
+[vars]
+  mempalace_llm_model = "qwen3:8b"

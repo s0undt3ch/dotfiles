@@ -1,2 +1,7 @@
 # chezmoi source: LazyVim lockfile / generated config are owned by nvim, not vcs
 home/dot_config/nvim/*.json
+# mise global config: per-machine files stay out of git
+files/.config/mise/*.local.toml
+files/.config/mise/conf.d/*.local.toml
+files/.config/mise/*.lock
+files/.config/mise/conf.d/dotfiles-tracking.toml
