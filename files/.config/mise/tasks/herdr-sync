@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#MISE description="Install herdr-lazy and converge herdr plugins to plugins.list"
+#MISE sources=["{{env.HOME}}/.config/herdr/plugins/config/herdr-lazy/plugins.list"]
+set -euo pipefail
+
+if ! command -v herdr >/dev/null 2>&1; then
+	echo "herdr not installed; skipping plugin sync."
+	exit 0
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+	echo "jq not installed; skipping plugin sync."
+	exit 0
+fi
+
+if ! herdr plugin list --json 2>/dev/null | jq -e '.result.plugins[] | select(.plugin_id == "herdr-lazy")' >/dev/null; then
+	echo "==> Installing herdr-lazy plugin manager"
+	herdr plugin install natori-hrj/herdr-lazy -y
+fi
+
+plugin_root=$(herdr plugin list --json | jq -r '.result.plugins[] | select(.plugin_id == "herdr-lazy") | .plugin_root')
+
+if [ ! -x "${plugin_root}/target/release/herdr-lazy" ]; then
+	echo "herdr-lazy binary not built yet; skipping plugin sync." >&2
+	exit 0
+fi
+
+echo "==> Syncing herdr plugins (herdr-lazy sync)"
+HERDR_BIN_PATH=$(command -v herdr) "${plugin_root}/target/release/herdr-lazy" sync

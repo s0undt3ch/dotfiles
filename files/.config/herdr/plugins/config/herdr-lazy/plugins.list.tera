@@ -1,5 +1,5 @@
 devashish2203/herdr-worktrunk
 fkiene/llmtrim-herdr
-{{ if eq .chezmoi.os "darwin" -}}
+{% if os() == "macos" -%}
 tdi/herdr-worktree-from-linear
-{{ end -}}
+{% endif -%}
