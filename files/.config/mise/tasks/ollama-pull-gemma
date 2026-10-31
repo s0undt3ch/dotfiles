@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#MISE description="Pull the Ollama model mempalace uses for LLM-assisted entity refinement"
+set -euo pipefail
+
+# mempalace init --llm-provider ollama uses this model by default. No-op once cached.
+if ! command -v ollama >/dev/null 2>&1; then
+	echo "ollama not installed; skipping."
+	exit 0
+fi
+echo "==> ollama pull gemma4:e4b"
+ollama pull gemma4:e4b || echo "ollama pull failed (server not reachable?); skipping."

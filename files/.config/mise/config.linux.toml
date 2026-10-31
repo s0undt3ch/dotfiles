@@ -1,0 +1,5 @@
+# Linux-only: system services fail `mise bootstrap services` on macOS.
+
+[bootstrap.services.ollama]
+  state   = "running"
+  enabled = true

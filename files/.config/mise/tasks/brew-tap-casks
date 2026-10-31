@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#MISE description="Install tapped Homebrew casks that mise can't evaluate without Ruby 3"
+set -euo pipefail
+
+[ "$(uname)" = "Darwin" ] || exit 0
+
+brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace
