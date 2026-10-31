@@ -1,8 +1,9 @@
-{{ if eq .chezmoi.os "darwin" -}}
 #!/usr/bin/env bash
-# vim: set ft=sh:
+#MISE description="Install the root LaunchDaemon that books the 02:58 wake for mempalace-wings"
+#MISE sources=["{{env.HOME}}/.config/mise/tasks/mempalace-wake"]
 set -euo pipefail
 
+[ "$(uname)" = "Darwin" ] || exit 0
 # Root LaunchDaemon that keeps a one-off `pmset schedule wake` booked for the
 # next 02:58, so the 03:00 mempalace-wings run finds the Mac awake.
 # `pmset repeat` would do it in one line, but it holds a single repeating wake
@@ -13,8 +14,9 @@ label=com.pedro.mempalace-wake
 plist="/Library/LaunchDaemons/${label}.plist"
 
 if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
-    echo "${label}: no passwordless sudo and not interactive; skipping."
-    exit 0
+	echo "${label}: no passwordless sudo and not interactive; skipping."
+	echo "Run 'mise run mempalace-wake' from a terminal."
+	exit 1
 fi
 
 tmp="$(mktemp)"
@@ -51,5 +53,4 @@ sudo install -m 644 -o root -g wheel "${tmp}" "${plist}"
 sudo launchctl bootstrap system "${plist}"
 sleep 1
 pmset -g sched | grep -F '02:58:00' | sed -E 's#([0-9]{2})/([0-9]{2})/([0-9]{4})#\3/\1/\2#' ||
-    echo "${label}: no 02:58 wake booked yet." >&2
-{{ end -}}
+	echo "${label}: no 02:58 wake booked yet." >&2

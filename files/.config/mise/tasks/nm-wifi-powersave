@@ -1,19 +1,21 @@
-{{ if eq .chezmoi.os "linux" -}}
 #!/usr/bin/env bash
-# vim: set ft=sh:
+#MISE description="Install the NetworkManager dispatcher that toggles wifi power save on AC/battery"
+#MISE sources=["{{env.HOME}}/.config/mise/tasks/nm-wifi-powersave"]
 set -euo pipefail
 
+[ "$(uname)" = "Linux" ] || exit 0
+
 if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
-    echo "nm-wifi-powersave: no passwordless sudo and not interactive; skipping."
-    echo "Run 'chezmoi apply' from a terminal, or manually install the dispatcher."
-    exit 0
+	echo "nm-wifi-powersave: no passwordless sudo and not interactive; skipping."
+	echo "Run 'mise run nm-wifi-powersave' from a terminal."
+	exit 1
 fi
 
 DEST=/etc/NetworkManager/dispatcher.d/99-wifi-powersave
 
 echo "==> Installing NM dispatcher: wifi power save toggle on AC/battery"
 
-sudo tee "$DEST" > /dev/null << 'DISPATCHER'
+sudo tee "$DEST" >/dev/null <<'DISPATCHER'
 #!/bin/sh
 wifi_dev=$(iw dev 2>/dev/null | awk '/Interface/{print $2; exit}')
 [ -n "$wifi_dev" ] || exit 0
@@ -30,4 +32,3 @@ sudo chmod 755 "$DEST"
 
 echo "==> Running dispatcher immediately"
 sudo "$DEST"
-{{ end -}}

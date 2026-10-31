@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#MISE description="Enable the nvidia systemd services hibernate and suspend need"
+#MISE sources=["{{env.HOME}}/.config/mise/tasks/nvidia-sleep"]
+set -euo pipefail
+
+# Without these the GPU state is not saved/restored and hibernate fails.
+
+[ "$(uname)" = "Linux" ] || exit 0
+
+if ! lsmod | grep -q '^nvidia'; then
+	echo "nvidia module not loaded; skipping."
+	exit 0
+fi
+
+if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
+	echo "nvidia-sleep: no passwordless sudo and not interactive; skipping."
+	echo "Run 'mise run nvidia-sleep' from a terminal, or manually:"
+	echo "  sudo systemctl enable --now nvidia-hibernate nvidia-resume nvidia-suspend"
+	exit 1
+fi
+
+echo "==> Enabling nvidia sleep services (hibernate/resume/suspend)"
+sudo systemctl enable --now nvidia-hibernate nvidia-resume nvidia-suspend

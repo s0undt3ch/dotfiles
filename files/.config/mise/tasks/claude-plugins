@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#MISE description="Register the mempalace and mi-claude Claude Code plugins"
+set -euo pipefail
+
+# `claude plugin marketplace add` and `claude plugin install` are both
+# idempotent, so this runs on every bootstrap.
+
+if ! command -v claude >/dev/null 2>&1; then
+	echo "claude not installed; skipping plugin marketplace setup."
+	exit 0
+fi
+
+echo "==> Ensuring mempalace marketplace/plugin are configured"
+claude plugin marketplace add MemPalace/mempalace
+claude plugin install mempalace@mempalace
+
+mi_claude_dir="${HOME}/projects/me/mi-claude"
+if [ -d "${mi_claude_dir}" ]; then
+	echo "==> Ensuring mi-claude marketplace/plugin are configured (local checkout)"
+	claude plugin marketplace add "${mi_claude_dir}"
+	claude plugin install mi-claude@mi-claude
+else
+	echo "mi-claude checkout not found at ${mi_claude_dir}; skipping."
+	echo "Clone it first:"
+	echo "  git clone git@github.com:s0undt3ch/mi-claude.git ${mi_claude_dir}"
+	echo "Then run 'mise run claude-plugins'."
+fi

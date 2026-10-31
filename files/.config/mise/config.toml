@@ -52,3 +52,53 @@
 
 [vars]
   mempalace_llm_model = "qwen3:8b"
+
+# A TOML task, not a file task, so `run` can read vars.mempalace_llm_model.
+[tasks.ollama-pull]
+  description = "Pull the Ollama model mempalace-maintain uses"
+  sources = ["{{env.HOME}}/.config/mise/config.toml"]
+  shell = "bash -c"
+  run = '''
+set -euo pipefail
+model="{{ vars.mempalace_llm_model }}"
+
+if ! command -v ollama >/dev/null 2>&1; then
+    echo "ollama not installed; skipping pull of ${model}."
+    exit 0
+fi
+if [ "$(uname)" = "Darwin" ]; then
+    brew services start ollama >/dev/null
+fi
+
+for _ in $(seq 1 40); do
+    curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1 && break
+    sleep 0.25
+done
+if ! curl -fsS http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then
+    echo "ollama is not answering on 127.0.0.1:11434; skipping pull of ${model}."
+    exit 0
+fi
+
+if ollama list | awk 'NR > 1 { print $1 }' | grep -qxF -e "${model}" -e "${model}:latest"; then
+    echo "ollama already has ${model}."
+else
+    echo "==> ollama pull ${model}"
+    ollama pull "${model}"
+fi
+'''
+
+# Run by `mise bootstrap` after tools are installed. One after another: the
+# sudo-needing tasks go last so a missing terminal can't stop the rest.
+[tasks.bootstrap]
+  description = "Post-install setup: plugins, models, login items, root bits"
+  run = [
+    { task = "brew-tap-casks" },
+    { task = "claude-plugins" },
+    { task = "herdr-sync" },
+    { task = "llmtrim-autostart" },
+    { task = "ollama-pull-gemma" },
+    { task = "ollama-pull" },
+    { task = "nvidia-sleep" },
+    { task = "nm-wifi-powersave" },
+    { task = "mempalace-wake" },
+  ]
