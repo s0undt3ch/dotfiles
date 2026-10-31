@@ -44,10 +44,10 @@
   "~/.local/bin/claude-personal"     = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }
 
   # Retired targets: remove them wherever they linger.
-  "~/.config/fish/conf.d/claude-work.fish"       = { mode = "absent" }
-  "~/.config/fish/conf.d/claude-personal.fish"   = { mode = "absent" }
-  "~/.config/herdr/plugins/local/startup-layout" = { mode = "absent" }
-  "~/.config/claude/hooks/create-worktree.sh"    = { mode = "absent" }
+  "~/.config/fish/conf.d/claude-work.fish"                         = { mode = "absent" }
+  "~/.config/fish/conf.d/claude-personal.fish"                     = { mode = "absent" }
+  "~/.config/herdr/plugins/local/startup-layout/herdr-plugin.toml" = { mode = "absent" }
+  "~/.config/claude/hooks/create-worktree.sh"                      = { mode = "absent" }
 
   # herdr: files only, the directory is full of runtime state.
   "~/.config/herdr/config.toml"                               = { mode = "copy" }

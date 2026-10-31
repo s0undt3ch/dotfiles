@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Install the root LaunchDaemon that books the 02:58 wake for mempalace-wings"
+#MISE interactive=true
 #MISE sources=["{{env.HOME}}/.config/mise/tasks/mempalace-wake"]
 set -euo pipefail
 

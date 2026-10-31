@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Install tapped Homebrew casks that mise can't evaluate without Ruby 3"
+#MISE interactive=true
 set -euo pipefail
 
 [ "$(uname)" = "Darwin" ] || exit 0

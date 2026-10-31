@@ -69,6 +69,18 @@ else
     set --
 fi
 
+# mise links ~/.config/mise to the repo and refuses a non-empty directory there.
+CONFIG_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/mise"
+if [ -d "${CONFIG_DIR}" ] && [ ! -L "${CONFIG_DIR}" ] && [ -n "$(ls -A "${CONFIG_DIR}")" ]; then
+    BACKUP="${CONFIG_DIR}.pre-mise-$(date +%Y%m%d%H%M%S)"
+    if [ -n "${DRY_RUN}" ]; then
+        echo "==> would move ${CONFIG_DIR} to ${BACKUP}"
+    else
+        echo "==> moving ${CONFIG_DIR} to ${BACKUP}"
+        mv "${CONFIG_DIR}" "${BACKUP}"
+    fi
+fi
+
 ORIGIN=$(git -C "${REPO_DIR}" remote get-url origin)
 # shellcheck disable=SC2086 # DRY_RUN is empty or one flag
 exec "${MISE}" "$@" bootstrap ${DRY_RUN} \

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Enable the nvidia systemd services hibernate and suspend need"
+#MISE interactive=true
 #MISE sources=["{{env.HOME}}/.config/mise/tasks/nvidia-sleep"]
 set -euo pipefail
 

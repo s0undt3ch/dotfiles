@@ -87,18 +87,22 @@ else
 fi
 '''
 
+# The old com.pedro.* agents and plain systemd units must stop before the
+# dotfiles step deletes their files and the dev.mise.* ones claim port 6333.
+[bootstrap.hooks]
+  pre-dotfiles = "mise run retire-chezmoi-services"
+
 # Run by `mise bootstrap` after tools are installed. One after another: the
 # sudo-needing tasks go last so a missing terminal can't stop the rest.
 [tasks.bootstrap]
   description = "Post-install setup: plugins, models, login items, root bits"
   run = [
-    { task = "retire-chezmoi-services" },
     { task = "brew-tap-casks" },
     { task = "claude-plugins" },
     { task = "herdr-sync" },
     { task = "llmtrim-autostart" },
-    { task = "ollama-pull-gemma" },
     { task = "ollama-pull" },
+    { task = "ollama-pull-gemma" },
     { task = "restart-mempalace" },
     { task = "nvidia-sleep" },
     { task = "nm-wifi-powersave" },

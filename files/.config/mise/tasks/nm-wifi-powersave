@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Install the NetworkManager dispatcher that toggles wifi power save on AC/battery"
+#MISE interactive=true
 #MISE sources=["{{env.HOME}}/.config/mise/tasks/nm-wifi-powersave"]
 set -euo pipefail
 

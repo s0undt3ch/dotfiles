@@ -3,6 +3,8 @@
 set -euo pipefail
 
 # Two qdrants would fight over 6333. Safe to re-run: missing jobs are ignored.
+# Runs as a pre-dotfiles hook; works by label/unit name, so it still works when
+# a plain `mise dot apply` already deleted the old files.
 case "$(uname)" in
 Darwin)
 	domain="gui/$(id -u)"
@@ -14,11 +16,22 @@ Darwin)
 	done
 	;;
 Linux)
-	for unit in qdrant.service mempalace-hub.service mempalace-wings.timer mempalace-wings.service; do
-		if systemctl --user is-enabled --quiet "${unit}" 2>/dev/null || systemctl --user is-active --quiet "${unit}" 2>/dev/null; then
-			echo "==> disabling ${unit}"
-			systemctl --user disable --now "${unit}" || true
+	changed=0
+	for unit in mempalace-wings.timer mempalace-hub.service qdrant.service mempalace-wings.service; do
+		if systemctl --user is-active --quiet "${unit}" 2>/dev/null; then
+			echo "==> stopping ${unit}"
+			systemctl --user stop "${unit}" || true
 		fi
+		# disable needs the unit file, which may already be gone; drop the links directly.
+		for link in "${HOME}"/.config/systemd/user/*.wants/"${unit}"; do
+			[ -L "${link}" ] || continue
+			echo "==> removing ${link}"
+			rm -f "${link}"
+			changed=1
+		done
 	done
+	if [ "${changed}" -eq 1 ]; then
+		systemctl --user daemon-reload
+	fi
 	;;
 esac
