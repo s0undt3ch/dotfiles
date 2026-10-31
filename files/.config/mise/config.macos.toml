@@ -8,3 +8,42 @@
   aws                     = { version = "2.38.4", symlink_bins = "true" }
   "pipx:snowflake-cli"    = "3.30.0"
   "npm:@dust-tt/dust-cli" = "0.4.6"
+
+# Homebrew packages, installed by `mise bootstrap` (step 4).
+# Tapped formulae use their full owner/tap/name. The aerospace tap cask needs
+# Ruby 3 for mise to read it, so tasks/brew-tap-casks installs it instead.
+[bootstrap.packages]
+  "brew:bat"                                 = {}
+  "brew-cask:cap"                            = {}
+  "brew:coreutils"                           = {}
+  "brew:eza"                                 = {}
+  "brew:fd"                                  = {}
+  "brew:FelixKratz/formulae/borders"         = {}
+  "brew:fish"                                = {}
+  "brew:fisher"                              = {}
+  "brew:fzf"                                 = {}
+  "brew:git"                                 = {}
+  "brew:k9s"                                 = {}
+  "brew:kubernetes-cli"                      = {}
+  "brew:mise"                                = {}
+  "brew:neovim"                              = {}
+  "brew:ollama"                              = {}
+  "brew:pinentry-mac"                        = {}
+  "brew:pipx"                                = {}
+  "brew:ripgrep"                             = {}
+  "brew:starship"                            = {}
+  "brew:stylua"                              = {}
+  "brew:terminal-notifier"                   = {}
+  "brew:tmux"                                = {}
+  "brew:uv"                                  = {}
+  "brew:zoxide"                              = {}
+  "brew-cask:alt-tab"                        = {}
+  "brew-cask:db-browser-for-sqlite"          = {}
+  "brew-cask:font-hack-nerd-font"            = {}
+  "brew-cask:font-proggy-clean-tt-nerd-font" = {}
+  "brew-cask:font-sauce-code-pro-nerd-font"  = {}
+  "brew-cask:ghostty"                        = {}
+  "brew-cask:logitech-options"               = {}
+  "brew-cask:naps2"                          = {}
+  "brew-cask:notunes"                        = {}
+  "brew-cask:zed"                            = {}
