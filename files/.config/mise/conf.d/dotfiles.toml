@@ -48,11 +48,11 @@
   "~/.config/fish/conf.d/claude-personal.fish"                     = { mode = "absent" }
   "~/.config/herdr/plugins/local/startup-layout/herdr-plugin.toml" = { mode = "absent" }
   "~/.config/claude/hooks/create-worktree.sh"                      = { mode = "absent" }
+  "~/.config/herdr/plugins/config/herdr-spreader/config.yaml"      = { mode = "absent" }
 
   # herdr: files only, the directory is full of runtime state.
-  "~/.config/herdr/config.toml"                               = { mode = "copy" }
-  "~/.config/herdr/plugins/config/herdr-lazy/plugins.list"    = { mode = "template", source = "~/projects/me/dotfiles/files/.config/herdr/plugins/config/herdr-lazy/plugins.list.tera" }
-  "~/.config/herdr/plugins/config/herdr-spreader/config.yaml" = { mode = "copy" }
+  "~/.config/herdr/config.toml"                            = { mode = "copy" }
+  "~/.config/herdr/plugins/config/herdr-lazy/plugins.list" = { mode = "template", source = "~/projects/me/dotfiles/files/.config/herdr/plugins/config/herdr-lazy/plugins.list.tera" }
 
   # mempalace: qdrant config and the scripts the services run.
   "~/.config/qdrant/config.yaml"    = { mode = "template", source = "~/projects/me/dotfiles/files/.config/qdrant/config.yaml.tera" }
