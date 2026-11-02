@@ -94,17 +94,15 @@ fi
 
 # Run by `mise bootstrap` after tools are installed. One after another: the
 # sudo-needing tasks go last so a missing terminal can't stop the rest.
+# bootstrap-platform is defined in config.macos.toml and config.linux.toml.
 [tasks.bootstrap]
   description = "Post-install setup: plugins, models, login items, root bits"
   run = [
-    { task = "brew-tap-casks" },
     { task = "claude-plugins" },
     { task = "herdr-sync" },
     { task = "llmtrim-autostart" },
     { task = "ollama-pull" },
     { task = "ollama-pull-gemma" },
     { task = "restart-mempalace" },
-    { task = "nvidia-sleep" },
-    { task = "nm-wifi-powersave" },
-    { task = "mempalace-wake" },
+    { task = "bootstrap-platform" },
   ]

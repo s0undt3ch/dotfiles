@@ -95,3 +95,7 @@
   args                    = ["-e", "set volume output muted false"]
   run_at_load             = false
   start_calendar_interval = { hour = 9, minute = 0 }
+
+[tasks.bootstrap-platform]
+  description = "macOS-only post-install setup"
+  run         = [{ task = "brew-tap-casks" }, { task = "mempalace-wake" }]
