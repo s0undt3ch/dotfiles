@@ -5,8 +5,8 @@
   "github:qdrant/qdrant"               = "1.20.0"
 
   # Work-only (Paddle).
-  aws                     = { version = "2.38.4", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.30.0"
+  aws                     = { version = "2.39.3", symlink_bins = "true" }
+  "pipx:snowflake-cli"    = "3.31.0"
   "npm:@dust-tt/dust-cli" = "0.4.6"
 
 # Homebrew packages, installed by `mise bootstrap` (step 4).
