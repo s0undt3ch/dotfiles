@@ -17,6 +17,13 @@ macOS is supported via per-OS config files and Tera templates. Edits go to the
 - Formatter hooks (shfmt, taplo, yamlfmt) **modify files then report failure** on
   the run that changed them. Re-stage and commit again — it passes once formatted.
 - Work commits **directly on `main`** (personal repo, no PR flow). Push only when asked.
+- **Never switch branches in `~/projects/me/dotfiles`.** That checkout is the
+  machine's live config (see below): a `git switch` changes its tools, env,
+  tasks and services at once, and the next apply writes that branch to `$HOME`.
+  Do any other branch in a worktree (`git worktree add`). To preview one, set
+  `MISE_CONFIG_DIR=<worktree>/files/.config/mise`. Dotfile and template
+  sources are absolute paths into the main checkout, so never apply from a
+  worktree.
 
 ## Bumping mise tool versions
 
@@ -33,7 +40,7 @@ macOS is supported via per-OS config files and Tera templates. Edits go to the
 ## mise layout
 
 - `~/.config/mise` is a symlink to **`files/.config/mise`** in this repo, so the
-  global config follows the checked-out branch.
+  global config follows the checked-out branch: keep that checkout on `main`.
 - `files/` holds dotfile sources under their real names: `~/.config/fish/config.fish`
   comes from `files/.config/fish/config.fish.tera`. Entries live in
   `conf.d/dotfiles.toml`. Default mode is `copy`; `.tera` files use
