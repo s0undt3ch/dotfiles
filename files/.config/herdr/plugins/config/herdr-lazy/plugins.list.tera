@@ -1,5 +1,4 @@
 devashish2203/herdr-worktrunk
-fkiene/llmtrim-herdr
 {% if os() == "macos" -%}
 tdi/herdr-worktree-from-linear
 {% endif -%}

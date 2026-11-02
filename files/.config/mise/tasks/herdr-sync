@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#MISE description="Install herdr-lazy and converge herdr plugins to plugins.list"
+#MISE description="Install herdr-lazy and converge herdr plugins to plugins.list, uninstalling unlisted ones"
 #MISE sources=["{{env.HOME}}/.config/herdr/plugins/config/herdr-lazy/plugins.list"]
 set -euo pipefail
 
@@ -25,5 +25,5 @@ if [ ! -x "${plugin_root}/target/release/herdr-lazy" ]; then
 	exit 0
 fi
 
-echo "==> Syncing herdr plugins (herdr-lazy sync)"
-HERDR_BIN_PATH=$(command -v herdr) "${plugin_root}/target/release/herdr-lazy" sync
+echo "==> Syncing herdr plugins (herdr-lazy sync --prune)"
+HERDR_BIN_PATH=$(command -v herdr) "${plugin_root}/target/release/herdr-lazy" sync --prune
