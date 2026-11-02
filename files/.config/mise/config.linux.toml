@@ -188,7 +188,6 @@
   "pacman:zsh-syntax-highlighting"     = {}
   "pacman:zstd"                        = {}
 
-  # Installed on archie but missing from the old metapac list.
   "aur:android-studio"     = {}
   "aur:ripwire-bin"        = {}
   "pacman:amd-debug-tools" = {}

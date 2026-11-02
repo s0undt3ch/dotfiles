@@ -25,7 +25,7 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 
 # Make `less` pass ANSI color escapes through instead of printing them
-# literally, so `chezmoi diff | less`, `git ... | less`, etc. stay colored.
+# literally, so `git ... | less` and the like stay colored.
 # -F: quit immediately if content fits on one screen (also skips the pager
 # entirely on empty output, e.g. a `git grep` with no matches).
 # -X: don't clear the screen on exit, so output stays visible afterwards.
