@@ -59,7 +59,7 @@
   "~/.local/bin/mempalace-wings"    = { mode = "copy", permissions = "0755" }
   "~/.local/bin/mempalace-maintain" = { mode = "template", source = "~/projects/me/dotfiles/files/.local/bin/mempalace-maintain.tera", permissions = "0755" }
 
-  # Pre-mise service definitions, replaced by dev.mise.* (tasks/retire-chezmoi-services stops them).
+  # Pre-mise service definitions, replaced by dev.mise.*.
   "~/Library/LaunchAgents/com.pedro.qdrant.plist"          = { mode = "absent", variants = [{ os = "macos" }] }
   "~/Library/LaunchAgents/com.pedro.mempalace-hub.plist"   = { mode = "absent", variants = [{ os = "macos" }] }
   "~/Library/LaunchAgents/com.pedro.mempalace-wings.plist" = { mode = "absent", variants = [{ os = "macos" }] }
