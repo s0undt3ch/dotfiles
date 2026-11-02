@@ -5,8 +5,10 @@
   "github:qdrant/qdrant"               = "1.20.0"
 
   # Work-only (Paddle).
-  aws                     = { version = "2.39.3", symlink_bins = "true" }
-  "pipx:snowflake-cli"    = "3.31.0"
+  aws = { version = "2.39.3", symlink_bins = "true" }
+  # pydantic-core has no 3.15 wheel yet. --managed-python skips Homebrew's
+  # OpenSSL 4 build, which lacks the ssl.PROTOCOL_TLSv1 the connector needs.
+  "pipx:snowflake-cli"    = { version = "3.31.0", uvx_args = "--python 3.14 --managed-python" }
   "npm:@dust-tt/dust-cli" = "0.4.6"
 
 # Homebrew packages, installed by `mise bootstrap` (step 4).
