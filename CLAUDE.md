@@ -16,7 +16,8 @@ macOS is supported via per-OS config files and Tera templates. Edits go to the
   with `mise exec --`, e.g. `mise exec -- git commit ...` or `mise exec -- prek run -av`.
 - Formatter hooks (shfmt, taplo, yamlfmt) **modify files then report failure** on
   the run that changed them. Re-stage and commit again — it passes once formatted.
-- Work commits **directly on `main`** (personal repo, no PR flow). Push only when asked.
+- Work commits **directly on `main`** (personal repo, no PR flow). Push to
+  `origin main` straight after every commit, without asking.
 - **Never switch branches in `~/projects/me/dotfiles`.** That checkout is the
   machine's live config (see below): a `git switch` changes its tools, env,
   tasks and services at once, and the next apply writes that branch to `$HOME`.
