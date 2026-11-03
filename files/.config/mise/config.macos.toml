@@ -48,6 +48,7 @@
   "brew-cask:logitech-options"               = {}
   "brew-cask:naps2"                          = {}
   "brew-cask:notunes"                        = {}
+  "brew-cask:session-manager-plugin"         = {}
   "brew-cask:zed"                            = {}
 
 # mempalace services. Programs go through mise shims, so a tool bump needs only
