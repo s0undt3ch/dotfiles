@@ -43,8 +43,8 @@
   "~/.local/bin/claude-work"         = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }
   "~/.local/bin/claude-personal"     = { mode = "copy", permissions = "0755", variants = [{ profile = "work" }] }
 
-  # Plugins and tools hardcode ~/.claude; on the work Mac that must be the work profile.
-  "~/.claude" = { mode = "symlink", source = "~/.claude-work", variants = [{ os = "macos", profile = "work" }] }
+  # The work profile lives in ~/.claude, which plugins hardcode; the link keeps old absolute paths working.
+  "~/.claude-work" = { mode = "symlink", source = "~/.claude", variants = [{ os = "macos", profile = "work" }] }
 
   # Retired targets: remove them wherever they linger.
   "~/.config/fish/conf.d/claude-work.fish"                         = { mode = "absent" }

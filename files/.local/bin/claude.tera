@@ -30,7 +30,7 @@ fi
 
 {% if os() == "macos" and vars.work | default(value=false) -%}
 # On macOS plain `claude` means the work profile; claude-personal still overrides.
-: "${CLAUDE_CONFIG_DIR:=${HOME}/.claude-work}"
+: "${CLAUDE_CONFIG_DIR:=${HOME}/.claude}"
 export CLAUDE_CONFIG_DIR
 
 {% endif -%}
