@@ -27,7 +27,6 @@
   "github:grafana/mcp-grafana" = "2.2.0"
   prettier                     = "3.9.10"
   "npm:sql-formatter"          = "15.9.0"
-  "pipx:shandy-sqlfmt"         = "0.32.0"
   terraform                    = "1.17.1"
   terraform-docs               = "0.24.0"
   vault                        = "2.2.1"
@@ -73,6 +72,7 @@
   "brew:ripgrep"                             = {}
   "brew:sevenzip"                            = {}
   "brew:skillshare"                          = {}
+  "brew:sqlfmt"                              = {}
   "brew:starship"                            = {}
   "brew:stylua"                              = {}
   "brew:telnet"                              = {}
