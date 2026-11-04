@@ -11,6 +11,30 @@
   "pipx:snowflake-cli"    = { version = "3.31.0", uvx_args = "--python 3.14 --managed-python" }
   "npm:@dust-tt/dust-cli" = "0.4.6"
 
+  # macOS-only CLI tools, moved off Homebrew.
+  ast-grep                     = "0.51.1"
+  "pipx:codespell"             = "2.4.3"
+  copier                       = "9.19.1"
+  docker-compose               = "5.7.0"
+  git-filter-repo              = "2.47.0"
+  git-lfs                      = "3.8.1"
+  gum                          = "2.0.2"
+  hadolint                     = "2.15.1"
+  helm                         = "4.3.1"
+  helm-ls                      = "0.5.4"
+  "github:pamburus/hl"         = "0.36.5"
+  kubeconform                  = "0.8.0"
+  "github:grafana/mcp-grafana" = "2.2.0"
+  prettier                     = "3.9.10"
+  "npm:sql-formatter"          = "15.9.0"
+  "pipx:shandy-sqlfmt"         = "0.32.0"
+  terraform                    = "1.17.1"
+  terraform-docs               = "0.24.0"
+  vault                        = "2.2.1"
+  "github:tsenart/vegeta"      = "12.13.0"
+  "npm:yaml-language-server"   = "2.0.0"
+  yq                           = "4.54.1"
+
 # Homebrew packages, installed by `mise bootstrap` (step 4).
 # Tapped formulae use their full owner/tap/name. The aerospace tap cask needs
 # Ruby 3 for mise to read it, so tasks/brew-tap-casks installs it instead.

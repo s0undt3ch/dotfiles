@@ -25,29 +25,6 @@
   herdr                        = "0.9.5"
   vale                         = "3.26.0"
 
-  ast-grep                     = "0.51.1"
-  "pipx:codespell"             = "2.4.3"
-  copier                       = "9.19.1"
-  docker-compose               = "5.7.0"
-  git-filter-repo              = "2.47.0"
-  git-lfs                      = "3.8.1"
-  gum                          = "2.0.2"
-  hadolint                     = "2.15.1"
-  helm                         = "4.3.1"
-  helm-ls                      = "0.5.4"
-  "github:pamburus/hl"         = "0.36.5"
-  kubeconform                  = "0.8.0"
-  "github:grafana/mcp-grafana" = "2.2.0"
-  prettier                     = "3.9.10"
-  "npm:sql-formatter"          = "15.9.0"
-  "pipx:shandy-sqlfmt"         = "0.32.0"
-  terraform                    = "1.17.1"
-  terraform-docs               = "0.24.0"
-  vault                        = "2.2.1"
-  "github:tsenart/vegeta"      = "12.13.0"
-  "npm:yaml-language-server"   = "2.0.0"
-  yq                           = "4.54.1"
-
   # llmtrim CLI, required by the llmtrim-herdr plugin (herdr-lazy plugins.list).
   # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
   # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
