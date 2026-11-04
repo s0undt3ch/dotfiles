@@ -23,9 +23,9 @@ session's MCP server and hooks can write at once.
   - `dev.mise.mempalace-hub` runs `mempalace serve` on 127.0.0.1:8765. See below.
   - `dev.mise.mempalace-wings` runs `files/.local/bin/mempalace-wings` daily at
     03:00 (on Linux through `dev.mise.mempalace-wings-timer.timer`). See below.
-- `tasks/mempalace-wake` (macOS) installs a root LaunchDaemon,
-  `com.pedro.mempalace-wake`, that books a wake for 02:58. mise only manages
-  user agents, so this one stays a task. It asks for sudo on the
+- `tasks/mempalace-wake` installs the root `com.pedro.mempalace-wake` job that
+  wakes the machine for the 03:00 run: a LaunchDaemon on macOS, a system timer
+  on Linux. mise only manages user agents, so this one stays a task. It asks for sudo on the
   `mise bootstrap` that installs or changes it.
 - `tasks/restart-mempalace` restarts qdrant and the hub on any change to the mise
   config, the Qdrant config or the wings script. mise itself only restarts a
@@ -46,6 +46,23 @@ If a 03:00 run is missed, launchd runs it at the next wake.
 
     pmset -g sched                                         # 02:58 wake booked?
     sudo launchctl print system/com.pedro.mempalace-wake
+
+## Waking Linux at 03:00
+
+A user timer can't wake the machine: `WakeSystem=` needs `CAP_WAKE_ALARM`. So
+the root `com.pedro.mempalace-wake.timer` wakes it at 03:00 and its service
+starts the user's `dev.mise.mempalace-wings.service` through
+`systemctl --user -M <user>@`. If that run is already going, it waits on it.
+
+The service holds a `sleep:idle:handle-lid-switch` block inhibitor while it
+waits. With the lid shut, logind suspends again about 30s after resume, and
+`LidSwitchIgnoreInhibited` means only `handle-lid-switch` stops that. The
+service runs on AC power only and drops the inhibitor after 5 hours, so a long
+backlog can't keep the lid awake all day. The run itself carries on.
+
+    systemctl list-timers com.pedro.mempalace-wake.timer
+    journalctl -u com.pedro.mempalace-wake.service
+    systemd-inhibit --list                                 # lock held mid-run?
 
 ## Why a hub, not the daemon
 

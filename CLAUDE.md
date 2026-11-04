@@ -63,7 +63,8 @@ macOS is supported via per-OS config files and Tera templates. Edits go to the
 - Nothing is tracked or autosaved: `history.enabled = false`; never use
   `mode = "track"`, `mise dot track` or the `history-watch` service.
 - Services are mise launchd agents / systemd units named `dev.mise.<name>`.
-  The root `com.pedro.mempalace-wake` daemon stays a task (mise does user agents only).
+  The root `com.pedro.mempalace-wake` wake job (LaunchDaemon on macOS, system
+  timer on Linux) stays a task (mise does user agents only).
 
 ## Packages (declarative, don't install ad-hoc)
 

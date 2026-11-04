@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
-#MISE description="Install the root LaunchDaemon that books the 02:58 wake for mempalace-wings"
+#MISE description="Install the root wake job that gets mempalace-wings its 03:00 run"
 #MISE interactive=true
 #MISE sources=["{{env.HOME}}/.config/mise/tasks/mempalace-wake"]
 set -euo pipefail
 
-[ "$(uname)" = "Darwin" ] || exit 0
-# Root LaunchDaemon that keeps a one-off `pmset schedule wake` booked for the
-# next 02:58, so the 03:00 mempalace-wings run finds the Mac awake.
-# `pmset repeat` would do it in one line, but it holds a single repeating wake
-# and obsidiary already owns that. `pmset schedule` takes a two-digit year but
-# `pmset -g sched` prints four, hence %y to book and %Y to check.
-
+case "$(uname)" in Linux | Darwin) ;; *) exit 0 ;; esac
 label=com.pedro.mempalace-wake
-plist="/Library/LaunchDaemons/${label}.plist"
 
 if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
 	echo "${label}: no passwordless sudo and not interactive; skipping."
@@ -20,9 +13,56 @@ if ! sudo -n true 2>/dev/null && [ ! -t 0 ]; then
 	exit 1
 fi
 
-tmp="$(mktemp)"
-trap 'rm -f "${tmp}"' EXIT
-cat >"${tmp}" <<'PLIST'
+tmp="$(mktemp -d)"
+trap 'rm -rf "${tmp}"' EXIT
+
+if [ "$(uname)" = "Linux" ]; then
+	# A user timer can't wake the machine (WakeSystem needs CAP_WAKE_ALARM), so a
+	# root timer wakes it at 03:00 and starts the user's wings run itself. The
+	# inhibitor goes up at once: with the lid shut, logind re-suspends ~30s after
+	# resume, and LidSwitchIgnoreInhibited means only handle-lid-switch stops it.
+	# AC only, and capped at 5h so a long backlog can't keep the lid awake all day;
+	# the run itself carries on after the cap.
+	cat >"${tmp}/${label}.timer" <<-TIMER
+		[Unit]
+		Description=Wake for the 03:00 mempalace-wings run
+
+		[Timer]
+		OnCalendar=*-*-* 03:00:00
+		AccuracySec=1s
+		WakeSystem=true
+		Persistent=false
+
+		[Install]
+		WantedBy=timers.target
+	TIMER
+	cat >"${tmp}/${label}.service" <<-SERVICE
+		[Unit]
+		Description=Run mempalace-wings for $(id -un) with sleep inhibited, on AC only
+
+		[Service]
+		Type=oneshot
+		ExecCondition=/bin/sh -c 'for s in /sys/class/power_supply/*; do [ "\$\$(cat \$\$s/type)" = Mains ] && [ "\$\$(cat \$\$s/online)" = 1 ] && exit 0; done; exit 1'
+		ExecStart=/usr/bin/timeout 5h /usr/bin/systemd-inhibit --what=sleep:idle:handle-lid-switch --mode=block --who=${label} --why="mempalace-wings run" /usr/bin/systemctl --user -M $(id -un)@ start dev.mise.mempalace-wings.service
+		SuccessExitStatus=124
+	SERVICE
+
+	echo "==> installing ${label} (sudo)"
+	sudo install -m 644 -o root -g root "${tmp}/${label}.timer" "${tmp}/${label}.service" /etc/systemd/system/
+	sudo systemctl daemon-reload
+	sudo systemctl enable --now "${label}.timer"
+	systemctl list-timers "${label}.timer" --no-pager
+	exit 0
+fi
+
+# Root LaunchDaemon that keeps a one-off `pmset schedule wake` booked for the
+# next 02:58, so the 03:00 mempalace-wings run finds the Mac awake.
+# `pmset repeat` would do it in one line, but it holds a single repeating wake
+# and obsidiary already owns that. `pmset schedule` takes a two-digit year but
+# `pmset -g sched` prints four, hence %y to book and %Y to check.
+
+plist="/Library/LaunchDaemons/${label}.plist"
+cat >"${tmp}/plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -50,7 +90,7 @@ PLIST
 
 echo "==> installing ${label} (sudo)"
 sudo launchctl bootout "system/${label}" 2>/dev/null || true
-sudo install -m 644 -o root -g wheel "${tmp}" "${plist}"
+sudo install -m 644 -o root -g wheel "${tmp}/plist" "${plist}"
 sudo launchctl bootstrap system "${plist}"
 sleep 1
 pmset -g sched | grep -F '02:58:00' | sed -E 's#([0-9]{2})/([0-9]{2})/([0-9]{4})#\3/\1/\2#' ||

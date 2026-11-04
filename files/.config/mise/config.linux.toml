@@ -239,4 +239,4 @@
 
 [tasks.bootstrap-platform]
   description = "Linux-only post-install setup"
-  run         = [{ task = "nvidia-sleep" }, { task = "nm-wifi-powersave" }]
+  run         = [{ task = "nvidia-sleep" }, { task = "nm-wifi-powersave" }, { task = "mempalace-wake" }]
