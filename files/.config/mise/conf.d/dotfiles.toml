@@ -45,7 +45,7 @@
 
   # The work profile lives in ~/.claude, which plugins hardcode; the link keeps old absolute paths working.
   "~/.claude-work"      = { mode = "symlink", source = "~/.claude", variants = [{ os = "macos", profile = "work" }] }
-  "~/.claude/CLAUDE.md" = { mode = "copy", variants = [{ os = "macos" }] }
+  "~/.claude/CLAUDE.md" = { mode = "copy", variants = [{ os = "macos", profile = "work" }] }
 
   # Retired targets: remove them wherever they linger.
   "~/.config/fish/conf.d/claude-work.fish"                         = { mode = "absent" }
