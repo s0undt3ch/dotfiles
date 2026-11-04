@@ -41,6 +41,7 @@
   "brew:zoxide"                              = {}
   "brew-cask:alt-tab"                        = {}
   "brew-cask:db-browser-for-sqlite"          = {}
+  "brew-cask:docker-desktop"                 = {}
   "brew-cask:font-hack-nerd-font"            = {}
   "brew-cask:font-proggy-clean-tt-nerd-font" = {}
   "brew-cask:font-sauce-code-pro-nerd-font"  = {}
