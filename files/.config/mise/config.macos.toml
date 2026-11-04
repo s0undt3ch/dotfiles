@@ -20,7 +20,6 @@
   "brew:coreutils"                           = {}
   "brew:eza"                                 = {}
   "brew:fd"                                  = {}
-  "brew:FelixKratz/formulae/borders"         = {}
   "brew:fish"                                = {}
   "brew:fisher"                              = {}
   "brew:git-gui"                             = {}
