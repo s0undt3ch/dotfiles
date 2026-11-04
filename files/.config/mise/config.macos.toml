@@ -23,6 +23,7 @@
   "brew:FelixKratz/formulae/borders"         = {}
   "brew:fish"                                = {}
   "brew:fisher"                              = {}
+  "brew:git-gui"                             = {}
   "brew:fzf"                                 = {}
   "brew:git"                                 = {}
   "brew:k9s"                                 = {}
@@ -39,7 +40,9 @@
   "brew:tmux"                                = {}
   "brew:uv"                                  = {}
   "brew:zoxide"                              = {}
+  "brew-cask:1password-cli"                  = {}
   "brew-cask:alt-tab"                        = {}
+  "brew-cask:claude-code@latest"             = {}
   "brew-cask:db-browser-for-sqlite"          = {}
   "brew-cask:docker-desktop"                 = {}
   "brew-cask:font-hack-nerd-font"            = {}
@@ -48,6 +51,7 @@
   "brew-cask:ghostty"                        = {}
   "brew-cask:logitech-options"               = {}
   "brew-cask:naps2"                          = {}
+  "brew-cask:notion"                         = {}
   "brew-cask:notunes"                        = {}
   "brew-cask:session-manager-plugin"         = {}
   "brew-cask:zed"                            = {}
