@@ -14,9 +14,10 @@ jq="${shims}/jq"
 [ -x "${jq}" ] || jq=jq
 projects="${HOME}/projects"
 groups=(me paddle 3rd-party)
-# Repos not worth a wing. ripwire vendors tree-sitter parser.c files of 20-40k
-# drawers each, and the Qdrant backend scans the whole palace on every mine.
-skip=(3rd-party/ripwire)
+# The Qdrant backend scans the whole palace on every mine, so keep it lean:
+# 3rd-party repos are mined only when listed here, me/paddle ones unless skipped.
+mine_3rd_party=()
+skip=()
 report_dir="${HOME}/.mempalace/sync-reports"
 marker="${report_dir}/.last"
 apply="${MEMPALACE_SYNC_APPLY:-0}"
@@ -90,7 +91,11 @@ for group in "${groups[@]}"; do
     for dir in "${projects}/${group}"/*/; do
         [ -d "${dir}" ] || continue
         name="$(basename "${dir}")"
-        [[ " ${skip[*]} " == *" ${group}/${name} "* ]] && continue
+        if [ "${group}" = 3rd-party ]; then
+            [[ " ${mine_3rd_party[*]-} " == *" ${name} "* ]] || continue
+        else
+            [[ " ${skip[*]-} " == *" ${group}/${name} "* ]] && continue
+        fi
         wing="$(wing_slug "${name}")"
         if grep -qxF -- "${name}" <<<"${dup_names}"; then
             wing="$(wing_slug "${group}-${name}")"
