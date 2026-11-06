@@ -55,7 +55,9 @@ macOS is supported via per-OS config files and Tera templates. Edits go to the
 - Work profile: work machines set `env = ["work"]` in the gitignored
   `files/.config/mise/miserc.local.toml`. Templates test
   `vars.work | default(value=false)`; work-only dotfiles use
-  `variants = [{ profile = "work" }]`.
+  `variants = [{ profile = "work" }]`. Gate work-only things on the work
+  profile alone, never on the OS; gate on the OS only for real platform
+  differences (packages, paths, launchd vs systemd).
 - Task `sources` don't expand `~`: write `{{env.HOME}}/...`.
 - **Edit the source, not the target.** Preview with `mise dot diff` /
   `mise bootstrap --dry-run`, then **ask** before `mise dot apply` or

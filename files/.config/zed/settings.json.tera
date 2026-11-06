@@ -16,7 +16,7 @@
     "dock": "left"
   },
   "context_servers": {
-{%- if os() == "macos" %}
+{%- if vars.work | default(value=false) %}
     "mcp-server-linear": {
       "enabled": true,
       "remote": false,
