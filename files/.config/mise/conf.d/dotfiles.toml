@@ -20,7 +20,6 @@
   "~/.gitconfig"             = { mode = "template", source = "~/projects/me/dotfiles/files/.gitconfig.tera" }
   "~/.gitconfig.paddle"      = { mode = "copy" }
   "~/.gitconfig.personal"    = { mode = "copy" }
-  "~/.gitconfig.work"        = { mode = "copy" }
 
   "~/.config/zed/settings.json"   = { mode = "template", source = "~/projects/me/dotfiles/files/.config/zed/settings.json.tera" }
   "~/.config/wezterm/wezterm.lua" = { mode = "copy" }
@@ -48,6 +47,7 @@
   "~/.claude/CLAUDE.md" = { mode = "template", source = "~/projects/me/dotfiles/files/.claude/CLAUDE.md.tera" }
 
   # Retired targets: remove them wherever they linger.
+  "~/.gitconfig.work"                                              = { mode = "absent" }
   "~/.config/fish/conf.d/claude-work.fish"                         = { mode = "absent" }
   "~/.config/fish/conf.d/claude-personal.fish"                     = { mode = "absent" }
   "~/.config/herdr/plugins/local/startup-layout/herdr-plugin.toml" = { mode = "absent" }

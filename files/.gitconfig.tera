@@ -4,8 +4,6 @@
   path = .gitconfig.personal
 [includeIf "gitdir:~/projects/paddle/**"]
   path = .gitconfig.paddle
-[includeIf "gitdir:~/projects/work/**"]
-  path = .gitconfig.work
 [user]
 	email = pedro@algarvio.me
   name = Pedro Algarvio
