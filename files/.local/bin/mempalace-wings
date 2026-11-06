@@ -16,7 +16,7 @@ projects="${HOME}/projects"
 groups=(me paddle 3rd-party)
 # The Qdrant backend scans the whole palace on every mine, so keep it lean:
 # 3rd-party repos are mined only when listed here, me/paddle ones unless skipped.
-mine_3rd_party=()
+mine_3rd_party=(loam)
 skip=()
 report_dir="${HOME}/.mempalace/sync-reports"
 marker="${report_dir}/.last"
