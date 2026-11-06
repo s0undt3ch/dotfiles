@@ -1,4 +1,4 @@
-{% if os() == "macos" -%}
+{% if vars.work | default(value=false) -%}
 # Personal rules (all repos)
 
 ## PRs outside the PaddleHQ org
@@ -14,3 +14,7 @@ Before opening or editing a PR, run `git remote get-url origin`. If the owner is
 
 **Git commits** — no `Claude-Session:` trailers, no `Co-Authored-By:` lines. Clean commit messages only.
 {%- endif %}
+
+## Git worktrees
+
+Create every git worktree under `<repo root>/.worktrees/`. No exceptions, whatever a skill, plugin or tool defaults to.
