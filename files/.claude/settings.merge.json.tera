@@ -4,9 +4,11 @@
   },
   "env": {
     "VAULT_DIR": "{{ env.HOME }}/projects/me/obsidiary",
+{% if os() == "macos" %}
     "OLLAMA_MODE": "external",
     "OLLAMA_URL": "http://localhost:11434",
     "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS": "1",
+{% endif %}
     "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
   },
   "hooks": {
@@ -27,7 +29,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash {{ env.HOME }}/projects/3rd-party/ripwire/hooks/ripwire-nudge.sh --session-start"
+            "command": "bash {% if os() == "macos" %}{{ env.HOME }}/projects/3rd-party/ripwire/hooks/ripwire-nudge.sh{% else %}/usr/share/ripwire/hooks/ripwire-nudge.sh{% endif %} --session-start"
           }
         ]
       },
@@ -68,7 +70,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash {{ env.HOME }}/projects/3rd-party/ripwire/hooks/ripwire-nudge.sh"
+            "command": "bash {% if os() == "macos" %}{{ env.HOME }}/projects/3rd-party/ripwire/hooks/ripwire-nudge.sh{% else %}/usr/share/ripwire/hooks/ripwire-nudge.sh{% endif %}"
           }
         ]
       }
