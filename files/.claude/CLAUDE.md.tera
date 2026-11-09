@@ -18,3 +18,12 @@ Before opening or editing a PR, run `git remote get-url origin`. If the owner is
 ## Git worktrees
 
 Create every git worktree under `<repo root>/.worktrees/`. No exceptions, whatever a skill, plugin or tool defaults to.
+
+## Model choice
+
+Pick the cheapest model that can do the job well, not the strongest one available. This covers every subagent dispatch and any model you suggest.
+
+- Haiku: mechanical work, such as searches, lookups, renames and summaries.
+- Sonnet: the default for most work, such as implementation, debugging and routine reviews.
+- Opus: hard reasoning, such as architecture, gnarly bugs and plans with many moving parts.
+- Fable: security reviews only, or work that truly needs the newest model. Say why when you pick it.

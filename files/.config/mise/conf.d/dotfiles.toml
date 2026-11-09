@@ -45,6 +45,9 @@
   # The work profile lives in ~/.claude, which plugins hardcode; the link keeps old absolute paths working.
   "~/.claude-work"      = { mode = "symlink", source = "~/.claude", variants = [{ profile = "work" }] }
   "~/.claude/CLAUDE.md" = { mode = "template", source = "~/projects/me/dotfiles/files/.claude/CLAUDE.md.tera" }
+  # Claude Code owns the rest of settings.json (plugins, allow rules); only these keys are ours.
+  # Arrays (each hooks event) are replaced whole; keys dropped here are NOT removed from the target.
+  "~/.claude/settings.json/shared" = { source = "~/projects/me/dotfiles/files/.claude/settings.merge.json.tera", merge = true, template = "tera" }
 
   # Retired targets: remove them wherever they linger.
   "~/.gitconfig.work"                                              = { mode = "absent" }

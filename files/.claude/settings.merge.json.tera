@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "env": {
+    "VAULT_DIR": "{{ env.HOME }}/projects/me/obsidiary",
+    "OLLAMA_MODE": "external",
+    "OLLAMA_URL": "http://localhost:11434",
+    "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ env.HOME }}/.local/share/mise/installs/github-fkiene-llmtrim/global/llmtrim' guard",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{ env.HOME }}/projects/3rd-party/ripwire/hooks/ripwire-nudge.sh --session-start"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '{{ env.HOME }}/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ env.HOME }}/.local/share/mise/installs/github-fkiene-llmtrim/global/llmtrim' window-sub hook-start # llmtrim-owned-window-sub-hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'{{ env.HOME }}/.local/share/mise/installs/github-fkiene-llmtrim/global/llmtrim' window-sub hook-end # llmtrim-owned-window-sub-hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^(Read|Glob|Grep|Bash|Edit|Write|MultiEdit|NotebookEdit|mcp__ripwire__.*)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{ env.HOME }}/projects/3rd-party/ripwire/hooks/ripwire-nudge.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
