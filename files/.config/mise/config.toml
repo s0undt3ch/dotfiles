@@ -5,20 +5,20 @@
 [tools]
   "github:abhinav/git-spice" = "0.33.0"
   "pipx:mempalace"           = "3.11.0"
-  usage                      = "7.1.5"
+  usage                      = "7.3.0"
 
   python                   = "3.15.2"
-  uv                       = "0.13.6"
+  uv                       = "0.13.7"
   github-cli               = "2.103.3"
-  aqua                     = "2.66.0"
-  semgrep                  = "1.183.0"
+  aqua                     = "2.66.1"
+  semgrep                  = "1.184.0"
   "aqua:s0undt3ch/ToolR"   = "0.35.1"
-  "aqua:redhat-et/ripwire" = "0.6.9"
+  "aqua:redhat-et/ripwire" = "0.6.10"
   bun                      = "1.4.4"
   "aqua:quarylabs/sqruff"  = "0.44.0"
   jq                       = "1.8.2"
   "aqua:orhun/git-cliff"   = "2.14.2"
-  atuin                    = "18.24.4"
+  atuin                    = "18.24.5"
 
   node                         = "26.13.0"
   "aqua:quarto-dev/quarto-cli" = "1.11.9"
@@ -29,7 +29,7 @@
   # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
   # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
   # gnu "tray" GUI build); pin matching=musl so ubi/github doesn't grab the tray one.
-  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.7"
+  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.8"
 
   # MemPalace vector store, run as a user service (qdrant launchd/systemd unit).
   # Linux x86_64 ships gnu and musl tarballs; pin gnu so the pick is stable.
