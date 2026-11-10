@@ -1,8 +1,8 @@
 # macOS overrides for config.toml; keep versions in step with it.
 
 [tools]
-  "github:fkiene/llmtrim[exe=llmtrim]" = "0.13.8"
-  "github:qdrant/qdrant"               = "1.20.0"
+  "github:fkiene/llmtrim" = "0.13.8"
+  "github:qdrant/qdrant"  = "1.20.0"
 
   # Work-only (Paddle).
   aws = { version = "2.39.7", symlink_bins = "true" }

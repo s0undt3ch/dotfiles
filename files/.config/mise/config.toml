@@ -29,7 +29,7 @@
   # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
   # On linux x86_64 the release ships two candidate assets (plain musl CLI and a
   # gnu "tray" GUI build); pin matching=musl so ubi/github doesn't grab the tray one.
-  "github:fkiene/llmtrim[matching=musl,exe=llmtrim]" = "0.13.8"
+  "github:fkiene/llmtrim[matching=musl]" = "0.13.8"
 
   # MemPalace vector store, run as a user service (qdrant launchd/systemd unit).
   # Linux x86_64 ships gnu and musl tarballs; pin gnu so the pick is stable.
