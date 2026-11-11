@@ -89,7 +89,6 @@
   "brew-cask:cap"                            = {}
   "brew-cask:claude-code@latest"             = {}
   "brew-cask:db-browser-for-sqlite"          = {}
-  "brew-cask:discord"                        = {}
   "brew-cask:docker-desktop"                 = {}
   "brew-cask:elgato-stream-deck"             = {}
   "brew-cask:firefox"                        = {}
@@ -108,7 +107,6 @@
   "brew-cask:obsidian"                       = {}
   "brew-cask:only-switch"                    = {}
   "brew-cask:session-manager-plugin"         = {}
-  "brew-cask:visual-studio-code"             = {}
   "brew-cask:zed"                            = {}
 
 # mempalace services. Programs go through mise shims, so a tool bump needs only
