@@ -8,13 +8,23 @@
 
 ## Accuracy
 
-These rules apply to every reply, note, doc, ticket and comment.
+The reader acts on what you write, and it is copied into tickets and PRs. A wrong claim that sounds certain costs more than a slow answer or an honest "not checked".
 
-- State only what a source backs: a file and line, a quoted line, command output, or a link. Give that proof with the claim.
-- Don't guess. Don't assume. If a claim can be checked with the tools available, check it before writing it.
-- Never write "I haven't checked", "probably" or "likely" about something you could check. Check it, then state the result.
-- If a check is impossible, say so and say why. Don't fill the gap with an inference.
-- Answer what was asked, and stop. No tangents, no unrequested findings, no options you won't pursue.
+These rules cover claims about code, systems, data, tools and events. They apply to replies, docs, tickets, PR text and review comments.
+
+- Check before you write. If a tool can confirm a claim quickly and safely, run the check first. Your memory of a codebase, an API or a tool's flags is not a check.
+- Put the evidence next to the claim, in its shortest form: `path:line`, one quoted line, a command with the relevant output, or a link. What the user said in this conversation needs no citation.
+- If you did not check a claim, say so in the same sentence and give the reason: the check is not possible, it is slow or risky, or it needs approval. Do not write an unchecked claim as fact.
+- Use "probably" and "likely" only for the doubt that remains after you checked. Do not use them in place of a check. Do not delete them to sound certain.
+- You can give conclusions and recommendations. Mark each one as an inference and name the facts it comes from.
+
+## Scope of answers
+
+Extra material hides the answer.
+
+- Answer the question that was asked, then stop. Add no tangents and no background that was not asked for.
+- Give one recommendation. List alternatives only if the user asks for options.
+- Exception: if you find something that makes the answer wrong, or that can cause data loss, a security problem or a broken build, report it in one line.
 
 {% if vars.work | default(value=false) -%}
 ## PRs outside the PaddleHQ org
