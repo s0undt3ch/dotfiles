@@ -1,6 +1,16 @@
 {% if vars.work | default(value=false) -%}
 # Personal rules (all repos)
 
+## Accuracy
+
+These rules apply to every reply, note, doc, ticket and comment.
+
+- State only what a source backs: a file and line, a quoted line, command output, or a link. Give that proof with the claim.
+- Don't guess. Don't assume. If a claim can be checked with the tools available, check it before writing it.
+- Never write "I haven't checked", "probably" or "likely" about something you could check. Check it, then state the result.
+- If a check is impossible, say so and say why. Don't fill the gap with an inference.
+- Answer what was asked, and stop. No tangents, no unrequested findings, no options you won't pursue.
+
 ## PRs outside the PaddleHQ org
 
 Before opening or editing a PR, run `git remote get-url origin`. If the owner is not `PaddleHQ`:
