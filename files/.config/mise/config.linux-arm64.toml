@@ -2,4 +2,4 @@
 
 [tools]
   # arm64 Linux only gets musl.
-  "github:qdrant/qdrant[matching=aarch64-unknown-linux-musl]" = "1.20.0"
+  "github:qdrant/qdrant[matching=aarch64-unknown-linux-musl]" = "1.20.1"
