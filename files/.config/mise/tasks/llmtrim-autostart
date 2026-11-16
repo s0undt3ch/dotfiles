@@ -7,8 +7,9 @@ set -euo pipefail
 # (systemd/launchd/registry). Re-runs whenever the mise config changes, so a
 # version bump keeps autostart pointed at the current binary.
 
-if ! command -v llmtrim >/dev/null 2>&1; then
-	echo "llmtrim not on PATH yet; skipping autostart setup."
+# mise which, not command -v: a stale shim survives disable_tools (work profile).
+if ! mise which llmtrim >/dev/null 2>&1; then
+	echo "llmtrim not installed or disabled; skipping autostart setup."
 	exit 0
 fi
 

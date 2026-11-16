@@ -2,3 +2,7 @@
 
 [vars]
   work = true
+
+# llmtrim is a TLS-intercepting proxy; keep it off work machines.
+[settings]
+  disable_tools = ["github:fkiene/llmtrim"]

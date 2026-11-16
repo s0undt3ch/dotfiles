@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 # Shadows the real claude so only Claude Code (and what it spawns) goes through
-# the llmtrim proxy, not every shell.
+# the llmtrim proxy (personal machines only), not every shell.
 
 self_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
 
@@ -24,9 +24,11 @@ if [ -z "$real" ]; then
 	exit 127
 fi
 
+{% if not vars.work | default(value=false) -%}
 if command -v llmtrim >/dev/null 2>&1 && llmtrim _alive 2>/dev/null; then
 	eval "$(SHELL=/bin/sh llmtrim setup --env --port 43117 2>/dev/null)"
 fi
+{% endif -%}
 
 {% if vars.work | default(value=false) -%}
 # On work machines plain `claude` means the work profile; claude-personal still overrides.

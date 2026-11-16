@@ -13,6 +13,7 @@
   },
   "hooks": {
     "UserPromptSubmit": [
+{% if not vars.work | default(value=false) %}
       {
         "hooks": [
           {
@@ -22,6 +23,7 @@
           }
         ]
       }
+{% endif %}
     ],
     "SessionStart": [
       {
@@ -42,7 +44,7 @@
             "timeout": 10
           }
         ]
-      },
+      }{% if not vars.work | default(value=false) %},
       {
         "hooks": [
           {
@@ -51,9 +53,10 @@
             "timeout": 10
           }
         ]
-      }
+      }{% endif %}
     ],
     "SessionEnd": [
+{% if not vars.work | default(value=false) %}
       {
         "hooks": [
           {
@@ -63,6 +66,7 @@
           }
         ]
       }
+{% endif %}
     ],
     "PreToolUse": [
       {
