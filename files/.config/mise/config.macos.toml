@@ -2,34 +2,34 @@
 
 [tools]
   "github:fkiene/llmtrim" = "0.13.8"
-  "github:qdrant/qdrant"  = "1.20.0"
+  "github:qdrant/qdrant"  = "1.20.1"
 
   # Work-only (Paddle).
-  aws = { version = "2.39.7", symlink_bins = "true" }
+  aws = { version = "2.40.3", symlink_bins = "true" }
   # pydantic-core has no 3.15 wheel yet. --managed-python skips Homebrew's
   # OpenSSL 4 build, which lacks the ssl.PROTOCOL_TLSv1 the connector needs.
   "pipx:snowflake-cli"    = { version = "3.33.0", uvx_args = "--python 3.14 --managed-python" }
   "npm:@dust-tt/dust-cli" = "0.4.6"
 
   # macOS-only CLI tools, moved off Homebrew.
-  ast-grep                     = "0.51.1"
+  ast-grep                     = "0.51.2"
   "pipx:codespell"             = "2.4.3"
   copier                       = "9.19.1"
-  docker-compose               = "5.7.0"
+  docker-compose               = "5.7.1"
   git-filter-repo              = "2.47.0"
   git-lfs                      = "3.8.1"
   gum                          = "2.0.2"
   hadolint                     = "2.15.1"
-  helm                         = "4.3.1"
+  helm                         = "4.3.2"
   helm-ls                      = "0.5.4"
   "github:pamburus/hl"         = "0.36.5"
   kubeconform                  = "0.8.0"
-  "github:grafana/mcp-grafana" = "2.2.0"
-  prettier                     = "3.9.10"
+  "github:grafana/mcp-grafana" = "2.3.0"
+  prettier                     = "3.10.1"
   "npm:sql-formatter"          = "15.9.0"
-  terraform                    = "1.17.1"
-  terraform-docs               = "0.24.0"
-  vault                        = "2.2.1"
+  terraform                    = "1.17.2"
+  terraform-docs               = "0.25.1"
+  vault                        = "2.2.2"
   "github:tsenart/vegeta"      = "12.13.0"
   "npm:yaml-language-server"   = "2.0.0"
   yq                           = "4.54.3"
