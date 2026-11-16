@@ -12,7 +12,7 @@ case ",${MISE_ENV:-}," in
 	if ! brew list --cask meet-nook >/dev/null 2>&1; then
 		brew install --cask paddlehq/tooling/meet-nook
 		# Gatekeeper blocks the app until the quarantine attribute is gone.
-		xattr -cr /Applications/Nook.app
+		/usr/bin/xattr -cr /Applications/Nook.app
 	fi
 	;;
 esac
