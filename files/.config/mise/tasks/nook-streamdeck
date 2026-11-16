@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#MISE description="Link the Nook Stream Deck plugin from the local nook checkout (work only)"
+#MISE interactive=true
+set -euo pipefail
+
+[ "$(uname)" = "Darwin" ] || exit 0
+case ",${MISE_ENV:-}," in *,work,*) ;; *) exit 0 ;; esac
+
+plugin="$HOME/projects/paddle/nook/streamdeck-plugin/com.alecsammon.nook.sdPlugin"
+linked="$HOME/Library/Application Support/com.elgato.StreamDeck/Plugins/com.alecsammon.nook.sdPlugin"
+
+if [ ! -d "$plugin" ]; then
+	echo "nook-streamdeck: $plugin missing; clone PaddleHQ/nook first" >&2
+	exit 0
+fi
+[ -e "$linked" ] && exit 0
+
+streamdeck dev
+streamdeck link "$plugin"
+streamdeck restart com.alecsammon.nook

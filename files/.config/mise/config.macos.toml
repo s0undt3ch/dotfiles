@@ -10,6 +10,7 @@
   # OpenSSL 4 build, which lacks the ssl.PROTOCOL_TLSv1 the connector needs.
   "pipx:snowflake-cli"    = { version = "3.33.0", uvx_args = "--python 3.14 --managed-python" }
   "npm:@dust-tt/dust-cli" = "0.4.6"
+  "npm:@elgato/cli"       = "1.10.4"
 
   # macOS-only CLI tools, moved off Homebrew.
   ast-grep                     = "0.51.2"
@@ -159,4 +160,4 @@
 
 [tasks.bootstrap-platform]
   description = "macOS-only post-install setup"
-  run         = [{ task = "brew-tap-casks" }, { task = "mempalace-wake" }]
+  run         = [{ task = "brew-tap-casks" }, { task = "nook-streamdeck" }, { task = "mempalace-wake" }]
