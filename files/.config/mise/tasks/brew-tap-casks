@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
-#MISE description="Install tapped Homebrew casks that mise can't evaluate without Ruby 3"
+#MISE description="Install tapped Homebrew casks (aerospace; meet-nook on work) that mise can't evaluate without Ruby 3"
 #MISE interactive=true
 set -euo pipefail
 
 [ "$(uname)" = "Darwin" ] || exit 0
 
 brew list --cask aerospace >/dev/null 2>&1 || brew install --cask nikitabobko/tap/aerospace
+
+case ",${MISE_ENV:-}," in
+*,work,*)
+	if ! brew list --cask meet-nook >/dev/null 2>&1; then
+		brew install --cask paddlehq/tooling/meet-nook
+		# Gatekeeper blocks the app until the quarantine attribute is gone.
+		xattr -cr /Applications/Nook.app
+	fi
+	;;
+esac
