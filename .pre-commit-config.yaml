@@ -25,6 +25,7 @@ repos:
         exclude: '^bin/git-clone-branches-layout$|\.tera$' # zsh / mise Tera templates
       - id: yamlfmt # Format YAML files.
       - id: taplo-fmt # Format TOML with taplo (respects .taplo.toml).
+      - id: taplo-lint # Validate TOML syntax and schemas with taplo.
       - id: auto-push # Push each commit on main straight to origin.
         args: [--branch=main]
 
