@@ -1,4 +1,5 @@
 minimum_pre_commit_version: 3.0.0
+default_install_hook_types: [pre-commit, post-commit]
 repos:
   # Generic file hygiene (no equivalent in the system-tool hooks below).
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -13,7 +14,7 @@ repos:
   # System-installed tools, versions pinned in mise.toml (single source of
   # truth — no drift). See https://github.com/s0undt3ch/pre-commit-hooks.
   - repo: https://github.com/s0undt3ch/pre-commit-hooks
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       - id: gitleaks # Scan staged changes for hardcoded secrets.
       - id: typos # Source-code spell checker (config in typos.toml).
@@ -27,6 +28,8 @@ repos:
         name: taplo format
         args: [taplo, format]
         types: [toml]
+      - id: auto-push # Push each commit on main straight to origin.
+        args: [--branch=main]
 
 #  - repo: https://github.com/rwxcorp/pre-commit-lua.git
 #    rev: v1.0.0
