@@ -70,6 +70,7 @@
   "brew:pipx"                                = {}
   "brew:poppler"                             = {}
   "brew:pstree"                              = {}
+  "brew:renovate"                            = {}
   "brew:ripgrep"                             = {}
   "brew:sevenzip"                            = {}
   "brew:skillshare"                          = {}

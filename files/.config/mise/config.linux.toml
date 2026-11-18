@@ -134,6 +134,7 @@
   "pacman:python-weasyprint"           = {}
   "pacman:qt5-tools"                   = {}
   "aur:rate-mirrors-bin"               = {}
+  "aur:renovate"                       = {}
   "pacman:ripgrep"                     = {}
   "pacman:rsync"                       = {}
   "pacman:sdl2-compat"                 = {}
