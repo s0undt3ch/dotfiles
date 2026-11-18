@@ -24,11 +24,7 @@ repos:
       - id: shfmt # Format shell scripts in place.
         exclude: '^bin/git-clone-branches-layout$|\.tera$' # zsh / mise Tera templates
       - id: yamlfmt # Format YAML files.
-      - id: system-tool # Format TOML with taplo (respects .taplo.toml).
-        alias: taplo-format
-        name: taplo format
-        args: [taplo, format]
-        types: [toml]
+      - id: taplo-fmt # Format TOML with taplo (respects .taplo.toml).
       - id: auto-push # Push each commit on main straight to origin.
         args: [--branch=main]
 
