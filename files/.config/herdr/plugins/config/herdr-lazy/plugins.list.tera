@@ -1,4 +1,1 @@
 devashish2203/herdr-worktrunk
-{% if vars.work | default(value=false) -%}
-tdi/herdr-worktree-from-linear
-{% endif -%}
