@@ -6,25 +6,25 @@
   "github:abhinav/git-spice" = "0.33.0"
   # onnxruntime (via chromadb) has no cp315 wheel yet.
   "pipx:mempalace" = { version = "3.12.0", uvx_args = "--python 3.14" }
-  usage            = "7.3.0"
+  usage            = "7.4.0"
 
   python                   = "3.15.2"
-  uv                       = "0.13.8"
-  github-cli               = "2.104.0"
+  uv                       = "0.13.9"
+  github-cli               = "2.105.0"
   aqua                     = "2.66.1"
-  semgrep                  = "1.185.0"
+  semgrep                  = "1.186.0"
   "aqua:s0undt3ch/ToolR"   = "0.37.0"
   "aqua:redhat-et/ripwire" = "0.6.10"
-  bun                      = "1.4.4"
+  bun                      = "1.4.5"
   "aqua:quarylabs/sqruff"  = "0.44.0"
   jq                       = "1.8.2"
   "aqua:orhun/git-cliff"   = "2.14.2"
-  atuin                    = "18.24.8"
+  atuin                    = "18.25.1"
 
   node                         = "26.13.1"
   "aqua:quarto-dev/quarto-cli" = "1.11.9"
   herdr                        = "0.9.5"
-  vale                         = "3.27.0"
+  vale                         = "3.28.1"
 
   # llmtrim CLI, required by the llmtrim-herdr plugin (herdr-lazy plugins.list).
   # Prebuilt Rust binary from GitHub releases — avoids the npm/Node wrapper.
@@ -34,7 +34,7 @@
 
   # MemPalace vector store, run as a user service (qdrant launchd/systemd unit).
   # Linux x86_64 ships gnu and musl tarballs; pin gnu so the pick is stable.
-  "github:qdrant/qdrant[matching=linux-gnu]" = "1.20.1"
+  "github:qdrant/qdrant[matching=linux-gnu]" = "1.20.2"
 
 [settings]
   python.uv_venv_auto                 = true
