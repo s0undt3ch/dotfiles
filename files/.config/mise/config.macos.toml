@@ -100,6 +100,7 @@
   "brew-cask:font-sauce-code-pro-nerd-font"  = {}
   "brew-cask:ghostty"                        = {}
   "brew-cask:gimp"                           = {}
+  "brew-cask:herdr-app"                      = {}
   "brew-cask:logitech-options"               = {}
   "brew-cask:maccy"                          = {}
   "brew-cask:mitmproxy"                      = {}
