@@ -61,6 +61,12 @@
   "~/.config/herdr/config.toml"                            = { mode = "copy" }
   "~/.config/herdr/plugins/config/herdr-lazy/plugins.list" = { mode = "template", source = "~/projects/me/dotfiles/files/.config/herdr/plugins/config/herdr-lazy/plugins.list.tera" }
 
+  # herdr-app: the app rewrites most of its folder, so track only our files.
+  # It owns the rest of settings.json (Settings screen); only these keys are ours.
+  "~/.config/herdr-app/settings.json/dotfiles"             = { source = "~/projects/me/dotfiles/files/.config/herdr-app/settings.merge.json", merge = true }
+  "~/.config/herdr-app/themes/gruvbox-material-dark.json"  = { mode = "copy" }
+  "~/.config/herdr-app/themes/gruvbox-material-light.json" = { mode = "copy" }
+
   # mempalace: qdrant config and the scripts the services run.
   "~/.config/qdrant/config.yaml"    = { mode = "template", source = "~/projects/me/dotfiles/files/.config/qdrant/config.yaml.tera" }
   "~/.local/bin/mempalace-wings"    = { mode = "copy", permissions = "0755" }
