@@ -1,0 +1,1 @@
+{"name":"md-render","private":true,"type":"module","dependencies":{"@mermaid-js/mermaid-cli":"^11.4.2","mathjax-full":"^3.2.2"}}

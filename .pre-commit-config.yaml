@@ -1,6 +1,8 @@
 minimum_pre_commit_version: 3.0.0
 default_install_hook_types: [pre-commit, post-commit]
 default_stages: [pre-commit]
+# Vendored third-party code: keep it byte-identical to upstream.
+exclude: ^files/\.config/herdr-app/mods/herdr-md/
 repos:
   # Generic file hygiene (no equivalent in the system-tool hooks below).
   - repo: https://github.com/pre-commit/pre-commit-hooks

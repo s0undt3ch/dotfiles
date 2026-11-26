@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+"""mdh: drive the Herdr md viewer from a shell (built for Claude).
+
+  mdh open FILE [--down]                       open FILE in a viewer pane beside the calling terminal's pane
+                                                (the focused pane if that is unknown)
+  mdh hl FILE --lines 40-52 [--note TEXT]      highlight source lines (replaces existing highlights)
+  mdh hl FILE --text "a quote" [--note TEXT]   highlight the block containing a quote
+        [--color yellow|green|red|blue|purple|cyan] [--add]  (--add keeps earlier highlights)
+  mdh focus FILE N                              scroll to highlight N (1-based)
+  mdh clear FILE                                remove all highlights
+  mdh show FILE                                 print current highlights
+  mdh video FILE [N] play|pause|toggle [T]      play or pause video N (1-based, default 1) in FILE
+  mdh video FILE [N] seek T                     jump to time T (seconds or m:ss); keeps playing or paused
+  mdh sel                                       print what the person last sent from the viewer
+                                                (V to select, p to pin): file, lines, text
+  mdh pick                                      open the file picker (ctrl-p) in the focused viewer,
+                                                or in the only one; with no viewer open, open an empty
+                                                one beside the calling terminal's pane (else the focused one), in the picker, rooted at
+                                                this shell's folder (its git repo if it's in one)
+
+The viewer watches ~/.cache/herdr-md/ and redraws and scrolls when a file there changes.
+Anywhere in Herdr: cmd-shift-o opens a viewer straight into the picker (a keys.json binding, see README).
+Viewer keys: ctrl-p find a file (fuzzy, with preview), j/k move the cursor, V visual select, y copy, p pin for Claude, Enter fold/follow/zoom/play,
+O open a video in QuickTime, za fold, / search, n/N next match or highlight, # line numbers, ? key help, q close.
+"""
+import argparse, json, os, re, subprocess, sys, time
+
+DIR = os.path.expanduser("~/.cache/herdr-md")
+
+
+def find_pane(ls, terminal):
+    """Pane id of `terminal` (an $HC_TERMINAL_ID) in `herdr-app ls` JSON, or None.
+    Remote entries read `ska/t19`, so an exact id wins over a `/`-suffix match; a
+    sub-agent terminal resolves to its parent's pane."""
+    if not terminal:
+        return None
+    found = {}
+    for space in ls.get("spaces", []):
+        for tab in space.get("tabs", []):
+            for t in tab.get("terminals", []):
+                for tid in [t.get("terminal")] + [s.get("terminal") if isinstance(s, dict) else s for s in t.get("sub_agents") or []]:
+                    if isinstance(tid, str) and t.get("pane"):
+                        found.setdefault(tid, t["pane"])
+    if terminal in found:
+        return found[terminal]
+    return next((p for tid, p in found.items() if tid.endswith("/" + terminal)), None)
+
+
+def own_pane():
+    """The pane this shell runs in, so a viewer opens beside it and not beside whatever
+    space the person has focused. None (focused pane) if unknown; never raises."""
+    terminal = os.environ.get("HC_TERMINAL_ID")
+    if not terminal:
+        return None
+    try:
+        r = subprocess.run(["herdr-app", "ls"], capture_output=True, text=True, timeout=3)
+        return find_pane(json.loads(r.stdout), terminal) if r.returncode == 0 else None
+    except Exception:
+        return None
+
+
+def split_args(direction, props):
+    args = {"direction": direction, "mod": "herdr-md", "props": props}
+    pane = own_pane()
+    if pane:
+        args["pane"] = str(pane)
+    return args
+
+
+def key(path):
+    return os.path.join(DIR, re.sub(r"[^a-zA-Z0-9]+", "_", path) + ".json")
+
+
+def load(path):
+    try:
+        with open(key(path)) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {"highlights": []}
+
+
+def save(path, state, focus=None):
+    os.makedirs(DIR, exist_ok=True)
+    state["seq"] = time.time_ns()
+    state["focus"] = focus
+    tmp = key(path) + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(state, f, indent=1)
+    os.replace(tmp, key(path))
+
+
+def main():
+    p = argparse.ArgumentParser(prog="mdh", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = p.add_subparsers(dest="cmd", required=True)
+    o = sub.add_parser("open"); o.add_argument("file"); o.add_argument("--down", action="store_true")
+    h = sub.add_parser("hl"); h.add_argument("file")
+    h.add_argument("--lines"); h.add_argument("--text"); h.add_argument("--note")
+    h.add_argument("--color", default="yellow"); h.add_argument("--add", action="store_true")
+    f = sub.add_parser("focus"); f.add_argument("file"); f.add_argument("n", type=int)
+    c = sub.add_parser("clear"); c.add_argument("file")
+    s = sub.add_parser("show"); s.add_argument("file")
+    v = sub.add_parser("video"); v.add_argument("file"); v.add_argument("args", nargs="+")
+    sub.add_parser("sel")
+    sub.add_parser("pick")
+    a = p.parse_args()
+    if a.cmd == "pick":
+        # Every viewer hears it; the focused one (or the only one) opens its picker.
+        r = subprocess.run(["herdr-app", "do", "herdr-md.pick"], capture_output=True, text=True)
+        if r.returncode == 0:
+            sys.exit(0)
+        if "unknown command" not in r.stdout + r.stderr:
+            sys.stdout.write(r.stdout); sys.stderr.write(r.stderr); sys.exit(r.returncode)
+        # No viewer loaded, so nobody heard it: open an empty one in its picker,
+        # rooted here (the picker widens a folder inside a git repo to the repo).
+        cwd = os.getcwd()
+        pwd = os.environ.get("PWD")
+        try:
+            if pwd and os.path.samefile(pwd, cwd):
+                cwd = pwd   # keep the person's spelling (symlinks)
+        except OSError:
+            pass
+        args = split_args("right", {"pick": True, "dir": cwd})
+        r = subprocess.run(["herdr-app", "do", "pane.split", json.dumps(args)], capture_output=True, text=True)
+        sys.stdout.write(r.stdout); sys.stderr.write(r.stderr); sys.exit(r.returncode)
+    if a.cmd == "sel":
+        try:
+            with open(os.path.join(DIR, "selection.json")) as f:
+                print(json.dumps(json.load(f), indent=1))
+        except OSError:
+            sys.exit("mdh: nothing pinned (in the viewer: V, move, p)")
+        return
+    path = os.path.abspath(os.path.expanduser(a.file))
+
+    if a.cmd == "open":
+        if not os.path.isfile(path):
+            sys.exit(f"mdh: no such file: {path}")
+        args = split_args("down" if a.down else "right", {"file": path})
+        r = subprocess.run(["herdr-app", "do", "pane.split", json.dumps(args)], capture_output=True, text=True)
+        sys.stdout.write(r.stdout); sys.stderr.write(r.stderr); sys.exit(r.returncode)
+
+    state = load(path)
+    if a.cmd == "hl":
+        if not (a.lines or a.text):
+            sys.exit("mdh: hl needs --lines A-B or --text QUOTE")
+        mark = {"color": a.color}
+        if a.lines:
+            nums = [int(x) for x in a.lines.split("-")]
+            mark["lines"] = [nums[0], nums[-1]]
+        else:
+            mark["text"] = a.text
+        if a.note:
+            mark["note"] = a.note
+        marks = state.get("highlights", []) if a.add else []
+        marks.append(mark)
+        save(path, {"highlights": marks}, focus=len(marks) - 1)
+        print(f"highlight {len(marks)} of {len(marks)} on {path}")
+    elif a.cmd == "video":
+        rest = list(a.args)
+        n = int(rest.pop(0)) if rest and rest[0].isdigit() else 1
+        if not rest or rest[0] not in ("play", "pause", "toggle", "seek"):
+            sys.exit("mdh: video FILE [N] play|pause|toggle|seek [T]")
+        cmd = {"n": n - 1, "state": rest[0], "seq": time.time_ns()}
+        if len(rest) > 1:
+            m, _, sec = rest[1].rpartition(":")
+            cmd["t"] = int(m or 0) * 60 + float(sec)
+        elif cmd["state"] == "seek":
+            sys.exit("mdh: seek needs a time: 12, 0:12 or 1:05.5")
+        # Its own seq: a video command doesn't re-run the highlight glide.
+        state["video"] = cmd
+        os.makedirs(DIR, exist_ok=True)
+        tmp = key(path) + ".tmp"
+        with open(tmp, "w") as f:
+            json.dump(state, f, indent=1)
+        os.replace(tmp, key(path))
+        print(f"video {n} {cmd['state']}" + (f" at {cmd['t']:g}s" if "t" in cmd else "") + f" in {path}")
+    elif a.cmd == "focus":
+        save(path, state, focus=a.n - 1)
+    elif a.cmd == "clear":
+        save(path, {"highlights": []})
+    elif a.cmd == "show":
+        print(json.dumps(state.get("highlights", []), indent=1))
+
+
+if __name__ == "__main__":
+    main()

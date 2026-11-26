@@ -66,6 +66,10 @@
   "~/.config/herdr-app/settings.json/dotfiles"             = { source = "~/projects/me/dotfiles/files/.config/herdr-app/settings.merge.json", merge = true }
   "~/.config/herdr-app/themes/gruvbox-material-dark.json"  = { mode = "copy" }
   "~/.config/herdr-app/themes/gruvbox-material-light.json" = { mode = "copy" }
+  # Vendored from github.com/ryanthedev/herdr-md at 0feca76 (2026-11-21). Copy, not
+  # symlink: the mod writes .cache/ and render/node_modules/ into its own folder.
+  "~/.config/herdr-app/mods/herdr-md" = { mode = "copy" }
+  "~/.local/bin/mdh"                  = { mode = "copy", source = "~/projects/me/dotfiles/files/.config/herdr-app/mods/herdr-md/mdh", permissions = "0755" }
 
   # mempalace: qdrant config and the scripts the services run.
   "~/.config/qdrant/config.yaml"    = { mode = "template", source = "~/projects/me/dotfiles/files/.config/qdrant/config.yaml.tera" }

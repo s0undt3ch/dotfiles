@@ -3,3 +3,7 @@ files/.config/mise/*.local.toml
 files/.config/mise/conf.d/*.local.toml
 files/.config/mise/*.lock
 files/.config/mise/conf.d/dotfiles-tracking.toml
+
+# Written by `herdr-app check` into the mod folder.
+files/.config/herdr-app/mods/*/gpui-kit.d.ts
+files/.config/herdr-app/mods/*/jsconfig.json
