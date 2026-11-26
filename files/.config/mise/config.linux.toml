@@ -60,6 +60,7 @@
   "pacman:gwenview"                    = {}
   "pacman:hdparm"                      = {}
   "aur:herdr-app-bin"                  = {}
+  "aur:herdr-core-bin"                 = {}
   "pacman:htop"                        = {}
   "pacman:httpie"                      = {}
   "pacman:hunspell-en_us"              = {}
