@@ -37,6 +37,10 @@ Before opening or editing a PR, run `git remote get-url origin`. If the owner is
 - Never write "paddle", Paddle repo names or Paddle email addresses in the title or body.
 
 {% endif -%}
+## Git staging
+
+Be intentional. Stage each file by name. Never run `git add -A`, `git add .` or `git commit -a`.
+
 ## Git worktrees
 
 Create every git worktree under `<repo root>/.worktrees/`. No exceptions, whatever a skill, plugin or tool defaults to.
