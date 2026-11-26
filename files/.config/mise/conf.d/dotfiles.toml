@@ -28,7 +28,7 @@
 
   "~/.gnupg"                = { permissions = "0700" }
   "~/.gnupg/gpg-agent.conf" = { mode = "template", source = "~/projects/me/dotfiles/files/.gnupg/gpg-agent.conf.tera", permissions = "0600" }
-  "~/.config/powerdevilrc"  = { mode = "copy", permissions = "0600" }
+  "~/.config/powerdevilrc"  = { mode = "copy", permissions = "0600", variants = [{ os = "linux" }] }
 
   "~/Library/KeyBindings/DefaultKeyBinding.dict" = { mode = "copy", variants = [{ os = "macos" }] }
 
