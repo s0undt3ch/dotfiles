@@ -1,10 +1,13 @@
 [AC][SuspendAndShutdown]
 PowerButtonAction=1
-SleepMode=0
+SleepMode=2
 
 [Battery][SuspendAndShutdown]
 PowerButtonAction=1
-SleepMode=0
+SleepMode=2
 
 [Inhibitions]
 BlockedInhibitions=firefox:Playing audio
+
+[LowBattery][SuspendAndShutdown]
+SleepMode=3
